@@ -1,0 +1,7 @@
+Genç Expert Pro V4.3.1
+
+- Kategorili fotoğraf ekleme kaldırıldı.
+- Kategoriye göre filtre kaldırıldı.
+- Fotoğraf ekranında sadece Şase/VIN Fotoğrafı ve KM Fotoğrafı kontrol kutuları bırakıldı.
+- Kameradan Yükle ve Galeriden Yükle düğmeleri korundu.
+- Rapor formatına dokunulmadı.

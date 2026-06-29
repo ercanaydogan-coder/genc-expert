@@ -739,18 +739,14 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 
 <section id="foto" class="page">
 <h2>Fotoğraf Kontrol <span id="photoTotal" class="photoCount">0</span></h2>
-<div class="checks" id="photoChecks"><label><input type="checkbox" id="fc0">Ön genel</label><label><input type="checkbox" id="fc1">Arka genel</label><label><input type="checkbox" id="fc2">Sağ yan</label><label><input type="checkbox" id="fc3">Sol yan</label><label><input type="checkbox" id="fc4">İç mekan</label><label><input type="checkbox" id="fc5">Yakın hasar</label><label><input type="checkbox" id="fc6">Ruhsat</label><label><input type="checkbox" id="fc7">Şase/VIN</label><label><input type="checkbox" id="fc8">KM</label><label><input type="checkbox" id="fc9">Airbag</label><label><input type="checkbox" id="fc10">Lastik/Jant</label></div>
+<div class="checks" id="photoChecks"><label><input type="checkbox" id="fc0">Şase/VIN Fotoğrafı</label><label><input type="checkbox" id="fc1">KM Fotoğrafı</label></div>
 <div class="photoTools">
-  <b>Kategorili Fotoğraf Ekleme</b>
-  <div class="grid">
-    <label>Fotoğraf Kategorisi<select id="photoCategory"><option>Ön Genel</option><option>Arka Genel</option><option>Sağ Yan</option><option>Sol Yan</option><option>İç Mekan</option><option>Hasar Yakın</option><option>Ruhsat</option><option>Şase / VIN</option><option>Kilometre</option><option>Airbag</option><option>Lastik / Jant</option><option>Olay Yeri</option><option>Karşı Araç</option><option>Diğer</option></select></label>
-    <label>Kategoriye Göre Filtre<select id="photoFilter" onchange="renderPhotos()"><option value="">Tümü</option><option>Ön Genel</option><option>Arka Genel</option><option>Sağ Yan</option><option>Sol Yan</option><option>İç Mekan</option><option>Hasar Yakın</option><option>Ruhsat</option><option>Şase / VIN</option><option>Kilometre</option><option>Airbag</option><option>Lastik / Jant</option><option>Olay Yeri</option><option>Karşı Araç</option><option>Diğer</option></select></label>
-  </div>
+  <b>Fotoğraf Ekleme</b>
   <div class="inline">
-    <label class="box">Kameradan Çek<input type="file" accept="image/*" capture="environment" onchange="addPhotos(event)"></label>
-    <label class="box">Galeriden Seç<input type="file" accept="image/*" multiple onchange="addPhotos(event)"></label>
+    <label class="box">Kameradan Yükle<input type="file" accept="image/*" capture="environment" onchange="addPhotos(event)"></label>
+    <label class="box">Galeriden Yükle<input type="file" accept="image/*" multiple onchange="addPhotos(event)"></label>
   </div>
-  <p class="small">Fotoğraf eklemeden önce kategori seç. Fotoğraf kartındaki Sil düğmesiyle kaldırabilir, Yukarı/Aşağı ile sırayı değiştirebilirsin.</p>
+  <p class="small">Kategori ve filtre kaldırıldı. Fotoğraf kartındaki Sil düğmesiyle kaldırabilir, Yukarı/Aşağı ile sırayı değiştirebilirsin.</p>
 </div>
 <div id="photoStats" class="fileSummary"></div>
 <div id="photos" class="photoGrid"></div>
@@ -792,7 +788,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 const docs=["Ruhsat","Sürücü Belgesi","Trafik Kaza Tespit Tutanağı","Alkol Raporu","Beyan","Poliçe","Servis Evrakı","Onarım Teklifi","Fatura","İBAN","Eksik Evrak Talep Yazısı","Fotoğraf Seti","Tramer Kaydı","Vekalet / İmza Sirküsü"];
 const specialControls=["Rapor uyumlu mu?","Harici iz var mı?","Eski hasar var mı?"];
 const checks=["Motor çalışıyor","Araç yürür durumda","Anahtar mevcut","Akü mevcut/sağlam","Airbag açılmış","Emniyet kemeri hasarlı/kilitli","Araç çekici ile geldi","Lastik/Jant hasarı var","Şase/VIN kontrol edildi","Km fotoğrafı alındı","Ruhsat fotoğrafı alındı","Hasar yakın fotoğrafı alındı"];
-const fchecks=["Ön genel","Arka genel","Sağ yan","Sol yan","İç mekan","Yakın hasar","Ruhsat","Şase/VIN","KM","Airbag","Lastik/Jant"];
+const fchecks=["Şase/VIN Fotoğrafı","KM Fotoğrafı"];
 const damageGroups={
 "Ön Kısım":["Ön Tampon","Ön Tampon Demiri","Ön Panel","Kaput","Sağ Far","Sol Far","Sis Farı","Ön Izgara","Sağ Ön Çamurluk","Sol Ön Çamurluk"],
 "Arka Kısım":["Arka Tampon","Arka Tampon Demiri","Bagaj Kapağı","Sağ Stop","Sol Stop","Arka Panel","Stepne Havuzu","Sağ Arka Çamurluk","Sol Arka Çamurluk"],
@@ -979,13 +975,13 @@ document.addEventListener('input',e=>{if(e.target&&['INPUT','TEXTAREA','SELECT']
 document.addEventListener('change',e=>{if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))autoSave();});
 function normalizePhoto(p){return (typeof p==="string")?{src:p,cat:"Diğer",note:"",createdAt:""}:p}
 function photoSrc(p){return normalizePhoto(p).src||""}
-function addPhotos(e){let cat=$("photoCategory")?.value||"Diğer";[...e.target.files].forEach(file=>{let r=new FileReader();r.onload=()=>{photos.push({src:r.result,cat,note:"",createdAt:new Date().toISOString()});renderPhotos();autoSave();};r.readAsDataURL(file)}); e.target.value="";}
+function addPhotos(e){[...e.target.files].forEach(file=>{let r=new FileReader();r.onload=()=>{photos.push({src:r.result,note:"",createdAt:new Date().toISOString()});renderPhotos();autoSave();};r.readAsDataURL(file)}); e.target.value="";}
 function setPhotoCat(i,val){photos[i]=normalizePhoto(photos[i]);photos[i].cat=val;renderPhotos();autoSave();}
 function setPhotoNote(i,val){photos[i]=normalizePhoto(photos[i]);photos[i].note=val;autoSave();}
 function deletePhoto(i){if(confirm("Bu fotoğraf silinsin mi?")){photos.splice(i,1);renderPhotos();autoSave();}}
 function movePhoto(i,dir){let j=i+dir;if(j<0||j>=photos.length)return;let t=photos[i];photos[i]=photos[j];photos[j]=t;renderPhotos();autoSave();}
-function renderPhotoStats(){let counts={};photos.map(normalizePhoto).forEach(p=>{let c=p.cat||"Diğer";counts[c]=(counts[c]||0)+1});let html=`<div class="sumBox"><b>${photos.length}</b><br><span class="small">Toplam Fotoğraf</span></div>`;Object.entries(counts).forEach(([c,n])=>html+=`<div class="sumBox"><b>${n}</b><br>${c}</div>`); if($("photoStats"))$("photoStats").innerHTML=html; if($("photoTotal"))$("photoTotal").textContent=photos.length;}
-function renderPhotos(){let filter=$("photoFilter")?.value||"";renderPhotoStats();let cats=["Ön Genel","Arka Genel","Sağ Yan","Sol Yan","İç Mekan","Hasar Yakın","Ruhsat","Şase / VIN","Kilometre","Airbag","Lastik / Jant","Olay Yeri","Karşı Araç","Diğer"];let html="";photos.map(normalizePhoto).forEach((p,i)=>{if(filter && p.cat!==filter)return;let opts=cats.map(c=>`<option ${c===(p.cat||"Diğer")?"selected":""}>${c}</option>`).join("");let dt=p.createdAt?new Date(p.createdAt).toLocaleString("tr-TR"):"";html+=`<div class="photoCard"><img src="${p.src}"><div class="photoCat">${p.cat||"Diğer"}</div><select onchange="setPhotoCat(${i},this.value)">${opts}</select><input value="${(p.note||"").replaceAll('"','&quot;')}" placeholder="Fotoğraf notu" oninput="setPhotoNote(${i},this.value)"><div class="fileMeta">${dt}</div><div class="photoActions"><button class="ghost" onclick="movePhoto(${i},-1)">Yukarı</button><button class="ghost" onclick="movePhoto(${i},1)">Aşağı</button><button class="danger" onclick="deletePhoto(${i})">Sil</button></div></div>`});$("photos").innerHTML=html||"Fotoğraf eklenmedi.";}
+function renderPhotoStats(){let html=`<div class="sumBox"><b>${photos.length}</b><br><span class="small">Toplam Fotoğraf</span></div>`; if($("photoStats"))$("photoStats").innerHTML=html; if($("photoTotal"))$("photoTotal").textContent=photos.length;}
+function renderPhotos(){renderPhotoStats();let html="";photos.map(normalizePhoto).forEach((p,i)=>{let dt=p.createdAt?new Date(p.createdAt).toLocaleString("tr-TR"):"";html+=`<div class="photoCard"><img src="${p.src}"><input value="${(p.note||"").replaceAll('"','&quot;')}" placeholder="Fotoğraf notu" oninput="setPhotoNote(${i},this.value)"><div class="fileMeta">${dt}</div><div class="photoActions"><button class="ghost" onclick="movePhoto(${i},-1)">Yukarı</button><button class="ghost" onclick="movePhoto(${i},1)">Aşağı</button><button class="danger" onclick="deletePhoto(${i})">Sil</button></div></div>`});$("photos").innerHTML=html||"Fotoğraf eklenmedi.";}
 function lineList(title,rows){
  if(!rows.length) return "";
  return `<h4>${title}</h4><ul>${rows.map(x=>`<li>${x.name}${x.n?(" - "+x.n):""}</li>`).join("")}</ul>`;

@@ -1,0 +1,17 @@
+GENÇ EXPERT PRO V4.1 - İLK GÜNCELLEME
+
+Bu paket mevcut ekranları koruyarak dosya yönetimini güçlendirir.
+
+Eklenenler:
+- Dosya No / Plaka / Sigortalı adına göre arama
+- Kayıtlı dosya listesinde sigortalı adı ve son kayıt tarihi
+- Kayıt silme butonu
+- Kayıt kopyalama butonu
+- Yeni dosya açarken uyarı
+
+GitHub'a yükleme:
+1. Bu ZIP'i açın.
+2. İçindeki dosyaları genc-expert deposuna yükleyin.
+3. Var olan dosyaların üzerine yazın.
+4. Commit changes deyin.
+5. 1-2 dakika sonra telefonda/iPad'de sayfayı yenileyin.

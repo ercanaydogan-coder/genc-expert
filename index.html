@@ -3,7 +3,7 @@
 <html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Genç Expert Pro V4.3</title>
+<title>Genç Expert Pro V4.4</title>
 <style>
 *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;margin:0;background:#f3f4f6;color:#111827}
 header{background:#111827;color:white;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -41,13 +41,18 @@ input[type=checkbox],input[type=radio]{width:auto;transform:scale(1.2);margin-ri
 <meta name="theme-color" content="#111827">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <script>
+const APP_VERSION = '4.4';
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-  window.addEventListener('load', function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js?v=4.4').then(function(reg){
+      try { reg.update(); } catch(e) {}
+    }).catch(function(){});
+  });
 }
 </script>
 </head>
 <body>
-<header><h1>Genç Expert Pro</h1><button onclick="window.print()">PDF / Yazdır</button></header>
+<header><h1>Genç Expert Pro <span class="small" style="color:#d1d5db">V4.4</span></h1><button onclick="window.print()">PDF / Yazdır</button></header>
 <nav>
 <button onclick="show(&#39;dosya&#39;)">Dosya</button>
 <button onclick="show(&#39;evrak&#39;)">Evrak</button>
@@ -76,7 +81,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 <label>Servis / Konum<input id="servis"></label>
 <label>Dosya Durumu<select id="dosyaDurumu"><option>İnceleme Bekliyor</option><option>Araç İncelendi</option><option>Evrak Bekleniyor</option><option>Rapor Hazır</option><option>Kapatıldı</option></select></label>
 </div>
-<button onclick="save()">Kaydet</button> <button onclick="clearForm()">Yeni Dosya</button>
+<button onclick="save()">Kaydet</button> <button onclick="clearForm()">Yeni Dosya</button> <button class="ghost" onclick="forceUpdate()">Sürümü Yenile</button>
 <div class="fileTools">
   <b>Dosya Arama</b>
   <div class="grid">
@@ -746,7 +751,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     <label class="box">Kameradan Yükle<input type="file" accept="image/*" capture="environment" onchange="addPhotos(event)"></label>
     <label class="box">Galeriden Yükle<input type="file" accept="image/*" multiple onchange="addPhotos(event)"></label>
   </div>
-  <p class="small">Kategori ve filtre kaldırıldı. Fotoğraf kartındaki Sil düğmesiyle kaldırabilir, Yukarı/Aşağı ile sırayı değiştirebilirsin.</p>
+  <p class="small">Kategori ve filtre yoktur. Sadece Şase/VIN ve KM kontrolü kaldı. Diğer fotoğrafları Kameradan Yükle veya Galeriden Yükle ile serbest ekleyebilirsin.</p>
 </div>
 <div id="photoStats" class="fileSummary"></div>
 <div id="photos" class="photoGrid"></div>
@@ -932,7 +937,7 @@ function load(d){
 }
 function setDamageRow(pre,r){["s","o","d","b","mo"].forEach(x=>{if($(pre+x))$(pre+x).checked=r[x]}); if($(pre+"n"))$(pre+"n").value=r.n||""; if($(pre+"name"))$(pre+"name").value=r.name||""}
 function key(){return "GE3_"+($("dosyaNo").value||"DOSYA")+"_"+($("plaka").value||"PLAKA")}
-function saveSilent(){let d=collect();d.meta=Object.assign({},d.meta||{},{updatedAt:new Date().toISOString(),version:"4.3"});localStorage.setItem(key(),JSON.stringify(d));renderList();}
+function saveSilent(){let d=collect();d.meta=Object.assign({},d.meta||{},{updatedAt:new Date().toISOString(),version:"4.4"});localStorage.setItem(key(),JSON.stringify(d));renderList();}
 function save(){saveSilent();alert("Kaydedildi")}
 function safeParseRecord(k){try{return JSON.parse(localStorage[k])}catch(e){return null}}
 function recordText(d,k){let v=(d&&d.v)||{};return [k,v.dosyaNo,v.plaka,v.sigortali,v.sirket,v.servis,v.dosyaDurumu,v.tarih].join(" ").toLocaleLowerCase("tr-TR")}
@@ -986,6 +991,12 @@ function lineList(title,rows){
  if(!rows.length) return "";
  return `<h4>${title}</h4><ul>${rows.map(x=>`<li>${x.name}${x.n?(" - "+x.n):""}</li>`).join("")}</ul>`;
 }
+
+function forceUpdate(){
+ if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k)))).finally(()=>location.reload(true));}
+ else { location.reload(true); }
+}
+
 function makeReport(){
  let d=collect(),v=d.v;
  let docTaken=d.docs.concat(d.extraDocs).filter(x=>x.a), docFuture=d.docs.concat(d.extraDocs).filter(x=>x.g);

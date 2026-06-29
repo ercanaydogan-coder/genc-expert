@@ -1,0 +1,11 @@
+Genç Expert Pro V4.3
+
+Eklenenler:
+- Kategorili fotoğraf ekleme
+- Kameradan çek / galeriden seç ayrımı
+- Fotoğraf kategori filtresi
+- Fotoğraf not alanı
+- Fotoğraf sıralama: Yukarı / Aşağı
+- Fotoğraf silme onayı
+
+Not: Rapor formatına dokunulmadı. Mevcut HTML sistemi üzerinden devam edildi.

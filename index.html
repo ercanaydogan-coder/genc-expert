@@ -73,12 +73,14 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 <label>Sigorta Şirketi<input id="sirket"></label>
 <label>Acente<input id="acente"></label>
 <label>Servis / Konum<input id="servis"></label>
+<label>Dosya Durumu<select id="dosyaDurumu"><option>İnceleme Bekliyor</option><option>Araç İncelendi</option><option>Evrak Bekleniyor</option><option>Rapor Hazır</option><option>Kapatıldı</option></select></label>
 </div>
 <button onclick="save()">Kaydet</button> <button onclick="clearForm()">Yeni Dosya</button>
 <div class="fileTools">
   <b>Dosya Arama</b>
   <div class="grid">
     <label>Dosya No / Plaka / Sigortalı Ara<input class="searchInput" id="fileSearch" placeholder="Örn: 61 ABC 123 veya 2026-001" oninput="renderList()"></label>
+    <label>Duruma Göre Filtre<select id="statusFilter" onchange="renderList()"><option value="">Tümü</option><option>İnceleme Bekliyor</option><option>Araç İncelendi</option><option>Evrak Bekleniyor</option><option>Rapor Hazır</option><option>Kapatıldı</option></select></label>
   </div>
   <div class="small">Arama kayıtlı dosyalar içinde yapılır. Silme işlemi sadece seçilen kaydı kaldırır.</div>
 </div>
@@ -881,7 +883,7 @@ function renderPaint(){
  $("paint").innerHTML=paint.map((p,i)=>`<div class="paintrow"><b>${p}</b><select id="b${i}d"><option>Boyasız</option><option>Boyalı</option><option>Ölçülemedi</option></select><input id="b${i}m" placeholder="Mikron"></div>`).join("");
 }
 function collect(){
- let ids=["dosyaNo","plaka","tarih","eksper","sigortali","sigortaliTel","ilgili","ilgiliTel","sirket","acente","servis","marka","tip","yil","km","sase","motor","yakit","vites","not"];
+ let ids=["dosyaNo","plaka","tarih","eksper","sigortali","sigortaliTel","ilgili","ilgiliTel","sirket","acente","servis","dosyaDurumu","marka","tip","yil","km","sase","motor","yakit","vites","not"];
  let d={v:{},docs:[],extraDocs,c:[],fc:[],sc:[],groups:[],b:[],labor:[],extraLabor,photos,extraRows:{}};
  ids.forEach(x=>d.v[x]=$(x).value);
  docs.forEach((name,i)=>d.docs.push({name,a:$("doc"+i+"a").checked,g:$("doc"+i+"g").checked,n:$("doc"+i+"n").value}));
@@ -914,25 +916,32 @@ function load(d){
 }
 function setDamageRow(pre,r){["s","o","d","b","mo"].forEach(x=>{if($(pre+x))$(pre+x).checked=r[x]}); if($(pre+"n"))$(pre+"n").value=r.n||""; if($(pre+"name"))$(pre+"name").value=r.name||""}
 function key(){return "GE3_"+($("dosyaNo").value||"DOSYA")+"_"+($("plaka").value||"PLAKA")}
-function save(){let d=collect();d.meta={updatedAt:new Date().toISOString(),version:"4.1"};localStorage.setItem(key(),JSON.stringify(d));renderList();alert("Kaydedildi")}
+function saveSilent(){let d=collect();d.meta={updatedAt:new Date().toISOString(),version:"4.1.1"};localStorage.setItem(key(),JSON.stringify(d));renderList();}
+function save(){saveSilent();alert("Kaydedildi")}
 function safeParseRecord(k){try{return JSON.parse(localStorage[k])}catch(e){return null}}
-function recordText(d,k){let v=(d&&d.v)||{};return [k,v.dosyaNo,v.plaka,v.sigortali,v.sirket,v.servis,v.tarih].join(" ").toLocaleLowerCase("tr-TR")}
+function recordText(d,k){let v=(d&&d.v)||{};return [k,v.dosyaNo,v.plaka,v.sigortali,v.sirket,v.servis,v.dosyaDurumu,v.tarih].join(" ").toLocaleLowerCase("tr-TR")}
 function renderList(){
  let q=($("fileSearch")?.value||"").toLocaleLowerCase("tr-TR").trim();
+ let status=($("statusFilter")?.value||"").trim();
  let keys=Object.keys(localStorage).filter(k=>k.startsWith("GE3_"));
  let rows=keys.map(k=>({k,d:safeParseRecord(k)})).filter(x=>x.d);
  rows.sort((a,b)=>String(b.d.meta?.updatedAt||"").localeCompare(String(a.d.meta?.updatedAt||"")));
  if(q) rows=rows.filter(x=>recordText(x.d,x.k).includes(q));
+ if(status) rows=rows.filter(x=>(x.d.v||{}).dosyaDurumu===status);
  let html="";
  rows.forEach(x=>{let d=x.d,v=d.v||{},dt=d.meta?.updatedAt?new Date(d.meta.updatedAt).toLocaleString("tr-TR"):"";
   let esc=x.k.replaceAll("\\","\\\\").replaceAll("'","\\'");
-  html+=`<div class="card"><b>${v.plaka||"-"}</b><br>Dosya: ${v.dosyaNo||"-"}<br>Sigortalı: ${v.sigortali||"-"}<div class="fileMeta">Son kayıt: ${dt||"-"}</div><div class="fileActions"><button onclick='load(JSON.parse(localStorage["${esc}"]))'>Aç</button><button class="ghost" onclick='duplicateFile("${esc}")'>Kopyala</button><button class="danger" onclick='deleteFile("${esc}")'>Sil</button></div></div>`
+  html+=`<div class="card"><b>${v.plaka||"-"}</b><br>Dosya: ${v.dosyaNo||"-"}<br>Sigortalı: ${v.sigortali||"-"}<br>Durum: <b>${v.dosyaDurumu||"-"}</b><div class="fileMeta">Son kayıt: ${dt||"-"}</div><div class="fileActions"><button onclick='load(JSON.parse(localStorage["${esc}"]))'>Aç</button><button class="ghost" onclick='duplicateFile("${esc}")'>Kopyala</button><button class="danger" onclick='deleteFile("${esc}")'>Sil</button></div></div>`
  });
  $("list").innerHTML=html||"Kayıt bulunamadı.";
 }
 function deleteFile(k){if(confirm("Bu kayıt silinsin mi?")){localStorage.removeItem(k);renderList();}}
 function duplicateFile(k){let d=safeParseRecord(k);if(!d)return;load(d);$("dosyaNo").value=($("dosyaNo").value||"DOSYA")+"-KOPYA";save();}
 function clearForm(){if(confirm("Yeni dosya açılacak. Kaydedilmemiş bilgiler silinebilir. Devam edilsin mi?"))location.reload()}
+let autoSaveTimer=null;
+function autoSave(){clearTimeout(autoSaveTimer);autoSaveTimer=setTimeout(()=>{try{if(($('dosyaNo')?.value||$('plaka')?.value||'').trim()) saveSilent();}catch(e){}},900)}
+document.addEventListener('input',e=>{if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))autoSave();});
+document.addEventListener('change',e=>{if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))autoSave();});
 function addPhotos(e){[...e.target.files].forEach(file=>{let r=new FileReader();r.onload=()=>{photos.push(r.result);renderPhotos()};r.readAsDataURL(file)})}
 function renderPhotos(){$("photos").innerHTML=photos.map((p,i)=>`<img class="thumb" src="${p}" onclick="photos.splice(${i},1);renderPhotos()">`).join("")}
 function lineList(title,rows){

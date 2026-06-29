@@ -3,7 +3,7 @@
 <html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Genç Ekspertiz V3 - Tek Dosya</title>
+<title>Genç Expert Pro V4.2</title>
 <style>
 *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;margin:0;background:#f3f4f6;color:#111827}
 header{background:#111827;color:white;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -28,7 +28,7 @@ input[type=checkbox],input[type=radio]{width:auto;transform:scale(1.2);margin-ri
 .thumb{width:130px;height:95px;object-fit:cover;border:1px solid #ddd;border-radius:8px;margin:5px}
 .totalBox{background:#e5e7eb;border-radius:12px;padding:14px;margin:12px 0;font-size:18px;font-weight:700}
 .small{font-size:13px;color:#4b5563}
-.fileTools{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:10px;margin:10px 0}.fileActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.fileActions button{padding:9px 12px}.danger{background:#b91c1c!important}.ghost{background:#6b7280!important}.fileMeta{font-size:13px;color:#4b5563;margin:3px 0}.searchInput{background:#fff}
+.fileTools{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:10px;margin:10px 0}.fileActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.fileActions button{padding:9px 12px}.danger{background:#b91c1c!important}.ghost{background:#6b7280!important}.fileMeta{font-size:13px;color:#4b5563;margin:3px 0}.searchInput{background:#fff}.statusBadge{display:inline-block;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:800;background:#e5e7eb;color:#111827}.st-inceleme{background:#fef3c7;color:#92400e}.st-arac{background:#dbeafe;color:#1e40af}.st-evrak{background:#ffedd5;color:#9a3412}.st-rapor{background:#dcfce7;color:#166534}.st-kapali{background:#e5e7eb;color:#374151}.fileSummary{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}.sumBox{background:white;border:1px solid #d1d5db;border-radius:12px;padding:10px}.sumBox b{font-size:20px}.recentList{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}.recentCard{background:white;border:1px solid #ddd;border-radius:12px;padding:10px}
 @media(max-width:760px){.docrow,.partrow,.addrow,.paintrow,.laborrow{grid-template-columns:1fr}.inline{display:block}.inline label{display:inline-block;margin-right:10px}}
 @media print{header,nav,button,input[type=file]{display:none!important}body{background:white}main{padding:0}.page{display:none!important}#rapor{display:block!important}.report{border:0}.thumb{width:110px;height:80px}}
 </style>
@@ -46,7 +46,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 </script>
 </head>
 <body>
-<header><h1>Genç Ekspertiz V3</h1><button onclick="window.print()">PDF / Yazdır</button></header>
+<header><h1>Genç Expert Pro</h1><button onclick="window.print()">PDF / Yazdır</button></header>
 <nav>
 <button onclick="show(&#39;dosya&#39;)">Dosya</button>
 <button onclick="show(&#39;evrak&#39;)">Evrak</button>
@@ -84,7 +84,15 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   </div>
   <div class="small">Arama kayıtlı dosyalar içinde yapılır. Silme işlemi sadece seçilen kaydı kaldırır.</div>
 </div>
-<h3>Kayıtlı Dosyalar</h3><div id="list"><div class="card"><b>61 EA 621</b><br>Dosya: 22222<br><button onclick="load(JSON.parse(localStorage[&quot;GE3_22222_61 EA 621&quot;]))">Aç</button></div></div>
+<div class="fileTools">
+  <b>Dosya Özeti</b>
+  <div id="fileSummary" class="fileSummary"></div>
+</div>
+<div class="fileTools">
+  <b>Son Açılan Dosyalar</b>
+  <div id="recentFiles" class="recentList"></div>
+</div>
+<h3>Kayıtlı Dosyalar</h3><div id="list"><div class="card"><b>Henüz liste yüklenmedi</b></div></div>
 </section>
 
 <section id="evrak" class="page">
@@ -916,26 +924,41 @@ function load(d){
 }
 function setDamageRow(pre,r){["s","o","d","b","mo"].forEach(x=>{if($(pre+x))$(pre+x).checked=r[x]}); if($(pre+"n"))$(pre+"n").value=r.n||""; if($(pre+"name"))$(pre+"name").value=r.name||""}
 function key(){return "GE3_"+($("dosyaNo").value||"DOSYA")+"_"+($("plaka").value||"PLAKA")}
-function saveSilent(){let d=collect();d.meta={updatedAt:new Date().toISOString(),version:"4.1.1"};localStorage.setItem(key(),JSON.stringify(d));renderList();}
+function saveSilent(){let d=collect();d.meta=Object.assign({},d.meta||{},{updatedAt:new Date().toISOString(),version:"4.2"});localStorage.setItem(key(),JSON.stringify(d));renderList();}
 function save(){saveSilent();alert("Kaydedildi")}
 function safeParseRecord(k){try{return JSON.parse(localStorage[k])}catch(e){return null}}
 function recordText(d,k){let v=(d&&d.v)||{};return [k,v.dosyaNo,v.plaka,v.sigortali,v.sirket,v.servis,v.dosyaDurumu,v.tarih].join(" ").toLocaleLowerCase("tr-TR")}
+function statusClass(s){s=s||""; if(s.includes("İnceleme"))return "st-inceleme"; if(s.includes("Araç"))return "st-arac"; if(s.includes("Evrak"))return "st-evrak"; if(s.includes("Rapor"))return "st-rapor"; if(s.includes("Kapat"))return "st-kapali"; return "";}
+function badge(s){return `<span class="statusBadge ${statusClass(s)}">${s||"Durum Yok"}</span>`}
+function getRecords(){let keys=Object.keys(localStorage).filter(k=>k.startsWith("GE3_"));return keys.map(k=>({k,d:safeParseRecord(k)})).filter(x=>x.d);}
+function openRecord(k){let d=safeParseRecord(k); if(!d)return; d.meta=Object.assign({},d.meta||{},{lastOpenedAt:new Date().toISOString()}); localStorage.setItem(k,JSON.stringify(d)); load(d); show('dosya'); renderList();}
+function renderFileSummary(rows){
+ let all=getRecords(); let total=all.length; let counts={}; all.forEach(x=>{let s=(x.d.v||{}).dosyaDurumu||"Durum Yok"; counts[s]=(counts[s]||0)+1});
+ let html=`<div class="sumBox"><b>${total}</b><br><span class="small">Toplam Kayıt</span></div>`;
+ Object.entries(counts).forEach(([s,n])=>{html+=`<div class="sumBox"><b>${n}</b><br>${badge(s)}</div>`});
+ if($("fileSummary"))$("fileSummary").innerHTML=html;
+}
+function renderRecentFiles(){
+ let rows=getRecords().filter(x=>x.d.meta?.lastOpenedAt).sort((a,b)=>String(b.d.meta?.lastOpenedAt||"").localeCompare(String(a.d.meta?.lastOpenedAt||""))).slice(0,20);
+ let html=""; rows.forEach(x=>{let v=x.d.v||{}, esc=x.k.replaceAll("\\","\\\\").replaceAll("'","\\'"); let dt=x.d.meta?.lastOpenedAt?new Date(x.d.meta.lastOpenedAt).toLocaleString("tr-TR"):""; html+=`<div class="recentCard"><b>${v.plaka||"-"}</b><br>Dosya: ${v.dosyaNo||"-"}<br>${badge(v.dosyaDurumu)}<div class="fileMeta">Son açılış: ${dt}</div><button onclick='openRecord("${esc}")'>Aç</button></div>`});
+ if($("recentFiles"))$("recentFiles").innerHTML=html||"Henüz son açılan dosya yok.";
+}
 function renderList(){
  let q=($("fileSearch")?.value||"").toLocaleLowerCase("tr-TR").trim();
  let status=($("statusFilter")?.value||"").trim();
- let keys=Object.keys(localStorage).filter(k=>k.startsWith("GE3_"));
- let rows=keys.map(k=>({k,d:safeParseRecord(k)})).filter(x=>x.d);
+ let rows=getRecords();
  rows.sort((a,b)=>String(b.d.meta?.updatedAt||"").localeCompare(String(a.d.meta?.updatedAt||"")));
+ renderFileSummary(rows); renderRecentFiles();
  if(q) rows=rows.filter(x=>recordText(x.d,x.k).includes(q));
  if(status) rows=rows.filter(x=>(x.d.v||{}).dosyaDurumu===status);
  let html="";
  rows.forEach(x=>{let d=x.d,v=d.v||{},dt=d.meta?.updatedAt?new Date(d.meta.updatedAt).toLocaleString("tr-TR"):"";
   let esc=x.k.replaceAll("\\","\\\\").replaceAll("'","\\'");
-  html+=`<div class="card"><b>${v.plaka||"-"}</b><br>Dosya: ${v.dosyaNo||"-"}<br>Sigortalı: ${v.sigortali||"-"}<br>Durum: <b>${v.dosyaDurumu||"-"}</b><div class="fileMeta">Son kayıt: ${dt||"-"}</div><div class="fileActions"><button onclick='load(JSON.parse(localStorage["${esc}"]))'>Aç</button><button class="ghost" onclick='duplicateFile("${esc}")'>Kopyala</button><button class="danger" onclick='deleteFile("${esc}")'>Sil</button></div></div>`
+  html+=`<div class="card"><b>${v.plaka||"-"}</b><br>Dosya: ${v.dosyaNo||"-"}<br>Sigortalı: ${v.sigortali||"-"}<br>${badge(v.dosyaDurumu)}<div class="fileMeta">Son kayıt: ${dt||"-"}</div><div class="fileActions"><button onclick='openRecord("${esc}")'>Aç</button><button class="ghost" onclick='duplicateFile("${esc}")'>Kopyala</button><button class="danger" onclick='deleteFile("${esc}")'>Sil</button></div></div>`
  });
- $("list").innerHTML=html||"Kayıt bulunamadı.";
+ if($("list"))$("list").innerHTML=html||"Kayıt bulunamadı.";
 }
-function deleteFile(k){if(confirm("Bu kayıt silinsin mi?")){localStorage.removeItem(k);renderList();}}
+function deleteFile(k){if(confirm("Bu kayıt kalıcı olarak silinsin mi?")){localStorage.removeItem(k);renderList();}}
 function duplicateFile(k){let d=safeParseRecord(k);if(!d)return;load(d);$("dosyaNo").value=($("dosyaNo").value||"DOSYA")+"-KOPYA";save();}
 function clearForm(){if(confirm("Yeni dosya açılacak. Kaydedilmemiş bilgiler silinebilir. Devam edilsin mi?"))location.reload()}
 let autoSaveTimer=null;

@@ -1,0 +1,18 @@
+Genç Expert Pro V4.2
+
+Rapor bölümüne dokunulmadı.
+
+Eklenenler:
+- Dosya özeti paneli
+- Durum renkleri
+- Son açılan 20 dosya
+- Dosya açıldığında son açılış tarihi kaydı
+- Kayıt listesinde renkli durum etiketi
+- Dosya yönetimi ekranı iyileştirmeleri
+
+Yükleme:
+1) ZIP dosyasını Mac üzerinde açın.
+2) İçindeki dosyaları GitHub genc-expert deposuna yükleyin.
+3) Aynı isimli dosyalar için Replace/Üzerine Yaz seçeneğini onaylayın.
+4) Commit changes deyin.
+5) 1-2 dakika sonra iPhone/iPad sayfasını yenileyin.

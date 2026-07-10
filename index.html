@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GENÇ SİGORTA EKSPERLİK</title>
+<title>GENÇ SİGORTA EKSPERLİK V8.1</title>
 <style>
 *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;margin:0;background:#f3f4f6;color:#111827}header{background:#111827;color:white;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}h1{font-size:20px;margin:0}button{border:0;border-radius:10px;background:#111827;color:white;padding:11px 14px;font-weight:700;margin:2px;cursor:pointer}.danger{background:#991b1b}.soft{background:#4b5563}.green{background:#047857}nav{display:flex;gap:6px;overflow:auto;background:white;padding:8px;position:sticky;top:0;border-bottom:1px solid #ddd;z-index:3}nav button{background:#374151;white-space:nowrap}main{padding:12px;max-width:1220px;margin:auto}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}label,.card,.box{display:block;background:white;border:1px solid #ddd;border-radius:12px;padding:10px;margin:7px 0}input,textarea,select{width:100%;font-size:16px;padding:10px;border:1px solid #bbb;border-radius:8px;margin-top:5px}input[type=checkbox],input[type=radio]{width:auto;transform:scale(1.2);margin-right:8px}.sectionTitle{margin:18px 0 8px;background:#111827;color:#fff;padding:10px;border-radius:10px}.docrow{display:grid;grid-template-columns:auto auto 1.25fr auto auto 150px 1.35fr;gap:8px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:8px;margin:6px 0}.partrow,.addrow{display:grid;grid-template-columns:1.2fr repeat(5,auto) 1.2fr auto;gap:6px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:7px;margin:6px 0}.addrow{border-style:dashed}.paintrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:white;border:1px solid #ddd;border-radius:10px;padding:7px;margin:6px 0}.laborrow{display:grid;grid-template-columns:1.5fr 1fr 1.6fr;gap:8px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:8px;margin:6px 0}.controlrow,.critrow{background:white;border:1px solid #ddd;border-radius:12px;padding:10px;margin:8px 0}.critrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 90px 1.4fr;gap:8px;align-items:center}.pertResult{font-size:18px;font-weight:800;padding:10px;border-radius:10px;background:#e5e7eb}.scoreBox{background:#f9fafb;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0}.inline{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.inline label{border:0;padding:0;margin:0;background:transparent}.report{background:white;padding:18px;border-radius:12px;line-height:1.45}.warn{color:#b91c1c;font-weight:700}.ok{color:#047857;font-weight:700}.thumb{width:180px;height:240px;object-fit:cover;border:1px solid #ddd;border-radius:8px;margin:5px}.totalBox{background:#e5e7eb;border-radius:12px;padding:14px;margin:12px 0;font-size:18px;font-weight:700}.small{font-size:13px;color:#4b5563}.searchBox{background:#e5e7eb;border-radius:14px;padding:12px;margin:10px 0}.pill{display:inline-block;background:#e5e7eb;border-radius:999px;padding:4px 9px;margin:2px;font-size:12px}.hiddenBySearch{display:none}table{width:100%;border-collapse:collapse;margin:10px 0}td,th{border:1px solid #999;padding:6px;text-align:left}.damageTabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.damageTabs button{background:#4b5563}.damageTabs button.active{background:#047857}.damageGroupPanel{display:none}.damageGroupPanel.active{display:block}.photoGrid{display:flex;flex-wrap:wrap;gap:10px}.photoCard{background:white;border:1px solid #ddd;border-radius:12px;padding:8px;text-align:center}.photoCard .small{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:760px){.docrow,.partrow,.addrow,.paintrow,.laborrow,.critrow{grid-template-columns:1fr}.inline{display:block}.inline label{display:inline-block;margin-right:10px}header{display:block}header button{margin-top:8px}}
@@ -182,21 +182,53 @@ title{display:none!important}
   h2{font-size:13px!important}h4{font-size:9.6px!important;margin:1.6px 0!important}.totalBox{font-size:10px!important;padding:4px!important;margin:2px 0!important}
 }
 </style>
+
+<style>
+/* === V7.6 SAHA STABIL: form yapısına dokunmadan PDF düzeni === */
+.reportListLines{white-space:pre-line}
+@media print{
+  @page{size:A4 portrait;margin:7mm 8mm 7mm 8mm!important}
+  html,body{margin:0!important;padding:0!important;background:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  header,nav,button,.searchBox,input[type=file]{display:none!important}
+  main{padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
+  .page{display:none!important}#rapor{display:block!important}
+  #rapor>h2,#rapor>button{display:none!important}
+  .report{width:194mm!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:#fff!important;color:#111827!important;font-size:10.7px!important;line-height:1.26!important}
+  .reportPage{width:194mm!important;min-height:283mm!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;margin:0!important;padding:0!important}
+  .reportPage:last-child{page-break-after:auto!important;break-after:auto!important}
+  .reportHeader,.reportSlimHeader{position:static!important;margin:0 0 3mm 0!important;padding:0 0 2mm 0!important;border-bottom:2px solid #111827!important}
+  .reportBrand{min-width:0!important}.reportLogo{width:13mm!important;height:17mm!important;object-fit:contain!important}.reportBrandTitle{font-size:13.6px!important;line-height:1.1!important}.reportFileBox{font-size:7.8px!important;line-height:1.18!important;min-width:128px!important}.reportFileBox b{width:58px!important}.reportSlimName{font-size:11px!important}.reportSlimFile{font-size:7.5px!important}
+  .reportPageBody{flex:1 1 auto!important;overflow:hidden!important}.reportFooter{margin-top:auto!important;padding-top:2px!important;border-top:1px solid #cbd5e1!important;display:flex!important;gap:6px!important}.reportFooterContact{font-size:5.8px!important;line-height:1.08!important;flex:1!important}.reportPageNo{font-size:6.6px!important;font-weight:800!important;white-space:nowrap!important}
+  .reportCover{padding:5px!important;margin:0 0 2.2mm 0!important}.reportCover h2{font-size:12.5px!important;margin:0 0 2px 0!important}
+  .reportSection{margin:0 0 2.7mm 0!important;page-break-inside:auto!important;break-inside:auto!important}.reportTitle{font-size:9.3px!important;padding:3.5px 5px!important;margin:0 0 1.5mm 0!important;border-radius:3px!important;background:#111827!important;color:#fff!important}
+  .reportTable{width:100%!important;border-collapse:collapse!important;margin:0 0 1.8mm 0!important;table-layout:fixed!important}.reportTable th,.reportTable td{border:1px solid #777!important;padding:2.2px 3px!important;font-size:8.7px!important;line-height:1.16!important;vertical-align:top!important;word-break:normal!important;overflow-wrap:anywhere!important}.reportTable th{background:#e5e7eb!important;font-weight:800!important}
+  .reportDamageTable th{font-size:8.2px!important;text-align:center!important}.reportDamageTable td{font-size:8.35px!important;line-height:1.16!important;height:auto!important;min-height:0!important;overflow:visible!important}.reportDamageTable .damageItem{padding:.2px 0!important;border-bottom:1px solid #e5e7eb!important}
+  .reportPage1 .reportSection{margin-bottom:2.3mm!important}.reportPage1 .reportTable th,.reportPage1 .reportTable td{font-size:8.45px!important;padding:2px 2.8px!important}
+  .reportPage2 .reportTable th,.reportPage2 .reportTable td{font-size:8.8px!important}.reportPage3 .reportTable th,.reportPage3 .reportTable td{font-size:8.9px!important;line-height:1.18!important}
+  .reportSignature{margin-top:6mm!important;text-align:right!important;padding-right:10mm!important;font-size:10px!important}.reportSignature .title{font-size:9px!important}
+  .reportPhotos{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:5mm!important;margin-top:4mm!important}.reportPhotos .photoCard{break-inside:avoid!important;page-break-inside:avoid!important;padding:4px!important;border:1px solid #ddd!important;border-radius:6px!important;background:#fff!important}.reportPhotos img{width:100%!important;height:66mm!important;object-fit:contain!important;object-position:center top!important;border:1px solid #999!important;border-radius:4px!important;background:#fff!important}.reportPhotos .small{font-size:8px!important;text-align:center!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+}
+
+/* === V7.6.2 SAHA REVİZYON ALANLARI === */
+.partrow,.addrow{grid-template-columns:1.2fr auto 150px 130px auto 110px auto 1.2fr auto!important}.trafikOnly{display:none}.hasarServisListesiBox,.laborServisListesiBox{background:#fff7ed;border-color:#fdba74}
+@media(max-width:760px){.partrow,.addrow{grid-template-columns:1fr!important}}
+</style>
 </head>
 <body>
-<header><div><h1>GENÇ SİGORTA EKSPERLİK V7.5.5 FINAL</h1><div class="small" style="color:#d1d5db">PDF sıkıştırılmış final düzen</div></div><div><button onclick="save()" class="green">Kaydet</button><button onclick="printReport()">PDF / Yazdır</button></div></header>
-<nav><button onclick="show('home')">Ana Menü</button><button onclick="show('dosya')">Dosya</button><button onclick="show('evrak')">Evrak</button><button onclick="show('arac')">Araç</button><button onclick="show('hasar')">Hasar</button><button onclick="show('iscilik')">İşçilik</button><button onclick="show('boya')">Boya Ölçüm</button><button onclick="show('foto')">Tespit Foto Yükle</button><button onclick="show('kanaat')">Kanaat</button><button onclick="show('kontrol')">PERT Durumu</button><button onclick="show('rapor')">Rapor</button></nav>
+<header><div><h1>GENÇ SİGORTA EKSPERLİK V8.1 SAHA</h1><div class="small" style="color:#d1d5db">Kanaat açıklama alanları güncellendi</div></div><div><button onclick="save()" class="green">Kaydet</button><button onclick="printReport()">PDF / Yazdır</button></div></header>
+<nav><button onclick="show('home')">Ana Menü</button><button onclick="show('dosya')">Dosya</button><button onclick="show('evrak')">Evrak</button><button onclick="show('arac')">Araç</button><button onclick="show('hasar')">Hasar</button><button onclick="show('iscilik')">İşçilik</button><button onclick="show('boya')">Boya Ölçüm</button><button onclick="show('foto')">Tespit Foto Yükle</button><button onclick="show('kanaat')">Kanaat</button><button onclick="show('kontrol')">PERT Durumu</button><button onclick="show('notlar')">Notlar</button><button onclick="show('rapor')">Rapor</button></nav>
 <main>
 <section id="home" class="page active"><h2>GENÇ SİGORTA EKSPERLİK Mobil</h2><div class="card"><h3>Kullanıcı Seçimi</h3><label>Kullanıcı Adı / Raportör<input id="currentUserInput" placeholder="Örn: Ercan, Mustafa, Ahmet"></label><button class="green" onclick="setCurrentUser()">Kullanıcıyı Kaydet</button><p>Aktif Kullanıcı: <b id="activeUserLabel">Seçilmedi</b></p></div><div class="grid"><button class="green" onclick="startNewFile()">+ Yeni Dosya Aç</button><button onclick="show('dosya');renderList()">Kendi Dosyalarımı Göster</button><button onclick="show('rapor')">Rapor Ekranı</button></div><div class="searchBox"><b>Bu sürümde düzeltilenler:</b> Kurumsal logo, üst bilgi ve iletişim satırı rapor düzenine eklendi.</div></section>
-<section id="dosya" class="page"><h2>Dosya Bilgileri</h2><div class="grid"><label>İhbar Tarihi<input id="ihbarTarihi" type="date"></label><label>Ekspertiz Tarihi<input id="tarih" type="date"></label><label>Dosya No<input id="dosyaNo" onblur="checkFileNo()"></label><label>Sigorta Şirketi<input id="sirket"></label><label>Kasko / Trafik<select id="brans"><option value="">Seçiniz</option><option>Kasko</option><option>Trafik</option></select></label><label>Plaka No<input id="plaka" onblur="checkPlateHistory()"></label><label>Sigortalı<input id="sigortali"></label><label>Araç Sahibi<input id="aracSahibi"></label><label>Servis Adı<input id="servisAdi"></label><label>Servis İli<input id="servisIl"></label><label>Servis İlçesi<input id="servisIlce"></label><label>Eksperi<input id="eksper"></label><label>Dosya Durumu<select id="dosyaDurumu"><option>Ön İnceleme</option><option>Evrak Bekleniyor</option><option>Serviste</option><option>Rapor Hazır</option><option>Kapandı</option></select></label></div><button onclick="save()" class="green">Kaydet</button><button onclick="newFile()" class="soft">Yeni Dosya</button><button class="danger" onclick="deleteCurrent()">Açık Dosyayı Sil</button><div id="plateHistory" class="searchBox" style="display:none"></div><div class="searchBox"><h3>Dosya Ara</h3><input id="fileSearch" placeholder="Dosya no, plaka veya sigortalı adı yaz" oninput="renderList()"></div><h3>Kayıtlı Dosyalar</h3><div id="list"></div></section>
+<section id="dosya" class="page"><h2>Dosya Bilgileri</h2><div class="grid"><label>İhbar Tarihi<input id="ihbarTarihi" type="date"></label><label>Ekspertiz Tarihi<input id="tarih" type="date"></label><label>Dosya No<input id="dosyaNo" onblur="checkFileNo()"></label><label>Sigorta Şirketi<input id="sirket"></label><label>Kasko / Trafik<select id="brans" onchange="updateBransFields()"><option value="">Seçiniz</option><option>Kasko</option><option>Trafik</option></select></label><label>Plaka No<input id="plaka" onblur="checkPlateHistory()"></label><label>Sigortalı<input id="sigortali"></label><label>Araç Sahibi<input id="aracSahibi"></label><label class="trafikOnly">Bakılacak Araç Plakası<input id="bakilacakPlaka"></label><label class="trafikOnly">Bakılacak Araç Sahibi<input id="bakilacakAracSahibi"></label><label>Servis Adı<input id="servisAdi"></label><label>Servis İli<input id="servisIl"></label><label>Servis İlçesi<input id="servisIlce"></label><label>Eksperi<input id="eksper"></label><label>Dosya Durumu<select id="dosyaDurumu"><option>Ön İnceleme</option><option>Evrak Bekleniyor</option><option>Serviste</option><option>Rapor Hazır</option><option>Kapandı</option></select></label></div><button onclick="save()" class="green">Kaydet</button><button onclick="newFile()" class="soft">Yeni Dosya</button><button class="danger" onclick="deleteCurrent()">Açık Dosyayı Sil</button><div id="plateHistory" class="searchBox" style="display:none"></div><div class="searchBox"><h3>Dosya Ara</h3><input id="fileSearch" placeholder="Dosya no, plaka veya sigortalı adı yaz" oninput="renderList()"></div><h3>Kayıtlı Dosyalar</h3><div id="list"></div></section>
 <section id="evrak" class="page"><h2>Evrak Kontrol</h2><div class="inline"><button class="danger" onclick="deleteSelectedDocs()">Seçili Evrakları Sil</button><button onclick="selectAllDocs()" class="soft">Tümünü Seç</button><button onclick="clearDocSelection()" class="soft">Seçimi Temizle</button></div><div id="docs"></div><button onclick="addExtraDoc()">+ Evrak Ekle</button></section>
-<section id="arac" class="page"><h2>Araç Bilgileri</h2><div class="grid"><label>Marka<input id="marka"></label><label>Tip / Model<input id="tip"></label><label>Model Yılı<input id="yil"></label><label>KM<input id="km"></label><label>Şase No<input id="sase"></label><label>Yakıt<input id="yakit"></label><label>Vites<input id="vites"></label><label>Tahmini Onarım Süresi (İş Günü)<input id="onarimSuresi" inputmode="numeric" placeholder="Örn: 12"></label><label><input type="checkbox" id="parcaTedarikHaric"> Parça tedarik süresi hariçtir.</label></div><div class="sectionTitle">Araç Donanım / Ekipman</div><div class="checks" id="equipment"></div><div id="extraEquipment"></div><button onclick="addEquipment()">+ Donanım Ekle</button><div class="checks" id="vehicleChecks"></div></section>
+<section id="arac" class="page"><h2>Araç Bilgileri</h2><div class="grid"><label>Marka<input id="marka"></label><label>Tip / Model<input id="tip"></label><label>Model Yılı<input id="yil"></label><label>KM<input id="km"></label><label>Şase No<input id="sase"></label><label>Yakıt<select id="yakit"><option value="">Seçiniz</option><option>Benzin</option><option>Dizel</option><option>Hibrit</option><option>Elektrikli</option><option>LPG</option></select></label><label>Vites<select id="vites"><option value="">Seçiniz</option><option>Manuel</option><option>Otomatik</option><option>Yarı Otomatik</option></select></label><label>Tahmini Onarım Süresi (İş Günü)<input id="onarimSuresi" inputmode="numeric" placeholder="Örn: 12"></label><label><input type="checkbox" id="parcaTedarikHaric"> Parça tedarik süresi hariçtir.</label></div><div class="sectionTitle">Araç Donanım / Ekipman</div><div class="checks" id="equipment"></div><div id="extraEquipment"></div><button onclick="addEquipment()">+ Donanım Ekle</button><div class="checks" id="vehicleChecks"></div></section>
 <section id="kontrol" class="page"><h2>PERT Durumu</h2><div class="sectionTitle">PERT Oranı Hesaplama</div><div class="grid"><label>Araç Rayiç Değeri (TL)<input id="pertRayic" inputmode="decimal" placeholder="Örn: 1.250.000" oninput="calcPert()"></label><label>Tahmini Onarım Bedeli (TL)<input id="pertOnarim" inputmode="decimal" placeholder="Örn: 780.000" oninput="calcPert()"></label><label>PERT Oranı (%)<input id="pertOran" readonly placeholder="Otomatik hesaplanır"></label></div><div id="pertOranKarar" class="pertResult">Rayiç ve tahmini onarım bedeli giriniz.</div><p class="small">Yasal eşik: Tahmini onarım bedeli piyasa rayicinin %60'ını geçerse PERT, geçmezse onarım yönünde değerlendirilir.</p><div class="sectionTitle">Kritik Parça Puanlama</div><p class="small">Excel rehberine göre değişim ve onarım derecesi seçildiğinde puan otomatik hesaplanır. Kritik parça toplamı 35 puanı geçerse PERT değerlendirmesi oluşur.</p><div id="critical"></div><div class="totalBox">Kritik Parça Toplam Puanı: <span id="critTotal">0</span></div><div id="critKarar" class="pertResult">Kritik parça seçimi yapılmadı.</div><div class="sectionTitle">Pert Kararı ve Kanaat</div><div class="checks"><label><input type="checkbox" id="cekmePert">Çekme Belgeli Pert</label><label><input type="checkbox" id="hurdaPert">Hurda Belgeli Pert</label><label><input type="checkbox" id="ekonomikPert">Ekonomik Pert</label><label><input type="checkbox" id="onarilabilir">Onarılabilir</label></div><label>Eksper Kanaati<textarea id="pertEksperKanaati" rows="5" placeholder="Eksperin dosyaya özel teknik kanaati buraya yazılacak."></textarea></label><label>Açıklama ve Notlar<textarea id="not" rows="6"></textarea></label></section>
 <section id="hasar" class="page"><h2>Hasar Tespit</h2><div class="searchBox"><input id="partSearch" placeholder="Parça ara: örn. çamurluk, far, tampon" oninput="filterParts()"></div><div id="damageGroups"></div></section>
 <section id="iscilik" class="page"><h2>İşçilik</h2><div id="labor"></div><div class="sectionTitle">Ek İşçilik</div><div id="extraLabor"></div><button onclick="addExtraLabor()">+ İşçilik Ekle</button><div class="totalBox">Toplam İşçilik: <span id="laborTotal">0 TL</span></div></section>
 <section id="boya" class="page"><h2>Boya Ölçüm</h2><div id="paint"></div></section>
 <section id="foto" class="page"><h2>Tespit Foto Yükle</h2><p class="small">Bu bölümden galeri veya kamera ile tespit fotoğrafı yüklenir ve rapora aktarılır.</p><div class="grid"><label>Tespit Foto Yükle<input type="file" accept="image/*" multiple onchange="addPhotos(event,'Tespit')"></label><label>Kameradan Çek / Dosya Seç<input type="file" accept="image/*" capture="environment" multiple onchange="addPhotos(event,'Foto')"></label></div><p class="small"><b>Tespit Listesi</b> - Tespit görseline dokununca listeden silinir.</p><div id="photos" class="photoGrid"></div></section>
-<section id="kanaat" class="page"><h2>KANAAT</h2><div class="sectionTitle">Araç Başı Kontrol</div><div id="kanaatSpecialControls"></div><label>Notlar<textarea id="kanaatNot" rows="5" placeholder="Kanaat notları"></textarea></label><label>Açıklamalar<textarea id="kanaatAciklama" rows="7" placeholder="Eksper kanaati / açıklamalar"></textarea></label></section>
+<section id="kanaat" class="page"><h2>KANAAT</h2><div class="sectionTitle">Araç Başı Kontrol</div><div id="kanaatSpecialControls"></div><div class="sectionTitle">Kusur Durumu</div><div class="checks"><label><input type="radio" name="kusurDurumu" id="kusurSigortaliKusurlu" value="Sigortalı Kusurlu">Sigortalı Kusurlu</label><label><input type="radio" name="kusurDurumu" id="kusurKusursuz" value="Kusursuz">Kusursuz</label><label><input type="radio" name="kusurDurumu" id="kusurPaylasimliVar" value="Paylaşımlı Kusur Var">Paylaşımlı Kusur Var</label><label><input type="radio" name="kusurDurumu" id="kusurPaylasimliYok" value="Paylaşımlı Kusur Yok">Paylaşımlı Kusur Yok</label></div><label class="card"><input type="checkbox" id="tramereGonderilecek"> Tramer'e Gönderilecek<input id="tramerAciklama" placeholder="Tramer açıklaması"></label><label>Eksper Kanaati<textarea id="kanaatEksperKanaati" rows="7" placeholder="Eksper kanaati"></textarea></label></section>
+<section id="notlar" class="page"><h2>NOTLAR</h2><label>Araç Hakkında Açıklamalar<textarea id="notArac" rows="6" placeholder="Aracın genel kondisyon durumu ve araç hakkındaki açıklamalar"></textarea></label><label>Hasar Hakkında Açıklamalar<textarea id="notHasar" rows="6" placeholder="Hasarın genel anlatımı ve yapılması gereken kontroller"></textarea></label><label>Yapılacak Çalışmalar<textarea id="notCalisma" rows="6" placeholder="Ofiste yapılacak işlemler"></textarea></label><label>Diğer Notlar<textarea id="notDiger" rows="6" placeholder="Diğer notlar"></textarea></label></section>
 <section id="rapor" class="page"><h2>Özet Rapor</h2><button onclick="makeReport()">Raporu Oluştur</button><button onclick="printReport()">PDF Kaydet / Yazdır</button><button class="green" onclick="shareReport()">Raporu Paylaş</button><div id="report" class="report"></div></section>
 </main>
 <script>
@@ -381,7 +413,38 @@ function printReport(){
   .reportSignature{margin-top:5mm!important;text-align:right!important;padding-right:8mm!important;font-size:9px!important}.reportSignature .title{font-size:8px!important}
 }
 
-</style></head><body><main><section id="rapor" class="page active">${html}</section></main><script>setTimeout(function(){window.print();},400);<\/script></body></html>`);
+</style>
+<style>
+/* === V7.6 SAHA STABIL: form yapısına dokunmadan PDF düzeni === */
+.reportListLines{white-space:pre-line}
+@media print{
+  @page{size:A4 portrait;margin:7mm 8mm 7mm 8mm!important}
+  html,body{margin:0!important;padding:0!important;background:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  header,nav,button,.searchBox,input[type=file]{display:none!important}
+  main{padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
+  .page{display:none!important}#rapor{display:block!important}
+  #rapor>h2,#rapor>button{display:none!important}
+  .report{width:194mm!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:#fff!important;color:#111827!important;font-size:10.7px!important;line-height:1.26!important}
+  .reportPage{width:194mm!important;min-height:283mm!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;margin:0!important;padding:0!important}
+  .reportPage:last-child{page-break-after:auto!important;break-after:auto!important}
+  .reportHeader,.reportSlimHeader{position:static!important;margin:0 0 3mm 0!important;padding:0 0 2mm 0!important;border-bottom:2px solid #111827!important}
+  .reportBrand{min-width:0!important}.reportLogo{width:13mm!important;height:17mm!important;object-fit:contain!important}.reportBrandTitle{font-size:13.6px!important;line-height:1.1!important}.reportFileBox{font-size:7.8px!important;line-height:1.18!important;min-width:128px!important}.reportFileBox b{width:58px!important}.reportSlimName{font-size:11px!important}.reportSlimFile{font-size:7.5px!important}
+  .reportPageBody{flex:1 1 auto!important;overflow:hidden!important}.reportFooter{margin-top:auto!important;padding-top:2px!important;border-top:1px solid #cbd5e1!important;display:flex!important;gap:6px!important}.reportFooterContact{font-size:5.8px!important;line-height:1.08!important;flex:1!important}.reportPageNo{font-size:6.6px!important;font-weight:800!important;white-space:nowrap!important}
+  .reportCover{padding:5px!important;margin:0 0 2.2mm 0!important}.reportCover h2{font-size:12.5px!important;margin:0 0 2px 0!important}
+  .reportSection{margin:0 0 2.7mm 0!important;page-break-inside:auto!important;break-inside:auto!important}.reportTitle{font-size:9.3px!important;padding:3.5px 5px!important;margin:0 0 1.5mm 0!important;border-radius:3px!important;background:#111827!important;color:#fff!important}
+  .reportTable{width:100%!important;border-collapse:collapse!important;margin:0 0 1.8mm 0!important;table-layout:fixed!important}.reportTable th,.reportTable td{border:1px solid #777!important;padding:2.2px 3px!important;font-size:8.7px!important;line-height:1.16!important;vertical-align:top!important;word-break:normal!important;overflow-wrap:anywhere!important}.reportTable th{background:#e5e7eb!important;font-weight:800!important}
+  .reportDamageTable th{font-size:8.2px!important;text-align:center!important}.reportDamageTable td{font-size:8.35px!important;line-height:1.16!important;height:auto!important;min-height:0!important;overflow:visible!important}.reportDamageTable .damageItem{padding:.2px 0!important;border-bottom:1px solid #e5e7eb!important}
+  .reportPage1 .reportSection{margin-bottom:2.3mm!important}.reportPage1 .reportTable th,.reportPage1 .reportTable td{font-size:8.45px!important;padding:2px 2.8px!important}
+  .reportPage2 .reportTable th,.reportPage2 .reportTable td{font-size:8.8px!important}.reportPage3 .reportTable th,.reportPage3 .reportTable td{font-size:8.9px!important;line-height:1.18!important}
+  .reportSignature{margin-top:6mm!important;text-align:right!important;padding-right:10mm!important;font-size:10px!important}.reportSignature .title{font-size:9px!important}
+  .reportPhotos{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:5mm!important;margin-top:4mm!important}.reportPhotos .photoCard{break-inside:avoid!important;page-break-inside:avoid!important;padding:4px!important;border:1px solid #ddd!important;border-radius:6px!important;background:#fff!important}.reportPhotos img{width:100%!important;height:66mm!important;object-fit:contain!important;object-position:center top!important;border:1px solid #999!important;border-radius:4px!important;background:#fff!important}.reportPhotos .small{font-size:8px!important;text-align:center!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+}
+
+/* === V7.6.2 SAHA REVİZYON ALANLARI === */
+.partrow,.addrow{grid-template-columns:1.2fr auto 150px 130px auto 110px auto 1.2fr auto!important}.trafikOnly{display:none}.hasarServisListesiBox,.laborServisListesiBox{background:#fff7ed;border-color:#fdba74}
+@media(max-width:760px){.partrow,.addrow{grid-template-columns:1fr!important}}
+</style>
+</head><body><main><section id="rapor" class="page active">${html}</section></main><script>setTimeout(function(){window.print();},400);<\/script></body></html>`);
  w.document.close();
 }
 
@@ -424,7 +487,38 @@ function printReport(){
  const w=window.open('', '_blank');
  if(!w){alert('PDF penceresi açılamadı. Tarayıcı açılır pencere iznini kontrol et.');return;}
  w.document.open();
- w.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>${esc(pdfName)}</title><style>${css}</style></head><body><main><section id="rapor" class="page active">${html}</section></main><script>document.title=${JSON.stringify(pdfName)};setTimeout(function(){window.print();},500);<\/script></body></html>`);
+ w.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>${esc(pdfName)}</title><style>${css}</style>
+<style>
+/* === V7.6 SAHA STABIL: form yapısına dokunmadan PDF düzeni === */
+.reportListLines{white-space:pre-line}
+@media print{
+  @page{size:A4 portrait;margin:7mm 8mm 7mm 8mm!important}
+  html,body{margin:0!important;padding:0!important;background:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  header,nav,button,.searchBox,input[type=file]{display:none!important}
+  main{padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
+  .page{display:none!important}#rapor{display:block!important}
+  #rapor>h2,#rapor>button{display:none!important}
+  .report{width:194mm!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:#fff!important;color:#111827!important;font-size:10.7px!important;line-height:1.26!important}
+  .reportPage{width:194mm!important;min-height:283mm!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;margin:0!important;padding:0!important}
+  .reportPage:last-child{page-break-after:auto!important;break-after:auto!important}
+  .reportHeader,.reportSlimHeader{position:static!important;margin:0 0 3mm 0!important;padding:0 0 2mm 0!important;border-bottom:2px solid #111827!important}
+  .reportBrand{min-width:0!important}.reportLogo{width:13mm!important;height:17mm!important;object-fit:contain!important}.reportBrandTitle{font-size:13.6px!important;line-height:1.1!important}.reportFileBox{font-size:7.8px!important;line-height:1.18!important;min-width:128px!important}.reportFileBox b{width:58px!important}.reportSlimName{font-size:11px!important}.reportSlimFile{font-size:7.5px!important}
+  .reportPageBody{flex:1 1 auto!important;overflow:hidden!important}.reportFooter{margin-top:auto!important;padding-top:2px!important;border-top:1px solid #cbd5e1!important;display:flex!important;gap:6px!important}.reportFooterContact{font-size:5.8px!important;line-height:1.08!important;flex:1!important}.reportPageNo{font-size:6.6px!important;font-weight:800!important;white-space:nowrap!important}
+  .reportCover{padding:5px!important;margin:0 0 2.2mm 0!important}.reportCover h2{font-size:12.5px!important;margin:0 0 2px 0!important}
+  .reportSection{margin:0 0 2.7mm 0!important;page-break-inside:auto!important;break-inside:auto!important}.reportTitle{font-size:9.3px!important;padding:3.5px 5px!important;margin:0 0 1.5mm 0!important;border-radius:3px!important;background:#111827!important;color:#fff!important}
+  .reportTable{width:100%!important;border-collapse:collapse!important;margin:0 0 1.8mm 0!important;table-layout:fixed!important}.reportTable th,.reportTable td{border:1px solid #777!important;padding:2.2px 3px!important;font-size:8.7px!important;line-height:1.16!important;vertical-align:top!important;word-break:normal!important;overflow-wrap:anywhere!important}.reportTable th{background:#e5e7eb!important;font-weight:800!important}
+  .reportDamageTable th{font-size:8.2px!important;text-align:center!important}.reportDamageTable td{font-size:8.35px!important;line-height:1.16!important;height:auto!important;min-height:0!important;overflow:visible!important}.reportDamageTable .damageItem{padding:.2px 0!important;border-bottom:1px solid #e5e7eb!important}
+  .reportPage1 .reportSection{margin-bottom:2.3mm!important}.reportPage1 .reportTable th,.reportPage1 .reportTable td{font-size:8.45px!important;padding:2px 2.8px!important}
+  .reportPage2 .reportTable th,.reportPage2 .reportTable td{font-size:8.8px!important}.reportPage3 .reportTable th,.reportPage3 .reportTable td{font-size:8.9px!important;line-height:1.18!important}
+  .reportSignature{margin-top:6mm!important;text-align:right!important;padding-right:10mm!important;font-size:10px!important}.reportSignature .title{font-size:9px!important}
+  .reportPhotos{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:5mm!important;margin-top:4mm!important}.reportPhotos .photoCard{break-inside:avoid!important;page-break-inside:avoid!important;padding:4px!important;border:1px solid #ddd!important;border-radius:6px!important;background:#fff!important}.reportPhotos img{width:100%!important;height:66mm!important;object-fit:contain!important;object-position:center top!important;border:1px solid #999!important;border-radius:4px!important;background:#fff!important}.reportPhotos .small{font-size:8px!important;text-align:center!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+}
+
+/* === V7.6.2 SAHA REVİZYON ALANLARI === */
+.partrow,.addrow{grid-template-columns:1.2fr auto 150px 130px auto 110px auto 1.2fr auto!important}.trafikOnly{display:none}.hasarServisListesiBox,.laborServisListesiBox{background:#fff7ed;border-color:#fdba74}
+@media(max-width:760px){.partrow,.addrow{grid-template-columns:1fr!important}}
+</style>
+</head><body><main><section id="rapor" class="page active">${html}</section></main><script>document.title=${JSON.stringify(pdfName)};setTimeout(function(){window.print();},500);<\/script></body></html>`);
  w.document.close();
 }
 
@@ -462,7 +556,38 @@ function printReport(){
  const w=window.open('', '_blank');
  if(!w){alert('PDF penceresi açılamadı. Tarayıcı açılır pencere iznini kontrol et.');return;}
  w.document.open();
- w.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>${esc(pdfName)}</title><style>${css}</style></head><body><main><section id="rapor" class="page active">${html}</section></main><script>document.title=${JSON.stringify(pdfName)};setTimeout(function(){window.print();},500);<\/script></body></html>`);
+ w.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>${esc(pdfName)}</title><style>${css}</style>
+<style>
+/* === V7.6 SAHA STABIL: form yapısına dokunmadan PDF düzeni === */
+.reportListLines{white-space:pre-line}
+@media print{
+  @page{size:A4 portrait;margin:7mm 8mm 7mm 8mm!important}
+  html,body{margin:0!important;padding:0!important;background:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  header,nav,button,.searchBox,input[type=file]{display:none!important}
+  main{padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
+  .page{display:none!important}#rapor{display:block!important}
+  #rapor>h2,#rapor>button{display:none!important}
+  .report{width:194mm!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:#fff!important;color:#111827!important;font-size:10.7px!important;line-height:1.26!important}
+  .reportPage{width:194mm!important;min-height:283mm!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;margin:0!important;padding:0!important}
+  .reportPage:last-child{page-break-after:auto!important;break-after:auto!important}
+  .reportHeader,.reportSlimHeader{position:static!important;margin:0 0 3mm 0!important;padding:0 0 2mm 0!important;border-bottom:2px solid #111827!important}
+  .reportBrand{min-width:0!important}.reportLogo{width:13mm!important;height:17mm!important;object-fit:contain!important}.reportBrandTitle{font-size:13.6px!important;line-height:1.1!important}.reportFileBox{font-size:7.8px!important;line-height:1.18!important;min-width:128px!important}.reportFileBox b{width:58px!important}.reportSlimName{font-size:11px!important}.reportSlimFile{font-size:7.5px!important}
+  .reportPageBody{flex:1 1 auto!important;overflow:hidden!important}.reportFooter{margin-top:auto!important;padding-top:2px!important;border-top:1px solid #cbd5e1!important;display:flex!important;gap:6px!important}.reportFooterContact{font-size:5.8px!important;line-height:1.08!important;flex:1!important}.reportPageNo{font-size:6.6px!important;font-weight:800!important;white-space:nowrap!important}
+  .reportCover{padding:5px!important;margin:0 0 2.2mm 0!important}.reportCover h2{font-size:12.5px!important;margin:0 0 2px 0!important}
+  .reportSection{margin:0 0 2.7mm 0!important;page-break-inside:auto!important;break-inside:auto!important}.reportTitle{font-size:9.3px!important;padding:3.5px 5px!important;margin:0 0 1.5mm 0!important;border-radius:3px!important;background:#111827!important;color:#fff!important}
+  .reportTable{width:100%!important;border-collapse:collapse!important;margin:0 0 1.8mm 0!important;table-layout:fixed!important}.reportTable th,.reportTable td{border:1px solid #777!important;padding:2.2px 3px!important;font-size:8.7px!important;line-height:1.16!important;vertical-align:top!important;word-break:normal!important;overflow-wrap:anywhere!important}.reportTable th{background:#e5e7eb!important;font-weight:800!important}
+  .reportDamageTable th{font-size:8.2px!important;text-align:center!important}.reportDamageTable td{font-size:8.35px!important;line-height:1.16!important;height:auto!important;min-height:0!important;overflow:visible!important}.reportDamageTable .damageItem{padding:.2px 0!important;border-bottom:1px solid #e5e7eb!important}
+  .reportPage1 .reportSection{margin-bottom:2.3mm!important}.reportPage1 .reportTable th,.reportPage1 .reportTable td{font-size:8.45px!important;padding:2px 2.8px!important}
+  .reportPage2 .reportTable th,.reportPage2 .reportTable td{font-size:8.8px!important}.reportPage3 .reportTable th,.reportPage3 .reportTable td{font-size:8.9px!important;line-height:1.18!important}
+  .reportSignature{margin-top:6mm!important;text-align:right!important;padding-right:10mm!important;font-size:10px!important}.reportSignature .title{font-size:9px!important}
+  .reportPhotos{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:5mm!important;margin-top:4mm!important}.reportPhotos .photoCard{break-inside:avoid!important;page-break-inside:avoid!important;padding:4px!important;border:1px solid #ddd!important;border-radius:6px!important;background:#fff!important}.reportPhotos img{width:100%!important;height:66mm!important;object-fit:contain!important;object-position:center top!important;border:1px solid #999!important;border-radius:4px!important;background:#fff!important}.reportPhotos .small{font-size:8px!important;text-align:center!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+}
+
+/* === V7.6.2 SAHA REVİZYON ALANLARI === */
+.partrow,.addrow{grid-template-columns:1.2fr auto 150px 130px auto 110px auto 1.2fr auto!important}.trafikOnly{display:none}.hasarServisListesiBox,.laborServisListesiBox{background:#fff7ed;border-color:#fdba74}
+@media(max-width:760px){.partrow,.addrow{grid-template-columns:1fr!important}}
+</style>
+</head><body><main><section id="rapor" class="page active">${html}</section></main><script>document.title=${JSON.stringify(pdfName)};setTimeout(function(){window.print();},500);<\/script></body></html>`);
  w.document.close();
 }
 
@@ -493,6 +618,1030 @@ function makeReport(){
  let photoPage=d.photos.length?`<div class="reportPage reportPagePhotos">${reportSlimHeaderHtml(v)}<div class="reportPageBody">${reportSection(10,'TESPİT GÖRSELLERİ',photosHtml)}</div>${reportFooterHtml(2,total)}</div>`:'';
  $('report').innerHTML=textPage+photoPage;
 }
+
+
+/* === V7.6 SAHA FONKSIYON OVERRIDE - sadece rapor/PDF tarafı === */
+function reportCellHtml(value){
+  if(Array.isArray(value)) value=value.filter(Boolean).join('\n');
+  let s=String(value??'').trim();
+  if(!s) return '-';
+  return esc(s).replace(/\n/g,'<br>');
+}
+function infoTableV76(rows){
+  return `<table class="reportTable"><tbody>${rows.map(r=>`<tr><th>${esc(r[0])}</th><td>${reportCellHtml(r[1])}</td><th>${esc(r[2]||'')}</th><td>${reportCellHtml(r[3])}</td></tr>`).join('')}</tbody></table>`;
+}
+function cleanListLines(rows){
+  return rows&&rows.length?rows.map(x=>String(x)).join('\n'):'-';
+}
+function makeReport(){
+ let d=collect(),v=d.v;
+ let docTaken=d.docs.filter(x=>x.a),docFuture=d.docs.filter(x=>x.g);
+ let allDamage=[];d.groups.forEach(grp=>grp.rows.concat(grp.extras||[]).forEach(r=>{if(r.name&&(r.s||r.o||r.d||r.b||r.mo||r.n))allDamage.push({...r,group:grp.group})}));
+ let degisen=allDamage.filter(x=>x.d),soktak=allDamage.filter(x=>x.s),onarim=allDamage.filter(x=>x.o),boyanan=allDamage.filter(x=>x.b),mobil=allDamage.filter(x=>x.mo);
+ let laborRows=d.labor.concat(d.extraLabor).filter(x=>x.name&&(money(x.amount)>0||x.note));let laborTotal=laborRows.reduce((a,x)=>a+money(x.amount),0);
+ let boyasiz=d.b.filter(x=>x.d==='Boyasız'),boyali=d.b.filter(x=>x.d==='Boyalı'),olculemedi=d.b.filter(x=>x.d==='Ölçülemedi');let crit=d.crit.filter(x=>x.d||x.sev||x.n);
+ let equipList=equipment.filter((_,i)=>d.eq[i]).concat((d.extraEquipment||[]).filter(x=>x.checked&&x.name).map(x=>x.name));let sc=d.sc.filter(x=>x.val||x.n);let vc=checks.filter((_,i)=>d.c[i]);
+ if($('report')){$('report').setAttribute('data-dosya',v.dosyaNo||'-');$('report').setAttribute('data-plaka',v.plaka||'-');$('report').setAttribute('data-tarih',v.tarih||'-')}
+ let photosHtml=d.photos.length?`<div class="reportPhotos">${d.photos.map((p,i)=>`<div class="photoCard"><img src="${photoSrc(p)}"><div class="small">${esc(photoName(p,i))}</div></div>`).join('')}</div>`:'<p style="margin-top:5mm">Tespit görseli eklenmedi.</p>';
+ let page1=`<div class="reportCover"><h2>${esc(v.plaka||'')} PLAKALI ARAÇ EKSPERTİZ ÖN RAPORU</h2><div>Dosya No: <b>${esc(v.dosyaNo||'-')}</b> &nbsp; | &nbsp; Ekspertiz Tarihi: <b>${esc(v.tarih||'-')}</b></div></div>`+
+ reportSection(1,'DOSYA BİLGİLERİ',infoTableV76([['İhbar Tarihi',v.ihbarTarihi,'Ekspertiz Tarihi',v.tarih],['Dosya No',v.dosyaNo,'Sigorta Şirketi',v.sirket],['Branş',v.brans,'Sigortalı',v.sigortali],['Araç Sahibi',v.aracSahibi,'Eksperi',v.eksper],['Servis Adı',v.servisAdi,'Servis İli / İlçesi',`${v.servisIl||''} / ${v.servisIlce||''}`],['Dosya Durumu',v.dosyaDurumu,'Raportör',d.owner||currentUser||'-']]))+
+ reportSection(2,'ARAÇ BİLGİLERİ',infoTableV76([['Plaka',v.plaka,'Marka / Tip',`${v.marka||''} ${v.tip||''}`],['Model Yılı',v.yil,'KM',v.km],['Şase No',v.sase,'Yakıt',v.yakit],['Vites',v.vites,'Tahmini Onarım Süresi',v.onarimSuresi?(v.onarimSuresi+' İş Günü'):'-'],['Parça Tedarik Notu',d.parcaTedarikHaric?'Tahmini onarım süresine parça tedarik süresi dahil değildir.':'-','Donanım',cleanListLines(equipList)],['Araç Kontrolleri',cleanListLines(vc),'','']]))+
+ reportSection(3,'EVRAK ALIMI (TESPİTİ)',docTable(docTaken,docFuture))+
+ reportSection(4,'HASAR TESPİTİ',damageTable(degisen,onarim,soktak,boyanan,mobil))+
+ reportSection(5,'İŞÇİLİKLER',laborTableV73(laborRows,laborTotal));
+ let page2=reportSection(6,'BOYA ÖLÇÜM SONUÇLARI',paintTable(boyali,boyasiz,olculemedi))+reportSection(7,'PERT DEĞERLENDİRMESİ',pertTableV73(d,v,crit));
+ let page3=reportSection(8,'KANAAT',kanaatTable(sc,v,vc,[]))+reportSection(9,'EKSPERTİZ SONUCU',ekspertizSonucuHtml());
+ let pages=[page1,page2,page3];
+ if(d.photos.length){pages.push(reportSection(10,'TESPİT GÖRSELLERİ',photosHtml));}
+ let total=pages.length;
+ $('report').innerHTML=pages.map((p,i)=>reportPageHtml(v,i+1,total,p)).join('');
+}
+function printReport(){
+ makeReport();show('rapor');
+ const v=collect().v;
+ const pdfName=pdfFileBaseName(v);
+ const css=[...document.querySelectorAll('style')].map(s=>s.textContent).join('\n');
+ const html=$('report').outerHTML;
+ const w=window.open('', '_blank');
+ if(!w){alert('PDF penceresi açılamadı. Tarayıcı açılır pencere iznini kontrol et.');return;}
+ w.document.open();
+ w.document.write(`<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(pdfName)}</title><style>${css}</style></head><body><main><section id="rapor" class="page active">${html}</section></main><script>document.title=${JSON.stringify(pdfName)};setTimeout(function(){window.print();},450);<\/script></body></html>`);
+ w.document.close();
+}
+
+/* === V7.6.1 BOYA ÖLÇÜM METNİ DÜZELTMESİ === */
+const BOYA_OLCUM_BOYALI_YOK_METNI = 'ARACIN BOYA ÖLÇÜMLERİ YAPILMIŞ OLUP BOYALI PARÇAYA RASTLANMAMIŞTIR';
+
+const __ge761_renderPaint = renderPaint;
+renderPaint = function(){
+  if(!$('paint')) return;
+  $('paint').innerHTML = `<label class="card"><input type="checkbox" id="paintNoPaintedPart"> ${BOYA_OLCUM_BOYALI_YOK_METNI}</label>` +
+    paint.map((p,i)=>`<div class="paintrow"><b>${p}</b><select id="b${i}d"><option value="">Seçilmedi</option><option>Boyasız</option><option>Boyalı</option><option>Ölçülemedi</option></select><input id="b${i}m" placeholder="Mikron"></div>`).join('');
+};
+
+const __ge761_collect = collect;
+collect = function(){
+  const d = __ge761_collect();
+  d.paintNoPaintedPart = $('paintNoPaintedPart')?.checked || false;
+  return d;
+};
+
+const __ge761_load = load;
+load = function(d,k=''){
+  __ge761_load(d,k);
+  if($('paintNoPaintedPart')) $('paintNoPaintedPart').checked = !!d.paintNoPaintedPart;
+};
+
+paintTable = function(boyali,boyasiz,olculemedi){
+  if($('paintNoPaintedPart')?.checked){
+    return `<p><b>${esc(BOYA_OLCUM_BOYALI_YOK_METNI)}</b></p>`;
+  }
+  return `<table class="reportTable"><tr><th>BOYALI PARÇALAR</th><th>BOYASIZ PARÇALAR</th><th>ÖLÇÜLEMEYEN PARÇALAR</th></tr><tr><td>${boyali.length?boyali.map(x=>`${esc(x.name)}${x.m?' - '+esc(x.m)+' mikron':''}`).join('<br>'):'-'}</td><td>${boyasiz.length?boyasiz.map(x=>esc(x.name)).join('<br>'):'-'}</td><td>${olculemedi.length?olculemedi.map(x=>esc(x.name)).join('<br>'):'-'}</td></tr></table>`;
+};
+
+
+/* === V7.6.2 SAHA REVİZYONU - kontrollü eklemeler === */
+const EVRAK_OFIS_METNI = 'EVRAKLAR SERVİS VEYA SİGORTALI TARAFINDAN DİGİTAL OLARAK OFİSE GÖNDERİLMİŞ';
+const SERVIS_LISTESI_METNI = 'Hasar tespiti servis listesi üzerinden yapılmıştır.';
+
+function updateBransFields(){
+  const brans = ($('brans')?.value || '').toLowerCase();
+  document.querySelectorAll('.trafikOnly').forEach(el=>{ el.style.display = brans.includes('trafik') ? 'block' : 'none'; });
+}
+
+const __ge762_renderDocs = renderDocs;
+renderDocs = function(){
+  if(!$('docs')) return;
+  $('docs').innerHTML = `<label class="card"><input type="checkbox" id="docsOfficeSent"> ${EVRAK_OFIS_METNI}</label>` +
+    docs.map((d,i)=>`<div class="docrow"><label><input type="checkbox" ${d.sel?'checked':''} onchange="docs[${i}].sel=this.checked">Seç</label><button class="danger" onclick="deleteDoc(${i})">Sil</button><b>${esc(d.name)}</b><label><input type="checkbox" ${d.a?'checked':''} onchange="docs[${i}].a=this.checked;if(this.checked&&!docs[${i}].date){docs[${i}].date=todayStr()}renderDocs();if($('docsOfficeSent'))$('docsOfficeSent').checked=!!window.__docsOfficeSentTmp">Alındı</label><label><input type="checkbox" ${d.g?'checked':''} onchange="docs[${i}].g=this.checked">Gelecek</label><input type="date" value="${esc(d.date||'')}" onchange="docs[${i}].date=this.value"><input value="${esc(d.n||'')}" placeholder="Açıklama" oninput="docs[${i}].n=this.value"></div>`).join('');
+  if($('docsOfficeSent')) $('docsOfficeSent').checked = !!window.__docsOfficeSentTmp;
+  $('docsOfficeSent')?.addEventListener('change', e=>{ window.__docsOfficeSentTmp = e.target.checked; });
+};
+
+renderChecks = function(){
+  if(!$('vehicleChecks')) return;
+  const otherChecks = checks.map((c,i)=>({c,i})).filter(x=>!['Motor çalışıyor','Araç yürür durumda','Anahtar mevcut','Akü mevcut/sağlam','Araç çekici ile geldi'].includes(x.c));
+  $('vehicleChecks').innerHTML = `
+  <div class="controlrow"><b>Motor Durumu</b><div class="inline"><label><input type="radio" name="motorDurumu" id="motorCalisiyor" value="Motor çalışıyor">Motor çalışıyor</label><label><input type="radio" name="motorDurumu" id="motorCalismiyor" value="Motor çalışmıyor">Motor çalışmıyor</label></div></div>
+  <div class="controlrow"><b>Araç Yürüme Durumu</b><div class="inline"><label><input type="radio" name="yurumeDurumu" id="aracYuruyor" value="Araç yürür durumda">Araç yürür durumda</label><label><input type="radio" name="yurumeDurumu" id="aracYurumuyor" value="Araç yürümüyor">Araç yürümüyor</label></div></div>
+  <div class="controlrow"><b>Anahtar</b><div class="inline"><label><input type="radio" name="anahtarDurumu" id="anahtarVar" value="Anahtar var">Var</label><label><input type="radio" name="anahtarDurumu" id="anahtarYok" value="Anahtar yok">Yok</label></div></div>
+  <div class="controlrow"><b>Akü</b><div class="inline"><label><input type="radio" name="akuDurumu" id="akuVarSaglam" value="Akü var sağlam">Var sağlam</label><label><input type="radio" name="akuDurumu" id="akuVarHasarli" value="Akü var hasarlı">Var hasarlı</label><label><input type="radio" name="akuDurumu" id="akuYok" value="Akü yok">Yok</label></div></div>
+  <div class="controlrow"><b>Aracın Gelişi</b><div class="inline"><label><input type="radio" name="gelisDurumu" id="cekiciIleGeldi" value="Araç çekici ile geldi">Çekici ile geldi</label><label><input type="radio" name="gelisDurumu" id="surulerekGeldi" value="Araç sürülerek geldi">Sürülerek geldi</label></div></div>` +
+  otherChecks.map(x=>`<label><input type="checkbox" id="c${x.i}">${esc(x.c)}</label>`).join('');
+};
+
+function selectedRadioValue(name){return document.querySelector(`input[name="${name}"]:checked`)?.value || ''}
+function setRadioByValue(name,val){document.querySelectorAll(`input[name="${name}"]`).forEach(r=>{r.checked = (r.value===val);});}
+
+function damageSelectOptions(values, selected){return `<option value="">Seçilmedi</option>` + values.map(v=>`<option ${selected===v?'selected':''}>${v}</option>`).join('')}
+rowPart = function(g,i,p,isExtra){
+  let pre=isExtra?`eg${g}p${i}`:`g${g}p${i}`;
+  let del=isExtra?`<button type="button" class="danger" onclick="deleteExtraDamage(${g},${i})">Sil</button>`:`<span></span>`;
+  return `<div class="${isExtra?'addrow':'partrow'} partItem" data-part="${esc(String(p).toLowerCase())}">${isExtra?`<input id="${pre}name" value="${esc(p||'')}" placeholder="Parça adı" oninput="extraRows[${g}][${i}].name=this.value;filterParts()">`:`<b>${esc(p)}</b>`}<label><input type="checkbox" id="${pre}s">Sök/Tak</label><label>Parça<select id="${pre}pt">${damageSelectOptions(['Orijinal','Yan Sanayi','Onarılmış'],'')}</select></label><label>Onarım<select id="${pre}osev">${damageSelectOptions(['Az','Orta','Ağır'],'')}</select></label><label><input type="checkbox" id="${pre}d">Değişim</label><label>Boya<select id="${pre}bsev">${damageSelectOptions(['Kısmi','Tam'],'')}</select></label><label><input type="checkbox" id="${pre}mo">MO</label><input id="${pre}n" placeholder="Not">${del}</div>`;
+};
+
+collectDamageRow = function(pre,name){
+  const osev=$(pre+'osev')?.value || '';
+  const bsev=$(pre+'bsev')?.value || '';
+  return {name,
+    s:$(pre+'s')?.checked||false,
+    o:!!osev,
+    d:$(pre+'d')?.checked||false,
+    b:!!bsev,
+    mo:$(pre+'mo')?.checked||false,
+    partType:$(pre+'pt')?.value||'',
+    onarimSeviyesi:osev,
+    boyaTuru:bsev,
+    n:$(pre+'n')?.value||''};
+};
+setDamageRow = function(pre,r){
+  if($(pre+'s'))$(pre+'s').checked=!!r.s;
+  if($(pre+'d'))$(pre+'d').checked=!!r.d;
+  if($(pre+'mo'))$(pre+'mo').checked=!!r.mo;
+  if($(pre+'pt'))$(pre+'pt').value=r.partType||'';
+  if($(pre+'osev'))$(pre+'osev').value=r.onarimSeviyesi||(r.o?'Orta':'');
+  if($(pre+'bsev'))$(pre+'bsev').value=r.boyaTuru||(r.b?'Tam':'');
+  if($(pre+'n'))$(pre+'n').value=r.n||'';
+  if($(pre+'name'))$(pre+'name').value=r.name||'';
+};
+partCell = function(rows){return rows.length?rows.map(x=>{let det=[];if(x.partType)det.push('Parça: '+x.partType);if(x.onarimSeviyesi)det.push('Onarım: '+x.onarimSeviyesi);if(x.boyaTuru)det.push('Boya: '+x.boyaTuru);if(x.n)det.push(x.n);return `<span class="damageItem">${esc(x.name)}${det.length?`<br><small>${esc(det.join(' | '))}</small>`:''}</span>`}).join(''):'<span class="damageEmpty">Yok</span>'};
+
+damageTable = function(degisen,onarim,soktak,boyanan,mobil){
+  let servis = $('damageServisListesi')?.checked ? `<p><b>${esc(SERVIS_LISTESI_METNI)}</b></p>` : '';
+  return servis + `<table class="reportTable reportDamageTable"><tr><th>DEĞİŞEN PARÇALAR</th><th>ONARILAN PARÇALAR</th><th>SÖKÜLEN / TAKILAN</th><th>BOYANAN PARÇALAR</th><th>MOBİL ONARIM / MO</th></tr><tr><td>${partCell(degisen)}</td><td>${partCell(onarim)}</td><td>${partCell(soktak)}</td><td>${partCell(boyanan)}</td><td>${partCell(mobil)}</td></tr></table>`;
+};
+
+const __ge762_renderDamage = renderDamage;
+renderDamage = function(){
+  __ge762_renderDamage();
+  const box=$('damageGroups');
+  if(box && !$('damageServisListesi')) box.insertAdjacentHTML('afterbegin', `<label class="card hasarServisListesiBox"><input type="checkbox" id="damageServisListesi"> Servis listesi üzerinden tespit yapılmıştır.</label>`);
+};
+
+const __ge762_renderLabor = renderLabor;
+renderLabor = function(){
+  __ge762_renderLabor();
+  if($('labor') && !$('laborServisListesi')) $('labor').insertAdjacentHTML('afterbegin', `<label class="card laborServisListesiBox"><input type="checkbox" id="laborServisListesi"> Servis listesi üzerinden tespit yapılmıştır.</label>`);
+};
+
+const __ge762_laborTableV73 = laborTableV73;
+laborTableV73 = function(rows,total){
+  const servis = $('laborServisListesi')?.checked ? `<p><b>İşçilik tespiti servis listesi üzerinden yapılmıştır.</b></p>` : '';
+  return servis + __ge762_laborTableV73(rows,total);
+};
+
+kanaatTable = function(sc,v,vc,fc){
+  let rows=sc.length?sc.map(x=>`<tr><th>${esc(x.name)}</th><td>${esc(x.val||'-')}</td><td>${esc(x.n||'')}</td></tr>`).join(''):'<tr><td colspan="3">Araç başı kontrol girişi yok.</td></tr>';
+  let extra='';
+  if(v.kusurDurumu) extra+=`<p><b>Kusur Durumu:</b> ${esc(v.kusurDurumu)}</p>`;
+  if(v.tramereGonderilecek) extra+=`<p><b>Tramer'e Gönderilecek:</b> Evet${v.tramerAciklama?' - '+esc(v.tramerAciklama):''}</p>`;
+  if(v.kanaatEksperKanaati) extra+=`<p><b>Eksper Kanaati:</b><br>${esc(v.kanaatEksperKanaati).replace(/\n/g,'<br>')}</p>`;
+  if(v.not) extra+=`<p><b>Genel Not:</b><br>${esc(v.not).replace(/\n/g,'<br>')}</p>`;
+  return `<table class="reportTable"><tr><th>Kontrol</th><th>Sonuç</th><th>Açıklama</th></tr>${rows}</table>${extra}`;
+};
+
+function notesTable(v){
+  return `<table class="reportTable"><tr><th>Araç Hakkında Açıklamalar</th></tr><tr><td>${v.notArac?esc(v.notArac).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Hasar Hakkında Açıklamalar</th></tr><tr><td>${v.notHasar?esc(v.notHasar).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Yapılacak Çalışmalar</th></tr><tr><td>${v.notCalisma?esc(v.notCalisma).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Diğer Notlar</th></tr><tr><td>${v.notDiger?esc(v.notDiger).replace(/\n/g,'<br>'):'-'}</td></tr></table>`;
+}
+
+docTable = function(taken,future){
+  let max=Math.max(taken.length,future.length,1);let rows='';for(let i=0;i<max;i++){let a=taken[i],g=future[i];rows+=`<tr><td>${a?esc(a.name):''}</td><td>${a?esc(a.date||''):''}</td><td>${a?esc(a.n||''):''}</td><td>${g?esc(g.name):''}</td><td>${g?esc(g.n||''):''}</td></tr>`}
+  let note = $('docsOfficeSent')?.checked ? `<p><b>${esc(EVRAK_OFIS_METNI)}</b></p>` : '';
+  return note + `<table class="reportTable"><tr><th colspan="3">ALINAN EVRAKLAR</th><th colspan="2">GELECEK / BEKLENEN EVRAKLAR</th></tr><tr><th>Evrak</th><th>Tarih</th><th>Açıklama</th><th>Evrak</th><th>Açıklama</th></tr>${rows}</table>`;
+};
+
+const __ge762_collect = collect;
+collect = function(){
+  const d = __ge762_collect();
+  d.docsOfficeSent = $('docsOfficeSent')?.checked || false;
+  d.damageServisListesi = $('damageServisListesi')?.checked || false;
+  d.laborServisListesi = $('laborServisListesi')?.checked || false;
+  d.vehicleControl = {
+    motor:selectedRadioValue('motorDurumu'), yurume:selectedRadioValue('yurumeDurumu'), anahtar:selectedRadioValue('anahtarDurumu'), aku:selectedRadioValue('akuDurumu'), gelis:selectedRadioValue('gelisDurumu')
+  };
+  d.v.kusurDurumu = selectedRadioValue('kusurDurumu');
+  d.v.tramereGonderilecek = $('tramereGonderilecek')?.checked || false;
+  d.v.tramerAciklama = $('tramerAciklama')?.value || '';
+  d.v.kanaatEksperKanaati = $('kanaatEksperKanaati')?.value || d.v.pertEksperKanaati || '';
+  ['notArac','notHasar','notCalisma','notDiger','bakilacakPlaka','bakilacakAracSahibi'].forEach(id=>{if($(id))d.v[id]=$(id).value||''});
+  return d;
+};
+
+const __ge762_load = load;
+load = function(d,k=''){
+  __ge762_load(d,k);
+  window.__docsOfficeSentTmp = !!d.docsOfficeSent;
+  if($('docsOfficeSent')) $('docsOfficeSent').checked=!!d.docsOfficeSent;
+  if($('damageServisListesi')) $('damageServisListesi').checked=!!d.damageServisListesi;
+  if($('laborServisListesi')) $('laborServisListesi').checked=!!d.laborServisListesi;
+  setRadioByValue('motorDurumu',d.vehicleControl?.motor||'');setRadioByValue('yurumeDurumu',d.vehicleControl?.yurume||'');setRadioByValue('anahtarDurumu',d.vehicleControl?.anahtar||'');setRadioByValue('akuDurumu',d.vehicleControl?.aku||'');setRadioByValue('gelisDurumu',d.vehicleControl?.gelis||'');
+  setRadioByValue('kusurDurumu',d.v?.kusurDurumu||'');
+  if($('tramereGonderilecek')) $('tramereGonderilecek').checked=!!d.v?.tramereGonderilecek;
+  if($('tramerAciklama')) $('tramerAciklama').value=d.v?.tramerAciklama||'';
+  if($('kanaatEksperKanaati')) $('kanaatEksperKanaati').value=d.v?.kanaatEksperKanaati||d.v?.pertEksperKanaati||'';
+  ['notArac','notHasar','notCalisma','notDiger','bakilacakPlaka','bakilacakAracSahibi'].forEach(id=>{if($(id))$(id).value=d.v?.[id]||''});
+  updateBransFields();
+};
+
+const __ge762_newFile = newFile;
+newFile = function(){
+  __ge762_newFile();
+  window.__docsOfficeSentTmp=false;
+  updateBransFields();
+};
+
+const __ge762_makeReport = makeReport;
+makeReport = function(){
+ let d=collect(),v=d.v;
+ let docTaken=d.docs.filter(x=>x.a),docFuture=d.docs.filter(x=>x.g);
+ let allDamage=[];d.groups.forEach(grp=>grp.rows.concat(grp.extras||[]).forEach(r=>{if(r.name&&(r.s||r.o||r.d||r.b||r.mo||r.n||r.partType))allDamage.push({...r,group:grp.group})}));
+ let degisen=allDamage.filter(x=>x.d),soktak=allDamage.filter(x=>x.s),onarim=allDamage.filter(x=>x.o),boyanan=allDamage.filter(x=>x.b),mobil=allDamage.filter(x=>x.mo);
+ let laborRows=d.labor.concat(d.extraLabor).filter(x=>x.name&&(money(x.amount)>0||x.note));let laborTotal=laborRows.reduce((a,x)=>a+money(x.amount),0);
+ let boyasiz=d.b.filter(x=>x.d==='Boyasız'),boyali=d.b.filter(x=>x.d==='Boyalı'),olculemedi=d.b.filter(x=>x.d==='Ölçülemedi');let crit=d.crit.filter(x=>x.d||x.sev||x.n);
+ let equipList=equipment.filter((_,i)=>d.eq[i]).concat((d.extraEquipment||[]).filter(x=>x.checked&&x.name).map(x=>x.name));let sc=d.sc.filter(x=>x.val||x.n);
+ let vc=[d.vehicleControl?.motor,d.vehicleControl?.yurume,d.vehicleControl?.anahtar,d.vehicleControl?.aku,d.vehicleControl?.gelis].filter(Boolean).concat(checks.filter((_,i)=>d.c[i]));
+ if($('report')){$('report').setAttribute('data-dosya',v.dosyaNo||'-');$('report').setAttribute('data-plaka',v.plaka||'-');$('report').setAttribute('data-tarih',v.tarih||'-')}
+ let photosHtml=d.photos.length?`<div class="reportPhotos">${d.photos.map((p,i)=>`<div class="photoCard"><img src="${photoSrc(p)}"><div class="small">${esc(photoName(p,i))}</div></div>`).join('')}</div>`:'<p style="margin-top:5mm">Tespit görseli eklenmedi.</p>';
+ const dosyaRows=[['İhbar Tarihi',v.ihbarTarihi,'Ekspertiz Tarihi',v.tarih],['Dosya No',v.dosyaNo,'Sigorta Şirketi',v.sirket],['Branş',v.brans,'Sigortalı',v.sigortali],['Araç Sahibi',v.aracSahibi,'Eksperi',v.eksper],['Servis Adı',v.servisAdi,'Servis İli / İlçesi',`${v.servisIl||''} / ${v.servisIlce||''}`],['Dosya Durumu',v.dosyaDurumu,'Raportör',d.owner||currentUser||'-']];
+ if((v.brans||'').toLowerCase().includes('trafik')) dosyaRows.splice(4,0,['Bakılacak Araç Plakası',v.bakilacakPlaka,'Bakılacak Araç Sahibi',v.bakilacakAracSahibi]);
+ let page1=`<div class="reportCover"><h2>${esc(v.plaka||'')} PLAKALI ARAÇ EKSPERTİZ ÖN RAPORU</h2><div>Dosya No: <b>${esc(v.dosyaNo||'-')}</b> &nbsp; | &nbsp; Ekspertiz Tarihi: <b>${esc(v.tarih||'-')}</b></div></div>`+
+ reportSection(1,'DOSYA BİLGİLERİ',infoTableV76(dosyaRows))+
+ reportSection(2,'ARAÇ BİLGİLERİ',infoTableV76([['Plaka',v.plaka,'Marka / Tip',`${v.marka||''} ${v.tip||''}`],['Model Yılı',v.yil,'KM',v.km],['Şase No',v.sase,'Yakıt',v.yakit],['Vites',v.vites,'Tahmini Onarım Süresi',v.onarimSuresi?(v.onarimSuresi+' İş Günü'):'-'],['Parça Tedarik Notu',d.parcaTedarikHaric?'Tahmini onarım süresine parça tedarik süresi dahil değildir.':'-','Donanım',cleanListLines(equipList)],['Araç Kontrolleri',cleanListLines(vc),'','']]))+
+ reportSection(3,'EVRAK ALIMI (TESPİTİ)',docTable(docTaken,docFuture))+
+ reportSection(4,'HASAR TESPİTİ',damageTable(degisen,onarim,soktak,boyanan,mobil))+
+ reportSection(5,'İŞÇİLİKLER',laborTableV73(laborRows,laborTotal));
+ let page2=reportSection(6,'BOYA ÖLÇÜM SONUÇLARI',paintTable(boyali,boyasiz,olculemedi))+reportSection(7,'PERT DEĞERLENDİRMESİ',pertTableV73(d,v,crit));
+ let page3=reportSection(8,'KANAAT',kanaatTable(sc,v,vc,[]))+reportSection(9,'NOTLAR',notesTable(v))+reportSection(10,'EKSPERTİZ SONUCU',ekspertizSonucuHtml());
+ let pages=[page1,page2,page3];
+ if(d.photos.length){pages.push(reportSection(11,'TESPİT GÖRSELLERİ',photosHtml));}
+ let total=pages.length;
+ $('report').innerHTML=pages.map((p,i)=>reportPageHtml(v,i+1,total,p)).join('');
+};
+
+// İlk açılışta branş alanlarını doğru göster.
+setTimeout(updateBransFields,100);
+
+
+/* === V7.7 SAHA REVİZYONU - Onaylı notlara göre kontrollü eklemeler === */
+/* === V7.7.1: Kanaat soru diziminde 1-9 tüm sorulara isteğe bağlı açıklama alanı eklendi === */
+const GE77_DOSYA_INCELEME_SETI = [
+  {name:'Kaza Raporları Görüldü mü?', opts:['Evet','Hayır','Okunaksız','Eksik Bilgi'], aciklama:true},
+  {name:'Olay Yeri Fotoğrafları Görüldü mü?', opts:['Evet','Hayır'], aciklama:true},
+  {name:'Olay Yeri Fotoğrafları Yeterli mi?', opts:['Evet','Hayır'], aciklama:true},
+  {name:'Olay Yeri Fotoğraflarında Araçlara Ait Parça Döküntüsü Var mı?', opts:['Evet','Hayır','Belli Olmuyor'], aciklama:true},
+  {name:'Hasarlı Bölümlerin Yükseklikleri Uyumlu mu?', opts:['Evet','Hayır'], aciklama:true},
+  {name:'Olay Saati ile Olay Anı Saati Uyumlu mu?', opts:['Evet','Hayır'], aciklama:true},
+  {name:'Araçta Kazaya Ait İz Var mı?', opts:['Evet','Hayır'], aciklama:true},
+  {name:'Araçta Eski Hasar Var mı?', opts:['Evet','Hayır'], aciklama:true},
+  {name:'Kaza Uyumlu mu?', opts:['Evet','Hayır'], aciklama:true}
+];
+const BOYA_OLCUM_KOMPLE_BOYALI_METNI = 'ARACIN BOYA ÖLÇÜMLERİ YAPILMIŞ OLUP KOMPLE BOYALI OLDUĞU TESPİT EDİLMİŞTİR';
+
+function ge77IsTrafik(v){return String(v?.brans||$('brans')?.value||'').toLowerCase().includes('trafik')}
+function ge77ReportPlate(v){return ge77IsTrafik(v) ? (v.bakilacakPlaka||v.plaka||'') : (v.plaka||'')}
+function ge77ReportOwner(v){return ge77IsTrafik(v) ? (v.bakilacakAracSahibi||v.aracSahibi||'') : (v.aracSahibi||'')}
+
+function ge77KanaatLayout(){
+  const sec=$('kanaat'); if(!sec) return;
+  sec.innerHTML = `<h2>KANAAT</h2>
+    <div class="sectionTitle">Kusur Durumu</div>
+    <div class="checks"><label><input type="radio" name="kusurDurumu" id="kusurSigortaliKusurlu" value="Sigortalı Kusurlu">Sigortalı Kusurlu</label><label><input type="radio" name="kusurDurumu" id="kusurKusursuz" value="Kusursuz">Kusursuz</label><label><input type="radio" name="kusurDurumu" id="kusurPaylasimliVar" value="Paylaşımlı Kusur Var">Paylaşımlı Kusur Var</label><label><input type="radio" name="kusurDurumu" id="kusurPaylasimliYok" value="Paylaşımlı Kusur Yok">Paylaşımlı Kusur Yok</label></div>
+    <label class="card"><input type="checkbox" id="tramereGonderilecek"> Tramer'e Gönderilecek<input id="tramerAciklama" placeholder="Tramer açıklaması"></label>
+    <div class="controlrow"><b>Rücu Durumu Var mı?</b><div class="inline"><label><input type="radio" name="rucuDurumu" id="rucuEvet" value="Evet">Evet</label><label><input type="radio" name="rucuDurumu" id="rucuHayir" value="Hayır">Hayır</label></div><textarea id="rucuAciklama" rows="2" placeholder="Açıklama"></textarea></div>
+    <div class="sectionTitle">Araç Başı Kontrol / Dosya İnceleme - Evrak Değerlendirme</div>
+    <div id="kanaatSpecialControls"></div>
+    <label>Eksper Kanaati<textarea id="kanaatEksperKanaati" rows="7" placeholder="Eksper kanaati"></textarea></label>`;
+  renderSpecialControls();
+}
+
+renderSpecialControls = function(){
+  if(!$('kanaatSpecialControls')) return;
+  $('kanaatSpecialControls').innerHTML = GE77_DOSYA_INCELEME_SETI.map((q,i)=>{
+    const radios = q.opts.map(opt=>`<label><input type="radio" name="sc${i}" id="sc${i}_${safeName(opt)}" value="${esc(opt)}">${esc(opt)}</label>`).join('');
+    return `<div class="controlrow"><b>${i+1}. ${esc(q.name)}</b><div class="inline">${radios}</div>${q.aciklama?`<textarea id="sc${i}n" rows="2" placeholder="Gerekirse bu soruya ilişkin açıklama / gözlem yazınız..."></textarea>`:''}</div>`;
+  }).join('');
+};
+
+const __ge77_renderPaint = renderPaint;
+renderPaint = function(){
+  if(!$('paint')) return;
+  $('paint').innerHTML = `<label class="card"><input type="checkbox" id="paintNoPaintedPart"> ${BOYA_OLCUM_BOYALI_YOK_METNI}</label>` +
+    `<label class="card"><input type="checkbox" id="paintAllPaintedPart"> ${BOYA_OLCUM_KOMPLE_BOYALI_METNI}</label>` +
+    paint.map((p,i)=>`<div class="paintrow"><b>${p}</b><select id="b${i}d"><option value="">Seçilmedi</option><option>Boyasız</option><option>Boyalı</option><option>Ölçülemedi</option></select><input id="b${i}m" placeholder="Mikron"></div>`).join('');
+};
+
+paintTable = function(boyali,boyasiz,olculemedi){
+  if($('paintNoPaintedPart')?.checked){return `<p><b>${esc(BOYA_OLCUM_BOYALI_YOK_METNI)}</b></p>`;}
+  if($('paintAllPaintedPart')?.checked){return `<p><b>${esc(BOYA_OLCUM_KOMPLE_BOYALI_METNI)}</b></p>`;}
+  return `<table class="reportTable"><tr><th>BOYALI PARÇALAR</th><th>BOYASIZ PARÇALAR</th><th>ÖLÇÜLEMEYEN PARÇALAR</th></tr><tr><td>${boyali.length?boyali.map(x=>`${esc(x.name)}${x.m?' - '+esc(x.m)+' mikron':''}`).join('<br>'):'-'}</td><td>${boyasiz.length?boyasiz.map(x=>esc(x.name)).join('<br>'):'-'}</td><td>${olculemedi.length?olculemedi.map(x=>esc(x.name)).join('<br>'):'-'}</td></tr></table>`;
+};
+
+pdfFileBaseName = function(v){
+  let base = ge77IsTrafik(v) ? (v.bakilacakPlaka||v.plaka||v.dosyaNo) : (v.plaka||v.dosyaNo);
+  let name=(base||'Ekspertiz Raporu').toString().trim();
+  name=name.replace(/[\/:*?"<>|]+/g,' ').replace(/\s+/g,' ').trim();
+  return name||'Ekspertiz Raporu';
+};
+
+const __ge77_collect = collect;
+collect = function(){
+  const d = __ge77_collect();
+  d.sc = GE77_DOSYA_INCELEME_SETI.map((q,i)=>({
+    name:q.name,
+    val:document.querySelector(`input[name="sc${i}"]:checked`)?.value || '',
+    n:$('sc'+i+'n')?.value || ''
+  }));
+  d.paintAllPaintedPart = $('paintAllPaintedPart')?.checked || false;
+  d.v.rucuDurumu = selectedRadioValue('rucuDurumu');
+  d.v.rucuAciklama = $('rucuAciklama')?.value || '';
+  return d;
+};
+
+const __ge77_load = load;
+load = function(d,k=''){
+  __ge77_load(d,k);
+  ge77KanaatLayout();
+  (d.sc||[]).forEach((r,i)=>{
+    document.querySelectorAll(`input[name="sc${i}"]`).forEach(inp=>{inp.checked = (inp.value===r.val);});
+    if($('sc'+i+'n')) $('sc'+i+'n').value = r.n || '';
+  });
+  if($('paintAllPaintedPart')) $('paintAllPaintedPart').checked=!!d.paintAllPaintedPart;
+  setRadioByValue('rucuDurumu',d.v?.rucuDurumu||'');
+  if($('rucuAciklama')) $('rucuAciklama').value=d.v?.rucuAciklama||'';
+  setRadioByValue('kusurDurumu',d.v?.kusurDurumu||'');
+  if($('tramereGonderilecek')) $('tramereGonderilecek').checked=!!d.v?.tramereGonderilecek;
+  if($('tramerAciklama')) $('tramerAciklama').value=d.v?.tramerAciklama||'';
+  if($('kanaatEksperKanaati')) $('kanaatEksperKanaati').value=d.v?.kanaatEksperKanaati||d.v?.pertEksperKanaati||'';
+};
+
+const __ge77_newFile = newFile;
+newFile = function(){
+  __ge77_newFile();
+  ge77KanaatLayout();
+};
+
+kanaatTable = function(sc,v,vc,fc){
+  let rows=sc.length?sc.map(x=>`<tr><th>${esc(x.name)}</th><td>${esc(x.val||'-')}</td><td>${esc(x.n||'')}</td></tr>`).join(''):'<tr><td colspan="3">Araç başı kontrol girişi yok.</td></tr>';
+  let extra='';
+  if(v.kusurDurumu) extra+=`<p><b>Kusur Durumu:</b> ${esc(v.kusurDurumu)}</p>`;
+  if(v.tramereGonderilecek) extra+=`<p><b>Tramer'e Gönderilecek:</b> Evet${v.tramerAciklama?' - '+esc(v.tramerAciklama):''}</p>`;
+  if(v.rucuDurumu || v.rucuAciklama) extra+=`<p><b>Rücu Durumu Var mı?</b> ${esc(v.rucuDurumu||'-')}${v.rucuAciklama?' - '+esc(v.rucuAciklama):''}</p>`;
+  if(v.kanaatEksperKanaati) extra+=`<p><b>Eksper Kanaati:</b><br>${esc(v.kanaatEksperKanaati).replace(/\n/g,'<br>')}</p>`;
+  if(v.not) extra+=`<p><b>Genel Not:</b><br>${esc(v.not).replace(/\n/g,'<br>')}</p>`;
+  return `<table class="reportTable"><tr><th>Kontrol</th><th>Sonuç</th><th>Açıklama</th></tr>${rows}</table>${extra}`;
+};
+
+makeReport = function(){
+ let d=collect(),v=d.v;
+ let docTaken=d.docs.filter(x=>x.a),docFuture=d.docs.filter(x=>x.g);
+ let allDamage=[];d.groups.forEach(grp=>grp.rows.concat(grp.extras||[]).forEach(r=>{if(r.name&&(r.s||r.o||r.d||r.b||r.mo||r.n||r.partType))allDamage.push({...r,group:grp.group})}));
+ let degisen=allDamage.filter(x=>x.d),soktak=allDamage.filter(x=>x.s),onarim=allDamage.filter(x=>x.o),boyanan=allDamage.filter(x=>x.b),mobil=allDamage.filter(x=>x.mo);
+ let laborRows=d.labor.concat(d.extraLabor).filter(x=>x.name&&(money(x.amount)>0||x.note));let laborTotal=laborRows.reduce((a,x)=>a+money(x.amount),0);
+ let boyasiz=d.b.filter(x=>x.d==='Boyasız'),boyali=d.b.filter(x=>x.d==='Boyalı'),olculemedi=d.b.filter(x=>x.d==='Ölçülemedi');let crit=d.crit.filter(x=>x.d||x.sev||x.n);
+ let equipList=equipment.filter((_,i)=>d.eq[i]).concat((d.extraEquipment||[]).filter(x=>x.checked&&x.name).map(x=>x.name));let sc=d.sc;
+ let vc=[d.vehicleControl?.motor,d.vehicleControl?.yurume,d.vehicleControl?.anahtar,d.vehicleControl?.aku,d.vehicleControl?.gelis].filter(Boolean).concat(checks.filter((_,i)=>d.c[i]));
+ const raporPlaka = ge77ReportPlate(v), raporSahibi = ge77ReportOwner(v), aracBaslik = ge77IsTrafik(v) ? 'BAKILAN ARAÇ BİLGİLERİ' : 'ARAÇ BİLGİLERİ';
+ if($('report')){$('report').setAttribute('data-dosya',v.dosyaNo||'-');$('report').setAttribute('data-plaka',raporPlaka||'-');$('report').setAttribute('data-tarih',v.tarih||'-')}
+ let photosHtml=d.photos.length?`<div class="reportPhotos">${d.photos.map((p,i)=>`<div class="photoCard"><img src="${photoSrc(p)}"><div class="small">${esc(photoName(p,i))}</div></div>`).join('')}</div>`:'<p style="margin-top:5mm">Tespit görseli eklenmedi.</p>';
+ const dosyaRows=[['İhbar Tarihi',v.ihbarTarihi,'Ekspertiz Tarihi',v.tarih],['Dosya No',v.dosyaNo,'Sigorta Şirketi',v.sirket],['Branş',v.brans,'Sigortalı',v.sigortali],['Araç Sahibi',v.aracSahibi,'Eksperi',v.eksper],['Servis Adı',v.servisAdi,'Servis İli / İlçesi',`${v.servisIl||''} / ${v.servisIlce||''}`],['Dosya Durumu',v.dosyaDurumu,'Raportör',d.owner||currentUser||'-']];
+ if(ge77IsTrafik(v)) dosyaRows.splice(4,0,['Bakılacak Araç Plakası',v.bakilacakPlaka,'Bakılacak Araç Sahibi',v.bakilacakAracSahibi]);
+ let page1=`<div class="reportCover"><h2>${esc(raporPlaka||'')} PLAKALI ARAÇ EKSPERTİZ ÖN RAPORU</h2><div>Dosya No: <b>${esc(v.dosyaNo||'-')}</b> &nbsp; | &nbsp; Ekspertiz Tarihi: <b>${esc(v.tarih||'-')}</b></div></div>`+
+ reportSection(1,'DOSYA BİLGİLERİ',infoTableV76(dosyaRows))+
+ reportSection(2,aracBaslik,infoTableV76([['Plaka',raporPlaka,'Araç Sahibi',raporSahibi],['Marka / Tip',`${v.marka||''} ${v.tip||''}`,'Model Yılı',v.yil],['KM',v.km,'Şase No',v.sase],['Yakıt',v.yakit,'Vites',v.vites],['Tahmini Onarım Süresi',v.onarimSuresi?(v.onarimSuresi+' İş Günü'):'-','Parça Tedarik Notu',d.parcaTedarikHaric?'Tahmini onarım süresine parça tedarik süresi dahil değildir.':'-'],['Donanım',cleanListLines(equipList),'Araç Kontrolleri',cleanListLines(vc)]]))+
+ reportSection(3,'EVRAK ALIMI (TESPİTİ)',docTable(docTaken,docFuture))+
+ reportSection(4,'HASAR TESPİTİ',damageTable(degisen,onarim,soktak,boyanan,mobil))+
+ reportSection(5,'İŞÇİLİKLER',laborTableV73(laborRows,laborTotal));
+ let page2=reportSection(6,'BOYA ÖLÇÜM SONUÇLARI',paintTable(boyali,boyasiz,olculemedi))+reportSection(7,'PERT DEĞERLENDİRMESİ',pertTableV73(d,v,crit));
+ let page3=reportSection(8,'KANAAT',kanaatTable(sc,v,vc,[]))+reportSection(9,'NOTLAR',notesTable(v))+reportSection(10,'EKSPERTİZ SONUCU',ekspertizSonucuHtml());
+ let pages=[page1,page2,page3];
+ if(d.photos.length){pages.push(reportSection(11,'TESPİT GÖRSELLERİ',photosHtml));}
+ let total=pages.length;
+ $('report').innerHTML=pages.map((p,i)=>reportPageHtml(v,i+1,total,p)).join('');
+};
+
+
+// Trafik dosyalarında rapor üst bilgisindeki plaka da bakılan araca göre alınır.
+reportHeaderHtml = function(v){
+  const hp = ge77ReportPlate(v);
+  return `<div class="reportHeader"><div class="reportBrand"><img class="reportLogo" src="${COMPANY_LOGO_SRC}"><div><div class="reportBrandTitle">GENÇ EKSPERLİK</div><div class="reportBrandSub">Sigorta Eksperlik Hizmetleri</div></div></div><div class="reportFileBox"><div><b>Dosya No</b>: ${esc(v.dosyaNo||'-')}</div><div><b>Plaka</b>: ${esc(hp||'-')}</div><div><b>Ekspertiz Tarihi</b>: ${esc(v.tarih||'-')}</div></div></div>`;
+};
+reportFirstHeaderHtml = function(v){
+  const hp = ge77ReportPlate(v);
+  return `<div class="reportHeader reportHeaderFirst"><div class="reportBrand"><img class="reportLogo" src="${COMPANY_LOGO_SRC}"><div><div class="reportBrandTitle">${COMPANY_LEGAL_NAME}</div></div></div><div class="reportFileBox"><div><b>Dosya No</b>: ${esc(v.dosyaNo||'-')}</div><div><b>Plaka</b>: ${esc(hp||'-')}</div><div><b>Ekspertiz Tarihi</b>: ${esc(v.tarih||'-')}</div></div></div>`;
+};
+
+// V7.7 ilk açılış düzeni
+setTimeout(()=>{ge77KanaatLayout(); renderPaint(); updateBransFields();},160);
+
+
+/* === V7.8: Akıllı Hasar Açıklama Motoru === */
+function ge78CleanPartName(name){
+  return String(name||'').trim().replace(/\s+/g,' ').toLocaleLowerCase('tr-TR');
+}
+function ge78UniqueNames(rows){
+  const seen=new Set(), list=[];
+  (rows||[]).forEach(r=>{
+    const raw=String(r?.name||'').trim();
+    const key=raw.toLocaleLowerCase('tr-TR');
+    if(raw && !seen.has(key)){seen.add(key); list.push(ge78CleanPartName(raw));}
+  });
+  return list;
+}
+function ge78JoinTurkish(list){
+  list=(list||[]).filter(Boolean);
+  if(list.length===0) return '';
+  if(list.length===1) return list[0];
+  if(list.length===2) return list[0]+' ve '+list[1];
+  return list.slice(0,-1).join(', ')+' ve '+list[list.length-1];
+}
+function ge78JoinClauses(list){
+  list=(list||[]).filter(Boolean);
+  if(list.length===0) return '';
+  if(list.length===1) return list[0];
+  if(list.length===2) return list[0]+' ve '+list[1];
+  return list.slice(0,-1).join(', ')+' ve '+list[list.length-1];
+}
+function ge78DamageRowsFromData(d){
+  let rows=[];
+  (d?.groups||[]).forEach(grp=>{
+    (grp.rows||[]).concat(grp.extras||[]).forEach(r=>{
+      if(r.name && (r.d||r.o||r.mo)) rows.push(r);
+    });
+  });
+  return rows;
+}
+function ge78BuildDamageExplanation(d){
+  d = d || collect();
+  const rows = ge78DamageRowsFromData(d);
+  const used = new Set();
+  function take(type){
+    const out=[];
+    rows.forEach(r=>{
+      const key=String(r.name||'').trim().toLocaleLowerCase('tr-TR');
+      if(!key) return;
+      if(type==='d' && r.d && !used.has(key)){out.push(r); used.add(key);}
+      else if(type==='o' && !r.d && r.o && !used.has(key)){out.push(r); used.add(key);}
+      else if(type==='mo' && !r.d && !r.o && r.mo && !used.has(key)){out.push(r); used.add(key);}
+    });
+    return ge78UniqueNames(out);
+  }
+  const degisim = take('d');
+  const onarim = take('o');
+  const mobil = take('mo');
+  const parts=[];
+  if(degisim.length){
+    parts.push(ge78JoinTurkish(degisim) + (degisim.length===1 ? ' parçasının değişimine' : ' parçalarının değişimine'));
+  }
+  if(onarim.length){
+    parts.push(ge78JoinTurkish(onarim) + (onarim.length===1 ? ' parçasının onarımına' : ' parçalarının onarımına'));
+  }
+  if(mobil.length){
+    parts.push(ge78JoinTurkish(mobil) + (mobil.length===1 ? ' parçasının mobil onarım servislerine gönderilerek onarım durumunun değerlendirilmesine' : ' parçalarının mobil onarım servislerine gönderilerek onarım durumlarının değerlendirilmesine'));
+  }
+  if(!parts.length) return '';
+  return 'Yapılan hasar tespit çalışmaları sonucunda ' + ge78JoinClauses(parts) + ' karar verilerek bu husus hasar tespiti yapılan servis ve/veya tamirhane yetkililerine bilgi verilerek mutabık kalınmıştır.';
+}
+function ge78GenerateDamageExplanationToNotes(){
+  const d=collect();
+  const text=ge78BuildDamageExplanation(d);
+  if(!text){alert('Değişim, onarım veya mobil onarım seçili parça bulunamadı.');return;}
+  const conflicts=ge78DamageRowsFromData(d).filter(r=>((r.d?1:0)+(r.o?1:0)+(r.mo?1:0))>1).map(r=>r.name);
+  if(conflicts.length){
+    alert('Uyarı: Aynı parçada birden fazla işlem seçimi görüldü. Metin oluşturulurken öncelik sırası Değişim > Onarım > Mobil Onarım olarak uygulandı. Kontrol edilecek parçalar: '+ge78JoinTurkish(ge78UniqueNames(conflicts.map(name=>({name})))));
+  }
+  if($('notHasar')){
+    if(($('notHasar').value||'').trim()){
+      if(!confirm('Hasar Hakkında Açıklamalar alanında mevcut yazı var. Otomatik metin mevcut yazının altına eklensin mi?')) return;
+      $('notHasar').value = $('notHasar').value.replace(/\s+$/,'') + '\n\n' + text;
+    }else{
+      $('notHasar').value = text;
+    }
+    show('notlar');
+    $('notHasar').focus();
+  }
+}
+function ge78InitAutoDamageButton(){
+  const area=$('notHasar');
+  if(!area || $('ge78AutoDamageBtn')) return;
+  area.insertAdjacentHTML('afterend', '<button type="button" id="ge78AutoDamageBtn" class="green" onclick="ge78GenerateDamageExplanationToNotes()">Akıllı Hasar Açıklaması Oluştur</button><div class="small">Hasar tespitindeki değişim, onarım ve MO seçimlerine göre normal cümle düzeninde otomatik açıklama üretir. Metin düzenlenebilir ve başka programa kopyalanabilir.</div>');
+}
+notesTable = function(v){
+  const autoText = ge78BuildDamageExplanation();
+  const hasarText = (v.notHasar && String(v.notHasar).trim()) ? v.notHasar : autoText;
+  return `<table class="reportTable"><tr><th>Araç Hakkında Açıklamalar</th></tr><tr><td>${v.notArac?esc(v.notArac).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Hasar Hakkında Açıklamalar</th></tr><tr><td>${hasarText?esc(hasarText).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Yapılacak Çalışmalar</th></tr><tr><td>${v.notCalisma?esc(v.notCalisma).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Diğer Notlar</th></tr><tr><td>${v.notDiger?esc(v.notDiger).replace(/\n/g,'<br>'):'-'}</td></tr></table>`;
+};
+setTimeout(ge78InitAutoDamageButton,220);
+
+
+
+/* === V7.8.1: Akıllı Hasar Açıklama FIX - buton ve rapor aktarımı güçlendirildi === */
+function ge781PartDisplayName(name){
+  return String(name||'').trim().replace(/\s+/g,' ').toLocaleLowerCase('tr-TR');
+}
+function ge781Uniq(list){
+  const seen=new Set(), out=[];
+  (list||[]).forEach(x=>{
+    const raw=String(x||'').trim();
+    const key=raw.toLocaleLowerCase('tr-TR');
+    if(raw && !seen.has(key)){seen.add(key);out.push(ge781PartDisplayName(raw));}
+  });
+  return out;
+}
+function ge781JoinList(list){
+  list=ge781Uniq(list);
+  if(list.length===0)return '';
+  if(list.length===1)return list[0];
+  if(list.length===2)return list[0]+' ve '+list[1];
+  return list.slice(0,-1).join(', ')+' ve '+list[list.length-1];
+}
+function ge781AllDamageRows(d){
+  d=d||collect();
+  const rows=[];
+  (d.groups||[]).forEach(grp=>{
+    [...(grp.rows||[]),...(grp.extras||[])].forEach(r=>{
+      if(r && String(r.name||'').trim()) rows.push(r);
+    });
+  });
+  return rows;
+}
+function ge781BuildDamageExplanation(d){
+  d=d||collect();
+  const rows=ge781AllDamageRows(d);
+  const used=new Set();
+  const degisim=[], onarim=[], mobil=[];
+  function keyOf(r){return String(r.name||'').trim().toLocaleLowerCase('tr-TR');}
+  rows.forEach(r=>{const k=keyOf(r); if(k && r.d && !used.has(k)){degisim.push(r.name); used.add(k);}});
+  rows.forEach(r=>{const k=keyOf(r); if(k && r.o && !used.has(k)){onarim.push(r.name); used.add(k);}});
+  rows.forEach(r=>{const k=keyOf(r); if(k && r.mo && !used.has(k)){mobil.push(r.name); used.add(k);}});
+  const parts=[];
+  const dList=ge781Uniq(degisim), oList=ge781Uniq(onarim), mList=ge781Uniq(mobil);
+  if(dList.length) parts.push(ge781JoinList(dList)+(dList.length===1?' parçasının değişimine':' parçalarının değişimine'));
+  if(oList.length) parts.push(ge781JoinList(oList)+(oList.length===1?' parçasının onarımına':' parçalarının onarımına'));
+  if(mList.length) parts.push(ge781JoinList(mList)+(mList.length===1?' parçasının mobil onarım servislerine gönderilerek onarım durumunun değerlendirilmesine':' parçalarının mobil onarım servislerine gönderilerek onarım durumlarının değerlendirilmesine'));
+  if(!parts.length)return '';
+  return 'Yapılan hasar tespit çalışmaları sonucunda '+ge781JoinList(parts)+' karar verilerek bu husus hasar tespiti yapılan servis ve/veya tamirhane yetkililerine bilgi verilerek mutabık kalınmıştır.';
+}
+function ge781Conflicts(d){
+  d=d||collect();
+  return ge781Uniq(ge781AllDamageRows(d).filter(r=>((r.d?1:0)+(r.o?1:0)+(r.mo?1:0))>1).map(r=>r.name));
+}
+function ge781GenerateDamageExplanationToNotes(){
+  const d=collect();
+  const text=ge781BuildDamageExplanation(d);
+  if(!text){alert('Değişim, onarım veya mobil onarım seçili parça bulunamadı.');return;}
+  const c=ge781Conflicts(d);
+  if(c.length){alert('Uyarı: Aynı parçada birden fazla işlem seçimi görüldü. Metin oluşturulurken öncelik sırası Değişim > Onarım > Mobil Onarım olarak uygulandı. Kontrol edilecek parçalar: '+ge781JoinList(c));}
+  show('notlar');
+  const area=$('notHasar');
+  if(!area)return;
+  if((area.value||'').trim()){
+    if(!confirm('Hasar Hakkında Açıklamalar alanında mevcut yazı var. Otomatik metin mevcut yazının altına eklensin mi?')) return;
+    area.value=area.value.replace(/\s+$/,'')+'\n\n'+text;
+  }else{
+    area.value=text;
+  }
+  area.focus();
+}
+function ge781InitAutoDamageButton(){
+  const area=$('notHasar');
+  if(!area)return;
+  if($('ge781AutoDamageBtn'))return;
+  const host=area.closest('label')||area;
+  host.insertAdjacentHTML('afterend', '<div class="card"><button type="button" id="ge781AutoDamageBtn" class="green" onclick="ge781GenerateDamageExplanationToNotes()">Akıllı Hasar Açıklaması Oluştur</button><div class="small">Hasar tespitindeki Değişim / Onarım / MO seçimlerine göre metni oluşturur. Boş grupları yazmaz, metin normal cümle düzenindedir.</div></div>');
+  const old=$('ge78AutoDamageBtn');
+  if(old){old.style.display='none';}
+}
+const __ge781_show = show;
+show = function(id){
+  __ge781_show(id);
+  if(id==='notlar') setTimeout(ge781InitAutoDamageButton,20);
+};
+notesTable = function(v){
+  const autoText=ge781BuildDamageExplanation();
+  const hasarText=(v.notHasar && String(v.notHasar).trim()) ? v.notHasar : autoText;
+  return `<table class="reportTable"><tr><th>Araç Hakkında Açıklamalar</th></tr><tr><td>${v.notArac?esc(v.notArac).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Hasar Hakkında Açıklamalar</th></tr><tr><td>${hasarText?esc(hasarText).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Yapılacak Çalışmalar</th></tr><tr><td>${v.notCalisma?esc(v.notCalisma).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Diğer Notlar</th></tr><tr><td>${v.notDiger?esc(v.notDiger).replace(/\n/g,'<br>'):'-'}</td></tr></table>`;
+};
+setTimeout(ge781InitAutoDamageButton,400);
+
+
+/* === V8.0: Akıllı Kaza Oluşum Kanaati Motoru === */
+const GE80_EK_KAZA_ANALIZ_SETI = [
+  {name:'Karşı araca ait boya / iz transferi mevcut mu?', opts:['Evet','Hayır','Tespit Edilemedi']},
+  {name:'Hasar yönü beyan edilen kaza oluş şekli ile uyumlu mu?', opts:['Evet','Hayır','Kısmen']},
+  {name:'Ek inceleme gerekli mi?', opts:['Evet','Hayır']}
+];
+function ge80ValByName(name){return document.querySelector(`input[name="${name}"]:checked`)?.value || '';}
+function ge80SetRadio(name,val){document.querySelectorAll(`input[name="${name}"]`).forEach(x=>x.checked=(x.value===val));}
+function ge80InsertPanel(){
+  const sec=$('kanaat'); if(!sec || $('ge80KazaPanel')) return;
+  const target=$('kanaatSpecialControls');
+  const html=`<div id="ge80KazaPanel">
+    <div class="sectionTitle">V8 Akıllı Kaza Oluşum Kanaati</div>
+    <div class="searchBox"><b>Not:</b> Bu bölüm, Araç Başı Kontrol cevaplarını analiz ederek ekspere düzenlenebilir taslak kanaat üretir. Nihai karar eksper kontrolündedir.</div>
+    <div id="ge80EkKazaSorulari"></div>
+    <div class="inline"><button type="button" class="green" onclick="ge80GenerateAccidentOpinionToField()">Akıllı Kaza Oluşum Kanaati Oluştur</button><button type="button" class="soft" onclick="ge80ClearAccidentOpinion()">Kanaati Temizle</button></div>
+    <label>Kaza Oluşum Kanaati<textarea id="kazaOlusumKanaati" rows="7" placeholder="Butona basınca cevaplara göre otomatik taslak kanaat oluşur. Raportör isterse bu metni düzenleyebilir."></textarea></label>
+    <div id="ge80KanaatOzet" class="scoreBox small">Henüz analiz yapılmadı.</div>
+  </div>`;
+  if(target) target.insertAdjacentHTML('afterend',html); else sec.insertAdjacentHTML('beforeend',html);
+  ge80RenderExtraQuestions();
+}
+function ge80RenderExtraQuestions(){
+  const box=$('ge80EkKazaSorulari'); if(!box) return;
+  box.innerHTML=GE80_EK_KAZA_ANALIZ_SETI.map((q,i)=>{
+    const radios=q.opts.map(opt=>`<label><input type="radio" name="ge80q${i}" value="${esc(opt)}">${esc(opt)}</label>`).join('');
+    return `<div class="controlrow"><b>${esc(q.name)}</b><div class="inline">${radios}</div><textarea id="ge80q${i}n" rows="2" placeholder="Gerekirse açıklama / gözlem yazınız..."></textarea></div>`;
+  }).join('');
+}
+const __ge80_ge77KanaatLayout = ge77KanaatLayout;
+ge77KanaatLayout = function(){
+  __ge80_ge77KanaatLayout();
+  ge80InsertPanel();
+};
+function ge80CollectedExtra(){
+  return GE80_EK_KAZA_ANALIZ_SETI.map((q,i)=>({name:q.name,val:ge80ValByName('ge80q'+i),n:$('ge80q'+i+'n')?.value||''}));
+}
+function ge80ScMap(d){
+  const m={};
+  (d?.sc||[]).forEach(x=>{m[x.name]=x;});
+  return m;
+}
+function ge80Answer(d,idx){return (d?.sc?.[idx]?.val||'').trim();}
+function ge80Note(d,idx){return (d?.sc?.[idx]?.n||'').trim();}
+function ge80Extra(d,idx){return (d?.ge80EkKaza||[])[idx]||{val:'',n:''};}
+function ge80Mention(text){return text && String(text).trim() ? String(text).trim() : ''}
+function ge80AnalyzeAccident(d){
+  d=d||collect();
+  let score=0, support=[], concern=[], missing=[];
+  const a=i=>ge80Answer(d,i), n=i=>ge80Note(d,i);
+  function pos(txt,w=1){score+=w; support.push(txt);} function neg(txt,w=1){score-=w; concern.push(txt);} function miss(txt){missing.push(txt);}
+  // 1 Kaza raporu
+  if(a(0)==='Evet') pos('kaza raporunun görülmüş olması',1); else if(a(0)==='Okunaksız'||a(0)==='Eksik Bilgi') neg('kaza raporunda okunak / bilgi eksikliği bulunması',1); else if(a(0)==='Hayır') neg('kaza raporunun görülememiş olması',1); else miss('kaza raporu bilgisi girilmemiş');
+  // 2-3 Foto
+  if(a(1)==='Evet') pos('olay yeri fotoğraflarının görülmüş olması',1); else if(a(1)==='Hayır') neg('olay yeri fotoğraflarının bulunmaması',1); else miss('olay yeri fotoğraf bilgisi girilmemiş');
+  if(a(2)==='Evet') pos('olay yeri fotoğraflarının değerlendirme için yeterli olması',1); else if(a(2)==='Hayır') neg('olay yeri fotoğraflarının değerlendirme için yetersiz olması',1);
+  // 4 Döküntü
+  if(a(3)==='Evet') pos('olay yeri fotoğraflarında araçlara ait parça döküntüsü görülmesi',1); else if(a(3)==='Belli Olmuyor') concern.push('olay yeri fotoğraflarında parça döküntüsünün net ayırt edilememesi');
+  // 5 Yükseklik
+  if(a(4)==='Evet') pos('hasarlı bölümlerin darbe yüksekliklerinin uyumlu olması',2); else if(a(4)==='Hayır') neg('hasarlı bölümlerin darbe yüksekliklerinin uyumsuz olması',3); else miss('darbe yüksekliği uyumu girilmemiş');
+  // 6 Saat
+  if(a(5)==='Evet') pos('olay saati ile olay anı saatinin uyumlu olması',1); else if(a(5)==='Hayır') neg('olay saati ile olay anı saati arasında uyumsuzluk bulunması',1);
+  // 7 İz
+  if(a(6)==='Evet') pos('araç üzerinde kazaya ait iz tespit edilmesi',2); else if(a(6)==='Hayır') neg('araç üzerinde kazaya ait iz tespit edilememesi',2); else miss('kazaya ait iz bilgisi girilmemiş');
+  // 8 Eski hasar
+  if(a(7)==='Hayır') pos('araçta eski hasar tespit edilmemesi',1); else if(a(7)==='Evet') neg('araçta eski hasar bulunması',1);
+  // 9 Kaza uyumlu
+  if(a(8)==='Evet') pos('kaza oluş şeklinin genel olarak uyumlu görülmesi',3); else if(a(8)==='Hayır') neg('kaza oluş şeklinin uyumsuz görülmesi',4); else miss('genel kaza uyumu girilmemiş');
+  const e0=ge80Extra(d,0), e1=ge80Extra(d,1), e2=ge80Extra(d,2);
+  if(e0.val==='Evet') pos('karşı araca ait boya / iz transferinin mevcut olması',2); else if(e0.val==='Hayır') concern.push('karşı araca ait boya / iz transferi tespit edilmemesi');
+  if(e1.val==='Evet') pos('hasar yönünün beyan edilen kaza oluş şekli ile uyumlu olması',2); else if(e1.val==='Kısmen') {score+=0; concern.push('hasar yönünün beyan ile kısmen uyumlu olması');} else if(e1.val==='Hayır') neg('hasar yönünün beyan edilen kaza oluş şekli ile uyumsuz olması',3);
+  if(e2.val==='Evet') neg('ek inceleme ihtiyacı bulunması',2); else if(e2.val==='Hayır') pos('ek inceleme ihtiyacı görülmemesi',1);
+  let result='Kısmen uyumlu / ek inceleme ile desteklenmeli'; let level='Orta';
+  const criticalNegative=(a(8)==='Hayır') || (a(4)==='Hayır' && a(6)==='Hayır') || e1.val==='Hayır';
+  if(score>=7 && !criticalNegative){result='Uyumlu'; level='Yüksek';}
+  else if(score<=0 || criticalNegative){result='Uyumsuz / çelişkili bulgular mevcut'; level='Düşük';}
+  else if(score>=3){result='Kısmen uyumlu'; level='Orta';}
+  return {score,result,level,support,concern,missing};
+}
+function ge80BuildOpinion(d){
+  d=d||collect();
+  const an=ge80AnalyzeAccident(d);
+  const a=i=>ge80Answer(d,i), n=i=>ge80Note(d,i);
+  const e0=ge80Extra(d,0), e1=ge80Extra(d,1), e2=ge80Extra(d,2);
+  let detail=[];
+  if(n(6)) detail.push(n(6));
+  if(e0.n) detail.push(e0.n);
+  if(n(4)) detail.push('Darbe yüksekliği değerlendirmesi: '+n(4));
+  if(n(7)) detail.push('Eski hasar değerlendirmesi: '+n(7));
+  if(n(8)) detail.push('Kaza uyumu açıklaması: '+n(8));
+  if(e1.n) detail.push('Hasar yönü değerlendirmesi: '+e1.n);
+  let intro='Dosya kapsamında incelenen bilgi ve belgeler ile araç üzerinde yapılan fiziki tespitler birlikte değerlendirilmiştir.';
+  if(an.result==='Uyumlu'){
+    let txt=intro+' Kaza raporu, olay yeri fotoğrafları, araç üzerindeki fiziki bulgular, darbe yükseklikleri ve hasar karakteri birlikte değerlendirildiğinde, araçta tespit edilen hasarların beyan edilen kaza oluş şekli ile teknik açıdan genel olarak uyumlu olduğu kanaatine varılmıştır.';
+    if(e0.val==='Evet') txt+=' Karşı araca ait boya / iz transferi mevcut olup temas bulgusunu desteklemektedir.';
+    if(detail.length) txt+=' '+detail.join(' ');
+    return txt;
+  }
+  if(an.result.startsWith('Uyumsuz')){
+    let txt=intro+' Yapılan değerlendirmede araç üzerindeki fiziki bulgular ile beyan edilen kaza oluş şekli arasında teknik açıdan açıklanması gereken uyumsuzluklar tespit edilmiştir.';
+    if(an.concern.length) txt+=' Özellikle '+ge781JoinList(an.concern)+' hususları mevcut kaza senaryosunu zayıflatmaktadır.';
+    if(detail.length) txt+=' '+detail.join(' ');
+    txt+=' Bu nedenle dosyanın mevcut haliyle ek bilgi, belge, fotoğraf veya teknik inceleme ile desteklenmesinin uygun olacağı değerlendirilmiştir.';
+    return txt;
+  }
+  let txt=intro+' Mevcut bulgular kaza oluş şeklini kısmen desteklemekle birlikte, kanaatin tam olarak kesinleştirilebilmesi için bazı hususların ek inceleme veya ilave belge/fotoğraf ile desteklenmesi uygun olacaktır.';
+  if(an.support.length) txt+=' Destekleyen bulgular: '+ge781JoinList(an.support)+'.';
+  if(an.concern.length) txt+=' Tereddüt oluşturan hususlar: '+ge781JoinList(an.concern)+'.';
+  if(detail.length) txt+=' '+detail.join(' ');
+  return txt;
+}
+function ge80GenerateAccidentOpinionToField(){
+  const d=collect();
+  const text=ge80BuildOpinion(d);
+  const an=ge80AnalyzeAccident(d);
+  if($('kazaOlusumKanaati')) $('kazaOlusumKanaati').value=text;
+  ge80UpdateSummary(an);
+}
+function ge80UpdateSummary(an){
+  an=an||ge80AnalyzeAccident();
+  const box=$('ge80KanaatOzet'); if(!box) return;
+  box.innerHTML='<b>Otomatik Analiz:</b> '+esc(an.result)+' &nbsp; | &nbsp; <b>Güven Seviyesi:</b> '+esc(an.level)+' &nbsp; | &nbsp; <b>Puan:</b> '+esc(String(an.score))+'<br><b>Destekleyen:</b> '+esc(ge781JoinList(an.support)||'-')+'<br><b>Tereddüt:</b> '+esc(ge781JoinList(an.concern)||'-');
+}
+function ge80ClearAccidentOpinion(){
+  if($('kazaOlusumKanaati')) $('kazaOlusumKanaati').value='';
+  if($('ge80KanaatOzet')) $('ge80KanaatOzet').textContent='Kanaat temizlendi.';
+}
+const __ge80_collect = collect;
+collect = function(){
+  const d=__ge80_collect();
+  d.ge80EkKaza=ge80CollectedExtra();
+  d.v.kazaOlusumKanaati=$('kazaOlusumKanaati')?.value||'';
+  const an=ge80AnalyzeAccident(d);
+  d.v.kazaOlusumSonuc=an.result;
+  d.v.kazaOlusumGuven=an.level;
+  d.v.kazaOlusumPuan=an.score;
+  return d;
+};
+const __ge80_load = load;
+load = function(d,k=''){
+  __ge80_load(d,k);
+  ge80InsertPanel();
+  (d.ge80EkKaza||[]).forEach((r,i)=>{ge80SetRadio('ge80q'+i,r.val||''); if($('ge80q'+i+'n')) $('ge80q'+i+'n').value=r.n||'';});
+  if($('kazaOlusumKanaati')) $('kazaOlusumKanaati').value=d.v?.kazaOlusumKanaati||'';
+  ge80UpdateSummary({result:d.v?.kazaOlusumSonuc||'Kayıt yüklendi',level:d.v?.kazaOlusumGuven||'-',score:d.v?.kazaOlusumPuan||'-',support:[],concern:[]});
+};
+const __ge80_newFile = newFile;
+newFile = function(){
+  __ge80_newFile();
+  ge80InsertPanel();
+};
+const __ge80_kanaatTable = kanaatTable;
+kanaatTable = function(sc,v,vc,fc){
+  let base=__ge80_kanaatTable(sc,v,vc,fc);
+  let text=v.kazaOlusumKanaati||'';
+  let analiz='';
+  if(v.kazaOlusumSonuc || v.kazaOlusumGuven){analiz=`<p><b>Otomatik Kaza Oluşum Analizi:</b> ${esc(v.kazaOlusumSonuc||'-')} / Güven: ${esc(v.kazaOlusumGuven||'-')}</p>`;}
+  if(text){base+=`<h4>V8 Kaza Oluşum Kanaati</h4>${analiz}<p>${esc(text).replace(/\n/g,'<br>')}</p>`;}
+  return base;
+};
+setTimeout(()=>{ge80InsertPanel();},650);
+
+
+
+/* === V8.1: Akıllı Kanaat Sistemi - saha stabil entegrasyon === */
+(function(){
+  try{
+    document.title='GENÇ SİGORTA EKSPERLİK V8.1';
+    const h=document.querySelector('header h1'); if(h) h.textContent='GENÇ SİGORTA EKSPERLİK V8.1 SAHA';
+    const sub=document.querySelector('header .small'); if(sub) sub.textContent='Akıllı kanaat sistemi entegre edildi';
+  }catch(e){}
+})();
+
+const GE81_DOC_KEYS = [
+  {key:'kazaRaporu', title:'Kaza Raporu / Anlaşmalı Tutanak', match:['trafik kaza tespit tutanağı','anlaşma tutanağı','kaza tespit tutanağı','polis','jandarma','görgü tespit tutanağı','ifade tutanağı']},
+  {key:'beyan', title:'Olayı Anlatan Beyan', match:['beyan','ifade tutanağı']},
+  {key:'olayFoto', title:'Olay Yeri Fotoğrafları', match:['olay yeri fotoğraf','fotoğraf seti','fotoğraf']},
+  {key:'kamera', title:'Kamera Kaydı', match:['kamera','video','görüntü']}
+];
+const GE81_STATUS = ['','İncelendi','Eksik Bilgi','Okunamıyor / Görüntü Yetersiz','İncelenemedi'];
+const GE81_FIZIKI = [
+  'Darbe noktaları uyumlu','Darbe yükseklikleri uyumlu','Hasar yönü uyumlu','Boya transferi mevcut','Plastik / kauçuk / parça transferi mevcut','Sürtünme izi mevcut','Ezilme karakteri uyumlu','Hasar taze görünümde','Hasar alanı beyan edilen bölge ile uyumlu'
+];
+const GE81_TEKNIK = [
+  'Hasarın oluş şekli teknik olarak mümkün','Tek kazada oluşabilir','Karşı araç ile uyumlu','Enerji aktarımı uyumlu','Beyan edilen çarpışma şekli ile uyumlu','İlave hasar ihtimali mevcut'
+];
+const GE81_SON = [
+  'Hasarın tamamı aynı olaya ait','Ek inceleme gerekir','Karşı araç görülmelidir','Servis incelemesi gerekir'
+];
+function ge81RadioVal(name){return document.querySelector(`input[name="${name}"]:checked`)?.value||'';}
+function ge81SetRadio(name,val){document.querySelectorAll(`input[name="${name}"]`).forEach(x=>x.checked=(x.value===val));}
+function ge81YesNo(name){return `<div class="inline"><label><input type="radio" name="${name}" value="Evet" onchange="ge81RefreshAiPanel()">Evet</label><label><input type="radio" name="${name}" value="Hayır" onchange="ge81RefreshAiPanel()">Hayır</label></div>`;}
+function ge81RelevantDocs(){
+  const list=[];
+  (docs||[]).forEach(d=>{
+    const n=String(d.name||'').toLocaleLowerCase('tr-TR');
+    GE81_DOC_KEYS.forEach(k=>{ if(k.match.some(m=>n.includes(m)) && (d.a||d.g||String(d.n||'').trim())) list.push({doc:d,title:k.title,key:k.key}); });
+  });
+  const seen={};
+  return list.filter(x=>{ if(seen[x.key]) return false; seen[x.key]=true; return true; });
+}
+function ge81DocRows(saved){
+  const rel=ge81RelevantDocs();
+  const rows=(rel.length?rel:GE81_DOC_KEYS.map(k=>({title:k.title,key:k.key,doc:{}}))).map((x,i)=>{
+    const st=saved?.[x.key]?.status||''; const note=saved?.[x.key]?.note||'';
+    return `<div class="controlrow"><b>${esc(x.title)}</b><select id="ge81doc_${x.key}" onchange="ge81RefreshAiPanel()">${GE81_STATUS.map(o=>`<option ${o===st?'selected':''}>${esc(o||'Seçiniz')}</option>`).join('')}</select><textarea id="ge81doc_${x.key}_n" rows="2" placeholder="Belgeye ilişkin kısa açıklama" oninput="ge81RefreshAiPanel()">${esc(note)}</textarea></div>`;
+  });
+  return rows.join('');
+}
+function ge81KanaatLayout(){
+  const sec=$('kanaat'); if(!sec)return;
+  sec.innerHTML=`<h2>KANAAT</h2>
+    <div class="sectionTitle">Kusur Durumu</div>
+    <div class="checks"><label><input type="radio" name="kusurDurumu" value="Sigortalı Kusurlu">Sigortalı Kusurlu</label><label><input type="radio" name="kusurDurumu" value="Kusursuz">Kusursuz</label><label><input type="radio" name="kusurDurumu" value="Paylaşımlı Kusur Var">Paylaşımlı Kusur Var</label><label><input type="radio" name="kusurDurumu" value="Paylaşımlı Kusur Yok">Paylaşımlı Kusur Yok</label></div>
+    <label class="card"><input type="checkbox" id="tramereGonderilecek"> Tramer'e Gönderilecek<input id="tramerAciklama" placeholder="Tramer açıklaması"></label>
+    <div class="controlrow"><b>Rücu Durumu Var mı?</b>${ge81YesNo('rucuDurumu')}<textarea id="rucuAciklama" rows="2" placeholder="Açıklama"></textarea></div>
+    <div id="ge81Panel">
+      <div class="sectionTitle" style="background:#1d4ed8">1. Belge İncelemesi</div><div class="small">Evrak sayfasında girilen kaza raporu/tutanak, beyan, olay yeri fotoğrafı ve kamera kaydı esas alınır.</div><div id="ge81Docs">${ge81DocRows()}</div>
+      <div class="sectionTitle" style="background:#047857">2. Fiziki İnceleme</div><div id="ge81Fiziki">${GE81_FIZIKI.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge81YesNo('ge81f'+i)}${i===3?`<div id="ge81BoyaUyumBox" class="card" style="display:none"><b>Boya transferi karşı araç rengi ile uyumlu mu?</b>${ge81YesNo('ge81boyaUyum')}</div>`:''}</div>`).join('')}</div>
+      <div class="sectionTitle" style="background:#c2410c">3. Teknik Analiz</div><div id="ge81Teknik">${GE81_TEKNIK.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge81YesNo('ge81t'+i)}${i===5?'<textarea id="ge81ilaveHasarNot" rows="2" placeholder="İlave hasar ihtimali varsa bölge / neden açıklaması"></textarea>':''}</div>`).join('')}</div>
+      <div class="sectionTitle" style="background:#991b1b">4. Son Teknik Değerlendirme</div><div id="ge81Son">${GE81_SON.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge81YesNo('ge81s'+i)}</div>`).join('')}<div class="controlrow"><b>Dosya araştırmaya gönderildi mi?</b>${ge81YesNo('ge81arastirma')}<textarea id="ge81arastirmaNot" rows="2" placeholder="Eksper ilave görüşü / araştırma notu"></textarea></div></div>
+      <div class="sectionTitle">5. Yapay Zekâ Destek Paneli</div>
+      <div class="scoreBox"><b>Destekleyen Bulgular</b><div id="ge81Destek">-</div></div>
+      <div class="scoreBox"><b>Tereddüt Oluşturan Bulgular</b><div id="ge81Tereddut">-</div></div>
+      <label>Yapay Zekâ Kanaat Taslağı<textarea id="ge81AiKanaat" rows="7" placeholder="Cevaplara göre otomatik oluşturulur; gerekirse düzenlenir."></textarea></label>
+      <label>Araştırma Gerekçesi / Araştırmacıya Not<textarea id="ge81ArastirmaMetni" rows="6" placeholder="Araştırmaya gönderilirse gerekçe ve incelenecek hususlar burada oluşur."></textarea></label>
+      <div class="inline"><button type="button" class="green" onclick="ge81GenerateAiTexts()">Analizi Oluştur</button><button type="button" class="green" onclick="ge81TransferToReport()">Rapora Aktar</button><button type="button" class="soft" onclick="ge81ClearAiTexts()">Temizle</button></div>
+    </div>
+    <label>Eksper Kanaati<textarea id="kanaatEksperKanaati" rows="8" placeholder="Rapora aktar butonu ile taslak metin buraya gelir. Eksper isterse metni düzenler."></textarea></label>`;
+  setTimeout(ge81RefreshAiPanel,50);
+}
+function ge81Collect(){
+  const doc={}; GE81_DOC_KEYS.forEach(k=>doc[k.key]={title:k.title,status:($('ge81doc_'+k.key)?.value||'').replace('Seçiniz',''),note:$('ge81doc_'+k.key+'_n')?.value||''});
+  return {doc,fiziki:GE81_FIZIKI.map((q,i)=>({name:q,val:ge81RadioVal('ge81f'+i)})),boyaUyum:ge81RadioVal('ge81boyaUyum'),teknik:GE81_TEKNIK.map((q,i)=>({name:q,val:ge81RadioVal('ge81t'+i)})),ilaveHasarNot:$('ge81ilaveHasarNot')?.value||'',son:GE81_SON.map((q,i)=>({name:q,val:ge81RadioVal('ge81s'+i)})),arastirma:ge81RadioVal('ge81arastirma'),arastirmaNot:$('ge81arastirmaNot')?.value||'',aiKanaat:$('ge81AiKanaat')?.value||'',arastirmaMetni:$('ge81ArastirmaMetni')?.value||''};
+}
+function ge81Analyze(x){
+  x=x||ge81Collect(); const destek=[],ter=[],aras=[];
+  Object.values(x.doc||{}).forEach(d=>{if(d.status==='İncelendi')destek.push(d.title+' incelendi'); if(d.status&&d.status!=='İncelendi'){ter.push(d.title+' - '+d.status); aras.push(d.title+' yönünden eksiklik / okunurluk durumunun araştırılması');} if(d.note) (d.status==='İncelendi'?destek:ter).push(d.title+': '+d.note);});
+  x.fiziki.forEach((r,i)=>{if(r.val==='Evet') destek.push(r.name); if(r.val==='Hayır') ter.push(r.name.replace('uyumlu','uyumsuz').replace('mevcut','mevcut değil'));});
+  if(x.fiziki[3]?.val==='Evet'){ if(x.boyaUyum==='Evet') destek.push('Boya transferi karşı araç rengi ile uyumlu'); if(x.boyaUyum==='Hayır'){ter.push('Boya transferi karşı araç rengi ile uyumlu değil'); aras.push('Boya/iz transferinin karşı araç ile karşılaştırılması');} }
+  x.teknik.forEach((r,i)=>{ if(['Hasarın oluş şekli teknik olarak mümkün','Tek kazada oluşabilir','Karşı araç ile uyumlu','Enerji aktarımı uyumlu','Beyan edilen çarpışma şekli ile uyumlu'].includes(r.name)){ if(r.val==='Evet') destek.push(r.name); if(r.val==='Hayır'){ter.push(r.name.replace('uyumlu','uyumsuz').replace('mümkün','teknik olarak desteklenemedi').replace('oluşabilir','oluşması tereddütlü'));}} else if(r.name==='İlave hasar ihtimali mevcut'){ if(r.val==='Evet'){ter.push('İlave hasar ihtimali mevcut'+(x.ilaveHasarNot?' - '+x.ilaveHasarNot:'')); aras.push('İlave hasar ihtimali bulunan bölgelerin değerlendirilmesi');} if(r.val==='Hayır') destek.push('İlave hasar ihtimali görülmedi'); }});
+  x.son.forEach(r=>{ if(r.name==='Hasarın tamamı aynı olaya ait'){ if(r.val==='Evet') destek.push(r.name); if(r.val==='Hayır'){ter.push('Hasarın tamamının aynı olaya ait olduğu doğrulanamadı'); aras.push('Hasarların aynı olay kapsamında oluşup oluşmadığının araştırılması');}} if(r.name==='Ek inceleme gerekir' && r.val==='Evet'){ter.push('Ek inceleme gerekir'); aras.push('Ek belge, fotoğraf veya teknik inceleme temini');} if(r.name==='Karşı araç görülmelidir' && r.val==='Evet'){ter.push('Karşı araç görülmelidir'); aras.push('Karşı aracın hasar yapısı, darbe yüksekliği ve boya/iz transferi yönünden incelenmesi');} if(r.name==='Servis incelemesi gerekir' && r.val==='Evet'){ter.push('Servis incelemesi gerekir'); aras.push('Servis/tamirhane nezdinde hasar kapsamının doğrulanması');} });
+  return {destek:ge781Uniq?ge781Uniq(destek):[...new Set(destek)], tereddut:ge781Uniq?ge781Uniq(ter):[...new Set(ter)], arastirmaHusus:ge781Uniq?ge781Uniq(aras):[...new Set(aras)]};
+}
+function ge81Join(arr){return (arr&&arr.length)?arr.join('; '):'-';}
+function ge81BuildKanaat(){const x=ge81Collect(), a=ge81Analyze(x); let giris='Dosya kapsamındaki bilgi ve belgeler ile araç üzerinde yapılan fiziki tespitler birlikte değerlendirilmiştir.'; let t=''; if(a.destek.length && !a.tereddut.length){t=giris+' Yapılan değerlendirmede '+ge81Join(a.destek).toLowerCase()+' hususlarının kaza oluş şeklini desteklediği görülmüş olup, mevcut hasarın beyan edilen olay kapsamında meydana gelmesinin teknik olarak mümkün olduğu kanaatine varılmıştır.';} else if(a.destek.length && a.tereddut.length){t=giris+' İnceleme sırasında kaza oluş şeklini destekleyen bulgular bulunmakla birlikte, '+ge81Join(a.tereddut).toLowerCase()+' hususları nedeniyle dosyada değerlendirilmesi gereken tereddütler bulunduğu kanaatine varılmıştır.';} else if(a.tereddut.length){t=giris+' Mevcut değerlendirmede '+ge81Join(a.tereddut).toLowerCase()+' hususları nedeniyle hasarın beyan edilen olay ile tam olarak ilişkilendirilmesinde teknik tereddüt oluşmuştur.';} else {t=giris+' Kanaat oluşturulabilmesi için belge, fiziki inceleme ve teknik analiz alanlarının tamamlanması gerekmektedir.';} return t;}
+function ge81BuildResearch(){const x=ge81Collect(), a=ge81Analyze(x); if(x.arastirma==='Hayır') return 'Yapılan teknik inceleme ve dosya kapsamındaki bilgi ve belgelerin birlikte değerlendirilmesi sonucunda dosyanın araştırmaya sevk edilmesini gerektirecek nitelikte teknik bir bulguya rastlanmamıştır.'+(x.arastirmaNot?'\n\nEksper ilave görüşü: '+x.arastirmaNot:''); let txt='Yapılan teknik incelemede dosyada açıklığa kavuşturulması gereken hususlar bulunduğu değerlendirilmiştir. Bu nedenle dosyanın araştırma sürecine yönlendirilmesi uygun görülmüştür.'; const hus=a.arastirmaHusus.length?a.arastirmaHusus:a.tereddut; if(hus.length) txt+='\n\nAraştırmada özellikle incelenmesi önerilen hususlar:\n- '+hus.join('\n- '); if(x.arastirmaNot) txt+='\n\nEksper ilave görüşü: '+x.arastirmaNot; return txt;}
+function ge81RefreshAiPanel(){const x=ge81Collect(), a=ge81Analyze(x); if($('ge81BoyaUyumBox')) $('ge81BoyaUyumBox').style.display=(ge81RadioVal('ge81f3')==='Evet')?'block':'none'; if($('ge81Destek')) $('ge81Destek').innerHTML=a.destek.length?a.destek.map(esc).join('<br>'):'-'; if($('ge81Tereddut')) $('ge81Tereddut').innerHTML=a.tereddut.length?a.tereddut.map(esc).join('<br>'):'-';}
+function ge81GenerateAiTexts(){ge81RefreshAiPanel(); if($('ge81AiKanaat')) $('ge81AiKanaat').value=ge81BuildKanaat(); if($('ge81ArastirmaMetni')) $('ge81ArastirmaMetni').value=ge81BuildResearch();}
+function ge81TransferToReport(){ge81GenerateAiTexts(); const a=ge81Analyze(); let parts=[]; if(a.destek.length) parts.push('DESTEKLEYEN BULGULAR:\n- '+a.destek.join('\n- ')); if(a.tereddut.length) parts.push('TEREDDÜT OLUŞTURAN BULGULAR:\n- '+a.tereddut.join('\n- ')); if($('ge81AiKanaat')?.value) parts.push('EKSPER KANAAT TASLAĞI:\n'+$('ge81AiKanaat').value); if($('ge81ArastirmaMetni')?.value) parts.push('ARAŞTIRMA DEĞERLENDİRMESİ:\n'+$('ge81ArastirmaMetni').value); if($('kanaatEksperKanaati')) $('kanaatEksperKanaati').value=parts.join('\n\n'); alert('Akıllı kanaat metni Eksper Kanaati alanına aktarıldı.');}
+function ge81ClearAiTexts(){['ge81AiKanaat','ge81ArastirmaMetni','kanaatEksperKanaati'].forEach(id=>{if($(id))$(id).value=''}); ge81RefreshAiPanel();}
+try{ ge80InsertPanel=function(){}; }catch(e){}
+try{ ge77KanaatLayout = ge81KanaatLayout; }catch(e){}
+const __ge81_show = show; show=function(id){__ge81_show(id); if(id==='kanaat') setTimeout(()=>{ if(!$('ge81Panel')) ge81KanaatLayout(); },30);};
+const __ge81_collect = collect; collect=function(){ const d=__ge81_collect(); d.ge81=ge81Collect(); d.v.ge81AiKanaat=d.ge81.aiKanaat; d.v.ge81ArastirmaMetni=d.ge81.arastirmaMetni; d.v.kusurDurumu=selectedRadioValue('kusurDurumu'); d.v.rucuDurumu=selectedRadioValue('rucuDurumu'); d.v.rucuAciklama=$('rucuAciklama')?.value||''; d.v.kanaatEksperKanaati=$('kanaatEksperKanaati')?.value||d.v.kanaatEksperKanaati||''; return d; };
+const __ge81_load = load; load=function(d,k=''){ __ge81_load(d,k); ge81KanaatLayout(); const x=d.ge81||{}; Object.values(x.doc||{}).forEach((r)=>{}); GE81_DOC_KEYS.forEach(k=>{ if($('ge81doc_'+k.key)) $('ge81doc_'+k.key).value=x.doc?.[k.key]?.status||''; if($('ge81doc_'+k.key+'_n')) $('ge81doc_'+k.key+'_n').value=x.doc?.[k.key]?.note||''; }); (x.fiziki||[]).forEach((r,i)=>ge81SetRadio('ge81f'+i,r.val||'')); ge81SetRadio('ge81boyaUyum',x.boyaUyum||''); (x.teknik||[]).forEach((r,i)=>ge81SetRadio('ge81t'+i,r.val||'')); (x.son||[]).forEach((r,i)=>ge81SetRadio('ge81s'+i,r.val||'')); ge81SetRadio('ge81arastirma',x.arastirma||''); if($('ge81ilaveHasarNot')) $('ge81ilaveHasarNot').value=x.ilaveHasarNot||''; if($('ge81arastirmaNot')) $('ge81arastirmaNot').value=x.arastirmaNot||''; if($('ge81AiKanaat')) $('ge81AiKanaat').value=x.aiKanaat||d.v?.ge81AiKanaat||''; if($('ge81ArastirmaMetni')) $('ge81ArastirmaMetni').value=x.arastirmaMetni||d.v?.ge81ArastirmaMetni||''; setRadioByValue('kusurDurumu',d.v?.kusurDurumu||''); setRadioByValue('rucuDurumu',d.v?.rucuDurumu||''); if($('rucuAciklama')) $('rucuAciklama').value=d.v?.rucuAciklama||''; if($('kanaatEksperKanaati')) $('kanaatEksperKanaati').value=d.v?.kanaatEksperKanaati||''; ge81RefreshAiPanel(); };
+const __ge81_newFile = newFile; newFile=function(){ __ge81_newFile(); ge81KanaatLayout(); };
+const __ge81_kanaatTable = kanaatTable; kanaatTable=function(sc,v,vc,fc){ let base=__ge81_kanaatTable([],v,vc,fc); let d=collect(), x=d.ge81||{}, a=ge81Analyze(x); let detay=''; if(a.destek.length) detay+=`<p><b>Destekleyen Bulgular:</b><br>${a.destek.map(esc).join('<br>')}</p>`; if(a.tereddut.length) detay+=`<p><b>Tereddüt Oluşturan Bulgular:</b><br>${a.tereddut.map(esc).join('<br>')}</p>`; if(x.aiKanaat) detay+=`<p><b>Yapay Zekâ Kanaat Taslağı:</b><br>${esc(x.aiKanaat).replace(/\n/g,'<br>')}</p>`; if(x.arastirma || x.arastirmaMetni) detay+=`<p><b>Araştırma Kararı:</b> ${esc(x.arastirma||'-')}</p>${x.arastirmaMetni?`<p><b>Araştırma Değerlendirmesi:</b><br>${esc(x.arastirmaMetni).replace(/\n/g,'<br>')}</p>`:''}`; return detay+base; };
+setTimeout(()=>{ ge81KanaatLayout(); },900);
+
+
+/* === V8.2 KANAAT SAHA REVİZYONU - yalnızca kanaat modülü ve rapor kanaat çıktısı === */
+(function(){
+  try{
+    document.title='GENÇ SİGORTA EKSPERLİK V8.2';
+    const h=document.querySelector('header h1'); if(h) h.textContent='GENÇ SİGORTA EKSPERLİK V8.2 SAHA';
+    const sub=document.querySelector('header .small'); if(sub) sub.textContent='Kanaat saha revizyonu - karar destek paneli';
+  }catch(e){}
+})();
+
+const GE82_DOCS = [
+  {key:'kazaTespit', title:'Kaza Tespit Tutanağı', extra:[]},
+  {key:'anlasmali', title:'Anlaşmalı Tutanak', extra:[]},
+  {key:'sigortaliBeyan', title:'Sigortalı Beyanı', extra:[]},
+  {key:'polisJandarma', title:'Polis / Jandarma Tutanağı', extra:[]},
+  {key:'olayYeriFoto', title:'Olay Yeri Fotoğrafları', extra:['Çekilmemiş']},
+  {key:'kameraKaydi', title:'Kamera Kaydı', extra:['Yok']}
+];
+const GE82_BASE_STATUS = ['','İncelendi','Eksik Bilgi','Okunmuyor','İncelenmedi'];
+const GE82_FIZIKI = [
+  'Darbe noktaları uyumlu','Darbe yükseklikleri uyumlu','Hasar yönü uyumlu','Boya transferi mevcut','Plastik / kauçuk / parça transferi mevcut','Sürtünme izi mevcut','Ezilme karakteri uyumlu','Hasar taze görünümde','Hasar alanı beyan edilen bölge ile uyumlu'
+];
+const GE82_TEKNIK = [
+  'Hasarın oluş şekli teknik olarak mümkün','Tek kazada oluşabilir','Karşı araç ile uyumlu','Enerji aktarımı uyumlu','Beyan edilen çarpışma şekli ile uyumlu','İlave hasar ihtimali mevcut','Hasarın tamamı aynı olaya ait'
+];
+const GE82_SON = ['Karşı araç görülmelidir','Ek inceleme gereklidir'];
+const GE82_EK_INCELEME = ['Araç sökülerek incelenmeli','Olay yeri görülmeli','Servis görüşü alınmalı','Diğer'];
+
+function ge82RadioVal(name){return document.querySelector(`input[name="${name}"]:checked`)?.value||'';}
+function ge82SetRadio(name,val){document.querySelectorAll(`input[name="${name}"]`).forEach(x=>x.checked=(x.value===val));}
+function ge82YesNo(name){return `<div class="inline"><label><input type="radio" name="${name}" value="Evet" onchange="ge82RefreshPanel()">Evet</label><label><input type="radio" name="${name}" value="Hayır" onchange="ge82RefreshPanel()">Hayır</label></div>`;}
+function ge82DocOptions(doc, selected){
+  const opts=[...GE82_BASE_STATUS, ...(doc.extra||[])];
+  return opts.map(o=>`<option value="${esc(o)}" ${o===selected?'selected':''}>${esc(o||'Seçiniz')}</option>`).join('');
+}
+function ge82DocRows(saved){
+  return GE82_DOCS.map((x,i)=>{
+    const st=saved?.[x.key]?.status||''; const note=saved?.[x.key]?.note||'';
+    return `<div class="controlrow"><b>${i+1}. ${esc(x.title)}</b><select id="ge82doc_${x.key}" onchange="ge82RefreshPanel()">${ge82DocOptions(x,st)}</select><textarea id="ge82doc_${x.key}_n" rows="2" placeholder="Belgeye ilişkin kısa açıklama" oninput="ge82RefreshPanel()">${esc(note)}</textarea></div>`;
+  }).join('');
+}
+function ge82KanaatLayout(saved){
+  const sec=$('kanaat'); if(!sec)return;
+  const x=saved||{};
+  sec.innerHTML=`<h2>KANAAT</h2>
+    <div class="sectionTitle">Kusur Durumu</div>
+    <div class="checks"><label><input type="radio" name="kusurDurumu" value="Sigortalı Kusurlu">Sigortalı Kusurlu</label><label><input type="radio" name="kusurDurumu" value="Kusursuz">Kusursuz</label><label><input type="radio" name="kusurDurumu" value="Paylaşımlı Kusur Var">Paylaşımlı Kusur Var</label><label><input type="radio" name="kusurDurumu" value="Paylaşımlı Kusur Yok">Paylaşımlı Kusur Yok</label></div>
+    <label class="card"><input type="checkbox" id="tramereGonderilecek"> Tramer'e Gönderilecek<input id="tramerAciklama" placeholder="Tramer açıklaması"></label>
+    <div class="controlrow"><b>Rücu Durumu Var mı?</b>${ge82YesNo('rucuDurumu')}<textarea id="rucuAciklama" rows="2" placeholder="Açıklama"></textarea></div>
+    <div id="ge82Panel">
+      <div class="sectionTitle" style="background:#1d4ed8">1. Belge İncelemesi</div><div class="small">Bu bölüm Evrak sayfasına bağlı değildir. Kanaat için hangi belge değerlendirildiyse burada seçilir.</div><div id="ge82Docs">${ge82DocRows(x.doc)}</div>
+      <div class="sectionTitle" style="background:#047857">2. Fiziki İnceleme</div><div id="ge82Fiziki">${GE82_FIZIKI.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82f'+i)}${i===3?`<div id="ge82BoyaUyumBox" class="card" style="display:none"><b>Boya transferi karşı araç rengi ile uyumlu mu?</b>${ge82YesNo('ge82boyaUyum')}</div>`:''}</div>`).join('')}</div>
+      <div class="sectionTitle" style="background:#c2410c">3. Teknik Analiz</div><div id="ge82Teknik">${GE82_TEKNIK.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82t'+i)}${q==='İlave hasar ihtimali mevcut'?'<textarea id="ge82ilaveHasarNot" rows="2" placeholder="İlave hasar ihtimali varsa bölge / neden açıklaması"></textarea>':''}</div>`).join('')}</div>
+      <div class="sectionTitle" style="background:#991b1b">4. Son Teknik Değerlendirme</div><div id="ge82Son">${GE82_SON.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82s'+i)}${q==='Ek inceleme gereklidir'?`<div id="ge82EkIncelemeBox" class="card" style="display:none"><b>Ek inceleme türü</b><div class="checks">${GE82_EK_INCELEME.map((e,j)=>`<label><input type="checkbox" id="ge82ek${j}" onchange="ge82RefreshPanel()">${esc(e)}</label>`).join('')}</div><textarea id="ge82ekDigerNot" rows="2" placeholder="Diğer / ek inceleme açıklaması" oninput="ge82RefreshPanel()"></textarea></div>`:''}</div>`).join('')}</div>
+      <div class="controlrow"><b>Dosya araştırmaya gönderildi mi?</b>${ge82YesNo('ge82arastirma')}<textarea id="ge82arastirmaNot" rows="2" placeholder="Eksper ilave görüşü / araştırma notu" oninput="ge82RefreshPanel()"></textarea></div>
+      <div class="sectionTitle">5. Karar Destek Paneli</div>
+      <div class="grid"><div class="scoreBox"><b>Destekleyen Bulgular</b><div id="ge82Destek">-</div></div><div class="scoreBox"><b>Tereddüt Oluşturan Bulgular</b><div id="ge82Tereddut">-</div></div></div>
+      <div class="controlrow"><b>Kanaat Sonucu</b><div class="inline"><label><input type="radio" name="ge82KanaatSonuc" value="Olumlu" onchange="ge82RefreshPanel()">Olumlu</label><label><input type="radio" name="ge82KanaatSonuc" value="Olumsuz" onchange="ge82RefreshPanel()">Olumsuz</label></div></div>
+      <label>Otomatik Kanaat Taslağı<textarea id="ge82AiKanaat" rows="7" placeholder="Cevaplara göre otomatik oluşturulur; gerekirse düzenlenir."></textarea></label>
+      <label>İlave Eksper Görüşü<textarea id="ge82IlaveGorus" rows="4" placeholder="Eksper isterse bu alana kendi ek görüşünü yazar."></textarea></label>
+      <label>Araştırma Değerlendirmesi<textarea id="ge82ArastirmaMetni" rows="6" placeholder="Araştırmaya gönderilirse gerekçe ve incelenecek hususlar burada oluşur."></textarea></label>
+      <div class="inline"><button type="button" class="green" onclick="ge82GenerateTexts()">Analizi Oluştur</button><button type="button" class="green" onclick="ge82TransferToReport()">Rapora Aktar</button><button type="button" class="soft" onclick="ge82ClearTexts()">Temizle</button></div>
+    </div>
+    <label>Eksper Kanaati<textarea id="kanaatEksperKanaati" rows="8" placeholder="Rapora aktar butonu ile taslak metin buraya gelir. Eksper isterse metni düzenler."></textarea></label>`;
+  setTimeout(()=>{ge82ApplySaved(x);ge82RefreshPanel();},50);
+}
+function ge82ApplySaved(x){
+  if(!x) return;
+  GE82_DOCS.forEach(k=>{ if($('ge82doc_'+k.key)) $('ge82doc_'+k.key).value=x.doc?.[k.key]?.status||''; if($('ge82doc_'+k.key+'_n')) $('ge82doc_'+k.key+'_n').value=x.doc?.[k.key]?.note||''; });
+  (x.fiziki||[]).forEach((r,i)=>ge82SetRadio('ge82f'+i,r.val||'')); ge82SetRadio('ge82boyaUyum',x.boyaUyum||'');
+  (x.teknik||[]).forEach((r,i)=>ge82SetRadio('ge82t'+i,r.val||'')); if($('ge82ilaveHasarNot')) $('ge82ilaveHasarNot').value=x.ilaveHasarNot||'';
+  (x.son||[]).forEach((r,i)=>ge82SetRadio('ge82s'+i,r.val||'')); (x.ekInceleme||[]).forEach((v,i)=>{if($('ge82ek'+i)) $('ge82ek'+i).checked=!!v;}); if($('ge82ekDigerNot')) $('ge82ekDigerNot').value=x.ekDigerNot||'';
+  ge82SetRadio('ge82arastirma',x.arastirma||''); if($('ge82arastirmaNot')) $('ge82arastirmaNot').value=x.arastirmaNot||''; ge82SetRadio('ge82KanaatSonuc',x.kanaatSonuc||'');
+  if($('ge82AiKanaat')) $('ge82AiKanaat').value=x.aiKanaat||''; if($('ge82IlaveGorus')) $('ge82IlaveGorus').value=x.ilaveGorus||''; if($('ge82ArastirmaMetni')) $('ge82ArastirmaMetni').value=x.arastirmaMetni||'';
+}
+function ge82Collect(){
+  const doc={}; GE82_DOCS.forEach(k=>doc[k.key]={title:k.title,status:($('ge82doc_'+k.key)?.value||''),note:$('ge82doc_'+k.key+'_n')?.value||''});
+  return {doc,
+    fiziki:GE82_FIZIKI.map((q,i)=>({name:q,val:ge82RadioVal('ge82f'+i)})), boyaUyum:ge82RadioVal('ge82boyaUyum'),
+    teknik:GE82_TEKNIK.map((q,i)=>({name:q,val:ge82RadioVal('ge82t'+i)})), ilaveHasarNot:$('ge82ilaveHasarNot')?.value||'',
+    son:GE82_SON.map((q,i)=>({name:q,val:ge82RadioVal('ge82s'+i)})), ekInceleme:GE82_EK_INCELEME.map((_,i)=>!!$('ge82ek'+i)?.checked), ekDigerNot:$('ge82ekDigerNot')?.value||'',
+    arastirma:ge82RadioVal('ge82arastirma'), arastirmaNot:$('ge82arastirmaNot')?.value||'', kanaatSonuc:ge82RadioVal('ge82KanaatSonuc'),
+    aiKanaat:$('ge82AiKanaat')?.value||'', ilaveGorus:$('ge82IlaveGorus')?.value||'', arastirmaMetni:$('ge82ArastirmaMetni')?.value||''};
+}
+function ge82Uniq(a){return [...new Set((a||[]).filter(Boolean))];}
+function ge82Analyze(x){
+  x=x||ge82Collect(); const belgeDestek=[], teknikDestek=[], belgeTer=[], teknikTer=[], arastirma=[];
+  Object.values(x.doc||{}).forEach(d=>{
+    const st=d.status; if(!st) return;
+    if(st==='İncelendi') belgeDestek.push(d.title+' incelendi');
+    if(['Eksik Bilgi','Okunmuyor','İncelenmedi','Çekilmemiş','Yok'].includes(st)){ belgeTer.push(d.title+' - '+st); arastirma.push(d.title+' yönünden eksiklik / bulunmama durumunun araştırılması'); }
+    if(d.note){ (st==='İncelendi'?belgeDestek:belgeTer).push(d.title+': '+d.note); }
+  });
+  x.fiziki.forEach(r=>{ if(r.val==='Evet') teknikDestek.push(r.name); if(r.val==='Hayır') teknikTer.push(r.name.replace('uyumlu','uyumsuz').replace('mevcut','mevcut değil')); });
+  if(x.fiziki[3]?.val==='Evet'){ if(x.boyaUyum==='Evet') teknikDestek.push('Boya transferi karşı araç rengi ile uyumlu'); if(x.boyaUyum==='Hayır'){teknikTer.push('Boya transferi karşı araç rengi ile uyumlu değil'); arastirma.push('Boya / iz transferinin karşı araç rengi ile karşılaştırılması');} }
+  x.teknik.forEach(r=>{
+    if(['Hasarın oluş şekli teknik olarak mümkün','Tek kazada oluşabilir','Karşı araç ile uyumlu','Enerji aktarımı uyumlu','Beyan edilen çarpışma şekli ile uyumlu','Hasarın tamamı aynı olaya ait'].includes(r.name)){
+      if(r.val==='Evet') teknikDestek.push(r.name);
+      if(r.val==='Hayır'){ teknikTer.push(r.name.replace('uyumlu','uyumsuz').replace('mümkün','teknik olarak desteklenemedi').replace('oluşabilir','oluşması tereddütlü').replace('ait','ait olduğu doğrulanamadı')); arastirma.push(r.name+' hususunun doğrulanması'); }
+    } else if(r.name==='İlave hasar ihtimali mevcut'){
+      if(r.val==='Evet'){teknikTer.push('İlave hasar ihtimali mevcut'+(x.ilaveHasarNot?' - '+x.ilaveHasarNot:'')); arastirma.push('İlave hasar ihtimali bulunan bölgelerin değerlendirilmesi');}
+      if(r.val==='Hayır') teknikDestek.push('İlave hasar ihtimali görülmedi');
+    }
+  });
+  x.son.forEach((r,i)=>{ if(r.name==='Karşı araç görülmelidir' && r.val==='Evet'){teknikTer.push('Karşı araç görülmelidir'); arastirma.push('Karşı aracın hasar yapısı, darbe yüksekliği ve boya/iz transferi yönünden incelenmesi');} if(r.name==='Ek inceleme gereklidir' && r.val==='Evet'){teknikTer.push('Ek inceleme gereklidir'); arastirma.push('Ek teknik inceleme yapılması');} });
+  (x.ekInceleme||[]).forEach((v,i)=>{ if(v){teknikTer.push(GE82_EK_INCELEME[i]); arastirma.push(GE82_EK_INCELEME[i]);} });
+  if(x.ekDigerNot){teknikTer.push('Ek inceleme açıklaması: '+x.ekDigerNot); arastirma.push(x.ekDigerNot);}
+  return {belgeDestek:ge82Uniq(belgeDestek), teknikDestek:ge82Uniq(teknikDestek), belgeTer:ge82Uniq(belgeTer), teknikTer:ge82Uniq(teknikTer), arastirma:ge82Uniq(arastirma)};
+}
+function ge82ListHtml(arr){return (arr&&arr.length)?arr.map(x=>'• '+esc(x)).join('<br>'):'-';}
+function ge82ListText(arr){return (arr&&arr.length)?'- '+arr.join('\n- '):'-';}
+function ge82BuildKanaat(){
+  const x=ge82Collect(), a=ge82Analyze(x); const sonuc=x.kanaatSonuc||((a.belgeTer.length||a.teknikTer.length)?'Olumsuz':'Olumlu');
+  if(sonuc==='Olumlu') return 'Konu dosya kapsamında tarafımıza ibraz edilen bilgi ve belgeler ile araç üzerinde yapılan fiili ve teknik incelemeler birlikte değerlendirilmiştir. Yukarıda detaylandırılan belge incelemeleri, fiziki bulgular ve teknik analiz sonuçları dikkate alındığında, mevcut hasarın beyan edilen kaza oluş şekli ile teknik açıdan uyumlu olduğu ve olayın beyan edildiği şekilde meydana geldiği kanaatine varılmıştır.';
+  return 'Konu dosya kapsamında tarafımıza ibraz edilen bilgi ve belgeler ile araç üzerinde yapılan fiili ve teknik incelemeler birlikte değerlendirilmiştir. Yapılan değerlendirme sonucunda, yukarıda belirtilen tereddüt oluşturan hususlar ve teknik uyumsuzluklar dikkate alındığında mevcut hasarın tamamının beyan edilen olay ile teknik olarak doğrulanamadığı, bu nedenle kazanın beyan edilen oluş şekline ilişkin olumlu kanaat oluşturulamadığı değerlendirilmiştir.';
+}
+function ge82BuildResearch(){
+  const x=ge82Collect(), a=ge82Analyze(x); const hus=ge82Uniq([...(a.belgeTer||[]), ...(a.teknikTer||[]), ...(a.arastirma||[])]);
+  if(x.arastirma==='Hayır') return 'Yapılan belge incelemeleri, araç üzerindeki teknik tespitler ve değerlendirmeler sonucunda dosyanın araştırmaya sevk edilmesini gerektirecek nitelikte teknik bir bulguya rastlanmamıştır.'+(x.arastirmaNot?'\n\nEksper ilave görüşü: '+x.arastirmaNot:'');
+  if(x.arastirma==='Evet'){
+    let txt='Yapılan belge incelemeleri ve teknik değerlendirmeler sonucunda aşağıda belirtilen hususların açıklığa kavuşturulabilmesi amacıyla dosyanın araştırmaya sevk edilmesinin uygun olacağı değerlendirilmiştir.';
+    if(hus.length) txt+='\n\nAraştırmada özellikle incelenmesi önerilen hususlar:\n- '+hus.join('\n- ');
+    if(x.arastirmaNot) txt+='\n\nEksper ilave görüşü: '+x.arastirmaNot;
+    return txt;
+  }
+  return '';
+}
+function ge82RefreshPanel(){
+  const x=ge82Collect(), a=ge82Analyze(x);
+  if($('ge82BoyaUyumBox')) $('ge82BoyaUyumBox').style.display=(ge82RadioVal('ge82f3')==='Evet')?'block':'none';
+  if($('ge82EkIncelemeBox')) $('ge82EkIncelemeBox').style.display=(ge82RadioVal('ge82s1')==='Evet')?'block':'none';
+  if($('ge82Destek')) $('ge82Destek').innerHTML='<b>Belge Bulguları</b><br>'+ge82ListHtml(a.belgeDestek)+'<br><br><b>Teknik Bulgular</b><br>'+ge82ListHtml(a.teknikDestek);
+  if($('ge82Tereddut')) $('ge82Tereddut').innerHTML='<b>Belge Tereddütleri</b><br>'+ge82ListHtml(a.belgeTer)+'<br><br><b>Teknik Tereddütler</b><br>'+ge82ListHtml(a.teknikTer);
+}
+function ge82GenerateTexts(){ge82RefreshPanel(); if($('ge82AiKanaat')) $('ge82AiKanaat').value=ge82BuildKanaat(); if($('ge82ArastirmaMetni')) $('ge82ArastirmaMetni').value=ge82BuildResearch();}
+function ge82TransferToReport(){ge82GenerateTexts(); const x=ge82Collect(), a=ge82Analyze(x); let parts=[]; parts.push('DESTEKLEYEN BULGULAR\nBelge Bulguları:\n'+ge82ListText(a.belgeDestek)+'\n\nTeknik Bulgular:\n'+ge82ListText(a.teknikDestek)); parts.push('TEREDDÜT OLUŞTURAN BULGULAR\nBelge Tereddütleri:\n'+ge82ListText(a.belgeTer)+'\n\nTeknik Tereddütler:\n'+ge82ListText(a.teknikTer)); if($('ge82AiKanaat')?.value) parts.push('EKSPER KANAATİ\n'+$('ge82AiKanaat').value); if($('ge82IlaveGorus')?.value) parts.push('İLAVE EKSPER GÖRÜŞÜ\n'+$('ge82IlaveGorus').value); if($('ge82ArastirmaMetni')?.value) parts.push('ARAŞTIRMA DEĞERLENDİRMESİ\n'+$('ge82ArastirmaMetni').value); if($('kanaatEksperKanaati')) $('kanaatEksperKanaati').value=parts.join('\n\n'); alert('V8.2 karar destek metni Eksper Kanaati alanına aktarıldı.');}
+function ge82ClearTexts(){['ge82AiKanaat','ge82IlaveGorus','ge82ArastirmaMetni','kanaatEksperKanaati'].forEach(id=>{if($(id))$(id).value=''}); ge82RefreshPanel();}
+
+try{ ge80InsertPanel=function(){}; ge81KanaatLayout=ge82KanaatLayout; }catch(e){}
+const __ge82_show = show; show=function(id){__ge82_show(id); if(id==='kanaat') setTimeout(()=>{ if(!$('ge82Panel')) ge82KanaatLayout(); },30);};
+const __ge82_collect = collect; collect=function(){ const d=__ge82_collect(); d.ge82=ge82Collect(); d.v.kusurDurumu=selectedRadioValue('kusurDurumu'); d.v.rucuDurumu=selectedRadioValue('rucuDurumu'); d.v.rucuAciklama=$('rucuAciklama')?.value||''; d.v.kanaatEksperKanaati=$('kanaatEksperKanaati')?.value||d.v.kanaatEksperKanaati||''; return d; };
+const __ge82_load = load; load=function(d,k=''){ __ge82_load(d,k); ge82KanaatLayout(d.ge82||{}); setTimeout(()=>{ setRadioByValue('kusurDurumu',d.v?.kusurDurumu||''); setRadioByValue('rucuDurumu',d.v?.rucuDurumu||''); if($('rucuAciklama')) $('rucuAciklama').value=d.v?.rucuAciklama||''; if($('tramereGonderilecek')) $('tramereGonderilecek').checked=!!d.v?.tramereGonderilecek; if($('tramerAciklama')) $('tramerAciklama').value=d.v?.tramerAciklama||''; if($('kanaatEksperKanaati')) $('kanaatEksperKanaati').value=d.v?.kanaatEksperKanaati||''; ge82RefreshPanel(); },80); };
+const __ge82_newFile = newFile; newFile=function(){ __ge82_newFile(); ge82KanaatLayout(); };
+
+kanaatTable=function(sc,v,vc,fc){
+  let d; try{d=collect();}catch(e){d={ge82:{}};} const x=d.ge82||{}, a=ge82Analyze(x);
+  let meta='';
+  if(v.kusurDurumu) meta+=`<p><b>Kusur Durumu:</b> ${esc(v.kusurDurumu)}</p>`;
+  if(v.tramereGonderilecek) meta+=`<p><b>Tramer'e Gönderilecek:</b> Evet${v.tramerAciklama?' - '+esc(v.tramerAciklama):''}</p>`;
+  if(v.rucuDurumu || v.rucuAciklama) meta+=`<p><b>Rücu Durumu Var mı?</b> ${esc(v.rucuDurumu||'-')}${v.rucuAciklama?' - '+esc(v.rucuAciklama):''}</p>`;
+  const destek=`<table class="reportTable"><tr><th>Belge Bulguları</th><th>Teknik Bulgular</th></tr><tr><td>${ge82ListHtml(a.belgeDestek)}</td><td>${ge82ListHtml(a.teknikDestek)}</td></tr></table>`;
+  const ter=`<table class="reportTable"><tr><th>Belge Tereddütleri</th><th>Teknik Tereddütler</th></tr><tr><td>${ge82ListHtml(a.belgeTer)}</td><td>${ge82ListHtml(a.teknikTer)}</td></tr></table>`;
+  const kanaat=x.aiKanaat||v.kanaatEksperKanaati||'';
+  const ilave=x.ilaveGorus?`<p><b>İlave Eksper Görüşü:</b><br>${esc(x.ilaveGorus).replace(/\n/g,'<br>')}</p>`:'';
+  const arastirma=x.arastirmaMetni?`<h4>Araştırma Değerlendirmesi</h4><p>${esc(x.arastirmaMetni).replace(/\n/g,'<br>')}</p>`:'';
+  return `${meta}<h4>Destekleyen Bulgular</h4>${destek}<h4>Tereddüt Oluşturan Bulgular</h4>${ter}<h4>Eksper Kanaati</h4><p>${kanaat?esc(kanaat).replace(/\n/g,'<br>'):'-'}</p>${ilave}${arastirma}`;
+};
+setTimeout(()=>{ ge82KanaatLayout(); },1200);
 </script>
 </body>
 </html>

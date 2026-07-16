@@ -1564,7 +1564,7 @@ function ge82KanaatLayout(saved){
       <label>Otomatik Kanaat Taslağı<textarea id="ge82AiKanaat" rows="7" placeholder="Cevaplara göre otomatik oluşturulur; gerekirse düzenlenir."></textarea></label>
       <label>İlave Eksper Görüşü<textarea id="ge82IlaveGorus" rows="4" placeholder="Eksper isterse bu alana kendi ek görüşünü yazar."></textarea></label>
       <label>Araştırma Değerlendirmesi<textarea id="ge82ArastirmaMetni" rows="6" placeholder="Araştırmaya gönderilirse gerekçe ve incelenecek hususlar burada oluşur."></textarea></label>
-      <div class="inline"><button type="button" class="green" onclick="ge82GenerateTexts()">Analizi Oluştur</button><button type="button" class="green" onclick="ge82TransferToReport()">Rapora Aktar</button><button type="button" class="soft" onclick="ge82ClearTexts()">Temizle</button></div>
+      <div class="inline"><button type="button" class="green" onclick="ge82GenerateTexts()">Analizi Oluştur</button><button type="button" class="green" onclick="ge82TransferToReport()">Rapora Aktar</button><button type="button" class="soft" onclick="ge82ClearTexts()">Temizle</button><button type="button" class="green" onclick="save();show('kontrol')">KAYDET VE SONRAKİ BÖLÜM</button></div>
     </div>
     <label>Eksper Kanaati<textarea id="kanaatEksperKanaati" rows="8" placeholder="Rapora aktar butonu ile taslak metin buraya gelir. Eksper isterse metni düzenler."></textarea></label>`;
   setTimeout(()=>{ge82ApplySaved(x);ge82RefreshPanel();},50);
@@ -2166,4 +2166,88 @@ async function shareReport(){
     if(btn){btn.disabled=false;btn.textContent=oldText;}
   }
 }
+</script>
+
+
+<style id="geSahaRevizyon3Style">
+/* === SAHA REVİZYONU 3: Kaydet/sonraki, Diğer 15 satır, PDF boşluk azaltma === */
+.sectionNextBar{display:flex;justify-content:flex-end;gap:8px;margin:18px 0 8px;padding-top:10px;border-top:1px solid #d1d5db}
+@media print{
+  .sectionNextBar{display:none!important}
+  /* Birleştirilen ikinci metin sayfasının içeriği gerektiğinde doğal olarak devam eder. */
+  .reportPage2{min-height:0!important;height:auto!important;overflow:visible!important}
+  .reportPage2 .reportPageBody{overflow:visible!important}
+}
+</style>
+<script id="geSahaRevizyon3Script">
+(function(){
+  const sectionFlow={dosya:'evrak',evrak:'arac',arac:'hasar',hasar:'iscilik',iscilik:'boya',boya:'foto',foto:'kanaat',kanaat:'kontrol',kontrol:'notlar',notlar:'rapor'};
+
+  window.saveAndNextSection=function(nextId){
+    if(!currentUser){alert('Önce Ana Menüden kullanıcı adı seç.');show('home');return;}
+    const hasIdentity=(($('dosyaNo')?.value||'').trim()||($('plaka')?.value||'').trim()||($('sigortali')?.value||'').trim());
+    if(!hasIdentity){alert('Kaydetmek için dosya no, plaka veya sigortalıdan en az birini gir.');show('dosya');return;}
+    save();
+    show(nextId);
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  function addSectionNavigationButtons(){
+    Object.entries(sectionFlow).forEach(([id,nextId])=>{
+      const sec=$(id);if(!sec||sec.querySelector('.sectionNextBar'))return;
+      const bar=document.createElement('div');bar.className='sectionNextBar';
+      const btn=document.createElement('button');btn.type='button';btn.className='green';btn.textContent='Kaydet ve Sonraki Bölüme Geç';btn.onclick=()=>saveAndNextSection(nextId);
+      bar.appendChild(btn);sec.appendChild(bar);
+    });
+  }
+
+  /* Bölgesel parça sistemine ayrı Diğer ana bölümü eklenir. */
+  if(typeof regionalDamageData!=='undefined' && !regionalDamageData['Diğer']) regionalDamageData['Diğer']={'Diğer':[]};
+  if(typeof regionalFlatGroups!=='undefined' && !regionalFlatGroups.some(x=>x.main==='Diğer'&&x.group==='Diğer')) regionalFlatGroups.push({main:'Diğer',group:'Diğer',items:[]});
+
+  function ensureOtherRows(){
+    if(typeof regionalFlatGroups==='undefined')return;
+    const g=regionalFlatGroups.findIndex(x=>x.main==='Diğer'&&x.group==='Diğer');
+    if(g<0)return;
+    if(!Array.isArray(extraRows[g]))extraRows[g]=[];
+    while(extraRows[g].length<15)extraRows[g].push({name:''});
+    if($('extraDamage_'+g))renderExtraDamage(g);
+  }
+
+  if(typeof renderDamage==='function'){
+    const baseRenderDamage=renderDamage;
+    renderDamage=function(){ensureOtherRows();baseRenderDamage();ensureOtherRows();};
+  }
+  if(typeof load==='function'){
+    const baseLoad=load;
+    load=function(d,k=''){baseLoad(d,k);ensureOtherRows();};
+  }
+  if(typeof newFile==='function'){
+    const baseNewFile=newFile;
+    newFile=function(){baseNewFile();ensureOtherRows();};
+  }
+
+  /* Rapor: 2. ve 3. metin sayfalarını birleştirir; fotoğrafları ayrı sayfada tutar. */
+  if(typeof makeReport==='function'){
+    const baseMakeReport=makeReport;
+    makeReport=function(){
+      baseMakeReport();
+      const report=$('report');if(!report)return;
+      const p2=report.querySelector('.reportPage2');
+      const p3=report.querySelector('.reportPage3');
+      if(p2&&p3&&!p3.querySelector('.reportPhotos')){
+        const b2=p2.querySelector('.reportPageBody');
+        const b3=p3.querySelector('.reportPageBody');
+        if(b2&&b3){while(b3.firstChild)b2.appendChild(b3.firstChild);p3.remove();}
+      }
+      const pages=[...report.querySelectorAll('.reportPage')];
+      pages.forEach((p,i)=>{
+        p.className=p.className.replace(/reportPage\d+/g,'').trim()+' reportPage'+(i+1);
+        const no=p.querySelector('.reportPageNo');if(no)no.textContent='Sayfa '+(i+1)+' / '+pages.length;
+      });
+    };
+  }
+
+  window.addEventListener('load',()=>{addSectionNavigationButtons();ensureOtherRows();});
+})();
 </script>

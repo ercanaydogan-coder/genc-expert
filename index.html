@@ -293,7 +293,23 @@ function reportSection(no,title,body){return `<section class="reportSection"><di
 function infoTable(rows){return `<table class="reportTable"><tbody>${rows.map(r=>`<tr><th>${esc(r[0])}</th><td>${esc(r[1]||'-')}</td><th>${esc(r[2]||'')}</th><td>${esc(r[3]||'-')}</td></tr>`).join('')}</tbody></table>`}
 function docTable(taken,future){let max=Math.max(taken.length,future.length,1);let rows='';for(let i=0;i<max;i++){let a=taken[i],g=future[i];rows+=`<tr><td>${a?esc(a.name):''}</td><td>${a?esc(a.date||''):''}</td><td>${a?esc(a.n||''):''}</td><td>${g?esc(g.name):''}</td><td>${g?esc(g.n||''):''}</td></tr>`}return `<table class="reportTable"><tr><th colspan="3">ALINAN EVRAKLAR</th><th colspan="2">GELECEK / BEKLENEN EVRAKLAR</th></tr><tr><th>Evrak</th><th>Tarih</th><th>Açıklama</th><th>Evrak</th><th>Açıklama</th></tr>${rows}</table>`}
 function partCell(rows,mode=''){return rows.length?rows.map(x=>{let detail='';if(mode==='degisim'&&x.type)detail=` <b>(${esc(x.type)})</b>`;if(mode==='onarim'&&x.osev)detail=` <b>(${esc(x.osev)} Onarım)</b>`;return `<span class="damageItem">${esc(x.name)}${detail}${x.n?`<br><small>${esc(x.n)}</small>`:''}</span>`}).join(''):'<span class="damageEmpty">Yok</span>'}
-function damageTable(degisen,onarim,soktak,boyanan,mobil){return `<table class="reportTable reportDamageTable"><tr><th>DEĞİŞEN PARÇALAR</th><th>ONARILAN PARÇALAR</th><th>SÖKÜLEN / TAKILAN</th><th>BOYANAN PARÇALAR</th><th>MOBİL ONARIM / MO</th></tr><tr><td>${partCell(degisen,'degisim')}</td><td>${partCell(onarim,'onarim')}</td><td>${partCell(soktak)}</td><td>${partCell(boyanan)}</td><td>${partCell(mobil)}</td></tr></table>`}
+function damageTable(degisen,onarim,soktak,boyanan,mobil){return `<table class="reportTable reportDamageTable"><tr><th>DEĞİŞEN PARÇALAR</th><th>ONARILAN PARÇALAR</th><th>SÖKÜLEN / TAKILAN</th><th>BOYANAN PARÇALAR</th><th>MOBİL ONARIM / MO</th></tr><tr><td>${partCell(degisen,'degisim')}</td><td>${partCell(onarim,'onarim')}</td><td>${partCell(soktak)}</td><td>${partCell(boyanan)}</td><td>${partCell(mobil)}</td></tr></table>
+<div style="margin-top:8px">
+<table class="reportTable">
+<thead><tr>
+<th>DEĞİŞEN</th><th>ONARILAN</th><th>SÖKÜLEN / TAKILAN</th><th>BOYANAN</th><th>MOBİL ONARIM</th><th>KONTROL</th>
+</tr></thead>
+<tbody><tr>
+<td id="ozetDegisen">0 Adet</td>
+<td id="ozetOnarilan">0 Adet</td>
+<td id="ozetSokTak">0 Adet</td>
+<td id="ozetBoyanan">0 Adet</td>
+<td id="ozetMobil">0 Adet</td>
+<td id="ozetKontrol">0 Adet</td>
+</tr></tbody>
+</table>
+</div>
+`}
 function paintTable(boyali,boyasiz,olculemedi){return `<table class="reportTable"><tr><th>BOYALI PARÇALAR</th><th>BOYASIZ PARÇALAR</th><th>ÖLÇÜLEMEYEN PARÇALAR</th></tr><tr><td>${boyali.length?boyali.map(x=>`${esc(x.name)}${x.m?' - '+esc(x.m)+' mikron':''}`).join('<br>'):'-'}</td><td>${boyasiz.length?boyasiz.map(x=>esc(x.name)).join('<br>'):'-'}</td><td>${olculemedi.length?olculemedi.map(x=>esc(x.name)).join('<br>'):'-'}</td></tr></table>`}
 function laborTableV73(rows,total){return `<table class="reportTable"><tr><th>İşçilik Kalemi</th><th>Tutar</th><th>Açıklama</th></tr>${rows.length?rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${fmt(money(r.amount))}</td><td>${esc(r.note||'')}</td></tr>`).join(''):'<tr><td colspan="3">İşçilik girişi yok.</td></tr>'}<tr><th>TOPLAM</th><th colspan="2">${fmt(total)}</th></tr></table>`}
 function pertAutoKanaat(k){
@@ -2249,5 +2265,63 @@ async function shareReport(){
   }
 
   window.addEventListener('load',()=>{addSectionNavigationButtons();ensureOtherRows();});
+})();
+</script>
+
+<style id="geKontrolSutunuStyle">
+/* YALNIZCA RAPOR HASAR TESPİT TABLOSU: MO ve KONTROL ayrı sütunlar */
+.reportDamageTable.geSixColDamageTable col:nth-child(1){width:22%}
+.reportDamageTable.geSixColDamageTable col:nth-child(2){width:22%}
+.reportDamageTable.geSixColDamageTable col:nth-child(3){width:16%}
+.reportDamageTable.geSixColDamageTable col:nth-child(4){width:16%}
+.reportDamageTable.geSixColDamageTable col:nth-child(5){width:12%}
+.reportDamageTable.geSixColDamageTable col:nth-child(6){width:12%}
+.reportDamageTable.geSixColDamageTable th,
+.reportDamageTable.geSixColDamageTable td{word-break:normal;overflow-wrap:anywhere}
+@media print{
+  .reportDamageTable.geSixColDamageTable th{font-size:7.7px!important;padding-left:2px!important;padding-right:2px!important}
+  .reportDamageTable.geSixColDamageTable td{font-size:8.1px!important;padding-left:2px!important;padding-right:2px!important}
+}
+</style>
+<script id="geKontrolSutunuScript">
+(function(){
+  /* Ayrı kontrol tablosu kaldırılır; kontrol parçaları ana hasar tespit tablosunda gösterilir. */
+  window.regionalControlReportSection=function(){return null;};
+
+  window.damageTable=function(degisen,onarim,soktak,boyanan,mobil){
+    let kontrol=[];
+    try{
+      const d=collect();
+      (d.groups||[]).forEach(grp=>{
+        (grp.rows||[]).concat(grp.extras||[]).forEach(r=>{
+          if(r&&r.name&&r.kontrol)kontrol.push(r);
+        });
+      });
+    }catch(e){kontrol=[];}
+
+    const servis=$('damageServisListesi')?.checked
+      ? `<p><b>${esc(SERVIS_LISTESI_METNI)}</b></p>`
+      : '';
+
+    return servis+`<table class="reportTable reportDamageTable geSixColDamageTable">
+      <colgroup><col><col><col><col><col><col></colgroup>
+      <tr>
+        <th>DEĞİŞEN PARÇALAR</th>
+        <th>ONARILAN PARÇALAR</th>
+        <th>SÖKÜLEN / TAKILAN</th>
+        <th>BOYANAN PARÇALAR</th>
+        <th>MOBİL ONARIM / MO</th>
+        <th>KONTROL</th>
+      </tr>
+      <tr>
+        <td>${partCell(degisen)}</td>
+        <td>${partCell(onarim)}</td>
+        <td>${partCell(soktak)}</td>
+        <td>${partCell(boyanan)}</td>
+        <td>${partCell(mobil)}</td>
+        <td>${partCell(kontrol)}</td>
+      </tr>
+    </table>`;
+  };
 })();
 </script>

@@ -2428,12 +2428,66 @@ window.ge84BuildArchiveText=function(){
  lines.push('');lines.push('Bu belge ekspertiz çalışması sırasında programa girilen saha tespitleri, belge incelemeleri, teknik değerlendirmeler ve eksper seçimlerinin arşiv kaydıdır. Nihai ekspertiz raporu yerine geçmez.');
  return lines.join('\n');
 };
+function ge84ArchiveFileName(){
+ const plaka=($('plaka')?.value||'').trim().replace(/\s+/g,' ');
+ const dosya=($('dosyaNo')?.value||'').trim().replace(/\s+/g,' ');
+ const base=(plaka||dosya||'Teknik İnceleme').replace(/[\\/:*?"<>|]/g,'-').trim();
+ return `${base} Teknik İnceleme.pdf`;
+}
+function ge84BuildArchiveHtml(){
+ const x=ge82Collect(),ev=ge84Evaluate(x),v={};['dosyaNo','plaka','sigortali','sirket','eksper','tarih'].forEach(id=>v[id]=$(id)?.value||'');
+ const row=(q,a,c)=>`<tr><td>${esc(q)}</td><td>${esc(a||'-')}</td><td>${c}</td></tr>`;
+ let rows='';
+ (x.fiziki||[]).forEach((r,i)=>{if(!r.val)return;let c=r.val==='Evet'?'🟢 Uyumlu':([0,1,2,6,8].includes(i)?'🔴 Kritik uyumsuzluk':'🟡 Destekleyici bulgu yok');rows+=row('Fiziki İnceleme — '+r.name,r.val,c)});
+ (x.teknik||[]).forEach((r,i)=>{if(!r.val)return;let c=i===5?(r.val==='Evet'?'🟡 Tereddüt':'🟢 Destekliyor'):(r.val==='Evet'?'🟢 Teknik uyum':'🔴 Teknik uyumsuzluk');rows+=row('Teknik Analiz — '+r.name,r.val,c)});
+ (x.son||[]).forEach(r=>{if(r.val)rows+=row('Genel Teknik Değerlendirme — '+r.name,r.val,r.val==='Evet'?'🟡 Ek kontrol önerisi':'🟢 Ek kontrol gerekmiyor')});
+ let docs='';Object.values(x.doc||{}).forEach(d=>{if(d.status)docs+=row('Belge İncelemesi — '+d.title,d.status+(d.note?' — '+d.note:''),d.status==='İncelendi'?'🟢 İncelendi':'🟡 Eksik / sınırlayıcı')});
+ const final=x.finalEksperKanaat||ev.result;
+ return `<div class="ge84ArchivePdf" style="font-family:Arial,sans-serif;color:#111827;background:#fff;width:190mm;padding:0;margin:0 auto;font-size:11px;line-height:1.35">
+ <h1 style="font-size:17px;margin:0 0 10px">GENÇ SİGORTA EKSPERLİK<br>EKSPERTİZ ÇALIŞMA VE TEKNİK İNCELEME KAYDI</h1>
+ <table style="width:100%;border-collapse:collapse;margin:8px 0;table-layout:fixed"><tr><th style="border:1px solid #777;padding:6px;background:#eee">Dosya No</th><td style="border:1px solid #777;padding:6px">${esc(v.dosyaNo)}</td><th style="border:1px solid #777;padding:6px;background:#eee">Plaka</th><td style="border:1px solid #777;padding:6px">${esc(v.plaka)}</td></tr><tr><th style="border:1px solid #777;padding:6px;background:#eee">Sigorta Şirketi</th><td style="border:1px solid #777;padding:6px">${esc(v.sirket)}</td><th style="border:1px solid #777;padding:6px;background:#eee">Sigortalı</th><td style="border:1px solid #777;padding:6px">${esc(v.sigortali)}</td></tr><tr><th style="border:1px solid #777;padding:6px;background:#eee">Eksper</th><td style="border:1px solid #777;padding:6px">${esc(v.eksper)}</td><th style="border:1px solid #777;padding:6px;background:#eee">İnceleme Tarihi</th><td style="border:1px solid #777;padding:6px">${esc(v.tarih)}</td></tr></table>
+ <h2 style="font-size:13px;border-bottom:2px solid #222;padding-bottom:4px;margin-top:14px">Çalışma Kayıtları</h2>
+ <table style="width:100%;border-collapse:collapse;margin:8px 0;table-layout:fixed"><tr><th style="border:1px solid #777;padding:6px;background:#eee;width:44%">İncelenen Husus</th><th style="border:1px solid #777;padding:6px;background:#eee;width:22%">Cevap / Durum</th><th style="border:1px solid #777;padding:6px;background:#eee;width:34%">Sistem Değerlendirmesi</th></tr>${(docs+rows).replaceAll('<td>','<td style="border:1px solid #777;padding:6px;vertical-align:top;overflow-wrap:anywhere">')}</table>
+ <h2 style="font-size:13px;border-bottom:2px solid #222;padding-bottom:4px;margin-top:14px">Genel Teknik Değerlendirme</h2>
+ <div style="font-size:16px;font-weight:bold;padding:10px;border:2px solid #444;break-inside:avoid;page-break-inside:avoid">${ev.color==='green'?'🟢':ev.color==='red'?'🔴':'🟡'} SİSTEM DEĞERLENDİRMESİ: ${resultLabel(ev.result)}</div>
+ <p>${esc(ge84BuildTechnicalText(x,ev))}</p>
+ ${ev.limits.length?'<h2 style="font-size:13px;border-bottom:2px solid #222;padding-bottom:4px;margin-top:14px">Dikkat Edilecek Hususlar</h2><p>'+ev.limits.map(z=>'• '+esc(z)).join('<br>')+'</p>':''}
+ <h2 style="font-size:13px;border-bottom:2px solid #222;padding-bottom:4px;margin-top:14px">Eksper Nihai Kanaati</h2><p><b>${esc(resultLabel(final))}</b></p><p>${esc(ge84BuildConclusion(final))}</p>
+ ${x.finalGerekce?'<p><b>Sistem değerlendirmesinden farklı kanaat gerekçesi:</b> '+esc(x.finalGerekce)+'</p>':''}${x.ilaveGorus?'<p><b>İlave Eksper Görüşü:</b><br>'+esc(x.ilaveGorus).replace(/\n/g,'<br>')+'</p>':''}
+ <div style="font-size:9px;margin-top:18px;border-top:1px solid #aaa;padding-top:6px">Bu belge ekspertiz çalışması sırasında programa girilen saha tespitleri, belge incelemeleri, teknik değerlendirmeler ve eksper seçimlerinin arşiv kaydıdır. Nihai ekspertiz raporu yerine geçmez.</div>
+ </div>`;
+}
+async function ge84CreateArchivePdfBlob(){
+ await loadHtml2PdfLibrary();
+ const holder=document.createElement('div');
+ holder.style.position='fixed';holder.style.left='-10000px';holder.style.top='0';holder.style.width='190mm';holder.style.background='#fff';
+ holder.innerHTML=ge84BuildArchiveHtml();
+ document.body.appendChild(holder);
+ try{
+  const target=holder.firstElementChild;
+  const worker=window.html2pdf().set({
+    margin:[10,10,10,10],filename:ge84ArchiveFileName(),image:{type:'jpeg',quality:0.98},
+    html2canvas:{scale:2,useCORS:true,allowTaint:true,logging:false,backgroundColor:'#ffffff',scrollX:0,scrollY:0},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait',compress:true},pagebreak:{mode:['css','legacy']}
+  }).from(target).toPdf();
+  return await worker.outputPdf('blob');
+ }finally{holder.remove();}
+}
 window.ge84ShareArchive=async function(){
- const text=ge84BuildArchiveText(); const plaka=($('plaka')?.value||'').trim(); const dosya=($('dosyaNo')?.value||'').trim(); const title=`${plaka||dosya||''} Teknik İnceleme Çalışma Kaydı`.trim();
- if(navigator.share){try{await navigator.share({title,text});return}catch(e){if(e&&e.name==='AbortError')return;}}
- try{await navigator.clipboard.writeText(text);alert('Teknik inceleme / çalışma kaydı metni panoya kopyalandı. PDF için Teknik İnceleme PDF Kaydet / Yazdır butonunu kullanabilirsiniz.')}catch(e){alert('Bu cihazda paylaşım desteklenmiyor. PDF için Teknik İnceleme PDF Kaydet / Yazdır butonunu kullanabilirsiniz.')}
+ const btn=event&&event.currentTarget?event.currentTarget:null;const old=btn?btn.textContent:'';
+ if(btn){btn.disabled=true;btn.textContent='PDF Hazırlanıyor...';}
+ try{
+  const blob=await ge84CreateArchivePdfBlob();const fileName=ge84ArchiveFileName();const file=new File([blob],fileName,{type:'application/pdf'});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+    await navigator.share({title:fileName,text:'GENÇ SİGORTA EKSPERLİK - Teknik İnceleme',files:[file]});
+  }else{downloadPdfBlob(blob,fileName);alert('Teknik İnceleme PDF dosyası cihazınıza indirildi.');}
+ }catch(e){console.error(e);if(e&&e.name==='AbortError')return;alert('Teknik İnceleme PDF oluşturulamadı: '+(e&&e.message?e.message:e));}
+ finally{if(btn){btn.disabled=false;btn.textContent=old;}}
 };
-window.ge84PrintArchive=function(){const x=ge82Collect(),ev=ge84Evaluate(x),v={};['dosyaNo','plaka','sigortali','sirket','eksper','tarih'].forEach(id=>v[id]=$ (id)?.value||'');const row=(q,a,c)=>`<tr><td>${esc(q)}</td><td>${esc(a||'-')}</td><td>${c}</td></tr>`;let rows='';(x.fiziki||[]).forEach((r,i)=>{if(!r.val)return;let c=r.val==='Evet'?'🟢 Uyumlu':([0,1,2,6,8].includes(i)?'🔴 Kritik uyumsuzluk':'🟡 Destekleyici bulgu yok');rows+=row('Fiziki İnceleme — '+r.name,r.val,c)});(x.teknik||[]).forEach((r,i)=>{if(!r.val)return;let c=i===5?(r.val==='Evet'?'🟡 Tereddüt':'🟢 Destekliyor'):(r.val==='Evet'?'🟢 Teknik uyum':'🔴 Teknik uyumsuzluk');rows+=row('Teknik Analiz — '+r.name,r.val,c)});(x.son||[]).forEach(r=>{if(r.val)rows+=row('Genel Teknik Değerlendirme — '+r.name,r.val,r.val==='Evet'?'🟡 Ek kontrol önerisi':'🟢 Ek kontrol gerekmiyor')});let docs='';Object.values(x.doc||{}).forEach(d=>{if(d.status)docs+=row('Belge İncelemesi — '+d.title,d.status+(d.note?' — '+d.note:''),d.status==='İncelendi'?'🟢 İncelendi':'🟡 Eksik / sınırlayıcı')});const final=x.finalEksperKanaat||ev.result;const html=`<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>${esc(((v.plaka||'').trim()+' TİNK').trim())}</title><style>@page{size:A4;margin:12mm}body{font-family:Arial,sans-serif;color:#111;font-size:11px}h1{font-size:17px}h2{font-size:13px;border-bottom:2px solid #222;padding-bottom:4px}table{width:100%;border-collapse:collapse;margin:8px 0}th,td{border:1px solid #777;padding:6px;vertical-align:top}th{background:#eee}.result{font-size:16px;font-weight:bold;padding:10px;border:2px solid #444}.note{font-size:9px;margin-top:18px;border-top:1px solid #aaa;padding-top:6px}</style></head><body><h1>GENÇ SİGORTA EKSPERLİK<br>EKSPERTİZ ÇALIŞMA VE TEKNİK İNCELEME KAYDI</h1><table><tr><th>Dosya No</th><td>${esc(v.dosyaNo)}</td><th>Plaka</th><td>${esc(v.plaka)}</td></tr><tr><th>Sigorta Şirketi</th><td>${esc(v.sirket)}</td><th>Sigortalı</th><td>${esc(v.sigortali)}</td></tr><tr><th>Eksper</th><td>${esc(v.eksper)}</td><th>İnceleme Tarihi</th><td>${esc(v.tarih)}</td></tr></table><h2>Çalışma Kayıtları</h2><table><tr><th>İncelenen Husus</th><th>Cevap / Durum</th><th>Sistem Değerlendirmesi</th></tr>${docs+rows}</table><h2>Genel Teknik Değerlendirme</h2><div class="result">${ev.color==='green'?'🟢':ev.color==='red'?'🔴':'🟡'} SİSTEM DEĞERLENDİRMESİ: ${resultLabel(ev.result)}</div><p>${esc(ge84BuildTechnicalText(x,ev))}</p>${ev.limits.length?'<h2>Dikkat Edilecek Hususlar</h2><p>'+ev.limits.map(z=>'• '+esc(z)).join('<br>')+'</p>':''}<h2>Eksper Nihai Kanaati</h2><p><b>${esc(resultLabel(final))}</b></p><p>${esc(ge84BuildConclusion(final))}</p>${x.finalGerekce?'<p><b>Sistem değerlendirmesinden farklı kanaat gerekçesi:</b> '+esc(x.finalGerekce)+'</p>':''}${x.ilaveGorus?'<p><b>İlave Eksper Görüşü:</b><br>'+esc(x.ilaveGorus).replace(/\n/g,'<br>')+'</p>':''}<div class="note">Bu belge ekspertiz çalışması sırasında programa girilen saha tespitleri, belge incelemeleri, teknik değerlendirmeler ve eksper seçimlerinin arşiv kaydıdır. Nihai ekspertiz raporu yerine geçmez.</div><script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`;const w=window.open('','_blank');if(!w){alert('PDF penceresi açılamadı. Tarayıcı açılır pencere iznini kontrol ediniz.');return}w.document.open();w.document.write(html);w.document.close();};
+window.ge84PrintArchive=async function(){
+ try{const blob=await ge84CreateArchivePdfBlob();downloadPdfBlob(blob,ge84ArchiveFileName());}
+ catch(e){console.error(e);alert('Teknik İnceleme PDF oluşturulamadı: '+(e&&e.message?e.message:e));}
+};
 setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLayout(saved)}catch(e){console.error(e)}},1500);
 })();
 </script>

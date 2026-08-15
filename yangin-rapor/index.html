@@ -472,7 +472,13 @@
 <button class="tab" data-target="p7">9. Sonuç ve Eksper Notları</button>
 <button class="tab" data-target="p8">10. Rapor</button>
 </div>
-<div class="toolbar"><button class="btn primary" onclick="saveForm()">Kaydet</button><button class="btn light" onclick="v8PrintReport()">Yazdır / PDF</button><button class="btn danger" onclick="clearForm()">Açık Formu Temizle</button></div>
+<div class="toolbar">
+<button class="btn primary" onclick="saveForm()">Kaydet</button>
+<button class="btn light" type="button" onclick="exportCurrentFile()">Dosyayı Dışa Aktar</button>
+<label class="btn light" style="display:inline-flex;align-items:center;cursor:pointer">Dosya İçe Aktar<input id="yanginImportFile" type="file" accept="application/json,.json" style="display:none" onchange="importYanginFile(event)"/></label>
+<button class="btn light" onclick="v8PrintReport()">Yazdır / PDF</button>
+<button class="btn danger" onclick="clearForm()">Açık Formu Temizle</button>
+</div>
 <form id="mainForm">
 <section class="panel active" id="p0">
 <div class="home-menu" id="homeMenu">
@@ -1350,9 +1356,95 @@ function renderSavedFiles(){
     <div data-label="İrtibat">${esc([data.irtibatKisi,data.irtibatTelefonu].filter(Boolean).join(' / ')||'—')}</div>
     <div class="saved-file-actions">
       <button class="btn primary" type="button" onclick='openSavedFile(${JSON.stringify(key)})'>AÇ</button>
+      <button class="btn light" type="button" onclick='exportSavedFile(${JSON.stringify(key)})'>DIŞA AKTAR</button>
       <button class="btn danger" type="button" onclick='deleteSavedFile(${JSON.stringify(key)})'>SİL</button>
     </div>
   </div>`).join('');
+}
+
+
+function safeTransferFileName(v){
+  return String(v||'DOSYA').trim()
+    .replace(/[\\/:*?"<>|]+/g,'-')
+    .replace(/\s+/g,' ')
+    .slice(0,100) || 'DOSYA';
+}
+
+function downloadYanginTransfer(data){
+  const payload={
+    __gencTransferType:'GENC_SIGORTA_YANGIN_RAPOR',
+    __transferVersion:1,
+    __exportedAt:new Date().toISOString(),
+    record:data
+  };
+  const fileNo=safeTransferFileName(data?.dosyaNo||'DOSYA');
+  const insured=safeTransferFileName(data?.sigortali||'');
+  const name='YANGIN_'+fileNo+(insured?'_'+insured:'')+'.json';
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=name;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function exportSavedFile(key){
+  const raw=localStorage.getItem(key);
+  if(!raw){alert('Dışa aktarılacak kayıt bulunamadı.');return}
+  try{downloadYanginTransfer(JSON.parse(raw))}
+  catch(e){alert('Dosya dışa aktarılamadı: '+e.message)}
+}
+
+function exportCurrentFile(){
+  try{
+    let data;
+    if(currentFileKey&&localStorage.getItem(currentFileKey)){
+      data=JSON.parse(localStorage.getItem(currentFileKey));
+    }else{
+      data=formToObject();
+      const dosyaNo=normalizeFileNo(data.dosyaNo);
+      if(!dosyaNo){alert('Dosyayı dışa aktarmak için Hasar Dosya Numarasını yazınız.');return}
+      data.dosyaNo=dosyaNo;
+      data.__updatedAt=new Date().toISOString();
+      data.__owner=currentUser||'';
+      data.__recordVersion=2;
+    }
+    downloadYanginTransfer(data);
+  }catch(e){alert('Dosya dışa aktarılamadı: '+e.message)}
+}
+
+function importYanginFile(event){
+  const input=event?.target;
+  const file=input?.files?.[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(){
+    try{
+      const parsed=JSON.parse(String(reader.result||''));
+      const data=(parsed&&parsed.__gencTransferType==='GENC_SIGORTA_YANGIN_RAPOR')?parsed.record:parsed;
+      if(!data||typeof data!=='object'||Array.isArray(data))throw new Error('Geçerli Yangın Rapor dosyası değil.');
+      const dosyaNo=normalizeFileNo(data.dosyaNo);
+      if(!dosyaNo)throw new Error('Aktarılan dosyada Hasar Dosya Numarası bulunamadı.');
+      data.dosyaNo=dosyaNo;
+      data.__updatedAt=new Date().toISOString();
+      if(currentUser)data.__owner=currentUser;
+      data.__recordVersion=2;
+      const key=makeFileKey(dosyaNo);
+      if(localStorage.getItem(key)&&!confirm(dosyaNo+' numaralı kayıt zaten var. Üzerine yazılsın mı?'))return;
+      localStorage.setItem(key,JSON.stringify(data));
+      applySavedData(data);
+      currentFileKey=key;
+      renderSavedFiles();
+      showTab(0);
+      alert('Dosya içe aktarıldı ve kayıtlı dosyalara eklendi.');
+    }catch(e){
+      alert('Dosya içe aktarılamadı: '+e.message);
+    }finally{
+      if(input)input.value='';
+    }
+  };
+  reader.onerror=function(){alert('Dosya okunamadı.');if(input)input.value='';};
+  reader.readAsText(file,'utf-8');
 }
 
 function showMyFiles(){

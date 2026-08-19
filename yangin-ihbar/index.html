@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Genç Sigorta Eksperlik - Saha Hasar Tespit ve İnceleme Föyü</title>
+<title>Genç Sigorta Eksperlik - Saha Hasar Tespit ve İnceleme Föyü V30</title>
 <style>
 :root{--navy:#0b2f67;--line:#8aa0bd;--light:#eef4fb;--text:#162235}
 *{box-sizing:border-box} body{margin:0;background:#dfe6ee;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
@@ -246,11 +246,694 @@ background-position:0 0;
 @media(max-width:900px){body{background:#fff}.page{width:100%;min-height:auto;margin:0 auto 10px;box-shadow:none;padding:10px}.toolbar{position:sticky}.toolbar .title{width:100%;margin-right:0}.grid,.g2,.g22,.g3,.page1-top,.page1-types,.page1-notes{grid-template-columns:1fr}.page{overflow:visible}.page3{min-height:1100px}.file-band{grid-template-columns:1fr}.file-card{border-right:0;border-bottom:1px solid var(--line)}.file-card:last-child{border-bottom:0}.field{grid-template-columns:38mm 4mm 1fr}.signature-area{grid-template-columns:1fr}.signature-box{border-right:0;border-bottom:1px solid var(--line)}.signature-box:last-child{border-bottom:0}}
 @media print{.draw-tools,.signature-tools,.record-panel{display:none!important}.draw-canvas,.signature-canvas{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}.autosave-badge{display:none!important}}
 
+
+/* V14 - YALNIZCA TALEP EDILEN TABLET/PDF/HESAP/IMZA DUZELTMELERI */
+.numeric-display{text-align:right;font-variant-numeric:tabular-nums}
+.damage-table input[readonly]{font-weight:800;color:var(--navy);background:#f4f7fb}
+.statement-signature{align-items:center!important}
+.statement-signature .sigortalı-signature-wrap{width:52mm;height:16mm;border:1px dashed #7f8ea2;background:#fff;position:relative;touch-action:none}
+.statement-signature .sigortalı-signature-wrap canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.statement-signature .sigortalı-signature-tools button{border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:4px;padding:1mm 2mm;font-size:8px;font-weight:700}
+.print-value{color:#000!important;-webkit-text-fill-color:#000!important;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff!important}
+.field>.print-value{width:100%;min-height:5mm;border-bottom:1px solid #7f8ea2;padding:1mm;font-size:inherit;line-height:1.25}
+.file-card>.print-value{width:100%;min-height:4mm;border-bottom:1px solid #a7b3c2;padding:.35mm 0 .2mm;font-size:9.5px;font-weight:800}
+td>.print-value{width:100%;min-height:4mm;padding:0;font:inherit;line-height:1.15}
+.print-textarea{width:100%;min-height:inherit;border:0!important;background:#fff!important;line-height:5.7mm!important;padding:0 1mm!important}
+.print-control-placeholder{display:none!important}
+.print-canvas-image{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;background:#fff!important;opacity:1!important;visibility:visible!important}
+.signature-canvas-wrap>.print-canvas-image,.sigortalı-signature-wrap>.print-canvas-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:3!important}
+.draw-wrap>.print-canvas-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:3!important}
+@media print{
+  textarea,input[type="text"],input:not([type]),input[type="number"],input[type="date"],select{background:#fff!important;box-shadow:none!important;text-shadow:none!important}
+  .statement-signature .sigortalı-signature-wrap{width:47mm!important;height:12mm!important}
+  .statement-signature .sigortalı-signature-tools{display:none!important}
+  .print-value{background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important}
+  .print-textarea{background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important}
+  [name="adres"]{background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;box-shadow:none!important}
+}
+
+
+
+/* V15 - SON SAHA TESTI DUZELTMELERI */
+.unit-input{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2mm;min-width:0}
+.unit-input input{width:100%;min-width:0}
+.unit-suffix{font-size:10px;font-weight:700;color:#34445a;white-space:nowrap}
+.hand-line .hand-name-input{width:100%;height:6mm;border:0;border-bottom:1px solid #7f8ea2;background:transparent;font:inherit;padding:.5mm 1mm;min-width:0}
+.damage-table input[name$="_4"]{text-align:left!important}
+@media print{
+  .page4>.grid.g22{grid-template-columns:1fr 1fr!important;gap:1.8mm!important;display:grid!important}
+  .page4>.grid.g22>.section{min-width:0!important;margin-bottom:1.4mm!important}
+  .hand-line .hand-name-input{display:none!important}
+  .hand-line .hand-name-input + .print-value{display:block!important;width:100%!important;height:4mm!important;border-bottom:1px solid #7f8ea2!important;padding:0!important}
+  .unit-input{grid-template-columns:1fr auto!important;gap:1mm!important}
+  .unit-suffix{font-size:8px!important}
+}
+
+
+/* V17 - PDF/A4 YERLESIM DUZELTMESI: MOBIL GRID KURALLARINI BASKIDA IPTAL ET */
+@media print{
+  /* Her sayfada başlık altındaki şirket / sigortalı / dosya no tek satır */
+  .file-band{
+    display:grid!important;
+    grid-template-columns:1.2fr 1.2fr .75fr!important;
+    border-top:1px solid var(--navy)!important;
+  }
+  .file-card{
+    border-right:1px solid var(--line)!important;
+    border-bottom:0!important;
+    min-width:0!important;
+  }
+  .file-card:last-child{border-right:0!important}
+
+  /* Tablet görünümündeki tek-sütun düzen baskıya taşınmasın */
+  .grid.g2{grid-template-columns:2fr 1fr!important}
+  .grid.g22{grid-template-columns:1fr 1fr!important}
+  .grid.g3{grid-template-columns:1fr 1fr 1fr!important}
+  .page1-top,.page1-types,.page1-notes{grid-template-columns:1fr 1fr!important}
+
+  /* 4. sayfa imzalar yan yana ve sayfa içinde kalsın */
+  .signature-area{
+    display:grid!important;
+    grid-template-columns:1fr 1.25fr!important;
+    min-height:27mm!important;
+  }
+  .signature-box{
+    border-right:1px solid var(--line)!important;
+    border-bottom:0!important;
+    min-width:0!important;
+    padding:1.25mm 1.7mm!important;
+  }
+  .signature-box:last-child{border-right:0!important}
+  .signature-canvas-wrap{height:8.5mm!important}
+  .signature-title{margin-bottom:1mm!important}
+  .hand-line{margin:1mm 0!important}
+
+  /* 1. sayfa sonundaki sigortalı beyanı ve imza kesin görünür kalsın */
+  .page1 .statement{height:35mm!important}
+  .page1 .compact-notes{height:9mm!important}
+  .page1 .statement-signature{margin-top:.4mm!important}
+  .page1 .statement-signature .sigortalı-signature-wrap{height:9mm!important}
+
+  /* 2. sayfada alt bölümlere güvenli boşluk bırak */
+  .page:nth-of-type(2) .opinion{height:26mm!important}
+  .page:nth-of-type(2) textarea[name="sayfa2Not"]{height:13mm!important}
+
+  /* 4. sayfada iki kontrol listesi yan yana, imza bölümü kesilmeden */
+  .page4>.grid.g22{display:grid!important;grid-template-columns:1fr 1fr!important;gap:1.5mm!important}
+  .page4 .notes{height:29mm!important}
+  .page4 .work-actions{height:16mm!important}
+  .page4 .declaration{padding:1.2mm 1.7mm!important;margin-bottom:1mm!important;font-size:7.1px!important;line-height:1.18!important}
+  .page4 .inspection-date{margin:.3mm 0 1mm!important;font-size:8px!important}
+  .page4 .signature-section{margin-top:auto!important;margin-bottom:0!important}
+}
+
+
+
+/* V18 - SADECE 1. SAYFA SIGORTALI BEYAN IMZASI VE 2. SAYFA ALT BOSLUK DUZELTMESI */
+@media print{
+  /* 1. sayfa: sigortalı beyan imzasını A4 içinde kesin görünür tut */
+  .page1 .statement{height:24mm!important;min-height:24mm!important}
+  .page1 .statement-signature{
+    display:grid!important;
+    grid-template-columns:auto 48mm!important;
+    align-items:center!important;
+    justify-content:end!important;
+    column-gap:2mm!important;
+    min-height:11mm!important;
+    margin-top:.6mm!important;
+    overflow:visible!important;
+  }
+  .page1 .statement-signature>span:first-child{font-size:7.8px!important;white-space:nowrap!important}
+  .page1 .statement-signature .sigortalı-signature-wrap{
+    display:block!important;
+    width:48mm!important;
+    height:10mm!important;
+    min-height:10mm!important;
+    position:relative!important;
+    overflow:hidden!important;
+    flex:none!important;
+  }
+  .page1 .statement-signature .sigortalı-signature-wrap .print-canvas-image{
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    z-index:5!important;
+  }
+  .page1 .statement-signature .sigortalı-signature-tools{display:none!important}
+
+  /* 2. sayfa: son not alanı ve sayfa numarası birbirine girmesin */
+  .page:nth-of-type(2) textarea[name="sayfa2Not"]{height:10mm!important;min-height:10mm!important}
+  .page:nth-of-type(2) .section:last-of-type{margin-bottom:4mm!important}
+  .page:nth-of-type(2) .footer{bottom:2.5mm!important}
+}
+
+
+/* V19 - SADECE SIGORTALI IMZA PDF/PAYLASIM VE HASAR SATIRI SABITLEME */
+.page3 .damage-table tbody tr{
+  height:6.8mm!important;
+  min-height:6.8mm!important;
+  max-height:6.8mm!important;
+}
+.page3 .damage-table tbody td{
+  height:6.8mm!important;
+  min-height:6.8mm!important;
+  max-height:6.8mm!important;
+  overflow:hidden!important;
+  vertical-align:middle!important;
+  padding:.25mm!important;
+}
+.page3 .damage-table tbody td input{
+  display:block!important;
+  width:100%!important;
+  height:5.6mm!important;
+  min-height:5.6mm!important;
+  max-height:5.6mm!important;
+  line-height:5.6mm!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  padding:0 .35mm!important;
+}
+.page3 .damage-table tbody td .print-value{
+  display:block!important;
+  width:100%!important;
+  height:5.6mm!important;
+  min-height:5.6mm!important;
+  max-height:5.6mm!important;
+  line-height:5.6mm!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  padding:0 .35mm!important;
+}
+@media print{
+  .page3 .damage-table tbody tr,
+  .page3 .damage-table tbody td{height:6.2mm!important;min-height:6.2mm!important;max-height:6.2mm!important}
+  .page3 .damage-table tbody td input,
+  .page3 .damage-table tbody td .print-value{height:5.1mm!important;min-height:5.1mm!important;max-height:5.1mm!important;line-height:5.1mm!important}
+  .page1 .sigortalı-signature-wrap{position:relative!important;overflow:hidden!important}
+  .page1 .sigortalı-signature-wrap .print-canvas-image[data-canvas-id="insuredSignature"]{
+    display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+    object-fit:contain!important;object-position:center!important;z-index:20!important;opacity:1!important;visibility:visible!important;
+  }
+}
+
+
+/* V20 - SADECE PDF SIGORTALI IMZASI + HASAR TABLOSU TEK KAYIT / SABIT SATIR */
+@media print{
+  /* Hasar tablosu baskida 17 esit satir; tablo yuksekligi satirlari esnetmesin */
+  .page3 .damage-table{height:auto!important;table-layout:fixed!important}
+  .page3 .damage-table thead tr{height:6.2mm!important}
+  .page3 .damage-table tbody tr{height:6.2mm!important;min-height:6.2mm!important;max-height:6.2mm!important}
+  .page3 .damage-table tbody td{height:6.2mm!important;min-height:6.2mm!important;max-height:6.2mm!important;padding:.25mm!important;overflow:hidden!important;vertical-align:middle!important}
+  .page3 .damage-table tbody td input{display:block!important;width:100%!important;height:5.2mm!important;min-height:5.2mm!important;max-height:5.2mm!important;line-height:5.2mm!important;padding:0 .3mm!important;overflow:hidden!important;white-space:nowrap!important;text-overflow:ellipsis!important;background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important}
+  .page3 .damage-table input::placeholder{color:transparent!important;opacity:0!important}
+  /* V20'de hasar tablosu icin print-value kopyasi uretilmez */
+  .page3 .damage-table .print-value{display:none!important}
+
+  /* Sigortali beyani baskida sabit; ekran yuksekligi PDF'ye tasinmaz */
+  .page1 textarea[name="sigortaliBeyani"] + .print-textarea,
+  .page1 .print-textarea[data-print-name="sigortaliBeyani"]{
+    height:24mm!important;min-height:24mm!important;max-height:24mm!important;overflow:hidden!important;
+  }
+  .page1 .statement-signature{display:grid!important;grid-template-columns:auto 48mm!important;align-items:center!important;justify-content:end!important;column-gap:2mm!important;height:11mm!important;min-height:11mm!important;max-height:11mm!important;margin-top:.5mm!important;overflow:visible!important}
+  .page1 .statement-signature .sigortalı-signature-wrap{display:block!important;width:48mm!important;height:10mm!important;min-height:10mm!important;max-height:10mm!important;position:relative!important;overflow:hidden!important}
+}
+
+
+/* V21 - YENI SAHA KONTROLLERI VE UCUNCU SAHIS AKISI */
+.question-box{border:1px solid var(--line);background:#f8fafc;padding:2mm;margin:1.5mm 0;font-size:10px}
+.question-line{display:flex;align-items:center;gap:5mm;flex-wrap:wrap;font-weight:700}
+.question-line .qtext{margin-right:auto}
+.question-line label{display:flex;align-items:center;gap:1mm;font-weight:600}
+.answer-detail{display:none;margin-top:1.5mm}
+.answer-detail.show{display:block}
+.answer-detail textarea{height:14mm}
+.third-party-section,.third-party-page,.third-party-signature{display:none}
+.third-party-section.show,.third-party-page.show,.third-party-signature.show{display:block}
+.third-party-page.page{display:none}
+.third-party-page.page.show{display:flex;flex-direction:column}
+.third-party-page .damage-section,.third-party-page .sketch-section{flex:1 1 0;min-height:0;margin-bottom:2mm}
+.third-party-page .damage-section,.third-party-page .sketch-section{display:flex;flex-direction:column}
+.third-party-page .damage-section .body,.third-party-page .sketch-section .body{flex:1;display:flex;padding:1.2mm}
+.third-party-page .damage-table{height:100%;table-layout:fixed}
+.third-party-page .damage-table th{height:8mm}.third-party-page .damage-table td{height:7mm!important;padding:.45mm;overflow:hidden!important}
+.third-party-page .sketch-grid{width:100%;height:100%;min-height:0}
+.signature-area.three-signatures{grid-template-columns:1fr 1fr 1fr}
+@media print{
+ .question-box{padding:1mm 1.5mm!important;margin:.7mm 0!important;font-size:8px!important}
+ .answer-detail textarea{height:8mm!important;min-height:8mm!important}
+ .third-party-page.page.show{display:flex!important}
+ .third-party-page .damage-section,.third-party-page .sketch-section{flex:1 1 0!important;min-height:0!important}
+ .third-party-page .damage-section .body,.third-party-page .sketch-section .body{padding:.8mm!important}
+ .third-party-page .damage-table th{height:6.2mm!important;padding:.35mm!important}
+ .third-party-page .damage-table td{height:6.8mm!important;min-height:6.8mm!important;max-height:6.8mm!important;padding:.25mm!important;overflow:hidden!important}
+ .third-party-page .damage-table input{font-size:6.8px!important}
+ .third-party-page .sketch-grid{height:100%!important;min-height:0!important;background-size:4mm 4mm!important}
+ .page4 .work-actions{height:11mm!important}
+ .page4 .question-box{margin:.5mm 0!important}
+ .page4 .answer-detail textarea{height:6.5mm!important;min-height:6.5mm!important}
+ .signature-area.three-signatures{grid-template-columns:1fr 1fr 1fr!important}
+ .signature-area.three-signatures .signature-title{font-size:7.3px!important}
+}
+
+/* V22 - TOPLAM HASAR, 3A RAKAM DUZENI, IMZA VE DINAMIK SAYFA NO */
+.damage-table tfoot .damage-total-row td{
+  height:7mm!important;background:#eef3f8;font-weight:800;color:var(--navy);
+  border-top:1.6px solid var(--navy);vertical-align:middle
+}
+.damage-table tfoot .damage-total-row td:first-child{text-align:right;padding-right:2mm}
+.damage-table tfoot .damage-total-row td:nth-child(2){text-align:right}
+.damage-total-row output{display:block;width:100%;text-align:right;font-weight:900;color:#111;white-space:nowrap}
+.third-damage-table td:nth-child(4) input,
+.third-damage-table td:nth-child(6) input,
+.third-damage-table td:nth-child(7) input,
+.damage-table td:nth-child(4) input,
+.damage-table td:nth-child(6) input,
+.damage-table td:nth-child(7) input{text-align:right!important;font-variant-numeric:tabular-nums}
+@media print{
+  .damage-table input::placeholder{color:transparent!important;-webkit-text-fill-color:transparent!important;opacity:0!important}
+  .damage-table tfoot .damage-total-row td{height:6mm!important;min-height:6mm!important;max-height:6mm!important;padding:.35mm!important;font-size:7.2px!important}
+  .page4 .notes{height:24mm!important;min-height:24mm!important}
+  .page4 .work-actions{height:9mm!important;min-height:9mm!important}
+  .page4 .question-box{padding:.7mm 1.2mm!important;margin:.4mm 0!important}
+  .page4 .answer-detail textarea{height:5.5mm!important;min-height:5.5mm!important;max-height:5.5mm!important}
+  .page4 .signature-section{margin-top:1mm!important;margin-bottom:0!important}
+  .page4 .declaration{padding:.8mm 1.2mm!important;margin-bottom:.5mm!important;font-size:6.8px!important;line-height:1.12!important}
+  .page4 .inspection-date{margin:.2mm 0 .5mm!important;font-size:7.5px!important}
+  .page4 .signature-area{min-height:28mm!important}
+  .page4 .signature-box{padding:1mm 1.5mm!important}
+  .page4 .signature-title{margin-bottom:.7mm!important;font-size:7.5px!important}
+  .page4 .hand-line{grid-template-columns:20mm 1fr!important;margin:.6mm 0!important;font-size:7.3px!important}
+  .page4 .signature-canvas-wrap{height:10mm!important}
+  .page4 .signature-tools{display:none!important}
+}
+
+
+/* V23 - YALNIZCA TOPLAMLAR / 3. SAHIS RAKAM DUZENI / PDF IMZA GUVENCESI */
+/* Toplam satirlarini ekran gorunumunde de tablonun icinde görünür tut. */
+.page3 .damage-table,
+.third-party-page .damage-table{height:auto!important;table-layout:fixed!important}
+.page3 .damage-table tbody tr,
+.third-party-page .damage-table tbody tr{height:5.9mm!important;min-height:5.9mm!important;max-height:5.9mm!important}
+.page3 .damage-table tbody td,
+.third-party-page .damage-table tbody td{height:5.9mm!important;min-height:5.9mm!important;max-height:5.9mm!important;padding:.22mm!important;vertical-align:middle!important;overflow:hidden!important}
+.page3 .damage-table tbody td input,
+.third-party-page .damage-table tbody td input{height:5mm!important;min-height:5mm!important;max-height:5mm!important;line-height:5mm!important;padding:0 .3mm!important}
+.damage-table tfoot{display:table-footer-group!important}
+.damage-table tfoot .damage-total-row{display:table-row!important}
+.damage-table tfoot .damage-total-row td{display:table-cell!important}
+.damage-total-row output{min-height:4mm;line-height:4mm}
+/* Rakamsal kolonlar ayni hizada. */
+.damage-table td:nth-child(4) input,
+.damage-table td:nth-child(6) input,
+.damage-table td:nth-child(7) input,
+.third-damage-table td:nth-child(4) input,
+.third-damage-table td:nth-child(6) input,
+.third-damage-table td:nth-child(7) input{text-align:right!important;font-variant-numeric:tabular-nums!important}
+@media print{
+  /* Toplam satiri PDF'de kroki alaninin altina itilmesin / kesilmesin. */
+  .page3 .damage-section,.third-party-page .damage-section{flex:0 0 52%!important}
+  .page3 .sketch-section,.third-party-page .sketch-section{flex:1 1 48%!important}
+  .page3 .damage-table tbody tr,
+  .third-party-page .damage-table tbody tr,
+  .page3 .damage-table tbody td,
+  .third-party-page .damage-table tbody td{height:5.55mm!important;min-height:5.55mm!important;max-height:5.55mm!important}
+  .page3 .damage-table tbody td input,
+  .third-party-page .damage-table tbody td input{height:4.75mm!important;min-height:4.75mm!important;max-height:4.75mm!important;line-height:4.75mm!important}
+  .damage-table tfoot .damage-total-row td{height:5.7mm!important;min-height:5.7mm!important;max-height:5.7mm!important}
+  /* 4. sayfada imza bolumune kesin yer ayir. */
+  .page4 .notes{height:20mm!important;min-height:20mm!important;max-height:20mm!important}
+  .page4 .work-actions{height:7mm!important;min-height:7mm!important;max-height:7mm!important}
+  .page4 .signature-section{margin-top:.5mm!important;flex:0 0 auto!important;overflow:visible!important}
+  .page4 .signature-area{min-height:27mm!important;height:27mm!important;overflow:visible!important}
+  .page4 .signature-box{min-height:27mm!important;overflow:visible!important}
+  .page4 .signature-canvas-wrap{height:9mm!important;min-height:9mm!important;overflow:hidden!important}
+  .page4 .signature-canvas-wrap .print-canvas-image{display:block!important;opacity:1!important;visibility:visible!important;z-index:20!important}
+  .page4 .hand-line .print-value{display:block!important;color:#000!important;-webkit-text-fill-color:#000!important}
+}
+
+
+
+/* V24 - EKRAN TOPLAMLARI, MIKTAR/BIRIM BASLIKLARI, PDF BEYAN VE IMZA GARANTISI */
+.screen-total-bar{
+  display:flex;align-items:center;justify-content:flex-end;gap:5mm;
+  border:1.4px solid var(--navy);border-top:0;background:#eef3f8;
+  padding:1.6mm 3mm;margin:-2mm 0 2mm;font-size:10px;font-weight:900;color:var(--navy)
+}
+.screen-total-bar output{min-width:38mm;text-align:right;color:#111;font-size:11px;font-weight:900;font-variant-numeric:tabular-nums}
+@media print{
+  .screen-total-bar{display:none!important}
+
+  /* 1. sayfa: Sigortali beyani ve imzasi sayfa icinde kesin kalsin. */
+  .page1 .section{margin-bottom:1.1mm!important}
+  .page1 .body{padding:1.35mm!important}
+  .page1 textarea[name="sigortaliBeyani"],
+  .page1 .print-textarea[data-print-name="sigortaliBeyani"]{
+    display:block!important;height:14mm!important;min-height:14mm!important;max-height:14mm!important;
+    overflow:hidden!important;font-size:7.6px!important;line-height:4.3mm!important;background-size:100% 4.3mm!important
+  }
+  .page1 .statement-signature{
+    display:grid!important;grid-template-columns:auto 43mm!important;height:8.5mm!important;min-height:8.5mm!important;max-height:8.5mm!important;
+    margin-top:.2mm!important;column-gap:1.5mm!important
+  }
+  .page1 .statement-signature .sigortalı-signature-wrap{width:43mm!important;height:8mm!important;min-height:8mm!important;max-height:8mm!important}
+  .page1 .statement-signature>span:first-child{font-size:7.2px!important}
+
+  /* 4. sayfa: preparePrintView tarafindan uretilen metin kopyalari ekran yuksekligini tasimasin. */
+  .page4 .print-textarea[data-print-name="eksperNot"]{
+    height:16mm!important;min-height:16mm!important;max-height:16mm!important;overflow:hidden!important;
+    font-size:7px!important;line-height:4mm!important
+  }
+  .page4 .print-textarea[data-print-name="yapilacakIslemler"]{
+    height:7mm!important;min-height:7mm!important;max-height:7mm!important;overflow:hidden!important;
+    font-size:7px!important;line-height:3.5mm!important
+  }
+  .page4 .print-textarea[data-print-name="mutabakatAciklama"],
+  .page4 .print-textarea[data-print-name="rucuAciklama"]{
+    height:5mm!important;min-height:5mm!important;max-height:5mm!important;overflow:hidden!important;
+    font-size:6.8px!important;line-height:3mm!important
+  }
+  .page4 .section{margin-bottom:.65mm!important}
+  .page4 .section-title{padding:.9mm 1.6mm!important;font-size:7.8px!important}
+  .page4 .body{padding:1mm!important}
+  .page4>.grid.g22{gap:1mm!important}
+  .page4>.grid.g22 .body{padding:.7mm 1mm!important}
+  .page4>.grid.g22 .checks{font-size:6.7px!important;line-height:1!important;gap:.25mm!important}
+  .page4>.grid.g22 .checks label{gap:1mm!important;min-height:3.4mm!important}
+  .page4>.grid.g22 .checks input{width:2.7mm!important;height:2.7mm!important}
+  .page4 .question-box{padding:.45mm .9mm!important;margin:.25mm 0!important;font-size:6.7px!important}
+  .page4 .answer-detail{margin-top:.3mm!important}
+  .page4 .signature-section{display:block!important;margin-top:.5mm!important;overflow:visible!important;flex:0 0 auto!important}
+  .page4 .declaration{font-size:6.2px!important;line-height:1.05!important;padding:.55mm .9mm!important;margin-bottom:.3mm!important}
+  .page4 .inspection-date{font-size:6.8px!important;margin:.1mm 0 .3mm!important}
+  .page4 .signature-area{display:grid!important;min-height:23mm!important;height:23mm!important;overflow:visible!important}
+  .page4 .signature-box{min-height:23mm!important;height:23mm!important;padding:.6mm 1mm!important;overflow:visible!important}
+  .page4 .signature-title{font-size:6.7px!important;margin-bottom:.25mm!important;line-height:1.05!important}
+  .page4 .signature-title span{font-size:5.8px!important}
+  .page4 .hand-line{grid-template-columns:17mm 1fr!important;margin:.25mm 0!important;font-size:6.3px!important}
+  .page4 .hand-line .print-value{height:3mm!important;min-height:3mm!important;padding:0!important;line-height:3mm!important}
+  .page4 .signature-canvas-wrap{height:7.5mm!important;min-height:7.5mm!important;max-height:7.5mm!important}
+  .page4 .signature-box>div[style*="font-size:9px"]{font-size:6.2px!important}
+}
+
+/* V25 - SADECE FOY EKRANI: TEK TOPLAM SATIRI VE BOS BIRIM HUCRELERI */
+.damage-table tfoot{display:table-footer-group!important}
+.damage-table tfoot .damage-total-row{display:table-row!important}
+.damage-table tfoot .damage-total-row td{display:table-cell!important}
+.damage-table td:nth-child(5) input::placeholder{color:transparent!important;opacity:0!important}
+
 </style>
+<style id="v26-layout-fixes">
+.policy-inline-extra{border-top:1px solid #aab7c6;margin-top:2mm;padding-top:1.5mm;font-size:10px}.policy-extra-title{font-weight:800;color:var(--navy);margin-bottom:1mm}.policy-extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:2mm}.policy-extra-grid>div{display:flex;align-items:center;gap:1.5mm;flex-wrap:wrap}.policy-extra-grid b{width:100%}.mini-inline-input{width:16mm!important;border:0!important;border-bottom:1px solid #7f8ea2!important;padding:.4mm!important}.page1-type-stack{display:flex;flex-direction:column;gap:0}.page1-type-stack .section{flex:1}.screen-total-band{display:flex;justify-content:flex-end;align-items:center;gap:8mm;border:1px solid #9aabc0;border-top:0;background:#edf3fa;padding:2mm 3mm;font-size:11px;font-weight:900;color:var(--navy)}.screen-total-band output{min-width:35mm;text-align:right;color:#111}.page4 .work-actions{height:auto!important;min-height:30mm!important;overflow:visible!important}.page4 .section:has(.work-actions) .body{overflow:visible!important}
+@media screen{.damage-table tfoot{display:none!important}.page1 .opinion{height:32mm}.page1 .statement{height:38mm}}
+@media print{.screen-total-band{display:none!important}.policy-inline-extra{font-size:7.5px!important;margin-top:.8mm!important;padding-top:.6mm!important}.policy-extra-title{margin-bottom:.4mm!important}.policy-extra-grid{gap:1mm!important}.mini-inline-input{width:11mm!important}.page1 .statement{height:22mm!important}.page1 .opinion{height:18mm!important}.page4 .notes{height:24mm!important}.page4 .work-actions{height:25mm!important;min-height:25mm!important;max-height:25mm!important}.page4 .print-textarea[data-print-name="yapilacakIslemler"]{height:25mm!important;min-height:25mm!important;max-height:25mm!important;overflow:hidden!important}.page:nth-of-type(2) .answer-detail textarea,.page:nth-of-type(2) .print-textarea[data-print-name="benzerHasarAciklama"],.page:nth-of-type(2) .print-textarea[data-print-name="eskiHasarAciklama"]{height:7mm!important;min-height:7mm!important;max-height:7mm!important}.page1 .print-textarea[data-print-name="sigortaliBeyani"]{height:22mm!important;min-height:22mm!important;max-height:22mm!important}.page1 .print-textarea[data-print-name="eksperKanaat"]{height:18mm!important;min-height:18mm!important;max-height:18mm!important}}
+</style>
+<style id="v27-clean-fixes">
+/* V27 - TEMIZ YERLESIM / EKRAN TOPLAMLARI / KAYIT GUVENCESI */
+.page1-middle{display:grid;grid-template-columns:1.28fr .72fr;gap:3mm;align-items:stretch}
+.page1-middle>.section{margin-bottom:3mm}
+.page1-middle .page1-type-stack{display:flex;flex-direction:column;gap:3mm;min-width:0}
+.page1-middle .page1-type-stack>.section{margin:0;flex:1}
+.page1-middle .checks{grid-template-columns:1fr 1fr}
+.page1>.section{width:100%}
+.page1 textarea[name="sigortaliBeyani"]{height:34mm}
+.page1 textarea[name="eksperKanaat"]{height:29mm}
+.page2-building-row{display:grid;grid-template-columns:1fr!important}
+.page2-building-row>.section{width:100%}
+/* Ekranda gerçek tfoot toplam satırı; harici toplam bandı yok. */
+@media screen{
+  .page3 .damage-section .body,.third-party-page .damage-section .body{display:block!important}
+  .page3 .damage-table,.third-party-page .damage-table{width:100%!important;height:auto!important;table-layout:fixed!important}
+  .damage-table tfoot{display:table-footer-group!important}
+  .damage-table tfoot .damage-total-row{display:table-row!important}
+  .damage-table tfoot .damage-total-row td{display:table-cell!important;height:7mm!important;min-height:7mm!important;background:#eef3f8!important;border-top:1.6px solid var(--navy)!important;font-weight:900!important}
+  .damage-table tfoot .damage-total-row td:first-child{text-align:right!important}
+  .damage-total-row output{display:block!important;text-align:right!important;color:#111!important;font-weight:900!important}
+}
+@media(max-width:900px){.page1-middle{grid-template-columns:1fr}.page1-middle .page1-type-stack{gap:10px}}
+@media print{
+  .page1-middle{display:grid!important;grid-template-columns:1.28fr .72fr!important;gap:1.5mm!important;align-items:start!important}
+  .page1-middle>.section{margin-bottom:1mm!important}
+  .page1-middle .page1-type-stack{display:flex!important;flex-direction:column!important;gap:1mm!important}
+  .page1-middle .page1-type-stack>.section{margin:0!important}
+  .page1-middle .page1-type-stack .body{padding:.8mm 1.2mm!important}
+  .page1-middle .page1-type-stack .checks{font-size:7.2px!important;gap:.5mm 2mm!important}
+  .page1-middle .page1-type-stack .checks input{width:2.8mm!important;height:2.8mm!important}
+  .page1-middle .add-row-btn{padding:.5mm 1.2mm!important;font-size:6.6px!important;margin-top:.5mm!important}
+  .page1>.section{margin-bottom:.8mm!important}
+  .page1 textarea[name="sigortaliBeyani"],.page1 .print-textarea[data-print-name="sigortaliBeyani"]{height:18mm!important;min-height:18mm!important;max-height:18mm!important;overflow:hidden!important}
+  .page1 textarea[name="eksperKanaat"],.page1 .print-textarea[data-print-name="eksperKanaat"]{height:13mm!important;min-height:13mm!important;max-height:13mm!important;overflow:hidden!important}
+  .page1 .statement-signature{height:8.5mm!important;min-height:8.5mm!important;max-height:8.5mm!important}
+  .page2-building-row{display:grid!important;grid-template-columns:1fr!important}
+  .page:nth-of-type(2) .answer-detail.show{display:block!important}
+  .page:nth-of-type(2) .answer-detail.show textarea,.page:nth-of-type(2) .answer-detail.show .print-textarea{display:block!important;height:8mm!important;min-height:8mm!important;max-height:8mm!important}
+}
+</style>
+<style id="v28-targeted-fixes">
+/* V28 — yalnızca ekran toplamları ve PDF metin görünürlüğü */
+.v28-screen-total{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10mm;
+  width:100%;
+  box-sizing:border-box;
+  border:1.4px solid var(--navy);
+  border-top:0;
+  background:#eef3f8;
+  padding:1.8mm 3mm;
+  color:var(--navy);
+  font-size:10.5px;
+  font-weight:900;
+}
+.v28-screen-total output{
+  min-width:38mm;
+  text-align:right;
+  color:#111;
+  font-size:11px;
+  font-weight:900;
+  white-space:nowrap;
+}
+@media screen{
+  /* Programda toplamı ayrı yatay satırda göster; PDF tfoot'u ekranda kullanma. */
+  .page3 .damage-table tfoot,
+  .third-party-page .damage-table tfoot{display:none!important}
+  .v28-screen-total{display:flex!important}
+}
+@media print{
+  .v28-screen-total{display:none!important}
+
+  /* preparePrintView ile kopyası oluşturulan alanın aslı kesinlikle ikinci kez basılmasın. */
+  [data-print-hidden="1"]{display:none!important}
+
+  /* Eksper ilk teknik kanaati: V27'deki 13 mm sınırını kaldır ve metnin tamamına yer aç. */
+  .page1 textarea[name="eksperKanaat"],
+  .page1 .print-textarea[data-print-name="eksperKanaat"]{
+    height:26mm!important;
+    min-height:26mm!important;
+    max-height:26mm!important;
+    overflow:hidden!important;
+    font-size:7.2px!important;
+    line-height:4.1mm!important;
+    white-space:pre-wrap!important;
+  }
+
+  /* Benzer/Eski hasar açıklamalarında yalnız baskı kopyası görünür. */
+  .page:nth-of-type(2) .print-textarea[data-print-name="benzerHasarAciklama"],
+  .page:nth-of-type(2) .print-textarea[data-print-name="eskiHasarAciklama"]{
+    display:block!important;
+  }
+}
+</style>
+
+
+<style id="v29-screen-total-fix">
+/* V29 — SADECE PROGRAM EKRANINDA 3 ve 3A TOPLAM SATIRLARINI KESİN GÖSTER */
+@media screen{
+  .page3 .damage-section,
+  .third-party-page .damage-section{
+    flex:none!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:visible!important;
+  }
+
+  .page3 .damage-section .body,
+  .third-party-page .damage-section .body{
+    display:block!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    padding:1.2mm!important;
+  }
+
+  .page3 .damage-table,
+  .third-party-page .damage-table{
+    display:table!important;
+    width:100%!important;
+    height:auto!important;
+    table-layout:fixed!important;
+  }
+
+  .page3 .damage-table tbody tr,
+  .third-party-page .damage-table tbody tr{
+    height:6.8mm!important;
+  }
+
+  /* Ekranda tfoot yerine ayrı toplam bandını kullan */
+  .page3 .damage-table tfoot,
+  .third-party-page .damage-table tfoot{
+    display:none!important;
+  }
+
+  .page3 .v28-screen-total,
+  .third-party-page .v28-screen-total{
+    display:flex!important;
+    position:static!important;
+    float:none!important;
+    clear:both!important;
+    width:100%!important;
+    height:9mm!important;
+    min-height:9mm!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:8mm!important;
+    border:1.4px solid var(--navy)!important;
+    border-top:0!important;
+    background:#eef3f8!important;
+    padding:1.5mm 3mm!important;
+    overflow:visible!important;
+    visibility:visible!important;
+    opacity:1!important;
+    color:var(--navy)!important;
+    font-size:10.5px!important;
+    font-weight:900!important;
+  }
+
+  .page3 .v28-screen-total output,
+  .third-party-page .v28-screen-total output{
+    display:block!important;
+    min-width:38mm!important;
+    text-align:right!important;
+    color:#111!important;
+    font-size:11px!important;
+    font-weight:900!important;
+    white-space:nowrap!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+
+  /* Toplamdan sonra kroki normal akışta başlasın */
+  .page3 .sketch-section,
+  .third-party-page .sketch-section{
+    flex:none!important;
+    min-height:105mm!important;
+    height:auto!important;
+    margin-top:2mm!important;
+  }
+}
+</style>
+
+
+<style id="v30-field-and-print-fixes">
+/* V30 — saha testi: ek alanlar, dinamik hasar satırları ve iPad/Safari PDF güvenliği */
+.simple-dynamic-item{grid-template-columns:5mm 1fr 7mm}
+.damage-add-btn{display:block;margin:1.5mm 0 0 auto}
+@media screen{
+  .dynamic-damage-row td{height:6.8mm!important;min-height:6.8mm!important;max-height:6.8mm!important}
+}
+@media print{
+  /* Tarayıcının A4 yuvarlaması nedeniyle oluşan boş ara sayfaları önle. */
+  .page{height:auto!important;min-height:286mm!important;overflow:visible!important;page-break-after:always!important;break-after:page!important}
+  .page:last-child{page-break-after:auto!important;break-after:auto!important}
+  .damage-add-btn,.add-row-btn,.remove-row-btn{display:none!important}
+
+  /* Uzayan hasar tabloları yeni sayfaya devam edebilsin; toplam satırı tablonun sonunda kalsın. */
+  .page3 .damage-section,.third-party-page .damage-section{display:block!important;flex:none!important;break-inside:auto!important;page-break-inside:auto!important;overflow:visible!important}
+  .page3 .damage-section .body,.third-party-page .damage-section .body{display:block!important;overflow:visible!important}
+  .page3 .damage-table,.third-party-page .damage-table{height:auto!important;break-inside:auto!important;page-break-inside:auto!important}
+  .damage-table thead{display:table-header-group!important}.damage-table tfoot{display:table-footer-group!important}
+  .damage-table tr{break-inside:avoid!important;page-break-inside:avoid!important}
+  .page3 .sketch-section,.third-party-page .sketch-section{min-height:100mm!important;height:100mm!important;break-inside:avoid!important;page-break-inside:avoid!important;margin-top:2mm!important}
+
+  /* Eksper notları artık sabit yükseklikte kesilmez. */
+  .page4 .notes,.page4 .print-textarea[data-print-name="eksperNot"]{height:auto!important;min-height:20mm!important;max-height:none!important;overflow:visible!important;white-space:pre-wrap!important;line-height:4mm!important}
+  .page4{display:block!important;min-height:286mm!important}
+  .page4 .signature-section{break-inside:avoid!important;page-break-inside:avoid!important;margin-top:2mm!important}
+  .page4 .signature-area{break-inside:avoid!important;page-break-inside:avoid!important}
+  .page4 .print-textarea[data-print-name="surekliKullanimAciklama"]{height:auto!important;min-height:5mm!important;max-height:none!important;overflow:visible!important}
+}
+</style>
+
+<style id="v31-damage-choice">
+/* V31 — Hasar tablosu İşlem ve Birim alanları seçimli */
+.damage-table .damage-choice{
+  width:100%;
+  height:5mm;
+  min-height:5mm;
+  border:0;
+  background:transparent;
+  font:inherit;
+  color:inherit;
+  padding:0 .3mm;
+  outline:none;
+}
+@media print{
+  .damage-table .damage-choice{
+    height:4.75mm!important;
+    min-height:4.75mm!important;
+    max-height:4.75mm!important;
+    font-size:6.8px!important;
+    line-height:4.75mm!important;
+    padding:0!important;
+    background:#fff!important;
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+  }
+}
+</style>
+
+
+<style id="section-flow-ui">
+@media screen{
+  .section-flow{position:sticky;top:58px;z-index:19;background:#f5f8fc;border:1px solid #a9b8ca;border-radius:8px;margin:10px auto;padding:8px 10px;max-width:210mm;display:flex;gap:6px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px #0001}
+  .section-flow button{border:1px solid #8aa0bd;background:#fff;color:var(--navy);border-radius:6px;padding:7px 10px;font-weight:800;cursor:pointer}
+  .section-flow button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .section-flow .flow-spacer{flex:1}
+  .section-flow .next-btn{background:#1f6f4a;color:#fff;border-color:#1f6f4a}
+  .section-flow .prev-btn{background:#eef3f8}
+  form>.page{display:none!important}
+  form>.page.flow-active{display:block!important}
+  form>.third-party-page.flow-active.show{display:flex!important}
+}
+@media print{.section-flow{display:none!important}form>.page{display:block!important}.third-party-page.page{display:none!important}.third-party-page.page.show{display:flex!important}}
+</style>
+
 </head>
 <body>
-<div class="toolbar"><div class="title">Genç Sigorta Eksperlik — Saha Hasar Tespit ve İnceleme Föyü <span class="autosave-badge" id="autosaveBadge">Hazır</span></div><button class="primary" type="button" onclick="newFile()">Yeni Dosya</button><button class="success" type="button" onclick="saveCurrentRecord()">Dosyayı Kaydet</button><button class="secondary" type="button" onclick="openRecordPanel()">Kayıtlı Dosyalar</button><button class="secondary" type="button" onclick="exportCurrentRecord()">Dışa Aktar</button><label class="secondary" style="border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer">İçe Aktar<input class="hidden-file" id="importFile" type="file" accept="application/json,.json"/></label><button class="primary" type="button" onclick="shareForm()">Paylaş</button><button class="primary" type="button" onclick="printPdf()">Yazdır / PDF</button><button class="danger" type="button" onclick="clearForm()">Temizle</button></div>
-<div class="record-panel" id="recordPanel"><div class="record-card"><div class="record-head"><h2>Kayıtlı Dosyalar</h2><button type="button" onclick="closeRecordPanel()">Kapat</button></div><div class="record-search"><input id="recordSearch" placeholder="Dosya no, sigortalı veya şirket ara"/></div><div class="record-list" id="recordList"></div></div></div>
+<div class="toolbar"><div class="title">Genç Sigorta Eksperlik — Saha Hasar Tespit ve İnceleme Föyü <span class="autosave-badge" id="autosaveBadge">Hazır</span></div><button class="primary" onclick="newFile()" type="button">Yeni Dosya</button><button class="success" onclick="saveCurrentRecord()" type="button">Dosyayı Kaydet</button><button class="secondary" onclick="openRecordPanel()" type="button">Kayıtlı Dosyalar</button><button class="secondary" onclick="exportCurrentRecord()" type="button">Dışa Aktar</button><label class="secondary" style="border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer">İçe Aktar<input accept="application/json,.json" class="hidden-file" id="importFile" type="file"/></label><button class="primary" onclick="shareForm()" type="button">Paylaş</button><button class="primary" onclick="printPdf()" type="button">Yazdır / PDF</button><button class="danger" onclick="clearForm()" type="button">Temizle</button></div>
+<div class="record-panel" id="recordPanel"><div class="record-card"><div class="record-head"><h2>Kayıtlı Dosyalar</h2><button onclick="closeRecordPanel()" type="button">Kapat</button></div><div class="record-search"><input id="recordSearch" placeholder="Dosya no, sigortalı veya şirket ara"/></div><div class="record-list" id="recordList"></div></div></div>
+
+<div class="section-flow" id="sectionFlow">
+  <button type="button" data-flow="0">1. Dosya – Poliçe</button>
+  <button type="button" data-flow="1">2. Riziko – Teknik İnceleme</button>
+  <button type="button" data-flow="2">3. Hasar Tespiti</button>
+  <button type="button" data-flow="3" id="thirdFlowButton">3A. Üçüncü Şahıs</button>
+  <button type="button" data-flow="4">4. Notlar – Evrak – Kontrol</button>
+  <span class="flow-spacer"></span>
+  <button type="button" class="prev-btn" id="flowPrev">← Önceki Bölüm</button>
+  <button type="button" class="next-btn" id="flowNext">Kaydet ve Sonraki Bölüme Geç →</button>
+</div>
+
 <form id="form">
 <section class="page page1"><div class="corporate-header">
 <div class="brand-block">
@@ -273,7 +956,7 @@ background-position:0 0;
 <div class="field"><label>Sigorta Ettiren IBAN</label><span>:</span><input maxlength="26" name="ettirenIban" style="letter-spacing:.5px"/></div>
 <div class="field"><label>Riziko Adresi</label><span>:</span><textarea name="adres" rows="2" style="height:14mm"></textarea></div>
 <div class="field"><label>İl</label><span>:</span><input name="il"/></div>
-<div class="field"><label>İlçe</label><span>:</span><input name="ilce"/></div>
+<div class="field"><label>İlçe</label><span>:</span><input name="ilce"/></div><div class="question-box"><div class="question-line"><span class="qtext">Ekspertiz yeri poliçe adresi ile aynı mı?</span><label><input name="ekspertizAdresAyni" type="radio" value="Evet"/>Evet</label><label><input name="ekspertizAdresAyni" type="radio" value="Hayır"/>Hayır</label></div><div class="answer-detail" id="ekspertizAdresAciklamaAlan"><textarea class="lined-textarea" name="ekspertizAdresAciklama" placeholder="Ekspertiz yapılan adres / açıklama"></textarea></div></div>
 <div class="field"><label>İrtibat Kişisi</label><span>:</span><input name="irtibat"/></div>
 <div class="field"><label>Telefon</label><span>:</span><input name="telefon"/></div>
 </div></div>
@@ -286,27 +969,12 @@ background-position:0 0;
 <div class="field"><label>Hasar Tarihi</label><span>:</span><input id="hasarTarihi" name="hasarTarihi" type="date"/></div>
 <div class="field"><label>İhbar Tarihi</label><span>:</span><input name="ihbar" type="date"/></div>
 <div class="field"><label>Ekspertiz Tarihi</label><span>:</span><input name="ekspertiz" type="date"/></div>
-<div class="field policy-day-field"><label>Poliçenin Kaçıncı Günü</label><span>:</span><output id="gun">— Gün</output></div>
+<div class="field policy-day-field"><label>Poliçenin Kaçıncı Günü</label><span>:</span><output id="gun">— Gün</output></div><div class="policy-inline-extra"><div class="policy-extra-title">ENFLASYON KORUMA VE MUAFİYET</div><div class="policy-extra-grid"><div><b>Enflasyon Koruma</b><label><input name="enfVar" type="radio" value="Evet"/> Evet</label><label><input name="enfVar" type="radio" value="Hayır"/> Hayır</label><span>Oran</span><input class="mini-inline-input" inputmode="decimal" name="enfOran"/><span>%</span></div><div><b>Muafiyet</b><label><input name="muafiyetVar" type="radio" value="Evet"/> Evet</label><label><input name="muafiyetVar" type="radio" value="Hayır"/> Hayır</label><span>Oran</span><input class="mini-inline-input" inputmode="decimal" name="muafiyetOran"/><span>%</span><span>Tutar</span><input class="mini-inline-input" inputmode="decimal" name="muafiyetTutar"/><span>TL</span></div></div></div>
 </div></div>
-</div>
-<div class="grid g2"><div class="section"><div class="section-title">C. SİGORTA BEDELLERİ</div><div class="body"><table class="money inflation-money"><thead><tr><th>TEMİNAT</th><th>SİGORTA BEDELİ (TL)</th><th>ENFLASYONLU SİGORTA BEDELİ (TL)</th></tr></thead><tbody><tr><td>Bina</td><td><input inputmode="decimal" name="bedel_0"/></td><td><input class="inflation-result" name="enfBedel_0" readonly=""/></td></tr><tr><td>Eşya</td><td><input inputmode="decimal" name="bedel_1"/></td><td><input class="inflation-result" name="enfBedel_1" readonly=""/></td></tr><tr><td>Dekorasyon</td><td><input inputmode="decimal" name="bedel_2"/></td><td><input class="inflation-result" name="enfBedel_2" readonly=""/></td></tr><tr><td>Emtia</td><td><input inputmode="decimal" name="bedel_3"/></td><td><input class="inflation-result" name="enfBedel_3" readonly=""/></td></tr><tr><td>Makine Kırılması</td><td><input inputmode="decimal" name="bedel_4"/></td><td><input class="inflation-result" name="enfBedel_4" readonly=""/></td></tr><tr><td>Elektronik Cihaz</td><td><input inputmode="decimal" name="bedel_5"/></td><td><input class="inflation-result" name="enfBedel_5" readonly=""/></td></tr><tr><td>Cam Kırılması</td><td><input inputmode="decimal" name="bedel_6"/></td><td><input class="inflation-result" name="enfBedel_6" readonly=""/></td></tr><tr><td>Mali Mesuliyet</td><td><input inputmode="decimal" name="bedel_7"/></td><td><input class="inflation-result" name="enfBedel_7" readonly=""/></td></tr><tr><td>Diğer</td><td><input inputmode="decimal" name="bedel_8"/></td><td><input class="inflation-result" name="enfBedel_8" readonly=""/></td></tr></tbody><tbody id="ekTeminatGovdesi"></tbody></table><button class="add-row-btn" onclick="addCoverageRow()" type="button">+ Teminat Ekle</button><div class="mini-note" style="margin-top:2mm">Enflasyonlu bedel, poliçe başlangıç tarihi ile hasar tarihi arasındaki çalışan gün sayısı ve yıllık enflasyon koruma oranı esas alınarak otomatik hesaplanır.</div></div></div>
-<div class="section"><div class="section-title">D. ENFLASYON KORUMA VE MUAFİYET</div><div class="body">
-<div style="font-size:11px;font-weight:700;margin-bottom:2mm">Enflasyon Koruma Var mı?</div><div class="checks"><label><input name="enfVar" type="radio" value="Evet"/>Evet</label><label><input name="enfVar" type="radio" value="Hayır"/>Hayır</label></div>
-<div class="percent-row"><label>Enflasyon Koruma Oranı</label><input aria-label="Enflasyon koruma oranı" inputmode="decimal" name="enfOran"/><span>%</span></div>
-<div style="border-top:1px solid #aab7c6;margin:5mm 0 3mm"></div>
-<div style="font-size:11px;font-weight:700;margin-bottom:2mm">Muafiyet Var mı?</div><div class="checks"><label><input name="muafiyetVar" type="radio" value="Evet"/>Evet</label><label><input name="muafiyetVar" type="radio" value="Hayır"/>Hayır</label></div>
-<div class="deductible-row"><label>Muafiyet Oranı</label><input inputmode="decimal" name="muafiyetOran"/><span>%</span></div>
-<div class="deductible-row"><label>Muafiyet Tutarı</label><input inputmode="decimal" name="muafiyetTutar"/><span>TL</span></div>
-</div></div></div>
-<div class="grid page1-types">
+</div><div class="page1-middle"><div class="section"><div class="section-title">C. SİGORTA BEDELLERİ</div><div class="body"><table class="money inflation-money"><thead><tr><th>TEMİNAT</th><th>SİGORTA BEDELİ (TL)</th><th>ENFLASYONLU SİGORTA BEDELİ (TL)</th></tr></thead><tbody><tr><td>Bina</td><td><input inputmode="decimal" name="bedel_0"/></td><td><input class="inflation-result" name="enfBedel_0" readonly=""/></td></tr><tr><td>Eşya</td><td><input inputmode="decimal" name="bedel_1"/></td><td><input class="inflation-result" name="enfBedel_1" readonly=""/></td></tr><tr><td>Dekorasyon</td><td><input inputmode="decimal" name="bedel_2"/></td><td><input class="inflation-result" name="enfBedel_2" readonly=""/></td></tr><tr><td>Emtia</td><td><input inputmode="decimal" name="bedel_3"/></td><td><input class="inflation-result" name="enfBedel_3" readonly=""/></td></tr><tr><td>Makine Kırılması</td><td><input inputmode="decimal" name="bedel_4"/></td><td><input class="inflation-result" name="enfBedel_4" readonly=""/></td></tr><tr><td>Elektronik Cihaz</td><td><input inputmode="decimal" name="bedel_5"/></td><td><input class="inflation-result" name="enfBedel_5" readonly=""/></td></tr><tr><td>Cam Kırılması</td><td><input inputmode="decimal" name="bedel_6"/></td><td><input class="inflation-result" name="enfBedel_6" readonly=""/></td></tr><tr><td>Mali Mesuliyet</td><td><input inputmode="decimal" name="bedel_7"/></td><td><input class="inflation-result" name="enfBedel_7" readonly=""/></td></tr><tr><td>Diğer</td><td><input inputmode="decimal" name="bedel_8"/></td><td><input class="inflation-result" name="enfBedel_8" readonly=""/></td></tr></tbody><tbody id="ekTeminatGovdesi"></tbody></table><button class="add-row-btn" onclick="addCoverageRow()" type="button">+ Teminat Ekle</button><div class="mini-note" style="margin-top:2mm">Enflasyonlu bedel, poliçe başlangıç tarihi ile hasar tarihi arasındaki çalışan gün sayısı ve yıllık enflasyon koruma oranı esas alınarak otomatik hesaplanır.</div></div></div><div class="page1-type-stack">
 <div class="section"><div class="section-title">RİZİKO TÜRÜ</div><div class="body"><div class="checks"><label><input name="riziko_konut" type="checkbox"/>Konut</label><label><input name="riziko_isyeri" type="checkbox"/>İşyeri</label><label><input name="riziko_fabrika" type="checkbox"/>Fabrika</label><label><input name="riziko_depo" type="checkbox"/>Depo</label><label><input name="riziko_buro" type="checkbox"/>Büro</label><label><input name="riziko_diger" type="checkbox"/>Diğer</label></div><div class="dynamic-list" id="ekRizikoListesi"></div><button class="add-row-btn" onclick="addCustomOption('riziko')" type="button">+ Riziko Türü Ekle</button></div></div>
 <div class="section"><div class="section-title">HASAR TÜRÜ</div><div class="body"><div class="checks"><label><input name="hasar_dahili" type="checkbox"/>Dahili Su</label><label><input name="hasar_yangin" type="checkbox"/>Yangın</label><label><input name="hasar_sel" type="checkbox"/>Sel / Su Baskını</label><label><input name="hasar_firtina" type="checkbox"/>Fırtına</label><label><input name="hasar_elektrik" type="checkbox"/>Elektrik</label><label><input name="hasar_cam" type="checkbox"/>Cam Kırılması</label><label><input name="hasar_diger" type="checkbox"/>Diğer</label></div><div class="dynamic-list" id="ekHasarListesi"></div><button class="add-row-btn" onclick="addCustomOption('hasar')" type="button">+ Hasar Türü / Olay Ekle</button></div></div>
-</div>
-<div class="grid page1-notes">
-<div class="section"><div class="section-title">KISA NOTLAR</div><div class="body"><textarea class="compact-notes lined-textarea" name="kisaNot1"></textarea></div></div>
-<div class="section"><div class="section-title">KISA NOTLAR</div><div class="body"><textarea class="compact-notes lined-textarea" name="kisaNot2"></textarea></div></div>
-</div>
-<div class="section"><div class="section-title">E. SİGORTALI BEYANI — Olayın Sigortalı Tarafından Anlatımı</div><div class="body"><textarea class="statement lined-textarea" name="sigortaliBeyani"></textarea><div class="statement-signature"><span>Sigortalı İmza :</span><span class="signature-line"></span></div></div></div><div class="footer">Sayfa 1 / 4</div>
+</div></div><div class="section"><div class="section-title">E. SİGORTALI BEYANI — Olayın Sigortalı Tarafından Anlatımı</div><div class="body"><textarea class="statement lined-textarea" name="sigortaliBeyani"></textarea><div class="statement-signature"><span>Sigortalı İmza :</span><span class="sigortalı-signature-wrap"><canvas aria-label="Sigortalı imza alanı" class="signature-canvas" id="insuredSignature"></canvas></span><span class="sigortalı-signature-tools"><button onclick="clearSignature('insuredSignature')" type="button">İmzayı Temizle</button></span></div></div></div><div class="section"><div class="section-title">G. EKSPERİN OLAYIN OLUŞUMUNA İLİŞKİN İLK TEKNİK KANAATİ</div><div class="body"><textarea class="opinion lined-textarea" name="eksperKanaat"></textarea></div></div><div class="footer">Sayfa 1 / 4</div>
 </section>
 <section class="page"><div class="corporate-header">
 <div class="brand-block">
@@ -319,14 +987,17 @@ background-position:0 0;
 <div class="file-card"><div class="file-label">Dosya No</div><div class="header-value header-sync" data-sync="dosyaNo"></div></div>
 </div>
 </div><div class="page-section-head"><div class="num">2</div><h1>RİZİKO BİLGİLERİ VE TEKNİK İNCELEME</h1></div>
-<div class="grid g2"><div class="section"><div class="section-title">A. BİNA / RİZİKO BİLGİLERİ</div><div class="body"><div class="field"><label>Yapı Türü</label><span>:</span><input name="yapiTuru"/></div><div class="field"><label>Yapım Yılı</label><span>:</span><input name="yapimYili"/></div><div class="field"><label>Toplam Kat Sayısı</label><span>:</span><input name="katSayisi"/></div><div class="field"><label>Sigortalının Bulunduğu Kat</label><span>:</span><input name="sigKat"/></div><div class="field"><label>Daire / İşyeri No</label><span>:</span><input name="daireNo"/></div><div class="field"><label>Yaklaşık Alan</label><span>:</span><input name="m2" placeholder="m²"/></div><div class="field"><label>Çatı Tipi</label><span>:</span><input name="cati"/></div><div class="checks"><label><input name="bodrum" type="checkbox"/>Bodrum Kat</label><label><input name="asansor" type="checkbox"/>Asansör</label><label><input name="ortakTesisat" type="checkbox"/>Ortak Tesisat</label><label><input name="site" type="checkbox"/>Site İçinde</label></div></div></div>
-<div class="section"><div class="section-title">KISA NOTLAR</div><div class="body"><textarea class="smallnotes lined-textarea" name="binaNot"></textarea></div></div></div>
+<div class="grid page2-building-row"><div class="section"><div class="section-title">A. BİNA / RİZİKO BİLGİLERİ</div><div class="body"><div class="field"><label>Yapı Türü</label><span>:</span><input name="yapiTuru"/></div><div class="field"><label>Yapım Yılı</label><span>:</span><input name="yapimYili"/></div><div class="field"><label>Toplam Kat Sayısı</label><span>:</span><input name="katSayisi"/></div><div class="field"><label>Sigortalının Bulunduğu Kat</label><span>:</span><input name="sigKat"/></div><div class="field"><label>Daire / İşyeri No</label><span>:</span><input name="daireNo"/></div><div class="field"><label>Yaklaşık Alan</label><span>:</span><div class="unit-input"><input inputmode="decimal" name="m2"/><span class="unit-suffix">m²</span></div></div><div class="checks"><label><input name="guvenlik" type="radio" value="Evet"/>Güvenlik Var — Evet</label><label><input name="guvenlik" type="radio" value="Hayır"/>Güvenlik Var — Hayır</label><label><input name="asansor" type="checkbox"/>Asansör</label><label><input name="site" type="checkbox"/>Site İçinde</label></div><button class="add-row-btn" onclick="addBuildingInfo()" type="button">+ Bilgi Ekle</button><div class="dynamic-list" id="ekBinaListesi"></div></div></div>
+</div>
 <div class="grid g22"><div class="section"><div class="section-title">B. HASAR KAYNAĞI</div><div class="body"><div class="checks"><label><input name="kaynak_0" type="checkbox"/>Temiz Su Tesisatı</label><label><input name="kaynak_1" type="checkbox"/>Pis Su Tesisatı</label><label><input name="kaynak_2" type="checkbox"/>Kalorifer</label><label><input name="kaynak_3" type="checkbox"/>Çatı</label><label><input name="kaynak_4" type="checkbox"/>Teras</label><label><input name="kaynak_5" type="checkbox"/>İzolasyon Eksikliği</label><label><input name="kaynak_6" type="checkbox"/>Yağmur Suyu</label><label><input name="kaynak_7" type="checkbox"/>Ortak Tesisat</label><label><input name="kaynak_8" type="checkbox"/>Üst Kat</label><label><input name="kaynak_9" type="checkbox"/>Yan Daire</label><label><input name="kaynak_10" type="checkbox"/>Bina Dışı Kaynak</label><label><input name="kaynak_11" type="checkbox"/>Elektrik</label><label><input name="kaynak_12" type="checkbox"/>Yangın</label><label><input name="kaynak_13" type="checkbox"/>Don / Buzlanma</label><label><input id="kaynakDiger" name="kaynak_14" type="checkbox"/>Diğer</label></div><div class="conditional" id="kaynakDigerAlan"><div class="field" style="grid-template-columns:36mm 4mm 1fr"><label>Diğer Kaynak Açıklaması</label><span>:</span><input name="kaynakDigerAciklama"/></div></div></div></div>
-<div class="section"><div class="section-title">C. HASARIN SEBEBİ</div><div class="body checks"><label><input name="sebep_0" type="checkbox"/>Tesisat Arızası</label><label><input name="sebep_1" type="checkbox"/>Kullanıcı Hatası</label><label><input name="sebep_2" type="checkbox"/>Eskime / Yıpranma</label><label><input name="sebep_3" type="checkbox"/>Donma</label><label><input name="sebep_4" type="checkbox"/>Korozyon</label><label><input name="sebep_5" type="checkbox"/>İmalat Hatası</label><label><input name="sebep_6" type="checkbox"/>Dış Etken</label><label><input name="sebep_7" type="checkbox"/>Diğer</label></div></div></div>
-<div class="grid g3"><div class="section"><div class="section-title">D. HASAR ANİ Mİ?</div><div class="body checks"><label><input name="ani" type="radio" value="Evet"/>Evet</label><label><input name="ani" type="radio" value="Hayır"/>Hayır</label><label><input name="ani" type="radio" value="Bilinmiyor"/>Bilinmiyor</label></div></div><div class="section"><div class="section-title">E. POLİÇE KAPSAMINDA MI?</div><div class="body checks"><label><input name="kapsam" type="radio" value="Evet"/>Evet</label><label><input name="kapsam" type="radio" value="Hayır"/>Hayır</label><label><input name="kapsam" type="radio" value="İncelenecek"/>İncelenecek</label></div></div><div class="section"><div class="section-title">F. ÜÇÜNCÜ ŞAHIS HASARI</div><div class="body checks"><label><input name="ucuncu" type="radio" value="Yok"/>Yok</label><label><input name="ucuncu" type="radio" value="Var"/>Var</label></div></div></div>
-<div class="section"><div class="section-title">ÜÇÜNCÜ ŞAHIS BİLGİLERİ</div><div class="body"><div class="grid third-party-balanced"><div><div class="field"><label>Adı Soyadı</label><span>:</span><input name="ucAd"/></div><div class="field"><label>Telefon</label><span>:</span><input name="ucTel"/></div><div class="field"><label>Bulunduğu Kat</label><span>:</span><input name="ucKat"/></div></div><div><div class="field"><label>T.C. Kimlik No</label><span>:</span><input inputmode="numeric" maxlength="11" name="ucTc"/></div><div class="field"><label>Daire / İşyeri No</label><span>:</span><input name="ucDaireNo"/></div><div class="field"><label>Hasarlı Bölüm</label><span>:</span><input name="ucBolum"/></div></div></div><div class="field iban-field" style="margin-top:3mm"><label>IBAN No</label><span>:</span><input maxlength="26" name="ucIban" style="letter-spacing:.6px"/></div></div></div>
-<div class="section"><div class="section-title">G. EKSPERİN OLAYIN OLUŞUMUNA İLİŞKİN İLK TEKNİK KANAATİ</div><div class="body"><textarea class="opinion lined-textarea" name="eksperKanaat"></textarea></div></div>
-<div class="section"><div class="section-title">BU SAYFAYA İLİŞKİN DİKKAT EDİLMESİ GEREKEN HUSUSLAR</div><div class="body"><textarea class="lined-textarea" name="sayfa2Not" style="height:20mm"></textarea></div></div><div class="footer">Sayfa 2 / 4</div></section>
+<div class="section"><div class="section-title">C. HASARIN SEBEBİ</div><div class="body"><div class="checks"><label><input name="sebep_0" type="checkbox"/>Tesisat Arızası</label><label><input name="sebep_1" type="checkbox"/>Kullanıcı Hatası</label><label><input name="sebep_2" type="checkbox"/>Eskime / Yıpranma</label><label><input name="sebep_3" type="checkbox"/>Donma</label><label><input name="sebep_4" type="checkbox"/>Korozyon</label><label><input name="sebep_5" type="checkbox"/>İmalat Hatası</label><label><input name="sebep_6" type="checkbox"/>Dış Etken</label><label><input name="sebep_7" type="checkbox"/>Diğer</label></div><button class="add-row-btn" onclick="addDamageCause()" type="button">+ Ekle</button><div class="dynamic-list" id="ekSebepListesi"></div></div></div></div>
+<div class="grid g22">
+<div class="question-box"><div class="question-line"><span class="qtext">Daha önceden benzer hasar olmuş mu?</span><label><input name="benzerHasar" type="radio" value="Evet"/>Evet</label><label><input name="benzerHasar" type="radio" value="Hayır"/>Hayır</label></div><div class="answer-detail" id="benzerHasarAciklamaAlan"><textarea class="lined-textarea" name="benzerHasarAciklama" placeholder="Benzer hasara ilişkin açıklama"></textarea></div></div>
+<div class="question-box"><div class="question-line"><span class="qtext">Eski hasar var mı?</span><label><input name="eskiHasar" type="radio" value="Evet"/>Evet</label><label><input name="eskiHasar" type="radio" value="Hayır"/>Hayır</label></div><div class="answer-detail" id="eskiHasarAciklamaAlan"><textarea class="lined-textarea" name="eskiHasarAciklama" placeholder="Eski hasara ilişkin açıklama"></textarea></div></div>
+</div>
+<div class="grid g3"><div class="section"><div class="section-title">D. HASAR ANİ Mİ?</div><div class="body checks"><label><input name="ani" type="radio" value="Evet"/>Evet</label><label><input name="ani" type="radio" value="Hayır"/>Hayır</label><label><input name="ani" type="radio" value="Bilinmiyor"/>Bilinmiyor</label></div></div><div class="section"><div class="section-title">E. POLİÇE KAPSAMINDA MI?</div><div class="body checks"><label><input name="kapsam" type="radio" value="Evet"/>Evet</label><label><input name="kapsam" type="radio" value="Hayır"/>Hayır</label><label><input name="kapsam" type="radio" value="İncelenecek"/>İncelenecek</label></div></div><div class="section"><div class="section-title">F. ÜÇÜNCÜ ŞAHIS HASARI VAR MI?</div><div class="body checks"><label><input name="ucuncu" type="radio" value="Hayır"/>Hayır</label><label><input name="ucuncu" type="radio" value="Evet"/>Evet</label></div></div></div>
+<div class="section third-party-section" id="thirdPartyInfo"><div class="section-title">ÜÇÜNCÜ ŞAHIS BİLGİLERİ</div><div class="body"><div class="grid third-party-balanced"><div><div class="field"><label>Adı Soyadı</label><span>:</span><input name="ucAd"/></div><div class="field"><label>Telefon</label><span>:</span><input name="ucTel"/></div><div class="field"><label>Bulunduğu Kat</label><span>:</span><input name="ucKat"/></div></div><div><div class="field"><label>T.C. Kimlik No</label><span>:</span><input inputmode="numeric" maxlength="11" name="ucTc"/></div><div class="field"><label>Daire / İşyeri No</label><span>:</span><input name="ucDaireNo"/></div><div class="field"><label>Hasarlı Bölüm</label><span>:</span><input name="ucBolum"/></div></div></div><div class="field iban-field" style="margin-top:3mm"><label>IBAN No</label><span>:</span><input maxlength="26" name="ucIban" style="letter-spacing:.6px"/></div></div></div>
+<div class="footer">Sayfa 2 / 4</div></section>
 <section class="page page3"><div class="corporate-header">
 <div class="brand-block">
 <div class="brand-name">GENÇ SİGORTA EKSPERLİK</div>
@@ -337,7 +1008,8 @@ background-position:0 0;
 <div class="file-card"><div class="file-label">Sigortalı</div><div class="header-value header-sync" data-sync="sigortali"></div></div>
 <div class="file-card"><div class="file-label">Dosya No</div><div class="header-value header-sync" data-sync="dosyaNo"></div></div>
 </div>
-</div><div class="page-section-head"><div class="num">3</div><h1>HASAR TESPİTİ</h1></div><div class="section damage-section"><div class="section-title">A. HASAR TESPİT TABLOSU</div><div class="body"><table class="damage-table"><colgroup><col/><col/><col/><col/><col/><col/><col/><col/></colgroup><thead><tr><th>MAHAL / ALAN</th><th>UNSUR / KALEM</th><th>İŞLEM</th><th>ÖLÇÜ</th><th>MİKTAR</th><th>BİRİM FİYAT (TL)</th><th>TUTAR (TL)</th><th>AÇIKLAMA</th></tr></thead><tbody><tr><td><input name="t_0_0"/></td><td><input name="t_0_1"/></td><td><input name="t_0_2"/></td><td><input name="t_0_3"/></td><td><input name="t_0_4"/></td><td><input name="t_0_5"/></td><td><input name="t_0_6"/></td><td><input name="t_0_7"/></td></tr><tr><td><input name="t_1_0"/></td><td><input name="t_1_1"/></td><td><input name="t_1_2"/></td><td><input name="t_1_3"/></td><td><input name="t_1_4"/></td><td><input name="t_1_5"/></td><td><input name="t_1_6"/></td><td><input name="t_1_7"/></td></tr><tr><td><input name="t_2_0"/></td><td><input name="t_2_1"/></td><td><input name="t_2_2"/></td><td><input name="t_2_3"/></td><td><input name="t_2_4"/></td><td><input name="t_2_5"/></td><td><input name="t_2_6"/></td><td><input name="t_2_7"/></td></tr><tr><td><input name="t_3_0"/></td><td><input name="t_3_1"/></td><td><input name="t_3_2"/></td><td><input name="t_3_3"/></td><td><input name="t_3_4"/></td><td><input name="t_3_5"/></td><td><input name="t_3_6"/></td><td><input name="t_3_7"/></td></tr><tr><td><input name="t_4_0"/></td><td><input name="t_4_1"/></td><td><input name="t_4_2"/></td><td><input name="t_4_3"/></td><td><input name="t_4_4"/></td><td><input name="t_4_5"/></td><td><input name="t_4_6"/></td><td><input name="t_4_7"/></td></tr><tr><td><input name="t_5_0"/></td><td><input name="t_5_1"/></td><td><input name="t_5_2"/></td><td><input name="t_5_3"/></td><td><input name="t_5_4"/></td><td><input name="t_5_5"/></td><td><input name="t_5_6"/></td><td><input name="t_5_7"/></td></tr><tr><td><input name="t_6_0"/></td><td><input name="t_6_1"/></td><td><input name="t_6_2"/></td><td><input name="t_6_3"/></td><td><input name="t_6_4"/></td><td><input name="t_6_5"/></td><td><input name="t_6_6"/></td><td><input name="t_6_7"/></td></tr><tr><td><input name="t_7_0"/></td><td><input name="t_7_1"/></td><td><input name="t_7_2"/></td><td><input name="t_7_3"/></td><td><input name="t_7_4"/></td><td><input name="t_7_5"/></td><td><input name="t_7_6"/></td><td><input name="t_7_7"/></td></tr><tr><td><input name="t_8_0"/></td><td><input name="t_8_1"/></td><td><input name="t_8_2"/></td><td><input name="t_8_3"/></td><td><input name="t_8_4"/></td><td><input name="t_8_5"/></td><td><input name="t_8_6"/></td><td><input name="t_8_7"/></td></tr><tr><td><input name="t_9_0"/></td><td><input name="t_9_1"/></td><td><input name="t_9_2"/></td><td><input name="t_9_3"/></td><td><input name="t_9_4"/></td><td><input name="t_9_5"/></td><td><input name="t_9_6"/></td><td><input name="t_9_7"/></td></tr><tr><td><input name="t_10_0"/></td><td><input name="t_10_1"/></td><td><input name="t_10_2"/></td><td><input name="t_10_3"/></td><td><input name="t_10_4"/></td><td><input name="t_10_5"/></td><td><input name="t_10_6"/></td><td><input name="t_10_7"/></td></tr><tr><td><input name="t_11_0"/></td><td><input name="t_11_1"/></td><td><input name="t_11_2"/></td><td><input name="t_11_3"/></td><td><input name="t_11_4"/></td><td><input name="t_11_5"/></td><td><input name="t_11_6"/></td><td><input name="t_11_7"/></td></tr><tr><td><input name="t_12_0"/></td><td><input name="t_12_1"/></td><td><input name="t_12_2"/></td><td><input name="t_12_3"/></td><td><input name="t_12_4"/></td><td><input name="t_12_5"/></td><td><input name="t_12_6"/></td><td><input name="t_12_7"/></td></tr><tr><td><input name="t_13_0"/></td><td><input name="t_13_1"/></td><td><input name="t_13_2"/></td><td><input name="t_13_3"/></td><td><input name="t_13_4"/></td><td><input name="t_13_5"/></td><td><input name="t_13_6"/></td><td><input name="t_13_7"/></td></tr><tr><td><input name="t_14_0"/></td><td><input name="t_14_1"/></td><td><input name="t_14_2"/></td><td><input name="t_14_3"/></td><td><input name="t_14_4"/></td><td><input name="t_14_5"/></td><td><input name="t_14_6"/></td><td><input name="t_14_7"/></td></tr><tr><td><input name="t_15_0"/></td><td><input name="t_15_1"/></td><td><input name="t_15_2"/></td><td><input name="t_15_3"/></td><td><input name="t_15_4"/></td><td><input name="t_15_5"/></td><td><input name="t_15_6"/></td><td><input name="t_15_7"/></td></tr><tr><td><input name="t_16_0"/></td><td><input name="t_16_1"/></td><td><input name="t_16_2"/></td><td><input name="t_16_3"/></td><td><input name="t_16_4"/></td><td><input name="t_16_5"/></td><td><input name="t_16_6"/></td><td><input name="t_16_7"/></td></tr></tbody></table></div></div><div class="section sketch-section"><div class="section-title">B. KROKİ / ÖLÇÜ ÇİZİM ALANI</div><div class="body"><div style="width:100%;display:flex;flex-direction:column"><div class="draw-tools"><button type="button" data-tool="pen" class="active" onclick="setSketchTool('pen',this)">Kalem</button><button type="button" data-tool="eraser" onclick="setSketchTool('eraser',this)">Silgi</button><button type="button" onclick="undoSketch()">Geri Al</button><button type="button" onclick="clearSketch()">Krokiyi Temizle</button></div><div aria-label="Kareli defter biçiminde kroki ve ölçü çizim alanı" class="sketch-grid"><div class="draw-wrap"><canvas id="sketchCanvas" class="draw-canvas"></canvas></div></div></div></div></div><div class="footer">Sayfa 3 / 4</div></section>
+</div><div class="page-section-head"><div class="num">3</div><h1>HASAR TESPİTİ</h1></div><div class="section damage-section"><div class="section-title">A. HASAR TESPİT TABLOSU</div><div class="body"><table class="damage-table"><colgroup><col/><col/><col/><col/><col/><col/><col/><col/></colgroup><thead><tr><th>MAHAL / ALAN</th><th>UNSUR / KALEM</th><th>İŞLEM</th><th>MİKTAR</th><th>BİRİM</th><th>BİRİM FİYAT (TL)</th><th>TUTAR (TL)</th><th>AÇIKLAMA</th></tr></thead><tbody><tr><td><input name="t_0_0"/></td><td><input name="t_0_1"/></td><td><select name="t_0_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_0_3"/></td><td><select name="t_0_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_0_5"/></td><td><input name="t_0_6" readonly="" tabindex="-1"/></td><td><input name="t_0_7"/></td></tr><tr><td><input name="t_1_0"/></td><td><input name="t_1_1"/></td><td><select name="t_1_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_1_3"/></td><td><select name="t_1_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_1_5"/></td><td><input name="t_1_6" readonly="" tabindex="-1"/></td><td><input name="t_1_7"/></td></tr><tr><td><input name="t_2_0"/></td><td><input name="t_2_1"/></td><td><select name="t_2_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_2_3"/></td><td><select name="t_2_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_2_5"/></td><td><input name="t_2_6" readonly="" tabindex="-1"/></td><td><input name="t_2_7"/></td></tr><tr><td><input name="t_3_0"/></td><td><input name="t_3_1"/></td><td><select name="t_3_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_3_3"/></td><td><select name="t_3_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_3_5"/></td><td><input name="t_3_6" readonly="" tabindex="-1"/></td><td><input name="t_3_7"/></td></tr><tr><td><input name="t_4_0"/></td><td><input name="t_4_1"/></td><td><select name="t_4_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_4_3"/></td><td><select name="t_4_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_4_5"/></td><td><input name="t_4_6" readonly="" tabindex="-1"/></td><td><input name="t_4_7"/></td></tr><tr><td><input name="t_5_0"/></td><td><input name="t_5_1"/></td><td><select name="t_5_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_5_3"/></td><td><select name="t_5_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_5_5"/></td><td><input name="t_5_6" readonly="" tabindex="-1"/></td><td><input name="t_5_7"/></td></tr><tr><td><input name="t_6_0"/></td><td><input name="t_6_1"/></td><td><select name="t_6_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_6_3"/></td><td><select name="t_6_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_6_5"/></td><td><input name="t_6_6" readonly="" tabindex="-1"/></td><td><input name="t_6_7"/></td></tr><tr><td><input name="t_7_0"/></td><td><input name="t_7_1"/></td><td><select name="t_7_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_7_3"/></td><td><select name="t_7_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_7_5"/></td><td><input name="t_7_6" readonly="" tabindex="-1"/></td><td><input name="t_7_7"/></td></tr><tr><td><input name="t_8_0"/></td><td><input name="t_8_1"/></td><td><select name="t_8_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_8_3"/></td><td><select name="t_8_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_8_5"/></td><td><input name="t_8_6" readonly="" tabindex="-1"/></td><td><input name="t_8_7"/></td></tr><tr><td><input name="t_9_0"/></td><td><input name="t_9_1"/></td><td><select name="t_9_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_9_3"/></td><td><select name="t_9_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_9_5"/></td><td><input name="t_9_6" readonly="" tabindex="-1"/></td><td><input name="t_9_7"/></td></tr><tr><td><input name="t_10_0"/></td><td><input name="t_10_1"/></td><td><select name="t_10_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_10_3"/></td><td><select name="t_10_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_10_5"/></td><td><input name="t_10_6" readonly="" tabindex="-1"/></td><td><input name="t_10_7"/></td></tr><tr><td><input name="t_11_0"/></td><td><input name="t_11_1"/></td><td><select name="t_11_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_11_3"/></td><td><select name="t_11_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_11_5"/></td><td><input name="t_11_6" readonly="" tabindex="-1"/></td><td><input name="t_11_7"/></td></tr><tr><td><input name="t_12_0"/></td><td><input name="t_12_1"/></td><td><select name="t_12_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_12_3"/></td><td><select name="t_12_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_12_5"/></td><td><input name="t_12_6" readonly="" tabindex="-1"/></td><td><input name="t_12_7"/></td></tr><tr><td><input name="t_13_0"/></td><td><input name="t_13_1"/></td><td><select name="t_13_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_13_3"/></td><td><select name="t_13_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_13_5"/></td><td><input name="t_13_6" readonly="" tabindex="-1"/></td><td><input name="t_13_7"/></td></tr><tr><td><input name="t_14_0"/></td><td><input name="t_14_1"/></td><td><select name="t_14_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_14_3"/></td><td><select name="t_14_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_14_5"/></td><td><input name="t_14_6" readonly="" tabindex="-1"/></td><td><input name="t_14_7"/></td></tr><tr><td><input name="t_15_0"/></td><td><input name="t_15_1"/></td><td><select name="t_15_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_15_3"/></td><td><select name="t_15_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_15_5"/></td><td><input name="t_15_6" readonly="" tabindex="-1"/></td><td><input name="t_15_7"/></td></tr><tr><td><input name="t_16_0"/></td><td><input name="t_16_1"/></td><td><select name="t_16_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="t_16_3"/></td><td><select name="t_16_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="t_16_5"/></td><td><input name="t_16_6" readonly="" tabindex="-1"/></td><td><input name="t_16_7"/></td></tr></tbody><tfoot><tr class="damage-total-row"><td colspan="6">TOPLAM HASAR TUTARI (TL)</td><td><output id="mainDamageTotal"></output></td><td></td></tr></tfoot></table><div class="v28-screen-total"><span>TOPLAM HASAR TUTARI (TL)</span><output id="mainDamageTotalScreen">0,00 TL</output></div><button class="add-row-btn damage-add-btn" onclick="addDamageTableRow('t')" type="button">+ Satır Ekle</button></div></div><div class="section sketch-section"><div class="section-title">B. KROKİ / ÖLÇÜ ÇİZİM ALANI</div><div class="body"><div style="width:100%;display:flex;flex-direction:column"><div class="draw-tools"><button class="active" data-tool="pen" onclick="setSketchTool('pen',this)" type="button">Kalem</button><button data-tool="eraser" onclick="setSketchTool('eraser',this)" type="button">Silgi</button><button onclick="undoSketch()" type="button">Geri Al</button><button onclick="clearSketch()" type="button">Krokiyi Temizle</button></div><div aria-label="Kareli defter biçiminde kroki ve ölçü çizim alanı" class="sketch-grid"><div class="draw-wrap"><canvas class="draw-canvas" id="sketchCanvas"></canvas></div></div></div></div></div><div class="footer">Sayfa 3 / 4</div></section>
+<section class="page third-party-page" id="thirdPartyPage"><div class="corporate-header"><div class="brand-block"><div class="brand-name">GENÇ SİGORTA EKSPERLİK</div><div class="form-name">SAHA HASAR TESPİT VE İNCELEME FÖYÜ</div></div><div class="file-band"><div class="file-card"><div class="file-label">Sigorta Şirketi</div><div class="header-value header-sync" data-sync="sirket"></div></div><div class="file-card"><div class="file-label">Sigortalı</div><div class="header-value header-sync" data-sync="sigortali"></div></div><div class="file-card"><div class="file-label">Dosya No</div><div class="header-value header-sync" data-sync="dosyaNo"></div></div></div></div><div class="page-section-head"><div class="num">3A</div><h1>ÜÇÜNCÜ ŞAHIS HASAR TESPİTİ</h1></div><div class="section damage-section"><div class="section-title">A. ÜÇÜNCÜ ŞAHIS HASAR TESPİT TABLOSU</div><div class="body"><table class="damage-table third-damage-table"><colgroup><col/><col/><col/><col/><col/><col/><col/><col/></colgroup><thead><tr><th>MAHAL / ALAN</th><th>UNSUR / KALEM</th><th>İŞLEM</th><th>MİKTAR</th><th>BİRİM</th><th>BİRİM FİYAT (TL)</th><th>TUTAR (TL)</th><th>AÇIKLAMA</th></tr></thead><tbody><tr><td><input name="u_0_0"/></td><td><input name="u_0_1"/></td><td><select name="u_0_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_0_3"/></td><td><select name="u_0_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_0_5"/></td><td><input name="u_0_6" readonly="" tabindex="-1"/></td><td><input name="u_0_7"/></td></tr><tr><td><input name="u_1_0"/></td><td><input name="u_1_1"/></td><td><select name="u_1_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_1_3"/></td><td><select name="u_1_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_1_5"/></td><td><input name="u_1_6" readonly="" tabindex="-1"/></td><td><input name="u_1_7"/></td></tr><tr><td><input name="u_2_0"/></td><td><input name="u_2_1"/></td><td><select name="u_2_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_2_3"/></td><td><select name="u_2_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_2_5"/></td><td><input name="u_2_6" readonly="" tabindex="-1"/></td><td><input name="u_2_7"/></td></tr><tr><td><input name="u_3_0"/></td><td><input name="u_3_1"/></td><td><select name="u_3_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_3_3"/></td><td><select name="u_3_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_3_5"/></td><td><input name="u_3_6" readonly="" tabindex="-1"/></td><td><input name="u_3_7"/></td></tr><tr><td><input name="u_4_0"/></td><td><input name="u_4_1"/></td><td><select name="u_4_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_4_3"/></td><td><select name="u_4_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_4_5"/></td><td><input name="u_4_6" readonly="" tabindex="-1"/></td><td><input name="u_4_7"/></td></tr><tr><td><input name="u_5_0"/></td><td><input name="u_5_1"/></td><td><select name="u_5_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_5_3"/></td><td><select name="u_5_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_5_5"/></td><td><input name="u_5_6" readonly="" tabindex="-1"/></td><td><input name="u_5_7"/></td></tr><tr><td><input name="u_6_0"/></td><td><input name="u_6_1"/></td><td><select name="u_6_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_6_3"/></td><td><select name="u_6_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_6_5"/></td><td><input name="u_6_6" readonly="" tabindex="-1"/></td><td><input name="u_6_7"/></td></tr><tr><td><input name="u_7_0"/></td><td><input name="u_7_1"/></td><td><select name="u_7_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_7_3"/></td><td><select name="u_7_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_7_5"/></td><td><input name="u_7_6" readonly="" tabindex="-1"/></td><td><input name="u_7_7"/></td></tr><tr><td><input name="u_8_0"/></td><td><input name="u_8_1"/></td><td><select name="u_8_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_8_3"/></td><td><select name="u_8_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_8_5"/></td><td><input name="u_8_6" readonly="" tabindex="-1"/></td><td><input name="u_8_7"/></td></tr><tr><td><input name="u_9_0"/></td><td><input name="u_9_1"/></td><td><select name="u_9_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_9_3"/></td><td><select name="u_9_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_9_5"/></td><td><input name="u_9_6" readonly="" tabindex="-1"/></td><td><input name="u_9_7"/></td></tr><tr><td><input name="u_10_0"/></td><td><input name="u_10_1"/></td><td><select name="u_10_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_10_3"/></td><td><select name="u_10_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_10_5"/></td><td><input name="u_10_6" readonly="" tabindex="-1"/></td><td><input name="u_10_7"/></td></tr><tr><td><input name="u_11_0"/></td><td><input name="u_11_1"/></td><td><select name="u_11_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_11_3"/></td><td><select name="u_11_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_11_5"/></td><td><input name="u_11_6" readonly="" tabindex="-1"/></td><td><input name="u_11_7"/></td></tr><tr><td><input name="u_12_0"/></td><td><input name="u_12_1"/></td><td><select name="u_12_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_12_3"/></td><td><select name="u_12_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_12_5"/></td><td><input name="u_12_6" readonly="" tabindex="-1"/></td><td><input name="u_12_7"/></td></tr><tr><td><input name="u_13_0"/></td><td><input name="u_13_1"/></td><td><select name="u_13_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_13_3"/></td><td><select name="u_13_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_13_5"/></td><td><input name="u_13_6" readonly="" tabindex="-1"/></td><td><input name="u_13_7"/></td></tr><tr><td><input name="u_14_0"/></td><td><input name="u_14_1"/></td><td><select name="u_14_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_14_3"/></td><td><select name="u_14_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_14_5"/></td><td><input name="u_14_6" readonly="" tabindex="-1"/></td><td><input name="u_14_7"/></td></tr><tr><td><input name="u_15_0"/></td><td><input name="u_15_1"/></td><td><select name="u_15_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_15_3"/></td><td><select name="u_15_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_15_5"/></td><td><input name="u_15_6" readonly="" tabindex="-1"/></td><td><input name="u_15_7"/></td></tr><tr><td><input name="u_16_0"/></td><td><input name="u_16_1"/></td><td><select name="u_16_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="u_16_3"/></td><td><select name="u_16_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="u_16_5"/></td><td><input name="u_16_6" readonly="" tabindex="-1"/></td><td><input name="u_16_7"/></td></tr></tbody><tfoot><tr class="damage-total-row"><td colspan="6">TOPLAM HASAR TUTARI (TL)</td><td><output id="thirdDamageTotal"></output></td><td></td></tr></tfoot></table><div class="v28-screen-total"><span>TOPLAM HASAR TUTARI (TL)</span><output id="thirdDamageTotalScreen">0,00 TL</output></div><button class="add-row-btn damage-add-btn" onclick="addDamageTableRow('u')" type="button">+ Satır Ekle</button></div></div><div class="section sketch-section"><div class="section-title">B. ÜÇÜNCÜ ŞAHIS KROKİ / ÖLÇÜ ÇİZİM ALANI</div><div class="body"><div style="width:100%;display:flex;flex-direction:column"><div class="draw-tools"><button class="active" data-third-tool="pen" onclick="setThirdSketchTool('pen',this)" type="button">Kalem</button><button data-third-tool="eraser" onclick="setThirdSketchTool('eraser',this)" type="button">Silgi</button><button onclick="undoThirdSketch()" type="button">Geri Al</button><button onclick="clearThirdSketch()" type="button">Krokiyi Temizle</button></div><div class="sketch-grid"><div class="draw-wrap"><canvas class="draw-canvas" id="thirdSketchCanvas"></canvas></div></div></div></div></div><div class="footer">Ek Sayfa 3A</div></section>
 <section class="page page4"><div class="corporate-header">
 <div class="brand-block">
 <div class="brand-name">GENÇ SİGORTA EKSPERLİK</div>
@@ -348,20 +1020,25 @@ background-position:0 0;
 <div class="file-card"><div class="file-label">Sigortalı</div><div class="header-value header-sync" data-sync="sigortali"></div></div>
 <div class="file-card"><div class="file-label">Dosya No</div><div class="header-value header-sync" data-sync="dosyaNo"></div></div>
 </div>
-</div><div class="page-section-head"><div class="num">4</div><h1>NOTLAR – EVRAK – KONTROL LİSTESİ</h1></div><div class="section"><div class="section-title">A. EKSPER NOTLARI</div><div class="body"><textarea class="notes lined-textarea" name="eksperNot"></textarea></div></div><div class="section"><div class="section-title">B. YAPILACAK İŞLEMLER</div><div class="body"><textarea class="work-actions lined-textarea" name="yapilacakIslemler"></textarea></div></div><div class="grid g22"><div class="section"><div class="section-title">C. EVRAK KONTROL LİSTESİ</div><div class="body checks" style="grid-template-columns:1fr"><label><input name="evrak_0" type="checkbox"/>Poliçe</label><label><input name="evrak_1" type="checkbox"/>Zeyilname</label><label><input name="evrak_2" type="checkbox"/>Tapu / Kira Sözleşmesi</label><label><input name="evrak_3" type="checkbox"/>Kimlik Fotokopisi</label><label><input name="evrak_4" type="checkbox"/>IBAN Bilgisi</label><label><input name="evrak_5" type="checkbox"/>Fatura / Makbuz</label><label><input name="evrak_6" type="checkbox"/>Proforma / Keşif</label><label><input name="evrak_7" type="checkbox"/>Servis / Usta Teklifi</label><label><input name="evrak_8" type="checkbox"/>Hasar Fotoğrafları</label><label><input name="evrak_9" type="checkbox"/>Teknik Servis Raporu</label><label><input name="evrak_10" type="checkbox"/>Ürün Etiketi / Seri No</label><label><input name="evrak_11" type="checkbox"/>Diğer</label></div></div><div class="section"><div class="section-title">D. SAHADAN AYRILMADAN ÖNCE KONTROL</div><div class="body checks" style="grid-template-columns:1fr"><label><input name="kontrol_0" type="checkbox"/>Sigortalı beyanı alındı</label><label><input name="kontrol_1" type="checkbox"/>Hasar kaynağı görüldü</label><label><input name="kontrol_2" type="checkbox"/>Tüm mahal ve alanlar gezildi</label><label><input name="kontrol_3" type="checkbox"/>Ölçüler alındı</label><label><input name="kontrol_4" type="checkbox"/>Fotoğraflar çekildi</label><label><input name="kontrol_5" type="checkbox"/>Üçüncü şahıs hasarı kontrol edildi</label><label><input name="kontrol_6" type="checkbox"/>Eksik evrak sigortalıya bildirildi</label><label><input name="kontrol_7" type="checkbox"/>İlgili kişilerin iletişim bilgileri alındı</label><label><input name="kontrol_8" type="checkbox"/>İmza alındı</label><label><input name="kontrol_9" type="checkbox"/>Diğer</label></div></div></div><div class="section signature-section"><div class="section-title">E. BEYAN, TARİH VE İMZA</div><div class="body">
+</div><div class="page-section-head"><div class="num">4</div><h1>NOTLAR – EVRAK – KONTROL LİSTESİ</h1></div><div class="section"><div class="section-title">A. EKSPER NOTLARI</div><div class="body"><textarea class="notes lined-textarea" name="eksperNot"></textarea></div></div><div class="section"><div class="section-title">B. YAPILACAK İŞLEMLER</div><div class="body"><textarea class="work-actions lined-textarea" name="yapilacakIslemler"></textarea>
+<div class="question-box"><div class="question-line"><span class="qtext">Hasar üzerinde mutabık kalındı mı?</span><label><input name="mutabakat" type="radio" value="Evet"/>Evet</label><label><input name="mutabakat" type="radio" value="Hayır"/>Hayır</label></div><div class="answer-detail" id="mutabakatAciklamaAlan"><textarea class="lined-textarea" name="mutabakatAciklama" placeholder="Mutabakat / mutabık kalınmama açıklaması"></textarea></div></div>
+<div class="question-box"><div class="question-line"><span class="qtext">Rücu durumu var mı?</span><label><input name="rucu" type="radio" value="Evet"/>Evet</label><label><input name="rucu" type="radio" value="Hayır"/>Hayır</label></div><div class="answer-detail" id="rucuAciklamaAlan"><textarea class="lined-textarea" name="rucuAciklama" placeholder="Rücu durumuna ilişkin açıklama"></textarea></div></div>
+<div class="question-box"><div class="question-line"><span class="qtext">Sürekli kullanım durumu var mı?</span><label><input name="surekliKullanim" type="radio" value="Evet"/>Evet</label><label><input name="surekliKullanim" type="radio" value="Hayır"/>Hayır</label></div><div class="answer-detail" id="surekliKullanimAciklamaAlan"><textarea class="lined-textarea" name="surekliKullanimAciklama" placeholder="Hayır ise boş kalma süresini eksper yazacaktır"></textarea></div></div>
+</div></div><div class="grid g22"><div class="section"><div class="section-title">C. EVRAK KONTROL LİSTESİ</div><div class="body checks" style="grid-template-columns:1fr"><label><input name="evrak_0" type="checkbox"/>Poliçe</label><label><input name="evrak_1" type="checkbox"/>Zeyilname</label><label><input name="evrak_2" type="checkbox"/>Tapu / Kira Sözleşmesi</label><label><input name="evrak_3" type="checkbox"/>Kimlik Fotokopisi</label><label><input name="evrak_4" type="checkbox"/>IBAN Bilgisi</label><label><input name="evrak_5" type="checkbox"/>Fatura / Makbuz</label><label><input name="evrak_6" type="checkbox"/>Proforma / Keşif</label><label><input name="evrak_7" type="checkbox"/>Servis / Usta Teklifi</label><label><input name="evrak_8" type="checkbox"/>Hasar Fotoğrafları</label><label><input name="evrak_9" type="checkbox"/>Teknik Servis Raporu</label><label><input name="evrak_10" type="checkbox"/>Ürün Etiketi / Seri No</label><label><input name="evrak_11" type="checkbox"/>Diğer</label></div></div><div class="section"><div class="section-title">D. SAHADAN AYRILMADAN ÖNCE KONTROL</div><div class="body checks" style="grid-template-columns:1fr"><label><input name="kontrol_0" type="checkbox"/>Sigortalı beyanı alındı</label><label><input name="kontrol_1" type="checkbox"/>Hasar kaynağı görüldü</label><label><input name="kontrol_2" type="checkbox"/>Tüm mahal ve alanlar gezildi</label><label><input name="kontrol_3" type="checkbox"/>Ölçüler alındı</label><label><input name="kontrol_4" type="checkbox"/>Fotoğraflar çekildi</label><label><input name="kontrol_5" type="checkbox"/>Üçüncü şahıs hasarı kontrol edildi</label><label><input name="kontrol_6" type="checkbox"/>Eksik evrak sigortalıya bildirildi</label><label><input name="kontrol_7" type="checkbox"/>İlgili kişilerin iletişim bilgileri alındı</label><label><input name="kontrol_8" type="checkbox"/>İmza alındı</label><label><input name="kontrol_9" type="checkbox"/>Diğer</label></div></div></div><div class="section signature-section"><div class="section-title">E. BEYAN, TARİH VE İMZA</div><div class="body">
 <div class="declaration">İşbu saha inceleme föyünde yer alan bilgiler, ekspertiz mahallinde yapılan gözlem ve incelemeler sırasında düzenlenmiştir. Bu föy nihai ekspertiz raporu niteliğinde olmayıp, saha tespitlerinin kayıt altına alınması amacıyla hazırlanmıştır.</div>
 <div class="inspection-date"><label>İnceleme Tarihi :</label><input autocomplete="off" inputmode="numeric" name="imzaTarih" type="text"/></div>
 <div class="signature-area">
 <div class="signature-box">
 <div class="signature-title">EKSPER</div>
-<div class="hand-line"><span>Adı Soyadı :</span><span></span></div>
-<div style="font-size:9px;font-weight:700">İmza :</div><div class="signature-canvas-wrap"><canvas class="signature-canvas" id="expertSignature"></canvas></div><div class="signature-tools"><button type="button" onclick="clearSignature('expertSignature')">İmzayı Temizle</button></div>
+<div class="hand-line"><span>Adı Soyadı :</span><input autocomplete="name" class="hand-name-input" name="eksperAdiSoyadi"/></div>
+<div style="font-size:9px;font-weight:700">İmza :</div><div class="signature-canvas-wrap"><canvas class="signature-canvas" id="expertSignature"></canvas></div><div class="signature-tools"><button onclick="clearSignature('expertSignature')" type="button">İmzayı Temizle</button></div>
 </div>
 <div class="signature-box">
 <div class="signature-title">TESPİTE EŞLİK EDEN KİŞİ<br/><span style="font-size:8px;font-weight:600">(Sigortalı / Yakını / Kiracı / İşletme Yetkilisi)</span></div>
-<div class="hand-line"><span>Adı Soyadı :</span><span></span></div>
-<div style="font-size:9px;font-weight:700">İmza :</div><div class="signature-canvas-wrap"><canvas class="signature-canvas" id="companionSignature"></canvas></div><div class="signature-tools"><button type="button" onclick="clearSignature('companionSignature')">İmzayı Temizle</button></div>
+<div class="hand-line"><span>Adı Soyadı :</span><input autocomplete="name" class="hand-name-input" name="eslikEdenAdiSoyadi"/></div>
+<div style="font-size:9px;font-weight:700">İmza :</div><div class="signature-canvas-wrap"><canvas class="signature-canvas" id="companionSignature"></canvas></div><div class="signature-tools"><button onclick="clearSignature('companionSignature')" type="button">İmzayı Temizle</button></div>
 </div>
+<div class="signature-box third-party-signature" id="thirdPartySignatureBox"><div class="signature-title">ÜÇÜNCÜ ŞAHIS</div><div class="hand-line"><span>Adı Soyadı :</span><input autocomplete="name" class="hand-name-input" name="ucImzaAdiSoyadi"/></div><div style="font-size:9px;font-weight:700">İmza :</div><div class="signature-canvas-wrap"><canvas class="signature-canvas" id="thirdPartySignature"></canvas></div><div class="signature-tools"><button onclick="clearSignature('thirdPartySignature')" type="button">İmzayı Temizle</button></div></div>
 </div>
 </div></div><div class="footer">Sayfa 4 / 4</div></section>
 </form>
@@ -371,9 +1048,10 @@ function parseTrNumber(value){
   if(value===null||value===undefined)return 0;
   let v=String(value).trim().replace(/\s/g,'').replace(/TL/gi,'');
   if(!v)return 0;
-  if(v.includes(',')&&v.includes('.'))v=v.replace(/\./g,'').replace(',','.');
-  else if(v.includes(','))v=v.replace(',','.');
-  else if((v.match(/\./g)||[]).length>1)v=v.replace(/\./g,'');
+  // Türkçe giriş kuralı: nokta binlik, virgül ondalık ayırıcıdır.
+  // 500.000 => 500000, 1.250.000 => 1250000, 12,5 => 12.5
+  if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');
+  else v=v.replace(/\./g,'');
   const n=Number(v.replace(/[^0-9.-]/g,''));
   return Number.isFinite(n)?n:0;
 }
@@ -415,7 +1093,7 @@ function calcDay(){const d=getWorkingDay(),o=document.getElementById('gun');o.te
 document.getElementById('baslangic').addEventListener('change',calcDay);document.getElementById('hasarTarihi').addEventListener('change',calcDay);
 form.querySelectorAll('[name^="bedel_"], [name="enfOran"], [name="enfVar"]').forEach(function(el){el.addEventListener('input',calcInflationAmounts);el.addEventListener('change',calcInflationAmounts)});
 const kaynakDiger=document.getElementById('kaynakDiger'),kaynakDigerAlan=document.getElementById('kaynakDigerAlan');function toggleKaynakDiger(){kaynakDigerAlan.classList.toggle('show',kaynakDiger.checked);if(!kaynakDiger.checked){const i=kaynakDigerAlan.querySelector('input');if(i)i.value=''}}kaynakDiger.addEventListener('change',toggleKaynakDiger);
-let dynamicCounters={riziko:0,hasar:0,teminat:0};
+let dynamicCounters={riziko:0,hasar:0,teminat:0,bina:0,sebep:0};
 function addCustomOption(type,value='',checked=false,index=null){
   const isRiziko=type==='riziko';
   const list=document.getElementById(isRiziko?'ekRizikoListesi':'ekHasarListesi');
@@ -425,6 +1103,20 @@ function addCustomOption(type,value='',checked=false,index=null){
   row.className='dynamic-item';
   row.innerHTML='<input type="checkbox" name="ek_'+type+'_sec_'+i+'" aria-label="Ek seçim" '+(checked?'checked':'')+'/><input name="ek_'+type+'_metin_'+i+'" placeholder="Eksper tarafından yazılacak" value="'+String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"/><button type="button" class="remove-row-btn" title="Satırı kaldır" onclick="this.parentElement.remove()">×</button>';
   list.appendChild(row);
+}
+function addBuildingInfo(value='',index=null){
+  const list=document.getElementById('ekBinaListesi'); if(!list)return;
+  const i=index===null?dynamicCounters.bina++:index; dynamicCounters.bina=Math.max(dynamicCounters.bina,i+1);
+  const row=document.createElement('div'); row.className='dynamic-item simple-dynamic-item';
+  row.innerHTML='<span>•</span><input name="ek_bina_metin_'+i+'" placeholder="Ek riziko bilgisi" value="'+String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"/><button type="button" class="remove-row-btn" title="Satırı kaldır" onclick="this.parentElement.remove();autoSave()">×</button>';
+  list.appendChild(row); return row;
+}
+function addDamageCause(value='',checked=false,index=null){
+  const list=document.getElementById('ekSebepListesi'); if(!list)return;
+  const i=index===null?dynamicCounters.sebep++:index; dynamicCounters.sebep=Math.max(dynamicCounters.sebep,i+1);
+  const row=document.createElement('div'); row.className='dynamic-item';
+  row.innerHTML='<input type="checkbox" name="ek_sebep_sec_'+i+'" aria-label="Ek hasar sebebi seçimi" '+(checked?'checked':'')+'/><input name="ek_sebep_metin_'+i+'" placeholder="Eksper tarafından yazılacak" value="'+String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"/><button type="button" class="remove-row-btn" title="Satırı kaldır" onclick="this.parentElement.remove();autoSave()">×</button>';
+  list.appendChild(row); return row;
 }
 function addCoverageRow(name='',base='',index=null){
   const body=document.getElementById('ekTeminatGovdesi');
@@ -441,21 +1133,28 @@ function prepareDynamicRows(data){
   document.getElementById('ekRizikoListesi').innerHTML='';
   document.getElementById('ekHasarListesi').innerHTML='';
   document.getElementById('ekTeminatGovdesi').innerHTML='';
-  dynamicCounters={riziko:0,hasar:0,teminat:0};
-  const indices={riziko:new Set(),hasar:new Set(),teminat:new Set()};
+  if(document.getElementById('ekBinaListesi'))document.getElementById('ekBinaListesi').innerHTML='';
+  if(document.getElementById('ekSebepListesi'))document.getElementById('ekSebepListesi').innerHTML='';
+  dynamicCounters={riziko:0,hasar:0,teminat:0,bina:0,sebep:0};
+  const indices={riziko:new Set(),hasar:new Set(),teminat:new Set(),bina:new Set(),sebep:new Set()};
   Object.keys(data||{}).forEach(function(k){
     let m=k.match(/^ek_(riziko|hasar)_(?:sec|metin)_(\d+)$/); if(m)indices[m[1]].add(Number(m[2]));
     m=k.match(/^ek(?:Teminat|Bedel|EnfBedel)_(\d+)$/); if(m)indices.teminat.add(Number(m[1]));
+    m=k.match(/^ek_bina_metin_(\d+)$/); if(m)indices.bina.add(Number(m[1]));
+    m=k.match(/^ek_sebep_(?:sec|metin)_(\d+)$/); if(m)indices.sebep.add(Number(m[1]));
   });
   indices.riziko.forEach(i=>addCustomOption('riziko',data['ek_riziko_metin_'+i]||'',!!data['ek_riziko_sec_'+i],i));
   indices.hasar.forEach(i=>addCustomOption('hasar',data['ek_hasar_metin_'+i]||'',!!data['ek_hasar_sec_'+i],i));
   indices.teminat.forEach(i=>addCoverageRow(data['ekTeminat_'+i]||'',data['ekBedel_'+i]||'',i));
+  indices.bina.forEach(i=>addBuildingInfo(data['ek_bina_metin_'+i]||'',i));
+  indices.sebep.forEach(i=>addDamageCause(data['ek_sebep_metin_'+i]||'',!!data['ek_sebep_sec_'+i],i));
+  prepareDamageRows(data||{});
 }
-function collect(){const out={};form.querySelectorAll('input,textarea,select').forEach((el,i)=>{const k=el.name||('f'+i);out[k]=el.type==='checkbox'||el.type==='radio'?el.checked:el.value});return out}
-function restore(data){prepareDynamicRows(data);form.querySelectorAll('input,textarea,select').forEach((el,i)=>{const k=el.name||('f'+i);if(!(k in data))return;if(el.type==='checkbox'||el.type==='radio')el.checked=!!data[k];else el.value=data[k]});calcDay();toggleKaynakDiger();calcInflationAmounts();document.querySelectorAll('[name="sirket"],[name="sigortali"],[name="dosyaNo"]').forEach(function(el){el.dispatchEvent(new Event('input'))})}
+function collect(){const out={};form.querySelectorAll('input,textarea,select').forEach((el,i)=>{const k=el.name||('f'+i);if(el.type==='radio'){if(el.checked)out[k]=el.value;else if(!(k in out))out[k]='';}else if(el.type==='checkbox')out[k]=el.checked;else out[k]=el.value});return out}
+function restore(data){prepareDynamicRows(data);form.querySelectorAll('input,textarea,select').forEach((el,i)=>{const k=el.name||('f'+i);if(!(k in data))return;if(el.type==='radio'){const v=data[k];el.checked=(typeof v==='string'?el.value===v:!!v&&el.value==='Evet');}else if(el.type==='checkbox')el.checked=!!data[k];else el.value=data[k]});calcDay();toggleKaynakDiger();toggleNewFields();calcInflationAmounts();if(typeof setupDamageCalculations==='function')setupDamageCalculations();if(typeof setupThirdDamageCalculations==='function')setupThirdDamageCalculations();if(typeof updateMainDamageTotal==='function')updateMainDamageTotal();if(typeof updateThirdDamageTotal==='function')updateThirdDamageTotal();document.querySelectorAll('[name="sirket"],[name="sigortali"],[name="dosyaNo"]').forEach(function(el){el.dispatchEvent(new Event('input'))})}
 function saveData(){localStorage.setItem('gencSahaFoyu',JSON.stringify(collect()));alert('Bilgiler bu bilgisayarda kaydedildi.')}
 function loadData(){const x=localStorage.getItem('gencSahaFoyu');if(!x)return alert('Kayıt bulunamadı.');restore(JSON.parse(x))}
-function clearForm(){if(confirm('Tüm alanlar ve çizimler temizlensin mi?')){form.reset();prepareDynamicRows({});calcDay();toggleKaynakDiger();calcInflationAmounts();document.querySelectorAll('.header-sync').forEach(el=>el.textContent='');if(document.getElementById('sketchCanvas'))restoreCanvasData({});autoSave()}}
+function clearForm(){if(confirm('Tüm alanlar ve çizimler temizlensin mi?')){form.reset();prepareDynamicRows({});resetDynamicDamageRows();calcDay();toggleKaynakDiger();toggleNewFields();calcInflationAmounts();document.querySelectorAll('.header-sync').forEach(el=>el.textContent='');if(document.getElementById('sketchCanvas'))restoreCanvasData({});autoSave()}}
 window.addEventListener('beforeunload',()=>localStorage.setItem('gencSahaFoyuOto',JSON.stringify(collect())));
 
 
@@ -490,24 +1189,195 @@ function getRecords(){try{return JSON.parse(localStorage.getItem(DB_KEY)||'{}')}
 function setRecords(records){localStorage.setItem(DB_KEY,JSON.stringify(records))}
 function safeName(v){return String(v||'').trim().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,'_').slice(0,80)||'BILINMIYOR'}
 function recordFileName(){const c=collect();return [safeName(c.sirket),safeName(c.dosyaNo),safeName(c.sigortali)].join('_')}
-function getCanvasData(){const out={};['sketchCanvas','expertSignature','companionSignature'].forEach(id=>{const c=document.getElementById(id);if(c)out[id]=c.toDataURL('image/png')});return out}
-function restoreCanvasData(data){['sketchCanvas','expertSignature','companionSignature'].forEach(id=>{const c=document.getElementById(id);if(!c)return;resizeCanvas(c,false);const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);const src=data&&data[id];if(src){const img=new Image();img.onload=()=>{const r=c.getBoundingClientRect();ctx.drawImage(img,0,0,r.width,r.height);if(id==='sketchCanvas')snapshotSketch()};img.src=src}else if(id==='sketchCanvas'){snapshotSketch()}})}
-function buildRecord(){return {id:currentRecordId||uid(),updatedAt:new Date().toISOString(),data:collect(),canvases:getCanvasData()}}
+function getCanvasData(){const out={};['sketchCanvas','thirdSketchCanvas','insuredSignature','expertSignature','companionSignature','thirdPartySignature'].forEach(id=>{const c=document.getElementById(id);if(c)out[id]=c.toDataURL('image/png')});return out}
+function restoreCanvasData(data){['sketchCanvas','thirdSketchCanvas','insuredSignature','expertSignature','companionSignature','thirdPartySignature'].forEach(id=>{const c=document.getElementById(id);if(!c)return;resizeCanvas(c,false);const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);const src=data&&data[id];if(src){const img=new Image();img.onload=()=>{const r=c.getBoundingClientRect();ctx.drawImage(img,0,0,r.width,r.height);if(id==='sketchCanvas')snapshotSketch();else if(id==='thirdSketchCanvas')snapshotThirdSketch()};img.src=src}else if(id==='sketchCanvas'){snapshotSketch()}else if(id==='thirdSketchCanvas'){snapshotThirdSketch()}})}
+function collectRadioState(){const s={};form.querySelectorAll('input[type=\"radio\"][name]').forEach(function(el){if(el.checked)s[el.name]=el.value});return s}
+function applyRadioState(s){if(!s)return;Object.keys(s).forEach(function(name){form.querySelectorAll('input[type=\"radio\"][name=\"'+CSS.escape(name)+'\"]').forEach(function(el){el.checked=(el.value===s[name])})});toggleNewFields()}
+function buildRecord(){return {id:currentRecordId||uid(),updatedAt:new Date().toISOString(),data:collect(),radioState:collectRadioState(),canvases:getCanvasData()}}
 function saveCurrentRecord(silent=false){const record=buildRecord();currentRecordId=record.id;const records=getRecords();records[record.id]=record;setRecords(records);localStorage.setItem('gencSahaFoyuCurrentId',record.id);if(!silent)alert('Dosya kayıtlı dosyalara kaydedildi.');setBadge('Kaydedildi')}
 function autoSave(){clearTimeout(autosaveTimer);setBadge('Değişiklik var');autosaveTimer=setTimeout(()=>{saveCurrentRecord(true)},700)}
 function setBadge(t){const el=document.getElementById('autosaveBadge');if(el)el.textContent=t}
-function newFile(){if(!confirm('Yeni boş dosya açılsın mı? Mevcut çalışma otomatik kaydedilecektir.'))return;saveCurrentRecord(true);currentRecordId=uid();form.reset();prepareDynamicRows({});calcDay();toggleKaynakDiger();restoreCanvasData({});document.querySelectorAll('.header-sync').forEach(el=>el.textContent='');saveCurrentRecord(true);setBadge('Yeni dosya')}
+function newFile(){if(!confirm('Yeni boş dosya açılsın mı? Mevcut çalışma otomatik kaydedilecektir.'))return;saveCurrentRecord(true);currentRecordId=uid();form.reset();prepareDynamicRows({});resetDynamicDamageRows();calcDay();toggleKaynakDiger();toggleNewFields();restoreCanvasData({});document.querySelectorAll('.header-sync').forEach(el=>el.textContent='');saveCurrentRecord(true);setBadge('Yeni dosya')}
 function openRecordPanel(){renderRecords();document.getElementById('recordPanel').classList.add('show')}
 function closeRecordPanel(){document.getElementById('recordPanel').classList.remove('show')}
 function renderRecords(){const q=(document.getElementById('recordSearch').value||'').toLocaleLowerCase('tr');const records=Object.values(getRecords()).sort((a,b)=>String(b.updatedAt).localeCompare(String(a.updatedAt)));const list=document.getElementById('recordList');list.innerHTML='';records.filter(r=>{const d=r.data||{};return [d.sirket,d.dosyaNo,d.sigortali].join(' ').toLocaleLowerCase('tr').includes(q)}).forEach(r=>{const d=r.data||{};const el=document.createElement('div');el.className='record-item';el.innerHTML='<div><div class="record-title">'+escapeHtml(d.dosyaNo||'Dosya numarası yok')+' — '+escapeHtml(d.sigortali||'Sigortalı yok')+'</div><div class="record-meta">'+escapeHtml(d.sirket||'Şirket yok')+' • '+new Date(r.updatedAt).toLocaleString('tr-TR')+'</div></div><div class="record-actions"><button class="record-open" type="button">Aç</button><button class="record-delete" type="button">Sil</button></div>';el.querySelector('.record-open').onclick=()=>loadRecordById(r.id);el.querySelector('.record-delete').onclick=()=>deleteRecord(r.id);list.appendChild(el)});if(!list.children.length)list.innerHTML='<div class="record-empty">Kayıt bulunamadı.</div>'}
 function escapeHtml(v){return String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-function loadRecordById(id){const r=getRecords()[id];if(!r)return alert('Kayıt bulunamadı.');currentRecordId=id;restore(r.data||{});restoreCanvasData(r.canvases||{});localStorage.setItem('gencSahaFoyuCurrentId',id);closeRecordPanel();setBadge('Kayıt açıldı')}
+function loadRecordById(id){const r=getRecords()[id];if(!r)return alert('Kayıt bulunamadı.');currentRecordId=id;restore(r.data||{});applyRadioState(r.radioState||r.data||{});restoreCanvasData(r.canvases||{});localStorage.setItem('gencSahaFoyuCurrentId',id);closeRecordPanel();setBadge('Kayıt açıldı')}
 function deleteRecord(id){if(!confirm('Bu kayıt silinsin mi?'))return;const records=getRecords();delete records[id];setRecords(records);if(currentRecordId===id)currentRecordId=null;renderRecords()}
 function exportCurrentRecord(){saveCurrentRecord(true);const r=getRecords()[currentRecordId];const blob=new Blob([JSON.stringify(r,null,2)],{type:'application/json'});downloadBlob(blob,recordFileName()+'.json')}
 function downloadBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
-async function shareForm(){saveCurrentRecord(true);const r=getRecords()[currentRecordId];const file=new File([JSON.stringify(r,null,2)],recordFileName()+'.json',{type:'application/json'});if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){try{await navigator.share({title:'Saha Hasar Tespit Föyü',text:'Doldurulmuş saha föyü yedeği',files:[file]});return}catch(e){if(e.name==='AbortError')return}}alert('Bu tarayıcı doğrudan dosya paylaşımını desteklemiyor. Dosya indirilecek; ardından iPad/Mac paylaşım menüsünden gönderebilirsiniz.');downloadBlob(file,recordFileName()+'.json')}
-function printPdf(){saveCurrentRecord(true);window.print()}
+function preparePrintView(){
+  updateMainDamageTotal();
+  updateThirdDamageTotal();
+  updatePageNumbers();
+  if(document.body.classList.contains('print-prepared'))return Promise.resolve();
+  document.body.classList.add('print-prepared');
+  document.querySelectorAll('input,textarea,select').forEach(function(el){
+    if(el.type==='checkbox'||el.type==='radio'||el.type==='file'||el.type==='button'||el.hidden)return;
+    if(el.tagName==='TEXTAREA'&&el.name==='sigortaliBeyani')return;
+    /* Hasar tablosu Safari'de zaten input degerini basiyor. Burada ikinci bir baski kopyasi olusturmak
+       ayni kaydin PDF'de iki kez gorunmesine yol acabiliyor; bu tabloyu native olarak birak. */
+    if(el.closest('.damage-table'))return;
+    const tag=document.createElement(el.tagName==='TEXTAREA'?'div':'span');
+    tag.className='print-value'+(el.tagName==='TEXTAREA'?' print-textarea':'');
+    if(el.name)tag.dataset.printName=el.name;
+    let value=el.value||'';
+    if(el.tagName==='SELECT'&&el.selectedIndex>=0)value=el.options[el.selectedIndex].text||value;
+    tag.textContent=value;
+    const rect=el.getBoundingClientRect();
+    /* Sigortali beyani ekran yuksekligi baskiya tasinirsa imza sayfa disina itiliyor. */
+    if(el.tagName==='TEXTAREA'&&el.name!=='sigortaliBeyani'&&rect.height>0)tag.style.minHeight=rect.height+'px';
+    el.dataset.printHidden='1';
+    el.style.display='none';
+    el.insertAdjacentElement('afterend',tag);
+  });
+  const waits=[];
+  ['sketchCanvas','thirdSketchCanvas','insuredSignature','expertSignature','companionSignature','thirdPartySignature'].forEach(function(id){
+    const c=document.getElementById(id);if(!c)return;
+    const rect=c.getBoundingClientRect();
+    const img=document.createElement('img');
+    img.className='print-canvas-image';
+    img.dataset.canvasId=id;
+    img.alt=id+' baskı görüntüsü';
+    const parentRect=c.parentElement?c.parentElement.getBoundingClientRect():rect;
+    img.style.width=Math.max(1,(id==='insuredSignature'?parentRect.width:rect.width))+'px';
+    img.style.height=Math.max(1,(id==='insuredSignature'?parentRect.height:rect.height))+'px';
+    const ready=new Promise(function(resolve){img.onload=resolve;img.onerror=resolve});
+    waits.push(ready);
+    const snapshot=c.toDataURL('image/png');
+    img.src=snapshot;
+    c.dataset.printHidden='1';c.style.display='none';c.insertAdjacentElement('afterend',img);
+  });
+  return Promise.all(waits);
+}
+function restorePrintView(){
+  document.querySelectorAll('.print-value,.print-canvas-image').forEach(el=>el.remove());
+  document.querySelectorAll('[data-print-hidden="1"]').forEach(function(el){el.style.display='';delete el.dataset.printHidden});
+  document.body.classList.remove('print-prepared');
+}
+let originalDocumentTitle=document.title;
+function pdfFileBaseName(){
+  const sirket=(form.querySelector('[name="sirket"]')||{}).value||'Sigorta Sirketi';
+  const dosya=(form.querySelector('[name="dosyaNo"]')||{}).value||'Dosya No';
+  return (sirket+' - '+dosya).replace(/[\/:*?"<>|]/g,'-').replace(/\s+/g,' ').trim();
+}
+async function printPdf(){
+  saveCurrentRecord(true);
+  document.title=pdfFileBaseName();
+  await preparePrintView();
+  // Safari/iPad PDF önizlemesinde imza görsellerinin kesin yerleşmesi için kısa bekleme.
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  setTimeout(()=>window.print(),120);
+}
+async function shareForm(){
+  saveCurrentRecord(true);
+  alert('Belge kod olarak değil PDF olarak paylaşılacaktır. Açılacak Yazdır/PDF önizlemesinde Paylaş simgesine dokunup Mail, WhatsApp veya Dosyalar seçeneğini kullanın.');
+  await printPdf();
+}
+window.addEventListener('beforeprint',preparePrintView);
+window.addEventListener('afterprint',()=>setTimeout(()=>{restorePrintView();document.title=originalDocumentTitle;},50));
 document.getElementById('importFile').addEventListener('change',async function(){const f=this.files&&this.files[0];if(!f)return;try{const r=JSON.parse(await f.text());if(!r.data)throw new Error('Geçersiz');currentRecordId=r.id||uid();const records=getRecords();r.id=currentRecordId;r.updatedAt=new Date().toISOString();records[currentRecordId]=r;setRecords(records);loadRecordById(currentRecordId);alert('Dosya içe aktarıldı.')}catch(e){alert('Dosya içe aktarılamadı. Geçerli bir föy yedeği seçin.')}this.value=''});
+
+// --- RAKAMSAL GIRISLER: TR BINLIK AYIRICI + HASAR TESPIT OTOMATIK HESAP ---
+function formatTrNumberPlain(value,maxFraction=2){
+  if(value===null||value===undefined||value==='')return '';
+  const n=typeof value==='number'?value:parseTrNumber(value);
+  if(!Number.isFinite(n))return '';
+  return new Intl.NumberFormat('tr-TR',{minimumFractionDigits:0,maximumFractionDigits:maxFraction}).format(n);
+}
+function sanitizeNumericTyping(raw){
+  let v=String(raw||'').replace(/[^0-9,\.]/g,'');
+  if(!v)return '';
+  // Son ayirici virgulse ondalik kabul et; noktalar binliktir.
+  const comma=v.lastIndexOf(',');
+  let intPart,decPart='';
+  if(comma>=0){intPart=v.slice(0,comma);decPart=v.slice(comma+1).replace(/[.,]/g,'').slice(0,2)}
+  else{intPart=v;}
+  intPart=intPart.replace(/[.,]/g,'').replace(/^0+(?=\d)/,'');
+  if(!intPart)intPart='0';
+  intPart=intPart.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  return decPart!==''||comma>=0?intPart+','+decPart:intPart;
+}
+function attachTrNumericFormatter(el,maxFraction=2){
+  if(!el||el.dataset.trNumeric==='1')return;
+  el.dataset.trNumeric='1';el.inputMode='decimal';el.classList.add('numeric-display');
+  el.addEventListener('input',function(){
+    const start=this.selectionStart||0,oldLen=this.value.length;
+    this.value=sanitizeNumericTyping(this.value);
+    const diff=this.value.length-oldLen;
+    try{this.setSelectionRange(Math.max(0,start+diff),Math.max(0,start+diff))}catch(e){}
+  });
+  el.addEventListener('blur',function(){const n=parseTrNumber(this.value);this.value=this.value?formatTrNumberPlain(n,maxFraction):''});
+}
+
+function radioValue(name){const x=form.querySelector('input[name="'+name+'"]:checked');return x?x.value:''}
+function toggleNewFields(){
+ const set=(id,show)=>{const el=document.getElementById(id);if(el)el.classList.toggle('show',!!show)};
+ set('ekspertizAdresAciklamaAlan',radioValue('ekspertizAdresAyni')==='Hayır');
+ set('benzerHasarAciklamaAlan',radioValue('benzerHasar')==='Evet');
+ set('eskiHasarAciklamaAlan',radioValue('eskiHasar')==='Evet');
+ const third=radioValue('ucuncu')==='Evet';
+ set('thirdPartyInfo',third);set('thirdPartyPage',third);set('thirdPartySignatureBox',third);
+ const sigArea=document.querySelector('.signature-area');if(sigArea)sigArea.classList.toggle('three-signatures',third);
+ updatePageNumbers();
+ set('mutabakatAciklamaAlan',!!radioValue('mutabakat'));
+ set('rucuAciklamaAlan',radioValue('rucu')==='Evet');
+ set('surekliKullanimAciklamaAlan',radioValue('surekliKullanim')==='Hayır');
+ if(third){setTimeout(()=>{const c=document.getElementById('thirdSketchCanvas');if(c)resizeCanvas(c,true);const sg=document.getElementById('thirdPartySignature');if(sg)resizeCanvas(sg,true)},0)}
+}
+function updatePageNumbers(){
+ const third=radioValue('ucuncu')==='Evet';
+ const total=third?5:4;
+ const pages=Array.from(document.querySelectorAll('.page')).filter(p=>!p.classList.contains('third-party-page')||third);
+ pages.forEach((p,idx)=>{const f=p.querySelector('.footer');if(!f)return;if(p.id==='thirdPartyPage')f.textContent='Sayfa 4 / '+total;else{const n=third?(idx+1):(idx+1);f.textContent='Sayfa '+n+' / '+total;}});
+}
+['ekspertizAdresAyni','benzerHasar','eskiHasar','ucuncu','mutabakat','rucu','surekliKullanim'].forEach(function(n){form.querySelectorAll('input[name="'+n+'"]').forEach(el=>el.addEventListener('change',function(){toggleNewFields();autoSave()}))});
+function damageRows(prefix){
+  const table=prefix==='u'?document.querySelector('.third-damage-table'):document.querySelector('.page3 .damage-table');
+  return table?Array.from(table.tBodies[0].rows):[];
+}
+function damageRowIndex(row,prefix){
+  const el=row&&row.querySelector('input[name^="'+prefix+'_"]');
+  if(!el)return -1; const m=el.name.match(new RegExp('^'+prefix+'_(\\d+)_')); return m?Number(m[1]):-1;
+}
+function nextDamageIndex(prefix){let max=-1;damageRows(prefix).forEach(r=>{max=Math.max(max,damageRowIndex(r,prefix))});return max+1}
+function createDamageRow(prefix,index,dynamic=true){
+  const tr=document.createElement('tr'); if(dynamic)tr.className='dynamic-damage-row';
+  tr.innerHTML='<td><input name="'+prefix+'_'+index+'_0"/></td><td><input name="'+prefix+'_'+index+'_1"/></td><td><select name="'+prefix+'_'+index+'_2" class="damage-choice"><option value=""></option><option value="DEĞİŞİM">DEĞİŞİM</option><option value="ONARIM">ONARIM</option><option value="YENİLEME">YENİLEME</option><option value="KONTROL">KONTROL</option></select></td><td><input inputmode="decimal" name="'+prefix+'_'+index+'_3"/></td><td><select name="'+prefix+'_'+index+'_4" class="damage-choice"><option value=""></option><option value="M2">M2</option><option value="M3">M3</option><option value="ADET">ADET</option><option value="TAKIM">TAKIM</option></select></td><td><input inputmode="decimal" name="'+prefix+'_'+index+'_5"/></td><td><input name="'+prefix+'_'+index+'_6" readonly tabindex="-1"/></td><td><input name="'+prefix+'_'+index+'_7"/></td>';
+  return tr;
+}
+function addDamageTableRow(prefix,index=null){
+  const table=prefix==='u'?document.querySelector('.third-damage-table'):document.querySelector('.page3 .damage-table'); if(!table)return;
+  const i=index===null?nextDamageIndex(prefix):index; const tr=createDamageRow(prefix,i,true); table.tBodies[0].appendChild(tr);
+  setupDamageRow(prefix,i); if(index===null){tr.querySelector('input')?.focus();autoSave()} updateDamageTotal(prefix); return tr;
+}
+function resetDynamicDamageRows(){document.querySelectorAll('.dynamic-damage-row').forEach(r=>r.remove())}
+function prepareDamageRows(data){
+  resetDynamicDamageRows(); const mx={t:16,u:16};
+  Object.keys(data||{}).forEach(k=>{const m=k.match(/^(t|u)_(\d+)_([0-7])$/);if(m)mx[m[1]]=Math.max(mx[m[1]],Number(m[2]))});
+  ['t','u'].forEach(prefix=>{for(let i=17;i<=mx[prefix];i++)addDamageTableRow(prefix,i)});
+}
+function updateDamageTotal(prefix){let sum=0;damageRows(prefix).forEach(row=>{const i=damageRowIndex(row,prefix);const o=form.elements[prefix+'_'+i+'_6'];sum+=parseTrNumber(o&&o.value)});const text=new Intl.NumberFormat('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}).format(sum)+' TL';const out=document.getElementById(prefix==='u'?'thirdDamageTotal':'mainDamageTotal');if(out)out.textContent=text;const scr=document.getElementById(prefix==='u'?'thirdDamageTotalScreen':'mainDamageTotalScreen');if(scr)scr.textContent=text}
+function calcDamageRowDynamic(prefix,i){const a=form.elements[prefix+'_'+i+'_3'],b=form.elements[prefix+'_'+i+'_5'],o=form.elements[prefix+'_'+i+'_6'];if(!o)return;const total=parseTrNumber(a&&a.value)*parseTrNumber(b&&b.value);o.value=(a&&a.value&&b&&b.value)?formatTrNumberPlain(total,2):'';updateDamageTotal(prefix)}
+function setupDamageRow(prefix,i){
+  const measure=form.elements[prefix+'_'+i+'_3'],qty=form.elements[prefix+'_'+i+'_4'],unit=form.elements[prefix+'_'+i+'_5'],total=form.elements[prefix+'_'+i+'_6'];
+  [measure,unit].forEach(function(el){if(el&&!el.dataset.damageCalc){el.dataset.damageCalc='1';attachTrNumericFormatter(el,2);el.addEventListener('input',()=>calcDamageRowDynamic(prefix,i));el.addEventListener('change',()=>calcDamageRowDynamic(prefix,i));}});
+  if(qty)qty.inputMode='text'; if(total){total.readOnly=true;total.tabIndex=-1;total.classList.add('numeric-display')} calcDamageRowDynamic(prefix,i);
+}
+function setupThirdDamageCalculations(){damageRows('u').forEach(r=>setupDamageRow('u',damageRowIndex(r,'u')))}
+function setupDamageCalculations(){damageRows('t').forEach(r=>setupDamageRow('t',damageRowIndex(r,'t')))}
+function updateThirdDamageTotal(){updateDamageTotal('u')}
+function updateMainDamageTotal(){updateDamageTotal('t')}
+function setupGeneralNumberFormatting(){
+  form.querySelectorAll('[name^="bedel_"],[name^="ekBedel_"],[name="muafiyetTutar"],[name="m2"]').forEach(el=>attachTrNumericFormatter(el,2));
+}
+setupGeneralNumberFormatting();
+setupDamageCalculations();
+setupThirdDamageCalculations();
+updateMainDamageTotal();
+updateThirdDamageTotal();
+updatePageNumbers();
+
 document.getElementById('recordSearch').addEventListener('input',renderRecords);
 form.addEventListener('input',autoSave);form.addEventListener('change',autoSave);
 
@@ -517,11 +1387,73 @@ canvas.addEventListener('pointerdown',e=>{e.preventDefault();canvas.setPointerCa
 canvas.addEventListener('pointermove',e=>{const st=canvasState[id];if(!st.drawing)return;e.preventDefault();const p=point(e);ctx.save();ctx.globalCompositeOperation=(st.tool==='eraser')?'destination-out':'source-over';ctx.strokeStyle='#111';ctx.lineWidth=(st.tool==='eraser'?14:Math.max(1.7,2.6*p.pressure));ctx.beginPath();ctx.moveTo(st.last.x,st.last.y);ctx.lineTo(p.x,p.y);ctx.stroke();ctx.restore();st.last=p});
 function end(){const st=canvasState[id];if(st.drawing){st.drawing=false;autoSave()}}canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);}
 function setSketchTool(tool,btn){canvasState.sketchCanvas.tool=tool;document.querySelectorAll('.draw-tools [data-tool]').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function setThirdSketchTool(tool,btn){canvasState.thirdSketchCanvas.tool=tool;document.querySelectorAll('.draw-tools [data-third-tool]').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function snapshotThirdSketch(){const c=document.getElementById('thirdSketchCanvas');const st=canvasState.thirdSketchCanvas;if(!c||!st)return;st.history.push(c.toDataURL());if(st.history.length>25)st.history.shift()}
+function undoThirdSketch(){const c=document.getElementById('thirdSketchCanvas'),st=canvasState.thirdSketchCanvas;if(!c||!st||st.history.length<2)return;st.history.pop();const src=st.history[st.history.length-1];const ctx=c.getContext('2d');const img=new Image();img.onload=()=>{ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.getBoundingClientRect().width,c.getBoundingClientRect().height);autoSave()};img.src=src}
+function clearThirdSketch(){if(!confirm('Üçüncü şahıs kroki çizimi temizlensin mi?'))return;const c=document.getElementById('thirdSketchCanvas');c.getContext('2d').clearRect(0,0,c.width,c.height);snapshotThirdSketch();autoSave()}
 function snapshotSketch(){const c=document.getElementById('sketchCanvas');const st=canvasState.sketchCanvas;if(!c||!st)return;st.history.push(c.toDataURL());if(st.history.length>25)st.history.shift()}
 function undoSketch(){const c=document.getElementById('sketchCanvas'),st=canvasState.sketchCanvas;if(!c||!st||st.history.length<2)return;st.history.pop();const src=st.history[st.history.length-1];const ctx=c.getContext('2d');const img=new Image();img.onload=()=>{ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.getBoundingClientRect().width,c.getBoundingClientRect().height);autoSave()};img.src=src}
 function clearSketch(){if(!confirm('Kroki çizimi temizlensin mi?'))return;const c=document.getElementById('sketchCanvas');c.getContext('2d').clearRect(0,0,c.width,c.height);snapshotSketch();autoSave()}
 function clearSignature(id){const c=document.getElementById(id);c.getContext('2d').clearRect(0,0,c.width,c.height);autoSave()}
-window.addEventListener('resize',()=>['sketchCanvas','expertSignature','companionSignature'].forEach(id=>{const c=document.getElementById(id);if(c)resizeCanvas(c,true)}));
-window.addEventListener('load',()=>{setupDrawingCanvas('sketchCanvas',true);setupDrawingCanvas('expertSignature');setupDrawingCanvas('companionSignature');setTimeout(()=>{['sketchCanvas','expertSignature','companionSignature'].forEach(id=>resizeCanvas(document.getElementById(id),true));const id=localStorage.getItem('gencSahaFoyuCurrentId');if(id&&getRecords()[id])loadRecordById(id);else{currentRecordId=uid();saveCurrentRecord(true)}},250)});
+window.addEventListener('resize',()=>['sketchCanvas','thirdSketchCanvas','insuredSignature','expertSignature','companionSignature','thirdPartySignature'].forEach(id=>{const c=document.getElementById(id);if(c)resizeCanvas(c,true)}));
+window.addEventListener('load',()=>{setupDrawingCanvas('sketchCanvas',true);setupDrawingCanvas('thirdSketchCanvas',true);setupDrawingCanvas('insuredSignature');setupDrawingCanvas('expertSignature');setupDrawingCanvas('companionSignature');setupDrawingCanvas('thirdPartySignature');setTimeout(()=>{['sketchCanvas','thirdSketchCanvas','insuredSignature','expertSignature','companionSignature','thirdPartySignature'].forEach(id=>resizeCanvas(document.getElementById(id),true));const id=localStorage.getItem('gencSahaFoyuCurrentId');if(id&&getRecords()[id])loadRecordById(id);else{currentRecordId=uid();saveCurrentRecord(true)}},250)});
 
-</script></body></html>
+toggleNewFields();
+setupThirdDamageCalculations();
+</script>
+<script id="section-flow-script">
+(function(){
+  let currentFlow=0;
+  const form=document.getElementById('form');
+  const pages=()=>Array.from(form.children).filter(el=>el.classList&&el.classList.contains('page'));
+  function thirdPartyEnabled(){
+    const r=form.querySelector('input[name="ucuncu"]:checked');
+    return !!(r && r.value==='Evet');
+  }
+  function logicalPages(){
+    const all=pages();
+    const main1=all.find(el=>el.classList.contains('page1'));
+    const page2=all.find(el=>!el.classList.contains('page1')&&!el.classList.contains('page3')&&!el.classList.contains('page4')&&!el.classList.contains('third-party-page'));
+    const page3=all.find(el=>el.classList.contains('page3'));
+    const page3a=all.find(el=>el.classList.contains('third-party-page'));
+    const page4=all.find(el=>el.classList.contains('page4'));
+    return [main1,page2,page3,page3a,page4];
+  }
+  function normalizeIndex(i){
+    if(i===3 && !thirdPartyEnabled()) return i>currentFlow?4:2;
+    return Math.max(0,Math.min(4,i));
+  }
+  function showFlow(i){
+    i=normalizeIndex(i);
+    currentFlow=i;
+    logicalPages().forEach((p,idx)=>{if(p)p.classList.toggle('flow-active',idx===i)});
+    document.querySelectorAll('#sectionFlow [data-flow]').forEach(b=>b.classList.toggle('active',Number(b.dataset.flow)===i));
+    const tb=document.getElementById('thirdFlowButton');
+    if(tb)tb.style.display=thirdPartyEnabled()?'inline-block':'none';
+    document.getElementById('flowPrev').disabled=(i===0);
+    document.getElementById('flowNext').textContent=(i===4?'Dosyayı Kaydet':'Kaydet ve Sonraki Bölüme Geç →');
+    // Gizli bölüm görünür olduğunda canvas gerçek ekran ölçüsünü yeniden alsın.
+    // Aksi halde pointer koordinatları ile canvas koordinatları farklı kalır.
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const active=logicalPages()[i];
+      if(active && typeof resizeCanvas==='function'){
+        active.querySelectorAll('canvas').forEach(c=>resizeCanvas(c,true));
+      }
+    }));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.querySelectorAll('#sectionFlow [data-flow]').forEach(b=>b.addEventListener('click',()=>showFlow(Number(b.dataset.flow))));
+  document.getElementById('flowPrev').addEventListener('click',()=>{let n=currentFlow-1;if(n===3&&!thirdPartyEnabled())n=2;showFlow(n)});
+  document.getElementById('flowNext').addEventListener('click',()=>{
+    if(typeof saveCurrentRecord==='function') saveCurrentRecord(true);
+    if(currentFlow===4){ if(typeof saveCurrentRecord==='function') saveCurrentRecord(false); return; }
+    let n=currentFlow+1;if(n===3&&!thirdPartyEnabled())n=4;showFlow(n);
+  });
+  form.addEventListener('change',e=>{if(e.target&&e.target.name==='ucuncu'){const tb=document.getElementById('thirdFlowButton');if(tb)tb.style.display=thirdPartyEnabled()?'inline-block':'none';if(currentFlow===3&&!thirdPartyEnabled())showFlow(4)}});
+  window.addEventListener('beforeprint',()=>logicalPages().forEach(p=>p&&p.classList.remove('flow-active')));
+  window.addEventListener('afterprint',()=>showFlow(currentFlow));
+  showFlow(0);
+})();
+</script>
+
+</body></html>

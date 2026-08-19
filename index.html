@@ -3113,3 +3113,227 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
 }
 </style>
 
+
+
+<!-- === V8.4 ÇOKLU HASAR (1-4) — SADECE HASAR + İŞÇİLİK === -->
+<style id="geMultiDamageStyle">
+.geMultiDamageCard{background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:10px;margin:8px 0 12px}
+.geMultiDamageTabs{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.geMultiDamageTabs button{border-radius:9px;padding:9px 13px;border:2px solid transparent;color:#fff;font-weight:900}
+.geMultiDamageTabs .geMd1{background:#111827}.geMultiDamageTabs .geMd2{background:#c2410c}.geMultiDamageTabs .geMd3{background:#047857}.geMultiDamageTabs .geMd4{background:#7c3aed}
+.geMultiDamageTabs button.active{outline:3px solid #bfdbfe;outline-offset:1px}
+.geMultiAddBtn{background:#374151!important;border:1px dashed #94a3b8!important}
+.geMultiDamageMeta{display:grid;grid-template-columns:1fr 170px 1.5fr;gap:8px}
+.geMultiDamageMeta label{margin:0;padding:7px;border-radius:8px}
+.geMultiLaborMarker{font-size:13px;font-weight:900;margin:0 0 8px;padding:7px 10px;border-radius:8px;background:#e5e7eb}
+.geMultiReportBand{color:#fff;font-weight:900;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;letter-spacing:.15px}
+.geMultiReportBand.geMd1{background:#0f4aa0!important}.geMultiReportBand.geMd2{background:#ea6a00!important}.geMultiReportBand.geMd3{background:#237a2c!important}.geMultiReportBand.geMd4{background:#7c3aed!important}
+.geMultiReportMeta{font-weight:800;font-size:8.8px;margin-top:2px}
+.geMultiMetaStrip{display:grid;grid-template-columns:180px 1fr;gap:0;border:1.5px solid currentColor;border-top:0;border-radius:0 0 4px 4px;margin:0 0 2.8mm 0;background:#fff}
+.geMultiMetaItem{padding:6px 10px;min-height:34px;display:flex;align-items:center;gap:8px}
+.geMultiMetaItem+.geMultiMetaItem{border-left:1px solid #cbd5e1}
+.geMultiMetaLabel{display:block;font-size:7.3px;font-weight:900;text-transform:uppercase;margin-bottom:1px}
+.geMultiMetaValue{display:block;font-size:9.1px;font-weight:900;color:#111827}
+.geMultiMetaIcon{font-size:16px;font-weight:900;line-height:1}
+.geMultiMetaWrap.geMd1{color:#0f4aa0}.geMultiMetaWrap.geMd2{color:#ea6a00}.geMultiMetaWrap.geMd3{color:#237a2c}.geMultiMetaWrap.geMd4{color:#7c3aed}
+.geMultiFirstMeta{margin:0 0 2.8mm 0}.geMultiFirstMetaTitle{background:#0f4aa0;color:#fff;font-weight:900;font-size:11.2px;padding:6px 10px;border-radius:4px 4px 0 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}.geMultiFirstMetaLine{display:grid;grid-template-columns:180px 1fr;border:1.5px solid #0f4aa0;border-top:0;border-radius:0 0 4px 4px;background:#fff;color:#0f4aa0}.geMultiFirstMetaLine>div{padding:6px 10px;min-height:34px;display:flex;align-items:center;gap:8px}.geMultiFirstMetaLine>div+div{border-left:1px solid #cbd5e1}
+@media(max-width:760px){.geMultiDamageMeta{grid-template-columns:1fr}.geMultiDamageTabs button{flex:1 1 42%}}
+@media print{
+ .geMultiIncidentPage .reportSection{margin-bottom:3mm!important}
+ .geMultiIncidentPage .geMultiReportBand{font-size:10.5px!important;padding:5px 7px!important;margin-bottom:3mm!important}
+ .geMultiIncidentPage .reportDamageTable td{font-size:8.2px!important}
+ .geMultiIncidentPage .ge13ReportLabor th,.geMultiIncidentPage .ge13ReportLabor td{font-size:7.5px!important;padding:2px!important}
+ .geMultiIncidentPage .ge13LaborSummary{font-size:7.4px!important}
+}
+</style>
+<script id="geMultiDamageScript">
+(function(){
+  const MAX_DAMAGE=4;
+  const COLORS=['geMd1','geMd2','geMd3','geMd4'];
+  const clone=x=>JSON.parse(JSON.stringify(x==null?null:x));
+  window.geMultiDamageList=window.geMultiDamageList||[];
+  window.geMultiDamageActive=Number.isInteger(window.geMultiDamageActive)?window.geMultiDamageActive:0;
+  let geMultiApplying=false;
+
+  function metaFromUI(){return {
+    area:$('geMultiDamageArea')?.value||'',
+    date:$('geMultiDamageDate')?.value||'',
+    note:$('geMultiDamageNote')?.value||''
+  }}
+  function captureFromData(d,old){
+    const m=metaFromUI(), prev=old||{};
+    return {
+      area:m.area||prev.area||'', date:m.date||prev.date||'', note:m.note||prev.note||'',
+      groups:clone(d.groups||[]), labor:clone(d.labor||[]), extraLabor:clone(d.extraLabor||[]),
+      laborEntryMode:d.laborEntryMode||window.ge13LaborMode||'bulk',
+      pieceLaborData:clone(d.pieceLaborData||window.ge13PieceLabor||{}),
+      pieceLaborCustom:clone(d.pieceLaborCustom||window.ge13CustomLabor||[]),
+      pieceLaborRows:clone(d.pieceLaborRows||[]),
+      damageServisListesi:!!d.damageServisListesi,
+      laborServisListesi:!!d.laborServisListesi
+    };
+  }
+  function emptyIncident(){
+    const groups=(typeof regionalFlatGroups!=='undefined'&&Array.isArray(regionalFlatGroups))
+      ? regionalFlatGroups.map(x=>({main:x.main,group:x.group,rows:(x.items||[]).map(name=>({name})),extras:[]}))
+      : Object.entries(typeof damageGroups!=='undefined'?damageGroups:{}).map(([group,items])=>({group,rows:(items||[]).map(name=>({name})),extras:[]}));
+    return {area:'',date:'',note:'',groups,labor:(typeof labors!=='undefined'?labors:[]).map(name=>({name,amount:'',note:''})),extraLabor:[],laborEntryMode:'bulk',pieceLaborData:{},pieceLaborCustom:[],pieceLaborRows:[],damageServisListesi:false,laborServisListesi:false};
+  }
+  function activeLabel(i){const x=window.geMultiDamageList[i]||{};const prefix=i===0?'1. HASAR – İHBAR KONUSU TESPİT':`${i+1}. HASAR`;return `${prefix}${x.area?' – '+x.area.toLocaleUpperCase('tr-TR'):''}`}
+  function renderControls(){
+    ['hasar','iscilik'].forEach(secId=>{
+      const sec=$(secId); if(!sec)return;
+      let host=sec.querySelector('.geMultiDamageCard');
+      if(!host){
+        host=document.createElement('div');host.className='geMultiDamageCard';
+        const h2=sec.querySelector('h2'); if(h2)h2.insertAdjacentElement('afterend',host); else sec.prepend(host);
+      }
+      host.innerHTML=`<div class="geMultiDamageTabs">${window.geMultiDamageList.map((x,i)=>`<button type="button" class="${COLORS[i]} ${i===window.geMultiDamageActive?'active':''}" onclick="geMultiSwitchDamage(${i})">${esc(activeLabel(i))}</button>`).join('')}${window.geMultiDamageList.length<MAX_DAMAGE?'<button type="button" class="geMultiAddBtn" onclick="geMultiAddDamage()">+ Yeni Hasar Ekle</button>':''}</div>
+      <div class="geMultiDamageMeta">
+        <label>Hasar Bölgesi<input id="${secId==='hasar'?'geMultiDamageArea':'geMultiDamageAreaMirror'}" value="${esc(window.geMultiDamageList[window.geMultiDamageActive]?.area||'')}" placeholder="Örn: Sağ Ön" ${secId==='iscilik'?'readonly':''}></label>
+        <label>Hasar Tarihi<input id="${secId==='hasar'?'geMultiDamageDate':'geMultiDamageDateMirror'}" type="date" value="${esc(window.geMultiDamageList[window.geMultiDamageActive]?.date||'')}" ${secId==='iscilik'?'readonly':''}></label>
+        <label>Kısa Açıklama<input id="${secId==='hasar'?'geMultiDamageNote':'geMultiDamageNoteMirror'}" value="${esc(window.geMultiDamageList[window.geMultiDamageActive]?.note||'')}" placeholder="Örn: Sağ ön bölge darbesi" ${secId==='iscilik'?'readonly':''}></label>
+      </div>`;
+    });
+    const a=$('geMultiDamageArea'),dt=$('geMultiDamageDate'),n=$('geMultiDamageNote');
+    if(a)a.oninput=()=>geMultiUpdateMeta('area',a.value); if(dt)dt.onchange=()=>geMultiUpdateMeta('date',dt.value); if(n)n.oninput=()=>geMultiUpdateMeta('note',n.value);
+  }
+  window.geMultiUpdateMeta=function(field,val){
+    const x=window.geMultiDamageList[window.geMultiDamageActive];if(!x)return;x[field]=val;
+    const mirror=field==='area'?$('geMultiDamageAreaMirror'):field==='date'?$('geMultiDamageDateMirror'):$('geMultiDamageNoteMirror');
+    if(mirror)mirror.value=val;
+  };
+
+  const baseCollect=collect;
+  function captureActive(){
+    if(geMultiApplying)return;
+    const d=baseCollect();
+    if(!window.geMultiDamageList.length)window.geMultiDamageList=[captureFromData(d,{})];
+    else window.geMultiDamageList[window.geMultiDamageActive]=captureFromData(d,window.geMultiDamageList[window.geMultiDamageActive]);
+  }
+
+  function applyIncident(index){
+    const inc=window.geMultiDamageList[index];if(!inc)return;
+    geMultiApplying=true;
+    try{
+      extraRows={}; renderDamage();
+      const activeGroups=(typeof regionalFlatGroups!=='undefined'&&Array.isArray(regionalFlatGroups))?regionalFlatGroups:null;
+      if(activeGroups){
+        activeGroups.forEach((x,g)=>{
+          const grp=(inc.groups||[]).find(z=>z.group===x.group&&(!z.main||z.main===x.main))||(inc.groups||[])[g];
+          if(!grp)return;
+          extraRows[g]=(grp.extras||[]).map(r=>({...r,name:r.name||''}));renderExtraDamage(g);
+          (grp.rows||[]).forEach((r,i)=>setDamageRow(`g${g}p${i}`,r));(grp.extras||[]).forEach((r,i)=>setDamageRow(`eg${g}p${i}`,r));
+        });
+      }else{
+        (inc.groups||[]).forEach((grp,g)=>{extraRows[g]=(grp.extras||[]).map(r=>({...r,name:r.name||''}));renderExtraDamage(g);(grp.rows||[]).forEach((r,i)=>setDamageRow(`g${g}p${i}`,r));(grp.extras||[]).forEach((r,i)=>setDamageRow(`eg${g}p${i}`,r));});
+      }
+      if($('damageServisListesi'))$('damageServisListesi').checked=!!inc.damageServisListesi;
+
+      extraLabor=clone(inc.extraLabor||[]); renderLabor();
+      (inc.labor||[]).forEach((r,i)=>{if($('lab'+i+'amount')){$('lab'+i+'amount').value=r.amount||'';$('lab'+i+'note').value=r.note||''}});
+      if($('laborServisListesi'))$('laborServisListesi').checked=!!inc.laborServisListesi;
+      window.ge13PieceLabor=clone(inc.pieceLaborData||{}); window.ge13CustomLabor=clone(inc.pieceLaborCustom||[]); window.ge13LaborMode=inc.laborEntryMode||'bulk';
+      if(typeof ge13SetLaborMode==='function')ge13SetLaborMode(window.ge13LaborMode); else calcLaborTotal();
+    }finally{geMultiApplying=false;}
+    renderControls();
+  }
+
+  window.geMultiSwitchDamage=function(index){
+    if(index===window.geMultiDamageActive){renderControls();return;}
+    captureActive();window.geMultiDamageActive=index;applyIncident(index);
+  };
+  window.geMultiAddDamage=function(){
+    captureActive();if(window.geMultiDamageList.length>=MAX_DAMAGE){alert('En fazla 4 ayrı hasar kaydı açılabilir.');return;}
+    window.geMultiDamageList.push(emptyIncident());window.geMultiDamageActive=window.geMultiDamageList.length-1;applyIncident(window.geMultiDamageActive);
+  };
+
+  collect=function(){
+    const d=baseCollect();
+    if(!geMultiApplying){
+      if(!window.geMultiDamageList.length)window.geMultiDamageList=[captureFromData(d,{})];
+      else window.geMultiDamageList[window.geMultiDamageActive]=captureFromData(d,window.geMultiDamageList[window.geMultiDamageActive]);
+    }
+    d.multiDamageData=clone(window.geMultiDamageList);d.multiDamageActive=window.geMultiDamageActive;
+    const first=window.geMultiDamageList[0];
+    if(first){
+      d.groups=clone(first.groups||[]);d.labor=clone(first.labor||[]);d.extraLabor=clone(first.extraLabor||[]);
+      d.laborEntryMode=first.laborEntryMode||'bulk';d.pieceLaborData=clone(first.pieceLaborData||{});d.pieceLaborCustom=clone(first.pieceLaborCustom||[]);d.pieceLaborRows=clone(first.pieceLaborRows||[]);
+      d.damageServisListesi=!!first.damageServisListesi;d.laborServisListesi=!!first.laborServisListesi;
+    }
+    return d;
+  };
+
+  const baseLoad=load;
+  load=function(d,k=''){
+    baseLoad(d,k);
+    if(Array.isArray(d.multiDamageData)&&d.multiDamageData.length)window.geMultiDamageList=clone(d.multiDamageData).slice(0,MAX_DAMAGE);
+    else window.geMultiDamageList=[captureFromData(baseCollect(),{})];
+    window.geMultiDamageActive=Math.max(0,Math.min(Number(d.multiDamageActive)||0,window.geMultiDamageList.length-1));
+    applyIncident(window.geMultiDamageActive);
+  };
+  const baseNewFile=newFile;
+  newFile=function(){baseNewFile();window.geMultiDamageActive=0;window.geMultiDamageList=[captureFromData(baseCollect(),{})];renderControls();};
+
+  function incidentDamageHtml(inc){
+    const all=[];(inc.groups||[]).forEach(grp=>(grp.rows||[]).concat(grp.extras||[]).forEach(r=>{if(r&&r.name&&(r.s||r.o||r.d||r.b||r.mo||r.kontrol||r.n))all.push(r)}));
+    const deg=all.filter(x=>x.d),ona=all.filter(x=>x.o),sok=all.filter(x=>x.s),boy=all.filter(x=>x.b),mo=all.filter(x=>x.mo),kont=all.filter(x=>x.kontrol);
+    const servis=inc.damageServisListesi?`<p><b>${esc(typeof SERVIS_LISTESI_METNI!=='undefined'?SERVIS_LISTESI_METNI:'Servis listesi üzerinden tespit yapılmıştır.')}</b></p>`:'';
+    return servis+`<table class="reportTable reportDamageTable geSixColDamageTable"><colgroup><col><col><col><col><col><col></colgroup><tr><th>DEĞİŞEN PARÇALAR</th><th>ONARILAN PARÇALAR</th><th>SÖKÜLEN / TAKILAN</th><th>BOYANAN PARÇALAR</th><th>MOBİL ONARIM / MO</th><th>KONTROL</th></tr><tr><td>${partCell(deg)}</td><td>${partCell(ona)}</td><td>${partCell(sok)}</td><td>${partCell(boy)}</td><td>${partCell(mo)}</td><td>${partCell(kont)}</td></tr></table>`;
+  }
+  const GE_MULTI_FIELDS=[['sokmeTakma','SÖKME-TAKMA'],['onarim','ONARIM'],['boya','BOYA'],['elektrik','ELEKTRİK'],['doseme','DÖŞEME'],['cam','CAM'],['mekanik','MEKANİK']];
+  function incidentPieceLaborHtml(inc){
+    const rows=(inc.pieceLaborRows||[]).filter(r=>r&&r.name&&GE_MULTI_FIELDS.some(x=>money(r[x[0]])>0));
+    const totals={};GE_MULTI_FIELDS.forEach(x=>totals[x[0]]=0);let grand=0;
+    rows.forEach(r=>GE_MULTI_FIELDS.forEach(x=>{const n=money(r[x[0]]);totals[x[0]]+=n;grand+=n}));
+    const servis=inc.laborServisListesi?'<p><b>İşçilik tespiti servis listesi üzerinden yapılmıştır.</b></p>':'';
+    if(!rows.length)return servis+'<p>Parça bazlı işçilik bedeli girilmedi.</p>';
+    let h=servis+`<table class="reportTable ge13ReportLabor"><thead><tr><th>PARÇA / İŞÇİLİK</th><th>TESPİT / İŞLEM</th>${GE_MULTI_FIELDS.map(x=>`<th>${x[1]}</th>`).join('')}<th>TOPLAM</th></tr></thead><tbody>`;
+    rows.forEach(r=>{const rt=GE_MULTI_FIELDS.reduce((a,x)=>a+money(r[x[0]]),0);h+=`<tr><td>${esc(r.name)}</td><td>${esc(r.operation||'-')}</td>${GE_MULTI_FIELDS.map(x=>`<td>${money(r[x[0]])?fmt(money(r[x[0]])):'-'}</td>`).join('')}<td><b>${fmt(rt)}</b></td></tr>`});
+    h+=`</tbody><tfoot><tr><td colspan="2"><b>TOPLAM</b></td>${GE_MULTI_FIELDS.map(x=>`<td><b>${fmt(totals[x[0]])}</b></td>`).join('')}<td><b>${fmt(grand)}</b></td></tr></tfoot></table>`;
+    h+=`<div class="ge13LaborSummary"><div><b>Sökme-Takma</b>${fmt(totals.sokmeTakma)}</div><div><b>Onarım</b>${fmt(totals.onarim)}</div><div><b>Boya</b>${fmt(totals.boya)}</div><div><b>Elektrik</b>${fmt(totals.elektrik)}</div><div><b>Döşeme</b>${fmt(totals.doseme)}</div><div><b>Cam</b>${fmt(totals.cam)}</div><div><b>Mekanik</b>${fmt(totals.mekanik)}</div><div><b>GENEL TOPLAM</b>${fmt(grand)}</div></div>`;return h;
+  }
+  function incidentBulkLaborHtml(inc){
+    const rows=(inc.labor||[]).concat(inc.extraLabor||[]).filter(x=>x&&x.name&&(money(x.amount)>0||x.note));const total=rows.reduce((a,x)=>a+money(x.amount),0);
+    const oldMode=window.ge13LaborMode,oldCheck=$('laborServisListesi')?.checked;if($('laborServisListesi'))$('laborServisListesi').checked=!!inc.laborServisListesi;window.ge13LaborMode='bulk';
+    let h;try{h=laborTableV73(rows,total)}finally{window.ge13LaborMode=oldMode;if($('laborServisListesi'))$('laborServisListesi').checked=!!oldCheck}return h;
+  }
+  function incidentLaborHtml(inc){return (inc.laborEntryMode||'bulk')==='piece'?incidentPieceLaborHtml(inc):incidentBulkLaborHtml(inc)}
+
+  const baseMakeReport=makeReport;
+  makeReport=function(){
+    baseMakeReport();
+    const report=$('report');if(!report)return;
+    const d=collect(),v=d.v||{};let firstPage=report.querySelector('.reportPage');if(!firstPage)return;
+
+    /* 1. HASAR ana rapor formatında kalır; sadece ihbar konusu, tarih ve açıklama satırı eklenir. */
+    const firstInc=window.geMultiDamageList[0]||{};
+    const firstTitle=[`1. HASAR – İHBAR KONUSU TESPİT`,firstInc.area?firstInc.area.toLocaleUpperCase('tr-TR'):''].filter(Boolean).join(' – ');
+    const firstMeta=[firstInc.date?('Hasar Tarihi: '+formatDateTR(firstInc.date)):'Hasar Tarihi: -',firstInc.note?('Açıklama: '+firstInc.note):'Açıklama: -'].join(' | ');
+    const damageTitle=[...firstPage.querySelectorAll('.reportTitle')].find(x=>(x.textContent||'').toLocaleUpperCase('tr-TR').includes('HASAR TESPİTİ'));
+    if(damageTitle&&damageTitle.parentElement){
+      const info=document.createElement('div');info.className='geMultiFirstMeta';
+      info.innerHTML=`<div class="geMultiFirstMetaTitle">${esc(firstTitle)}</div><div class="geMultiFirstMetaLine"><div><span class="geMultiMetaIcon">▣</span><span><span class="geMultiMetaLabel">HASAR TARİHİ</span><span class="geMultiMetaValue">${esc(firstInc.date?formatDateTR(firstInc.date):'-')}</span></span></div><div><span class="geMultiMetaIcon">▤</span><span><span class="geMultiMetaLabel">AÇIKLAMA</span><span class="geMultiMetaValue">${esc(firstInc.note||'-')}</span></span></div></div>`;
+      damageTitle.insertAdjacentElement('afterend',info);
+    }
+
+    let anchor=firstPage;
+    if(window.geMultiDamageList.length>=2){
+      window.geMultiDamageList.slice(1).forEach((inc,j)=>{
+        const idx=j+1,color=COLORS[idx];const meta=[inc.date?('Hasar Tarihi: '+formatDateTR(inc.date)):'',inc.note?('Açıklama: '+inc.note):''].filter(Boolean).join(' | ');
+        const body=`<div class="geMultiMetaWrap ${color}"><div class="geMultiReportBand ${color}">${idx+1}. HASAR${inc.area?' – '+esc(inc.area.toLocaleUpperCase('tr-TR')):''}</div><div class="geMultiMetaStrip"><div class="geMultiMetaItem"><span class="geMultiMetaIcon">▣</span><span><span class="geMultiMetaLabel">HASAR TARİHİ</span><span class="geMultiMetaValue">${esc(inc.date?formatDateTR(inc.date):'-')}</span></span></div><div class="geMultiMetaItem"><span class="geMultiMetaIcon">▤</span><span><span class="geMultiMetaLabel">AÇIKLAMA</span><span class="geMultiMetaValue">${esc(inc.note||'-')}</span></span></div></div></div>`+
+          `<div class="reportSection"><div class="reportTitle">HASAR TESPİTİ</div>${incidentDamageHtml(inc)}</div>`+
+          `<div class="reportSection"><div class="reportTitle">İŞÇİLİKLER</div>${incidentLaborHtml(inc)}</div>`;
+        const wrap=document.createElement('div');wrap.innerHTML=`<div class="reportPage geMultiIncidentPage">${reportSlimHeaderHtml(v)}<div class="reportPageBody">${body}</div>${reportFooterHtml(1,1)}</div>`;
+        const page=wrap.firstElementChild;anchor.insertAdjacentElement('afterend',page);anchor=page;
+      });
+    }
+    const pages=[...report.querySelectorAll('.reportPage')];pages.forEach((p,i)=>{const no=p.querySelector('.reportPageNo');if(no)no.textContent=`Sayfa ${i+1} / ${pages.length}`;});
+  };
+
+  const baseShow=show;
+  show=function(id){baseShow(id);if(id==='hasar'||id==='iscilik'){if(!window.geMultiDamageList.length)window.geMultiDamageList=[captureFromData(baseCollect(),{})];renderControls();}};
+
+  window.addEventListener('load',()=>{setTimeout(()=>{if(!window.geMultiDamageList.length)window.geMultiDamageList=[captureFromData(baseCollect(),{})];renderControls();},50)});
+})();
+</script>

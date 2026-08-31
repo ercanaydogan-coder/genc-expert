@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GENÇ SİGORTA EKSPERLİK V8.5.8 SATIR BAZLI PLANLAMA</title>
+<title>GENÇ SİGORTA EKSPERLİK V8.5.9 DOSYA BAZLI PLANLAMA + DEPOLAMA KORUMASI</title>
 <style>
 *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;margin:0;background:#f3f4f6;color:#111827}header{background:#111827;color:white;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}h1{font-size:20px;margin:0}button{border:0;border-radius:10px;background:#111827;color:white;padding:11px 14px;font-weight:700;margin:2px;cursor:pointer}.danger{background:#991b1b}.soft{background:#4b5563}.green{background:#047857}nav{display:flex;gap:6px;overflow:auto;background:white;padding:8px;position:sticky;top:0;border-bottom:1px solid #ddd;z-index:3}nav button{background:#374151;white-space:nowrap}main{padding:12px;max-width:1220px;margin:auto}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}label,.card,.box{display:block;background:white;border:1px solid #ddd;border-radius:12px;padding:10px;margin:7px 0}input,textarea,select{width:100%;font-size:16px;padding:10px;border:1px solid #bbb;border-radius:8px;margin-top:5px}input[type=checkbox],input[type=radio]{width:auto;transform:scale(1.2);margin-right:8px}.sectionTitle{margin:18px 0 8px;background:#111827;color:#fff;padding:10px;border-radius:10px}.docrow{display:grid;grid-template-columns:auto auto 1.25fr auto auto 150px 1.35fr;gap:8px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:8px;margin:6px 0}.partrow,.addrow{display:grid;grid-template-columns:1.2fr repeat(5,auto) 1.2fr auto;gap:6px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:7px;margin:6px 0}.addrow{border-style:dashed}.paintrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:white;border:1px solid #ddd;border-radius:10px;padding:7px;margin:6px 0}.laborrow{display:grid;grid-template-columns:1.5fr 1fr 1.6fr;gap:8px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:8px;margin:6px 0}.controlrow,.critrow{background:white;border:1px solid #ddd;border-radius:12px;padding:10px;margin:8px 0}.critrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 90px 1.4fr;gap:8px;align-items:center}.pertResult{font-size:18px;font-weight:800;padding:10px;border-radius:10px;background:#e5e7eb}.scoreBox{background:#f9fafb;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0}.inline{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.inline label{border:0;padding:0;margin:0;background:transparent}.report{background:white;padding:18px;border-radius:12px;line-height:1.45}.warn{color:#b91c1c;font-weight:700}.ok{color:#047857;font-weight:700}.thumb{width:180px;height:240px;object-fit:cover;border:1px solid #ddd;border-radius:8px;margin:5px}.totalBox{background:#e5e7eb;border-radius:12px;padding:14px;margin:12px 0;font-size:18px;font-weight:700}.small{font-size:13px;color:#4b5563}.searchBox{background:#e5e7eb;border-radius:14px;padding:12px;margin:10px 0}.pill{display:inline-block;background:#e5e7eb;border-radius:999px;padding:4px 9px;margin:2px;font-size:12px}.hiddenBySearch{display:none}table{width:100%;border-collapse:collapse;margin:10px 0}td,th{border:1px solid #999;padding:6px;text-align:left}.damageTabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.damageTabs button{background:#4b5563}.damageTabs button.active{background:#047857}.damageGroupPanel{display:none}.damageGroupPanel.active{display:block}.photoGrid{display:flex;flex-wrap:wrap;gap:10px}.photoCard{background:white;border:1px solid #ddd;border-radius:12px;padding:8px;text-align:center}.photoCard .small{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:760px){.docrow,.partrow,.addrow,.paintrow,.laborrow,.critrow{grid-template-columns:1fr}.inline{display:block}.inline label{display:inline-block;margin-right:10px}header{display:block}header button{margin-top:8px}}
@@ -229,7 +229,7 @@ title{display:none!important}
 
 </head>
 <body>
-<header><div><h1>GENÇ SİGORTA EKSPERLİK V8.5.8</h1><div class="small" style="color:#d1d5db">Kontrol / Görüşme / Rapor Takip ajanda planlama</div></div><div><button onclick="save()" class="green">Kaydet</button><button onclick="printReport()">PDF / Yazdır</button></div></header>
+<header><div><h1>GENÇ SİGORTA EKSPERLİK V8.5.9</h1><div class="small" style="color:#d1d5db">Kontrol / Görüşme / Rapor Takip ajanda planlama</div></div><div><button onclick="save()" class="green">Kaydet</button><button onclick="printReport()">PDF / Yazdır</button></div></header>
 <nav><button onclick="show('home')">Ana Menü</button><button onclick="show('dosya')">Dosya</button><button onclick="show('arac')">Araç</button><button onclick="show('hasar')">Hasar</button><button onclick="show('iscilik')">İşçilik</button><button onclick="show('boya')">Boya Ölçüm</button><button onclick="show('kanaat')">Kanaat</button><button onclick="show('kontrol')">PERT Durumu</button><button onclick="show('notlar')">Notlar</button><button onclick="show('rapor')">Rapor</button><button class="danger" onclick="window.open('https://crm.genceksperlik.com.tr', '_blank', 'noopener,noreferrer')">CRM'E GİT</button></nav>
 <main>
 <section id="home" class="page active"><h2>GENÇ SİGORTA EKSPERLİK Mobil</h2><div class="card"><h3>Kullanıcı Seçimi</h3><label>Kullanıcı Adı / Raportör<input id="currentUserInput" placeholder="Örn: Ercan, Mustafa, Ahmet"></label><button class="green" onclick="setCurrentUser()">Kullanıcıyı Kaydet</button><p>Aktif Kullanıcı: <b id="activeUserLabel">Seçilmedi</b></p></div><div class="grid"><button class="green" onclick="startNewFile()">+ Yeni Dosya Aç</button><button onclick="show('dosya');renderList()">Kendi Dosyalarımı Göster</button><button onclick="document.getElementById('otoTransferImport').click()">Dosya İçe Aktar</button><input id="otoTransferImport" type="file" accept="application/json,.json" style="display:none" onchange="importOtoTransfer(event)"><button onclick="show('rapor')">Rapor Ekranı</button></div><div class="searchBox"><b>Bu sürümde düzeltilenler:</b> Kurumsal logo, üst bilgi ve iletişim satırı rapor düzenine eklendi.</div></section>
@@ -275,7 +275,7 @@ title{display:none!important}
 </style>
 <div id="gePlanModal" class="gePlanModal" onclick="if(event.target===this)geClosePlanner()">
  <div class="gePlanPanel">
-  <div class="gePlanHead"><div><h3 style="margin:0">PLANLAMA</h3><div class="small">Her işi ayrı seçiniz. Tarih yalnız Ajandaya / Ajanda + Rapor seçiminde tarih ve saat zorunludur. Rapora seçilen iş tarih ve saat olmadan da yazdırılabilir. Bu planlar dosya kaydına alınmaz.</div></div><button type="button" class="soft" onclick="geClosePlanner()">KAPAT</button></div>
+  <div class="gePlanHead"><div><h3 style="margin:0">PLANLAMA</h3><div class="small">Her işi ayrı seçiniz. Tarih yalnız Ajandaya / Ajanda + Rapor seçiminde tarih ve saat zorunludur. Rapora seçilen iş tarih ve saat olmadan da yazdırılabilir. Planlamalar açık dosyaya özel olarak kaydedilir; başka dosyaya taşınmaz.</div></div><button type="button" class="soft" onclick="geClosePlanner()">KAPAT</button></div>
   <div class="gePlanList">
    <div class="geWorkRow disabled" id="geWorkRowEvrak"><label class="workTitle"><input type="checkbox" id="geWorkSecEvrak" onchange="geToggleWork('Evrak')"> 1- Eksik evraklar tamamlanacak</label><label class="workDate">Tarih<input id="geWorkDateEvrak" type="date"></label><label class="workTime">Saat<input id="geWorkTimeEvrak" type="time" value="10:00"></label><div class="workDest"><label><input type="radio" name="geWorkDestEvrak" value="calendar"> Ajandaya</label><label><input type="radio" name="geWorkDestEvrak" value="report"> Rapora</label><label><input type="radio" name="geWorkDestEvrak" value="both"> Ajanda + Rapor</label></div></div>
    <div class="geWorkRow disabled" id="geWorkRowMobil"><label class="workTitle"><input type="checkbox" id="geWorkSecMobil" onchange="geToggleWork('Mobil')"> 2- Mobil onarım girişi yapılacak</label><label class="workDate">Tarih<input id="geWorkDateMobil" type="date"></label><label class="workTime">Saat<input id="geWorkTimeMobil" type="time" value="10:00"></label><div class="workDest"><label><input type="radio" name="geWorkDestMobil" value="calendar"> Ajandaya</label><label><input type="radio" name="geWorkDestMobil" value="report"> Rapora</label><label><input type="radio" name="geWorkDestMobil" value="both"> Ajanda + Rapor</label></div></div>
@@ -642,7 +642,7 @@ function printReport(){makeReport();show('rapor');const oldTitle=document.title;
 const COMPANY_LEGAL_NAME = "GENÇ SİGORTA EKSPERLİK HİZMETLERİ LTD. ŞTİ.";
 
 function reportFirstHeaderHtml(v){return `<div class="reportHeader reportHeaderFirst"><div class="reportBrand"><img class="reportLogo" src="${COMPANY_LOGO_SRC}"><div><div class="reportBrandTitle">${COMPANY_LEGAL_NAME}</div><div class="reportBrandSub">Sigorta Eksperlik Hizmetleri</div></div></div><div class="reportFileBox"><div><b>Dosya No</b>: ${esc(v.dosyaNo||'-')}</div><div><b>Plaka</b>: ${esc(v.plaka||'-')}</div><div><b>Ekspertiz Tarihi</b>: ${esc(formatDateTR(v.tarih)||'-')}</div></div></div>`}
-function reportSlimHeaderHtml(v){return `<div class="reportSlimHeader"><div class="reportSlimName">${COMPANY_LEGAL_NAME}</div><div class="reportSlimFile"><span><b>Dosya No:</b> ${esc(v.dosyaNo||'-')}</span><span><b>Plaka:</b> ${esc(v.plaka||'-')}</span><span><b>Tarih:</b> ${esc(formatDateTR(v.tarih)||'-')}</span></div></div>`}
+function reportSlimHeaderHtml(v){const rp=(typeof ge77ReportPlate==='function')?ge77ReportPlate(v):(v.plaka||'');return `<div class="reportSlimHeader"><div class="reportSlimName">${COMPANY_LEGAL_NAME}</div><div class="reportSlimFile"><span><b>Dosya No:</b> ${esc(v.dosyaNo||'-')}</span><span><b>Plaka:</b> ${esc(rp||'-')}</span><span><b>Tarih:</b> ${esc(formatDateTR(v.tarih)||'-')}</span></div></div>`}
 function reportFooterHtml(page,total){return `<div class="reportFooter"><div class="reportFooterContact"><b>${COMPANY_LEGAL_NAME}</b> &nbsp; | &nbsp; Yavuz Selim Bulvarı Toklu Mahallesi No:232 Güven Sitesi B Blok Kat:1 Ortahisar / Trabzon &nbsp; | &nbsp; Tel: 0 (462) 230 86 96 &nbsp; | &nbsp; WhatsApp: 0542 244 30 00 &nbsp; | &nbsp; ihbar@genceksperlik.com.tr</div><div class="reportPageNo">Sayfa ${page} / ${total}</div></div>`}
 function reportPageHtml(v,page,total,body){let head=page===1?reportFirstHeaderHtml(v):reportSlimHeaderHtml(v);return `<div class="reportPage reportPage${page}">${head}<div class="reportPageBody">${body}</div>${reportFooterHtml(page,total)}</div>`}
 function formatListWithTicks(rows){return rows&&rows.length?rows.map(x=>String(x)).join(', '):'-'}
@@ -2422,6 +2422,186 @@ makeReport=function(){__regionalMakeReportBase();const sec=regionalControlReport
   window.addEventListener('load',()=>setTimeout(markLaborReport,300));
 })();
 </script>
+
+
+<style id="ge859StorageStyle">
+.geStorageCard{border:1px solid #bfdbfe;background:#eff6ff}.geStorageMeter{height:16px;border-radius:999px;background:#dbeafe;overflow:hidden;margin:8px 0}.geStorageMeter>span{display:block;height:100%;background:#16a34a;width:0;transition:width .25s}.geStorageMeter.warn75>span{background:#d97706}.geStorageMeter.danger90>span{background:#dc2626}.geStorageModal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.62);z-index:10050;padding:18px;overflow:auto}.geStorageModal.open{display:flex;align-items:flex-start;justify-content:center}.geStoragePanel{width:min(980px,100%);background:#fff;border-radius:16px;padding:16px;margin-top:3vh;box-shadow:0 18px 60px rgba(0,0,0,.28)}.geStorageRow{display:grid;grid-template-columns:auto 130px 120px 1fr 120px;gap:8px;align-items:center;border:1px solid #e5e7eb;border-radius:10px;padding:9px;margin:6px 0}.geStorageRow.planned{border-color:#f59e0b;background:#fffbeb}.geStorageActions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px}.geStorageStats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}.geStorageStat{border:1px solid #dbe3ee;border-radius:10px;padding:10px;background:#f8fafc}.geStorageStat b{display:block;font-size:18px;margin-top:4px}@media(max-width:760px){.geStorageRow{grid-template-columns:auto 1fr}.geStorageRow>*:not(input){grid-column:2}.geStorageActions button{width:100%}}
+</style>
+<script id="ge859StorageAndPlanningFix">
+(function(){
+  const GE_LOCAL_SAFE_LIMIT=5*1024*1024; // localStorage için ihtiyatlı 5 MB referans
+  const GE_WARN_RATIO=.75;
+  const WORK_KEYS=['Evrak','Mobil','Tramer','Parca','Sbm','Sirket','Kontrol','Gorusme','Custom'];
+  let ge859WarnShown=false;
+
+  function ge859ApproxBytes(s){ return String(s||'').length*2; }
+  function ge859FmtBytes(n){
+    n=Number(n||0); if(n<1024)return n+' B'; if(n<1024*1024)return (n/1024).toFixed(1).replace('.',',')+' KB'; return (n/1024/1024).toFixed(2).replace('.',',')+' MB';
+  }
+  function ge859StorageInfo(){
+    let total=0, oto=0, other=0, count=0;
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i),v=localStorage.getItem(k)||''; const b=ge859ApproxBytes(k)+ge859ApproxBytes(v); total+=b;
+      if(k&&k.startsWith('GE7_')){oto+=b;count++;} else other+=b;
+    }
+    return {total,oto,other,count,ratio:total/GE_LOCAL_SAFE_LIMIT};
+  }
+  function ge859DateValue(d){
+    const meta=d&&d.__geMeta||{},v=d&&d.v||{};
+    return meta.savedAt||meta.updatedAt||v.tarih||v.ihbarTarihi||'9999-12-31';
+  }
+  function ge859HasPlanning(d){
+    return !!(d&&d.gePlanning&&Array.isArray(d.gePlanning.works)&&d.gePlanning.works.some(x=>x&&x.selected));
+  }
+  function ge859CapturePlanning(){
+    const works=WORK_KEYS.map(k=>({
+      key:k,
+      selected:!!document.getElementById('geWorkSec'+k)?.checked,
+      date:document.getElementById('geWorkDate'+k)?.value||'',
+      time:document.getElementById('geWorkTime'+k)?.value||'10:00',
+      dest:document.querySelector('input[name="geWorkDest'+k+'"]:checked')?.value||'',
+      text:k==='Custom'?(document.getElementById('geWorkTextCustom')?.value||''):''
+    }));
+    return {works,reportWorks:(typeof geReportPlannedWorks!=='undefined'&&Array.isArray(geReportPlannedWorks))?geReportPlannedWorks.map(x=>({...x})):[]};
+  }
+  function ge859ResetPlanning(){
+    WORK_KEYS.forEach(k=>{
+      const sec=document.getElementById('geWorkSec'+k); if(sec)sec.checked=false;
+      const date=document.getElementById('geWorkDate'+k); if(date)date.value='';
+      const time=document.getElementById('geWorkTime'+k); if(time)time.value='10:00';
+      document.querySelectorAll('input[name="geWorkDest'+k+'"]').forEach(r=>r.checked=false);
+      if(k==='Custom'){const t=document.getElementById('geWorkTextCustom');if(t)t.value='';}
+      if(typeof window.geToggleWork==='function')window.geToggleWork(k);
+    });
+    if(typeof geReportPlannedWorks!=='undefined')geReportPlannedWorks=[];
+    window.geReportPlannedWorks=[];
+    const links=document.getElementById('geCalendarSelectedButtons'); if(links){links.innerHTML='';links.style.display='none';}
+    document.getElementById('gePlanModal')?.classList.remove('open');
+  }
+  function ge859RestorePlanning(p){
+    ge859ResetPlanning(); if(!p||!Array.isArray(p.works))return;
+    p.works.forEach(w=>{
+      const k=w.key;if(!WORK_KEYS.includes(k))return;
+      const sec=document.getElementById('geWorkSec'+k);if(sec)sec.checked=!!w.selected;
+      const date=document.getElementById('geWorkDate'+k);if(date)date.value=w.date||'';
+      const time=document.getElementById('geWorkTime'+k);if(time)time.value=w.time||'10:00';
+      if(w.dest){const r=document.querySelector('input[name="geWorkDest'+k+'"][value="'+w.dest+'"]');if(r)r.checked=true;}
+      if(k==='Custom'){const t=document.getElementById('geWorkTextCustom');if(t)t.value=w.text||'';}
+      if(typeof window.geToggleWork==='function')window.geToggleWork(k);
+    });
+    if(typeof geReportPlannedWorks!=='undefined')geReportPlannedWorks=Array.isArray(p.reportWorks)?p.reportWorks.map(x=>({...x})):[];
+    window.geReportPlannedWorks=Array.isArray(p.reportWorks)?p.reportWorks.map(x=>({...x})):[];
+  }
+
+  // Son collect katmanı: planlama dosyaya aittir; fotoğraf Base64 verisi localStorage'a yazılmaz.
+  const baseCollect=window.collect;
+  window.collect=function(){
+    const d=baseCollect.apply(this,arguments);
+    if(d){
+      d.gePlanning=ge859CapturePlanning();
+      d.photos=[];
+      d.__geMeta=d.__geMeta||{};
+    }
+    return d;
+  };
+
+  // Dosya açılırken önce önceki dosyanın planlama ekranını temizle, sonra yalnız açılan dosyanın planını yükle.
+  const baseLoad=window.load;
+  window.load=function(d,k){
+    ge859ResetPlanning();
+    const r=baseLoad.apply(this,arguments);
+    ge859RestorePlanning(d&&d.gePlanning);
+    return r;
+  };
+
+  // Yeni dosya: kayıtlı dosyayı SİLMEZ; yalnız ekrandaki geçici planlama durumunu temizler.
+  const baseNewFile=window.newFile;
+  window.newFile=function(){
+    const r=baseNewFile.apply(this,arguments);
+    ge859ResetPlanning();
+    ge859RefreshStorageCard();
+    return r;
+  };
+
+  // Kaydetme: önce yeni kayıt güvenle yazılır; başarılı olduktan sonra eski anahtar temizlenir.
+  window.save=function(){
+    if(!requireUser())return;
+    const d=collect();
+    if(!d.v.dosyaNo&&!d.v.plaka&&!d.v.sigortali){alert('Kaydetmek için dosya no, plaka veya sigortalıdan en az birini gir.');show('dosya');return;}
+    const newKey=keyFor(d), oldKey=currentKey;
+    let previous=null;
+    try{ if(oldKey)previous=JSON.parse(localStorage.getItem(oldKey)||'null'); }catch(e){}
+    const now=new Date().toISOString();
+    d.__geMeta={...(previous&&previous.__geMeta||{}),savedAt:(previous&&previous.__geMeta&&previous.__geMeta.savedAt)||now,updatedAt:now};
+    try{
+      localStorage.setItem(newKey,JSON.stringify(d));
+      if(oldKey&&oldKey!==newKey)localStorage.removeItem(oldKey);
+      currentKey=newKey; renderList(); ge859RefreshStorageCard();
+      const info=ge859StorageInfo();
+      alert('Kaydedildi');
+      if(info.ratio>=GE_WARN_RATIO)setTimeout(()=>ge859ShowStorageManager(true),0);
+    }catch(e){
+      console.error('Kayıt hatası',e);
+      if(e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014)){
+        alert('Tarayıcı depolama alanı dolmak üzere veya doldu. Kayıt silinmedi. Eski dosyaları gözden geçirmek için depolama yöneticisi açılacak.');
+        ge859ShowStorageManager(true);
+      }else alert('Dosya kaydedilemedi: '+(e&&e.message?e.message:e));
+    }
+  };
+
+  function ge859Records(){
+    const rows=[];
+    Object.keys(localStorage).filter(k=>k.startsWith('GE7_')).forEach(k=>{
+      try{const raw=localStorage.getItem(k)||'',d=JSON.parse(raw);rows.push({k,d,bytes:ge859ApproxBytes(k)+ge859ApproxBytes(raw),date:ge859DateValue(d),planned:ge859HasPlanning(d)});}catch(e){}
+    });
+    rows.sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+    return rows;
+  }
+  function ge859EnsureUI(){
+    if(!document.getElementById('geStorageCard')){
+      const host=document.querySelector('#home .searchBox')||document.getElementById('home');
+      const card=document.createElement('div');card.id='geStorageCard';card.className='card geStorageCard';
+      card.innerHTML='<b>DEPOLAMA DURUMU</b><div id="geStorageSummary" class="small" style="margin-top:5px"></div><div id="geStorageMeter" class="geStorageMeter"><span></span></div><button type="button" class="soft" onclick="ge859ShowStorageManager(false)">Depolama Ayrıntıları / Eski Dosyaları Temizle</button>';
+      host.parentNode.insertBefore(card,host);
+    }
+    if(!document.getElementById('geStorageModal')){
+      const m=document.createElement('div');m.id='geStorageModal';m.className='geStorageModal';m.onclick=e=>{if(e.target===m)m.classList.remove('open')};
+      m.innerHTML='<div class="geStoragePanel"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><h3 style="margin:0">DEPOLAMA YÖNETİCİSİ</h3><div class="small">Program hiçbir dosyayı kendiliğinden silmez. Seçim ve son onay size aittir.</div></div><button class="soft" type="button" onclick="document.getElementById(\'geStorageModal\').classList.remove(\'open\')">KAPAT</button></div><div id="geStorageStats" class="geStorageStats" style="margin-top:12px"></div><div id="geStorageWarning" class="searchBox"></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="soft" type="button" onclick="ge859SelectOldest(5)">En Eski 5 Dosyayı Seç</button><button class="soft" type="button" onclick="ge859SelectOldest(10)">En Eski 10 Dosyayı Seç</button><button class="soft" type="button" onclick="ge859ClearSelection()">Seçimi Temizle</button></div><div id="geStorageList"></div><div class="geStorageActions"><button class="danger" type="button" onclick="ge859DeleteSelected()">SEÇİLEN DOSYALARI SİL</button><button class="soft" type="button" onclick="document.getElementById(\'geStorageModal\').classList.remove(\'open\')">ŞİMDİLİK SİLME</button></div></div>';
+      document.body.appendChild(m);
+    }
+  }
+  window.ge859RefreshStorageCard=function(){
+    ge859EnsureUI();const i=ge859StorageInfo(),pct=Math.min(100,i.ratio*100);const meter=document.getElementById('geStorageMeter');
+    document.getElementById('geStorageSummary').innerHTML='Toplam yaklaşık <b>'+ge859FmtBytes(i.total)+'</b> · Oto Kaza <b>'+ge859FmtBytes(i.oto)+'</b> · Diğer program/kayıtlar <b>'+ge859FmtBytes(i.other)+'</b> · Oto Kaza dosyası <b>'+i.count+'</b> · İhtiyatlı 5 MB referansa göre <b>%'+pct.toFixed(0)+'</b>';
+    meter.className='geStorageMeter'+(pct>=90?' danger90':pct>=75?' warn75':'');meter.querySelector('span').style.width=pct+'%';
+  };
+  window.ge859ShowStorageManager=function(fromWarning){
+    ge859EnsureUI();const i=ge859StorageInfo(),pct=i.ratio*100,rows=ge859Records();
+    document.getElementById('geStorageStats').innerHTML='<div class="geStorageStat">Toplam kullanım<b>'+ge859FmtBytes(i.total)+'</b></div><div class="geStorageStat">Oto Kaza<b>'+ge859FmtBytes(i.oto)+'</b></div><div class="geStorageStat">Diğer program/kayıtlar<b>'+ge859FmtBytes(i.other)+'</b></div><div class="geStorageStat">Oto Kaza dosyası<b>'+i.count+'</b></div>';
+    document.getElementById('geStorageWarning').innerHTML=(pct>=75?'<b class="warn">Alan ihtiyatlı sınırın %'+pct.toFixed(0)+' seviyesinde.</b> En eski dosyalar aşağıda önce gösteriliyor.':'<b class="ok">Depolama seviyesi normal.</b>')+'<br><span class="small">Not: Tarayıcıların gerçek localStorage kotası cihaza göre değişebilir. Buradaki yüzde, güvenli takip için 5 MB ihtiyatlı referans üzerinden hesaplanır.</span>';
+    document.getElementById('geStorageList').innerHTML=rows.length?rows.map((r,idx)=>{const v=r.d.v||{},date=(r.d.__geMeta&&r.d.__geMeta.savedAt)?formatDateTR(String(r.d.__geMeta.savedAt).slice(0,10)):formatDateTR(v.tarih||v.ihbarTarihi||'');return '<div class="geStorageRow '+(r.planned?'planned':'')+'"><input class="geStoragePick" type="checkbox" data-key="'+esc(r.k)+'"><b>'+(date||'-')+'</b><span>'+esc(v.plaka||'Plaka yok')+'</span><span><b>'+esc(v.dosyaNo||'Dosya no yok')+'</b><br><span class="small">'+esc(v.sirket||'-')+(r.planned?' · ⚠ Planlama var':'')+'</span></span><span>'+ge859FmtBytes(r.bytes)+'</span></div>';}).join(''):'<p>Kayıtlı Oto Kaza dosyası bulunamadı.</p>';
+    document.getElementById('geStorageModal').classList.add('open');
+  };
+  window.ge859SelectOldest=function(n){
+    const boxes=[...document.querySelectorAll('.geStoragePick')];boxes.forEach((b,i)=>b.checked=i<n);
+  };
+  window.ge859ClearSelection=function(){document.querySelectorAll('.geStoragePick').forEach(b=>b.checked=false);};
+  window.ge859DeleteSelected=function(){
+    const keys=[...document.querySelectorAll('.geStoragePick:checked')].map(b=>b.dataset.key);if(!keys.length){alert('Silmek için en az bir dosya seçiniz.');return;}
+    const selected=ge859Records().filter(r=>keys.includes(r.k)),planned=selected.filter(r=>r.planned).length,freed=selected.reduce((a,r)=>a+r.bytes,0);
+    const msg=keys.length+' dosya silinecek ve yaklaşık '+ge859FmtBytes(freed)+' alan açılacak.'+(planned?'\n\nUYARI: Seçilen dosyalardan '+planned+' tanesinde planlama kaydı var.':'')+'\n\nDevam edilsin mi?';
+    if(!confirm(msg))return;
+    keys.forEach(k=>{localStorage.removeItem(k);if(currentKey===k)currentKey='';});
+    renderList();ge859RefreshStorageCard();ge859ShowStorageManager(false);alert('Seçilen '+keys.length+' dosya silindi.');
+  };
+
+  // Planlama işleminden sonra seçilen planı açık dosyanın hafızasına bağla; Kaydet düğmesiyle kalıcı olur.
+  const basePlanningAction=window.gePlanningAction;
+  if(typeof basePlanningAction==='function')window.gePlanningAction=function(){const r=basePlanningAction.apply(this,arguments);return r;};
+
+  window.addEventListener('load',()=>{setTimeout(()=>{ge859EnsureUI();ge859RefreshStorageCard();const i=ge859StorageInfo();if(i.ratio>=GE_WARN_RATIO&&!ge859WarnShown){ge859WarnShown=true;ge859ShowStorageManager(true);}},700);});
+})();
+</script>
 </body>
 </html>
 
@@ -2765,9 +2945,10 @@ window.ge82GenerateTexts=function(){ge82RefreshPanel();const x=ge82Collect(),ev=
 window.ge82TransferToReport=function(){const x=ge82Collect(),ev=ge84Evaluate(x);const final=x.finalEksperKanaat||ev.result;let txt='TEKNİK DEĞERLENDİRME\n'+ge84BuildTechnicalText(x,ev)+'\n\nSONUÇ VE KANAAT\n'+ge84BuildConclusion(final);if(x.finalGerekce&&final!==ev.result)txt+='\n\nEksper gerekçesi: '+x.finalGerekce;if(x.ilaveGorus)txt+='\n\nİLAVE EKSPER GÖRÜŞÜ\n'+x.ilaveGorus;if($('kanaatEksperKanaati'))$('kanaatEksperKanaati').value=txt;alert('Teknik değerlendirme ve eksper nihai kanaati rapor alanına aktarıldı.');};
 window.kanaatTable=function(sc,v,vc,fc){let d;try{d=collect()}catch(e){d={ge82:{}}}const x=d.ge82||{},ev=ge84Evaluate(x),final=x.finalEksperKanaat||ev.result;let meta='';if(v.kusurDurumu)meta+=`<p><b>Kusur Durumu:</b> ${esc(v.kusurDurumu)}</p>`;if(v.traMereGonderilecek||v.tramereGonderilecek)meta+=`<p><b>Tramer'e Gönderilecek:</b> Evet${v.tramerAciklama?' - '+esc(v.tramerAciklama):''}</p>`;if(v.rucuDurumu||v.rucuAciklama)meta+=`<p><b>Rücu Durumu Var mı?</b> ${esc(v.rucuDurumu||'-')}${v.rucuAciklama?' - '+esc(v.rucuAciklama):''}</p>`;return `${meta}<h4>Teknik Değerlendirme</h4><p>${esc(ge84BuildTechnicalText(x,ev))}</p><h4>Sonuç ve Kanaat</h4><p><b>${esc(resultLabel(final))}</b><br>${esc(ge84BuildConclusion(final))}</p>${x.ilaveGorus?`<p><b>İlave Eksper Görüşü:</b><br>${esc(x.ilaveGorus).replace(/\n/g,'<br>')}</p>`:''}`;};
 window.ge84BuildArchiveText=function(){
- const x=ge82Collect(),ev=ge84Evaluate(x),v={};['dosyaNo','plaka','sigortali','sirket','eksper','tarih'].forEach(id=>v[id]=$(id)?.value||'');
+ const x=ge82Collect(),ev=ge84Evaluate(x),v={};['dosyaNo','plaka','bakilacakPlaka','brans','sigortali','sirket','eksper','tarih'].forEach(id=>v[id]=$(id)?.value||'');
+ const archivePlaka=(typeof ge77ReportPlate==='function')?ge77ReportPlate(v):(v.plaka||'');
  const lines=[]; lines.push('GENÇ SİGORTA EKSPERLİK'); lines.push('EKSPERTİZ ÇALIŞMA VE TEKNİK İNCELEME KAYDI'); lines.push('');
- lines.push('Dosya No: '+(v.dosyaNo||'-')); lines.push('Plaka: '+(v.plaka||'-')); lines.push('Sigorta Şirketi: '+(v.sirket||'-')); lines.push('Sigortalı: '+(v.sigortali||'-')); lines.push('Eksper: '+(v.eksper||'-')); lines.push('İnceleme Tarihi: '+(formatDateTR(v.tarih)||'-')); lines.push('');
+ lines.push('Dosya No: '+(v.dosyaNo||'-')); lines.push('Plaka: '+(archivePlaka||'-')); lines.push('Sigorta Şirketi: '+(v.sirket||'-')); lines.push('Sigortalı: '+(v.sigortali||'-')); lines.push('Eksper: '+(v.eksper||'-')); lines.push('İnceleme Tarihi: '+(formatDateTR(v.tarih)||'-')); lines.push('');
  lines.push('BELGE İNCELEMESİ'); Object.values(x.doc||{}).forEach(d=>{if(d.status)lines.push('• '+d.title+': '+d.status+(d.note?' — '+d.note:''));}); lines.push('');
  lines.push('FİZİKİ İNCELEME'); (x.fiziki||[]).forEach((r,i)=>{if(!r.val)return;let c=r.val==='Evet'?'Uyumlu':([0,1,2,6,8].includes(i)?'Kritik uyumsuzluk':'Destekleyici bulgu yok');lines.push('• '+r.name+': '+r.val+' ['+c+']');}); lines.push('');
  lines.push('TEKNİK ANALİZ'); (x.teknik||[]).forEach((r,i)=>{if(!r.val)return;let c=i===5?(r.val==='Evet'?'Tereddüt':'Destekliyor'):(r.val==='Evet'?'Teknik uyum':'Teknik uyumsuzluk');lines.push('• '+r.name+': '+r.val+' ['+c+']');}); lines.push('');
@@ -2781,13 +2962,15 @@ window.ge84BuildArchiveText=function(){
  return lines.join('\n');
 };
 function ge84ArchiveFileName(){
- const plaka=($('plaka')?.value||'').trim().replace(/\s+/g,' ');
+ const brans=($('brans')?.value||''); const bakilacak=($('bakilacakPlaka')?.value||'').trim().replace(/\s+/g,' '); const normal=($('plaka')?.value||'').trim().replace(/\s+/g,' ');
+ const plaka=(brans==='Trafik'&&bakilacak)?bakilacak:normal;
  const dosya=($('dosyaNo')?.value||'').trim().replace(/\s+/g,' ');
  const base=(plaka||dosya||'Teknik İnceleme').replace(/[\\/:*?"<>|]/g,'-').trim();
  return `${base} Teknik İnceleme.pdf`;
 }
 function ge84BuildArchiveHtml(){
- const x=ge82Collect(),ev=ge84Evaluate(x),v={};['dosyaNo','plaka','sigortali','sirket','eksper','tarih'].forEach(id=>v[id]=$(id)?.value||'');
+ const x=ge82Collect(),ev=ge84Evaluate(x),v={};['dosyaNo','plaka','bakilacakPlaka','brans','sigortali','sirket','eksper','tarih'].forEach(id=>v[id]=$(id)?.value||'');
+ const archivePlaka=(typeof ge77ReportPlate==='function')?ge77ReportPlate(v):(v.plaka||'');
  const row=(q,a,c)=>`<tr><td>${esc(q)}</td><td>${esc(a||'-')}</td><td>${c}</td></tr>`;
  let rows='';
  (x.fiziki||[]).forEach((r,i)=>{if(!r.val)return;let c=r.val==='Evet'?'🟢 Uyumlu':([0,1,2,6,8].includes(i)?'🔴 Kritik uyumsuzluk':'🟡 Destekleyici bulgu yok');rows+=row('Fiziki İnceleme — '+r.name,r.val,c)});
@@ -2797,7 +2980,7 @@ function ge84BuildArchiveHtml(){
  const final=x.finalEksperKanaat||ev.result;
  return `<div class="ge84ArchivePdf" style="font-family:Arial,sans-serif;color:#111827;background:#fff;width:190mm;padding:0;margin:0 auto;font-size:11px;line-height:1.35">
  <h1 style="font-size:17px;margin:0 0 10px">GENÇ SİGORTA EKSPERLİK<br>EKSPERTİZ ÇALIŞMA VE TEKNİK İNCELEME KAYDI</h1>
- <table style="width:100%;border-collapse:collapse;margin:8px 0;table-layout:fixed"><tr><th style="border:1px solid #777;padding:6px;background:#eee">Dosya No</th><td style="border:1px solid #777;padding:6px">${esc(v.dosyaNo)}</td><th style="border:1px solid #777;padding:6px;background:#eee">Plaka</th><td style="border:1px solid #777;padding:6px">${esc(v.plaka)}</td></tr><tr><th style="border:1px solid #777;padding:6px;background:#eee">Sigorta Şirketi</th><td style="border:1px solid #777;padding:6px">${esc(v.sirket)}</td><th style="border:1px solid #777;padding:6px;background:#eee">Sigortalı</th><td style="border:1px solid #777;padding:6px">${esc(v.sigortali)}</td></tr><tr><th style="border:1px solid #777;padding:6px;background:#eee">Eksper</th><td style="border:1px solid #777;padding:6px">${esc(v.eksper)}</td><th style="border:1px solid #777;padding:6px;background:#eee">İnceleme Tarihi</th><td style="border:1px solid #777;padding:6px">${esc(formatDateTR(v.tarih))}</td></tr></table>
+ <table style="width:100%;border-collapse:collapse;margin:8px 0;table-layout:fixed"><tr><th style="border:1px solid #777;padding:6px;background:#eee">Dosya No</th><td style="border:1px solid #777;padding:6px">${esc(v.dosyaNo)}</td><th style="border:1px solid #777;padding:6px;background:#eee">Plaka</th><td style="border:1px solid #777;padding:6px">${esc(archivePlaka)}</td></tr><tr><th style="border:1px solid #777;padding:6px;background:#eee">Sigorta Şirketi</th><td style="border:1px solid #777;padding:6px">${esc(v.sirket)}</td><th style="border:1px solid #777;padding:6px;background:#eee">Sigortalı</th><td style="border:1px solid #777;padding:6px">${esc(v.sigortali)}</td></tr><tr><th style="border:1px solid #777;padding:6px;background:#eee">Eksper</th><td style="border:1px solid #777;padding:6px">${esc(v.eksper)}</td><th style="border:1px solid #777;padding:6px;background:#eee">İnceleme Tarihi</th><td style="border:1px solid #777;padding:6px">${esc(formatDateTR(v.tarih))}</td></tr></table>
  <h2 style="font-size:13px;border-bottom:2px solid #222;padding-bottom:4px;margin-top:14px">Çalışma Kayıtları</h2>
  <table style="width:100%;border-collapse:collapse;margin:8px 0;table-layout:fixed"><tr><th style="border:1px solid #777;padding:6px;background:#eee;width:44%">İncelenen Husus</th><th style="border:1px solid #777;padding:6px;background:#eee;width:22%">Cevap / Durum</th><th style="border:1px solid #777;padding:6px;background:#eee;width:34%">Değerlendirme Sonucu</th></tr>${(docs+rows).replaceAll('<td>','<td style="border:1px solid #777;padding:6px;vertical-align:top;overflow-wrap:anywhere">')}</table>
  <h2 style="font-size:13px;border-bottom:2px solid #222;padding-bottom:4px;margin-top:14px">Genel Teknik Değerlendirme</h2>

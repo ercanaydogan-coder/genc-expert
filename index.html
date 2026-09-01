@@ -3973,8 +3973,11 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
   function portableSnapshot(){
     const groups=toLegacyGroups(), pr=pieceRows();
     const map={Kaporta:ptBulk.ka,Boya:ptBulk.bo,Elektrik:ptBulk.el,Döşeme:ptBulk.do,Cam:ptBulk.ca,Mekanik:ptBulk.me};
-    const labor=(typeof labors!=='undefined'?labors:[]).map(n=>({name:n,amount:map[n]||'',note:''}));
-    const extraLabor=ptExtraBulk.map(r=>({name:r.name,amount:r.amount,note:''}));
+    /* V8.5.10: SADECE TOPLU İŞÇİLİK RAPOR AKTARIM DÜZELTMESİ.
+       Ekrandaki 10.000.- biçimini eski raporun money() fonksiyonunun okuyabileceği
+       sayısal değere çevirir. Parça bazlı işçilik verilerine dokunulmaz. */
+    const labor=(typeof labors!=='undefined'?labors:[]).map(n=>({name:n,amount:pmoney(map[n]||''),note:''}));
+    const extraLabor=ptExtraBulk.map(r=>({name:r.name,amount:pmoney(r.amount||''),note:''}));
     return {groups,labor,extraLabor,laborEntryMode:ptLaborMode,pieceLaborRows:pr,portableState:{selectedKeys:Object.keys(ptSelected).filter(k=>ptSelected[k]),rows:JSON.parse(JSON.stringify(ptRows)),customBySub:JSON.parse(JSON.stringify(ptCustomBySub)),laborMode:ptLaborMode,bulk:JSON.parse(JSON.stringify(ptBulk)),extraBulk:JSON.parse(JSON.stringify(ptExtraBulk)),piece:JSON.parse(JSON.stringify(ptPiece)),extraPiece:JSON.parse(JSON.stringify(ptExtraPiece)),activeMain:ptActiveMain,activeSub:ptActiveSub}};
   }
   window.gePortableSnapshot=portableSnapshot;

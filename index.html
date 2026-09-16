@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GENÇ SİGORTA EKSPERLİK V8.5.9 DOSYA BAZLI PLANLAMA + DEPOLAMA KORUMASI</title>
+<title>GENÇ SİGORTA EKSPERLİK V8.6 HIZLI GİRİŞ</title>
 <style>
 *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;margin:0;background:#f3f4f6;color:#111827}header{background:#111827;color:white;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}h1{font-size:20px;margin:0}button{border:0;border-radius:10px;background:#111827;color:white;padding:11px 14px;font-weight:700;margin:2px;cursor:pointer}.danger{background:#991b1b}.soft{background:#4b5563}.green{background:#047857}nav{display:flex;gap:6px;overflow:auto;background:white;padding:8px;position:sticky;top:0;border-bottom:1px solid #ddd;z-index:3}nav button{background:#374151;white-space:nowrap}main{padding:12px;max-width:1220px;margin:auto}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}label,.card,.box{display:block;background:white;border:1px solid #ddd;border-radius:12px;padding:10px;margin:7px 0}input,textarea,select{width:100%;font-size:16px;padding:10px;border:1px solid #bbb;border-radius:8px;margin-top:5px}input[type=checkbox],input[type=radio]{width:auto;transform:scale(1.2);margin-right:8px}.sectionTitle{margin:18px 0 8px;background:#111827;color:#fff;padding:10px;border-radius:10px}.docrow{display:grid;grid-template-columns:auto auto 1.25fr auto auto 150px 1.35fr;gap:8px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:8px;margin:6px 0}.partrow,.addrow{display:grid;grid-template-columns:1.2fr repeat(5,auto) 1.2fr auto;gap:6px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:7px;margin:6px 0}.addrow{border-style:dashed}.paintrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:white;border:1px solid #ddd;border-radius:10px;padding:7px;margin:6px 0}.laborrow{display:grid;grid-template-columns:1.5fr 1fr 1.6fr;gap:8px;align-items:center;background:white;border:1px solid #ddd;border-radius:10px;padding:8px;margin:6px 0}.controlrow,.critrow{background:white;border:1px solid #ddd;border-radius:12px;padding:10px;margin:8px 0}.critrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 90px 1.4fr;gap:8px;align-items:center}.pertResult{font-size:18px;font-weight:800;padding:10px;border-radius:10px;background:#e5e7eb}.scoreBox{background:#f9fafb;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0}.inline{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.inline label{border:0;padding:0;margin:0;background:transparent}.report{background:white;padding:18px;border-radius:12px;line-height:1.45}.warn{color:#b91c1c;font-weight:700}.ok{color:#047857;font-weight:700}.thumb{width:180px;height:240px;object-fit:cover;border:1px solid #ddd;border-radius:8px;margin:5px}.totalBox{background:#e5e7eb;border-radius:12px;padding:14px;margin:12px 0;font-size:18px;font-weight:700}.small{font-size:13px;color:#4b5563}.searchBox{background:#e5e7eb;border-radius:14px;padding:12px;margin:10px 0}.pill{display:inline-block;background:#e5e7eb;border-radius:999px;padding:4px 9px;margin:2px;font-size:12px}.hiddenBySearch{display:none}table{width:100%;border-collapse:collapse;margin:10px 0}td,th{border:1px solid #999;padding:6px;text-align:left}.damageTabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.damageTabs button{background:#4b5563}.damageTabs button.active{background:#047857}.damageGroupPanel{display:none}.damageGroupPanel.active{display:block}.photoGrid{display:flex;flex-wrap:wrap;gap:10px}.photoCard{background:white;border:1px solid #ddd;border-radius:12px;padding:8px;text-align:center}.photoCard .small{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:760px){.docrow,.partrow,.addrow,.paintrow,.laborrow,.critrow{grid-template-columns:1fr}.inline{display:block}.inline label{display:inline-block;margin-right:10px}header{display:block}header button{margin-top:8px}}
@@ -227,6 +227,21 @@ title{display:none!important}
 .plateClosed{color:#dc2626!important;font-size:18px!important;font-weight:900!important;}
 </style>
 
+
+<style id="geVisualReportHeadingStyle">
+/* YALNIZ RAPOR: kullanicinin 16.09.2026 tarihli gorselindeki baslik ve dosya bilgi karti */
+#report .geVisualReportCover{border:1.6px solid #0565ad!important;border-radius:8px!important;padding:0!important;overflow:hidden!important;margin:0 0 3mm 0!important;text-align:center!important;background:#fff!important}
+#report .geVisualMainTitle{background:linear-gradient(180deg,#0873bd 0%,#00599d 100%)!important;color:#fff!important;font-family:Verdana,Arial,sans-serif!important;font-size:18px!important;font-weight:800!important;line-height:1.18!important;padding:10px 8px!important;letter-spacing:-.2px!important}
+#report .geVisualSubTitle{font-family:Verdana,Arial,sans-serif!important;font-size:12px!important;line-height:1.2!important;padding:8px 6px!important;color:#0f172a!important}
+#report .geVisualSubTitle b{font-weight:800!important}#report .geVisualSep{display:inline-block!important;margin:0 12px!important;font-weight:800!important}
+#report .geVisualFileSection{margin-top:0!important;margin-bottom:3mm!important}
+#report .geVisualReportGrid{table-layout:fixed!important;width:100%!important;border-collapse:separate!important;border-spacing:0!important;border:1.6px solid #0565ad!important;border-radius:8px!important;overflow:hidden!important;margin:0!important;font-family:Verdana,Arial,sans-serif!important}
+#report .geVisualReportGrid th,#report .geVisualReportGrid td{width:33.333%!important;text-align:center!important;vertical-align:middle!important;border-color:#0b68a9!important}
+#report .geVisualReportGrid th{background:linear-gradient(180deg,#0873bd 0%,#00599d 100%)!important;color:#fff!important;font-size:12px!important;font-weight:800!important;padding:8px 5px!important}
+#report .geVisualReportGrid td{background:#fff!important;color:#0f172a!important;font-size:12px!important;font-weight:800!important;padding:10px 5px!important}
+#report .geVisualReportGrid tr:first-child th:first-child{border-top-left-radius:6px!important}#report .geVisualReportGrid tr:first-child th:last-child{border-top-right-radius:6px!important}
+@media print{#report .geVisualMainTitle{font-size:15px!important;padding:8px 6px!important}#report .geVisualSubTitle{font-size:10px!important;padding:6px 5px!important}#report .geVisualReportGrid th{font-size:9.2px!important;padding:6px 4px!important}#report .geVisualReportGrid td{font-size:9.6px!important;padding:7px 4px!important}.geVisualMainTitle,.geVisualReportGrid th{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+</style>
 </head>
 <body>
 <header><div><h1>GENÇ SİGORTA EKSPERLİK V8.5.9</h1><div class="small" style="color:#d1d5db">Kontrol / Görüşme / Rapor Takip ajanda planlama</div></div><div><button onclick="save()" class="green">Kaydet</button><button onclick="printReport()">PDF / Yazdır</button></div></header>
@@ -2539,7 +2554,7 @@ makeReport=function(){__regionalMakeReportBase();const sec=regionalControlReport
       currentKey=newKey; renderList(); ge859RefreshStorageCard();
       const info=ge859StorageInfo();
       alert('Kaydedildi');
-      if(info.ratio>=GE_WARN_RATIO)setTimeout(()=>ge859ShowStorageManager(true),0);
+      /* V8.6.1: depolama yöneticisi kayıt sonrası otomatik açılmaz */
     }catch(e){
       console.error('Kayıt hatası',e);
       if(e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014)){
@@ -2599,7 +2614,7 @@ makeReport=function(){__regionalMakeReportBase();const sec=regionalControlReport
   const basePlanningAction=window.gePlanningAction;
   if(typeof basePlanningAction==='function')window.gePlanningAction=function(){const r=basePlanningAction.apply(this,arguments);return r;};
 
-  window.addEventListener('load',()=>{setTimeout(()=>{ge859EnsureUI();ge859RefreshStorageCard();const i=ge859StorageInfo();if(i.ratio>=GE_WARN_RATIO&&!ge859WarnShown){ge859WarnShown=true;ge859ShowStorageManager(true);}},700);});
+  window.addEventListener('load',()=>{setTimeout(()=>{ge859EnsureUI();ge859RefreshStorageCard();const i=ge859StorageInfo();if(i.ratio>=GE_WARN_RATIO&&!ge859WarnShown){ge859WarnShown=true;/* yalnız uyarı kartı; modal otomatik açılmaz */}},700);});
 })();
 </script>
 </body>
@@ -4051,6 +4066,9 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
  #report .geLaborDamage3>.reportTitle{background:#237a2c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  #report .geLaborDamage4>.reportTitle{background:#7c3aed!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+/* V8.6 Hızlı Giriş görünümü */
+.ge86FastGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:8px 0 12px}.ge86FastGrid label{margin:0;min-height:86px}.ge86FastGrid label:nth-child(2){border:2px solid #111827}.ge86FastGrid #plaka{font-size:20px;font-weight:900;text-transform:uppercase}.ge86LegacyHidden{display:none!important}.ge86ReportGrid{table-layout:fixed!important}.ge86ReportGrid td{width:33.333%;text-align:left;min-height:15mm}.ge86ReportGrid td b{display:block;margin-bottom:2px}@media(max-width:760px){.ge86FastGrid{grid-template-columns:1fr}}@media print{.ge86ReportGrid td{font-size:8.7px!important;padding:3mm 3mm!important}}
 </style>
 <script id="geV8ServiceShareScript">
 (function(){
@@ -4187,4 +4205,59 @@ notesTable = function(v){
   const workHtml=workParts.length?workParts.join('<br><br>'):'-';
   return `<table class="reportTable"><tr><th>Araç Hakkında Açıklamalar</th></tr><tr><td>${v.notArac?esc(v.notArac).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Hasar Hakkında Açıklamalar</th></tr><tr><td>${hasarText?esc(hasarText).replace(/\n/g,'<br>'):'-'}</td></tr><tr><th>Yapılacak Çalışmalar</th></tr><tr><td>${workHtml}</td></tr><tr><th>Diğer Notlar</th></tr><tr><td>${v.notDiger?esc(v.notDiger).replace(/\n/g,'<br>'):'-'}</td></tr></table>`;
 };
+
+
+/* === V8.6.1 HIZLI GİRİŞ - ŞİRKET ADLARI + DEPOLAMA MODAL DÜZELTME === */
+const GE86_SIRKETLER=['AXA SİGORTA A.Ş.','ALLIANZ SİGORTA A.Ş.','ANADOLU SİGORTA A.Ş.','HDI SİGORTA A.Ş.','MAPFRE SİGORTA A.Ş.','SOMPO SİGORTA A.Ş.','TÜRKİYE SİGORTA A.Ş.','DOĞA SİGORTA A.Ş.','QUICK SİGORTA A.Ş.','RAY SİGORTA A.Ş.','NEOVA KATILIM SİGORTA A.Ş.','ZURICH SİGORTA A.Ş.','AKSİGORTA A.Ş.','GENERALI SİGORTA A.Ş.','CORPUS SİGORTA A.Ş.','BEREKET SİGORTA A.Ş.'];
+function ge86EnsureDatalist(id,values){
+  let dl=document.getElementById(id); if(!dl){dl=document.createElement('datalist');dl.id=id;document.body.appendChild(dl)}
+  dl.innerHTML=values.map(x=>`<option value="${esc(x)}"></option>`).join('');
+}
+function ge86SetupFastEntry(){
+  const sec=document.getElementById('dosya'); if(!sec||sec.dataset.ge86==='1')return; sec.dataset.ge86='1';
+  const grid=sec.querySelector('.grid'); if(!grid)return;
+  const labels=[...grid.querySelectorAll(':scope > label')];
+  const byInput=id=>labels.find(l=>l.querySelector('#'+id));
+  const wanted=['sirket','plaka','aracSahibi','dosyaNo','atamaKurumu','servisAdi'];
+  const fast=document.createElement('div'); fast.className='ge86FastGrid';
+  wanted.forEach(id=>{const l=byInput(id);if(l)fast.appendChild(l)});
+  const hidden=document.createElement('div');hidden.className='ge86LegacyHidden';
+  [...grid.children].forEach(el=>hidden.appendChild(el));
+  grid.replaceWith(fast,hidden);
+  const rename={sirket:'Sigorta Şirketi',plaka:'Plaka Numarası',aracSahibi:'Araç Sahibi / Sigortalı',dosyaNo:'Dosya Numarası',atamaKurumu:'Atama Kurumu',servisAdi:'Servis Adı'};
+  wanted.forEach(id=>{const el=document.getElementById(id),lab=el?.closest('label');if(lab&&el){lab.childNodes[0].textContent=rename[id];}});
+  const owner=document.getElementById('aracSahibi'), insured=document.getElementById('sigortali');
+  if(owner&&insured){owner.addEventListener('input',()=>{insured.value=owner.value}); if(!owner.value&&insured.value)owner.value=insured.value;}
+  const sirket=document.getElementById('sirket'); if(sirket){sirket.setAttribute('list','ge86SirketList');ge86EnsureDatalist('ge86SirketList',GE86_SIRKETLER);sirket.addEventListener('change',()=>{sirket.value=(sirket.value||'').toLocaleUpperCase('tr-TR')})}
+  const atama=document.getElementById('atamaKurumu');if(atama){[...atama.options].forEach(o=>{if((o.textContent||'').trim()==='ŞİRKET'){o.textContent='SİGORTA ŞİRKETİ';o.value='SİGORTA ŞİRKETİ'}});if(atama.value==='ŞİRKET')atama.value='SİGORTA ŞİRKETİ';}
+  const servis=document.getElementById('servisAdi'); if(servis){servis.setAttribute('list','ge86ServisList');
+    let vals=[];try{vals=JSON.parse(localStorage.getItem('GE86_SERVISLER')||'[]')}catch(e){};ge86EnsureDatalist('ge86ServisList',vals);
+    servis.addEventListener('change',()=>{let v=servis.value.trim();if(!v)return;let a=[];try{a=JSON.parse(localStorage.getItem('GE86_SERVISLER')||'[]')}catch(e){};if(!a.includes(v)){a.unshift(v);a=a.slice(0,50);localStorage.setItem('GE86_SERVISLER',JSON.stringify(a));ge86EnsureDatalist('ge86ServisList',a)}})}
+  const arac=document.getElementById('arac'); if(arac)arac.style.display='none';
+  document.querySelectorAll('nav button').forEach(b=>{if((b.textContent||'').trim()==='Araç')b.style.display='none'});
+}
+function ge86ReportFix(){
+  const report=document.getElementById('report');if(!report)return;
+  const vNow=collect().v||{};
+  report.querySelectorAll('.geAtamaKurumuReport').forEach(x=>x.remove());
+  [...report.querySelectorAll('p')].filter(x=>(x.textContent||'').trim().startsWith('Atama Kurumu:')).forEach(x=>x.remove());
+  const cover=report.querySelector('.reportCover');
+  if(cover){cover.classList.add('geVisualReportCover');cover.innerHTML=`<div class="geVisualMainTitle">${esc(vNow.plaka||'-')} PLAKALI ARAÇ – EKSPERTİZ ÖN RAPORU</div><div class="geVisualSubTitle">Dosya No: <b>${esc(vNow.dosyaNo||'-')}</b><span class="geVisualSep">|</span>Ekspertiz Tarihi: <b>${esc(formatDateTR(vNow.tarih)||'-')}</b></div>`;}
+  const titles=[...report.querySelectorAll('.reportTitle')];
+  const dosyaTitle=titles.find(x=>(x.textContent||'').toUpperCase().includes('DOSYA BİLGİLERİ'));
+  if(dosyaTitle){
+    const sec=dosyaTitle.closest('.reportSection')||dosyaTitle.parentElement;
+    sec.classList.add('geVisualFileSection');dosyaTitle.style.display='none';
+    const v=collect().v||{};
+    const owner=v.aracSahibi||v.sigortali||'-';
+    const html=`<table class="reportTable ge86ReportGrid geVisualReportGrid"><tbody><tr class="geVisualLabelRow"><th>Sigorta Şirketi</th><th>Plaka Numarası</th><th>Araç Sahibi / Sigortalı</th></tr><tr class="geVisualValueRow"><td>${reportCellHtml(v.sirket)}</td><td>${reportCellHtml(v.plaka)}</td><td>${reportCellHtml(owner)}</td></tr><tr class="geVisualLabelRow"><th>Dosya Numarası</th><th>Atama Kurumu</th><th>Servis Adı</th></tr><tr class="geVisualValueRow"><td>${reportCellHtml(v.dosyaNo)}</td><td>${reportCellHtml(v.atamaKurumu)}</td><td>${reportCellHtml(v.servisAdi)}</td></tr></tbody></table>`;
+    [...sec.children].filter(x=>x!==dosyaTitle).forEach(x=>x.remove());dosyaTitle.insertAdjacentHTML('afterend',html);
+  }
+  const aracTitle=[...report.querySelectorAll('.reportTitle')].find(x=>(x.textContent||'').toUpperCase().includes('ARAÇ BİLGİLERİ'));
+  if(aracTitle){const sec=aracTitle.closest('.reportSection')||aracTitle.parentElement;sec.remove()}
+  [...report.querySelectorAll('.reportTitle')].forEach(t=>{t.textContent=(t.textContent||'').replace(/^\s*(\d+)\s*-\s*/,(_,n)=>{n=Number(n);return (n>2?n-1:n)+'- ';})});
+}
+const __ge86MakeReport=window.makeReport;
+if(typeof __ge86MakeReport==='function')window.makeReport=function(){const r=__ge86MakeReport.apply(this,arguments);ge86ReportFix();return r;};
+window.addEventListener('load',()=>setTimeout(ge86SetupFastEntry,0));
 </script>

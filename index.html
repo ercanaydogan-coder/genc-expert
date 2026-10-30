@@ -274,6 +274,16 @@ title{display:none!important}
 @media(max-width:760px){#hasar .pt-subTabs,#hasar .pt-picker,#hasar .pt-otherGrid{grid-template-columns:1fr!important}}
 </style>
 
+
+<style id="ptMissingOpValidationStyle">
+/* Yalnızca ilerleme denemesinden sonra eksik işlem satırlarını vurgula. */
+#hasar tr.pt-missingOp td{background:#fee2e2!important;border-top:2px solid #dc2626!important;border-bottom:2px solid #dc2626!important}
+#hasar tr.pt-missingOp td:first-child{border-left:3px solid #dc2626!important;color:#991b1b!important}
+#hasar tr.pt-missingOp td:last-child{border-right:3px solid #dc2626!important}
+#hasar tr.pt-missingOp td.pt-pieceName::after{content:' • İŞLEM EKSİK';display:block;margin-top:3px;color:#b91c1c;font-size:11px;font-weight:900}
+#hasar .ptMissingOpWarning{background:#fef2f2;border:2px solid #dc2626;border-radius:10px;padding:14px;margin:12px 0;color:#991b1b;font-weight:800;line-height:1.5}
+@media print{#hasar .ptMissingOpWarning{display:none!important}}
+</style>
 </head>
 <body>
 <header><div><h1>GENÇ SİGORTA EKSPERLİK V8.5.9</h1><div class="small" style="color:#d1d5db">Kontrol / Görüşme / Rapor Takip ajanda planlama</div></div><div><button onclick="save()" class="green">Kaydet</button><button onclick="printReport()">PDF / Yazdır</button></div></header>
@@ -350,7 +360,7 @@ const equipment=["Webasto","Klima","Retarder","Deri Koltuk","Sunroof","Cam Tavan
 const fchecks=["Şase/VIN fotoğrafı alındı","KM fotoğrafı alındı"];
 const damageGroups={"Ön Kısım":["Ön Tampon","Ön Tampon Demiri","Ön Panel","Kaput","Sağ Far","Sol Far","Sağ Sis Farı","Sol Sis Farı","Ön Izgara","Sağ Ön Çamurluk","Sol Ön Çamurluk"],"Arka Kısım":["Arka Tampon","Arka Tampon Demiri","Bagaj Kapağı","Sağ Stop","Sol Stop","Arka Panel","Stepne Havuzu","Sağ Arka Çamurluk","Sol Arka Çamurluk"],"Sol Yan":["Sol Ön Kapı","Sol Arka Kapı","Sol Marşpiyel","Sol Ayna","Sol Ön Direk","Sol Orta Direk","Sol Arka Direk","Sol Kapı Fitilleri"],"Sağ Yan":["Sağ Ön Kapı","Sağ Arka Kapı","Sağ Marşpiyel","Sağ Ayna","Sağ Ön Direk","Sağ Orta Direk","Sağ Arka Direk","Sağ Kapı Fitilleri"],"Tavan":["Tavan Sacı","Tavan Döşemesi","Sunroof","Cam Tavan","Tavan Çıtası Sağ","Tavan Çıtası Sol"],"Motor Bölümü":["Radyatör","Klima Radyatörü","Fan Grubu","İntercooler","Motor Alt Muhafaza","Ön Travers","Motor Kaputu Kilidi","Motor Takozu","Direksiyon Kutusu"],"Alt Takım":["Sağ Ön Salıncak","Sol Ön Salıncak","Arka Dingil","Arka Travers","Sağ Arka Salıncak","Sol Arka Salıncak","Egzoz","Yakıt Deposu","Arka Amortisör Sağ","Arka Amortisör Sol"],"İç Bölüm":["Torpido","Ön Göğüs","Sürücü Airbag","Yolcu Airbag","Emniyet Kemeri Sağ","Emniyet Kemeri Sol","Koltuk Sağ","Koltuk Sol","İç Döşeme"],"Diğer":[]};
 const labors=["Kaporta","Boya","Elektrik","Döşeme","Cam","Mekanik","Şase","Aparat","Rot","Balans"];
-const paint=["Sol Ön Çamurluk","Sol Ön Kapı","Sol Arka Kapı","Sol Arka Çamurluk","Arka Panel","Bagaj Kapağı","Sağ Arka Çamurluk","Sağ Arka Kapı","Sağ Ön Kapı","Sağ Ön Çamurluk","Ön Panel","Ön Tampon","Arka Tampon"];
+const paint=["Sol Ön Çamurluk","Sol Ön Kapı","Sol Arka Kapı","Sol Arka Çamurluk","Arka Panel","Bagaj Kapağı","Sağ Arka Çamurluk","Sağ Arka Kapı","Sağ Ön Kapı","Sağ Ön Çamurluk","Ön Panel","Ön Tampon","Arka Tampon","Üst Tavan Sacı","Sağ Marşbiyel","Sol Marşbiyel"];
 const criticalParts=[
 {name:'Sağ ön şasi kolu',degisim:20,onarim:{Hafif:2,Orta:5,Ağır:10}},
 {name:'Sol ön şasi kolu',degisim:20,onarim:{Hafif:2,Orta:5,Ağır:10}},
@@ -797,7 +807,9 @@ function printReport(){
 .partrow,.addrow{grid-template-columns:1.2fr auto 150px 130px auto 110px auto 1.2fr auto!important}.trafikOnly{display:none}.hasarServisListesiBox,.laborServisListesiBox{background:#fff7ed;border-color:#fdba74}
 @media(max-width:760px){.partrow,.addrow{grid-template-columns:1fr!important}}
 </style>
-</head><body><main><section id="rapor" class="page active">${html}</section></main><script>setTimeout(function(){window.print();},400);<\/script></body></html>`);
+</head><body><main><section id="rapor" class="page active">${html}</section></main><script>setTimeout(function(){window.print();},400);<\/script>
+
+</body></html>`);
  w.document.close();
 }
 
@@ -1898,7 +1910,7 @@ function ge82KanaatLayout(saved){
     <div id="ge82Panel">
       <div class="sectionTitle" style="background:#1d4ed8">1. Belge İncelemesi</div><div class="small">Bu bölüm Evrak sayfasına bağlı değildir. Kanaat için hangi belge değerlendirildiyse burada seçilir.</div><div id="ge82Docs">${ge82DocRows(x.doc)}</div>
       <div class="sectionTitle" style="background:#047857">2. Fiziki İnceleme</div><div id="ge82Fiziki">${GE82_FIZIKI.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82f'+i)}${i===3?`<div id="ge82BoyaUyumBox" class="card" style="display:none"><b>Boya transferi karşı araç rengi ile uyumlu mu?</b>${ge82YesNo('ge82boyaUyum')}</div>`:''}</div>`).join('')}</div>
-      <div class="sectionTitle" style="background:#c2410c">3. Teknik Analiz</div><div id="ge82Teknik">${GE82_TEKNIK.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82t'+i)}${q==='İlave hasar ihtimali mevcut'?'<textarea id="ge82ilaveHasarNot" rows="2" placeholder="İlave hasar ihtimali varsa bölge / neden açıklaması"></textarea>':''}</div>`).join('')}</div>
+      <div class="sectionTitle" style="background:#c2410c">3. Teknik Analiz</div><div id="ge82Teknik">${GE82_TEKNIK.map((q,i)=>`<div class="controlrow"><b>${i>=6?i+2:i+1}. ${esc(q)}</b>${ge82YesNo('ge82t'+i)}${q==='İlave hasar ihtimali mevcut'?'<textarea id="ge82ilaveHasarNot" rows="2" placeholder="İlave hasar ihtimali varsa bölge / neden açıklaması"></textarea>':''}</div>${i===5?`<div class="controlrow" data-ge84="izEmare"><b>7. Araç üzerinde iz ve emare var mı?</b>${ge82YesNo('ge82IzEmare')}<textarea id="ge82IzEmareNot" rows="2" placeholder="Araç üzerinde tespit edilen iz ve emareler / açıklama"></textarea></div>`:''}`).join('')}</div>
       <div class="sectionTitle" style="background:#991b1b">4. Son Teknik Değerlendirme</div><div id="ge82Son">${GE82_SON.map((q,i)=>`<div class="controlrow"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82s'+i)}${q==='Ek inceleme gereklidir'?`<div id="ge82EkIncelemeBox" class="card" style="display:none"><b>Ek inceleme türü</b><div class="checks">${GE82_EK_INCELEME.map((e,j)=>`<label><input type="checkbox" id="ge82ek${j}" onchange="ge82RefreshPanel()">${esc(e)}</label>`).join('')}</div><textarea id="ge82ekDigerNot" rows="2" placeholder="Diğer / ek inceleme açıklaması" oninput="ge82RefreshPanel()"></textarea></div>`:''}</div>`).join('')}</div>
       <div class="controlrow"><b>Dosya araştırmaya gönderildi mi?</b>${ge82YesNo('ge82arastirma')}<textarea id="ge82arastirmaNot" rows="2" placeholder="Eksper ilave görüşü / araştırma notu" oninput="ge82RefreshPanel()"></textarea></div>
       <div class="sectionTitle">5. Karar Destek Paneli</div>
@@ -1917,7 +1929,7 @@ function ge82ApplySaved(x){
   if(!x) return;
   GE82_DOCS.forEach(k=>{ if($('ge82doc_'+k.key)) $('ge82doc_'+k.key).value=x.doc?.[k.key]?.status||''; if($('ge82doc_'+k.key+'_n')) $('ge82doc_'+k.key+'_n').value=x.doc?.[k.key]?.note||''; });
   (x.fiziki||[]).forEach((r,i)=>ge82SetRadio('ge82f'+i,r.val||'')); ge82SetRadio('ge82boyaUyum',x.boyaUyum||'');
-  (x.teknik||[]).forEach((r,i)=>ge82SetRadio('ge82t'+i,r.val||'')); if($('ge82ilaveHasarNot')) $('ge82ilaveHasarNot').value=x.ilaveHasarNot||'';
+  (x.teknik||[]).forEach((r,i)=>ge82SetRadio('ge82t'+i,r.val||'')); if($('ge82ilaveHasarNot')) $('ge82ilaveHasarNot').value=x.ilaveHasarNot||''; ge82SetRadio('ge82IzEmare',x.izEmare||''); if($('ge82IzEmareNot')) $('ge82IzEmareNot').value=x.izEmareNot||'';
   (x.son||[]).forEach((r,i)=>ge82SetRadio('ge82s'+i,r.val||'')); (x.ekInceleme||[]).forEach((v,i)=>{if($('ge82ek'+i)) $('ge82ek'+i).checked=!!v;}); if($('ge82ekDigerNot')) $('ge82ekDigerNot').value=x.ekDigerNot||'';
   ge82SetRadio('ge82arastirma',x.arastirma||''); if($('ge82arastirmaNot')) $('ge82arastirmaNot').value=x.arastirmaNot||''; ge82SetRadio('ge82KanaatSonuc',x.kanaatSonuc||'');
   (x.kanaatYokNedenler||[]).forEach((v,i)=>{if($('ge82ky'+i)) $('ge82ky'+i).checked=!!v;}); if($('ge82KanaatYokNot')) $('ge82KanaatYokNot').value=x.kanaatYokNot||'';
@@ -1927,7 +1939,7 @@ function ge82Collect(){
   const doc={}; GE82_DOCS.forEach(k=>doc[k.key]={title:k.title,status:($('ge82doc_'+k.key)?.value||''),note:$('ge82doc_'+k.key+'_n')?.value||''});
   return {doc,
     fiziki:GE82_FIZIKI.map((q,i)=>({name:q,val:ge82RadioVal('ge82f'+i)})), boyaUyum:ge82RadioVal('ge82boyaUyum'),
-    teknik:GE82_TEKNIK.map((q,i)=>({name:q,val:ge82RadioVal('ge82t'+i)})), ilaveHasarNot:$('ge82ilaveHasarNot')?.value||'',
+    teknik:GE82_TEKNIK.map((q,i)=>({name:q,val:ge82RadioVal('ge82t'+i)})), ilaveHasarNot:$('ge82ilaveHasarNot')?.value||'', izEmare:ge82RadioVal('ge82IzEmare'), izEmareNot:$('ge82IzEmareNot')?.value||'',
     son:GE82_SON.map((q,i)=>({name:q,val:ge82RadioVal('ge82s'+i)})), ekInceleme:GE82_EK_INCELEME.map((_,i)=>!!$('ge82ek'+i)?.checked), ekDigerNot:$('ge82ekDigerNot')?.value||'',
     arastirma:ge82RadioVal('ge82arastirma'), arastirmaNot:$('ge82arastirmaNot')?.value||'', kanaatSonuc:ge82RadioVal('ge82KanaatSonuc'),
     kanaatYokNedenler:GE82_KANAAT_YOK_NEDENLER.map((_,i)=>!!$('ge82ky'+i)?.checked), kanaatYokNot:$('ge82KanaatYokNot')?.value||'',
@@ -1953,6 +1965,8 @@ function ge82Analyze(x){
       if(r.val==='Hayır') teknikDestek.push('İlave hasar ihtimali görülmedi');
     }
   });
+  if(x.izEmare==='Evet') teknikDestek.push('Araç üzerinde iz ve emare mevcut'+(x.izEmareNot?' - '+x.izEmareNot:''));
+  if(x.izEmare==='Hayır') teknikTer.push('Araç üzerinde iz ve emare tespit edilmedi'+(x.izEmareNot?' - '+x.izEmareNot:''));
   x.son.forEach((r,i)=>{ if(r.name==='Karşı araç görülmelidir' && r.val==='Evet'){teknikTer.push('Karşı araç görülmelidir'); arastirma.push('Karşı aracın hasar yapısı, darbe yüksekliği ve boya/iz transferi yönünden incelenmesi');} if(r.name==='Ek inceleme gereklidir' && r.val==='Evet'){teknikTer.push('Ek inceleme gereklidir'); arastirma.push('Ek teknik inceleme yapılması');} });
   (x.ekInceleme||[]).forEach((v,i)=>{ if(v){teknikTer.push(GE82_EK_INCELEME[i]); arastirma.push(GE82_EK_INCELEME[i]);} });
   if(x.ekDigerNot){teknikTer.push('Ek inceleme açıklaması: '+x.ekDigerNot); arastirma.push(x.ekDigerNot);}
@@ -2296,7 +2310,7 @@ paintTable = function(boyali,boyasiz,olculemedi){
 </style>
 <script>
 /* === V8.3 BÖLGESEL HASAR PARÇA SEÇİMİ - MEVCUT SİSTEMİ BOZMADAN === */
-const regionalDamageData = {"ÖN BÖLÜM":{"Motor Kaputu":["Motor Kaputu","Kaput Kilidi","Kilit Karşılığı","Sağ Kaput Menteşesi","Sol Kaput Menteşesi","Sağ Kaput Amortisörü","Sol Kaput Amortisörü","Kaput İzolasyonu"],"Ön Tampon":["Ön Tampon","Ön Tampon Alt Parçası / Spoiler","Ön Tampon Izgarası","Tampon Demiri","Darbe Emici","Sağ Tampon Braketi","Sol Tampon Braketi","Sağ Sis Izgarası","Sol Sis Izgarası","Ön Park Sensörü","Ön Kamera / Radar"],"Farlar":["Sağ Far","Sol Far","Sağ Gündüz Farı / DRL","Sol Gündüz Farı / DRL","Sağ Far Bağlantı Sacı","Sol Far Bağlantı Sacı","Far Beyni / Modülü","LED Modülü"],"Ön Çamurluklar":["Sağ Ön Çamurluk","Sol Ön Çamurluk","Sağ İç Çamurluk","Sol İç Çamurluk","Sağ Davlumbaz","Sol Davlumbaz","Sağ Çamurluk Braketi","Sol Çamurluk Braketi"],"Ön Panel":["Ön Panel","Üst Travers","Alt Travers","Kaput Kilit Sacı"]},"SAĞ YAN":{"Sağ Ön Kapı":["Sağ Ön Kapı","Sağ Ön Kapı Kolu","Sağ Ön Kapı Kilidi","Sağ Ön Cam Mekanizması","Sağ Ön Kapı Fitili","Sağ Ön Kapı Döşemesi"],"Sağ Arka Kapı":["Sağ Arka Kapı","Sağ Arka Kapı Kolu","Sağ Arka Kapı Kilidi","Sağ Arka Cam Mekanizması","Sağ Arka Kapı Fitili","Sağ Arka Kapı Döşemesi"],"Sağ Ayna":["Sağ Dikiz Aynası","Sağ Ayna Camı","Sağ Ayna Sinyali","Sağ Ayna Kapağı"],"Sağ Marşpiyel":["Sağ Marşpiyel","Sağ Marşpiyel Kaplaması","Sağ Marşpiyel İç Sacı"],"Sağ Direkler":["Sağ A Direği","Sağ B Direği","Sağ C Direği"],"Sağ Arka Çamurluk":["Sağ Arka Çamurluk","Sağ Arka İç Çamurluk Sacı","Sağ Arka Davlumbaz"]},"SOL YAN":{"Sol Ön Kapı":["Sol Ön Kapı","Sol Ön Kapı Kolu","Sol Ön Kapı Kilidi","Sol Ön Cam Mekanizması","Sol Ön Kapı Fitili","Sol Ön Kapı Döşemesi"],"Sol Arka Kapı":["Sol Arka Kapı","Sol Arka Kapı Kolu","Sol Arka Kapı Kilidi","Sol Arka Cam Mekanizması","Sol Arka Kapı Fitili","Sol Arka Kapı Döşemesi"],"Sol Ayna":["Sol Dikiz Aynası","Sol Ayna Camı","Sol Ayna Sinyali","Sol Ayna Kapağı"],"Sol Marşpiyel":["Sol Marşpiyel","Sol Marşpiyel Kaplaması","Sol Marşpiyel İç Sacı"],"Sol Direkler":["Sol A Direği","Sol B Direği","Sol C Direği"],"Sol Arka Çamurluk":["Sol Arka Çamurluk","Sol Arka İç Çamurluk Sacı","Sol Arka Davlumbaz"]},"ARKA BÖLÜM":{"Arka Tampon":["Arka Tampon","Arka Tampon Demiri","Arka Darbe Emici","Sağ Arka Tampon Braketi","Sol Arka Tampon Braketi","Arka Park Sensörü"],"Bagaj Kapağı":["Bagaj Kapağı","Bagaj Kilidi","Kilit Karşılığı","Bagaj Amortisörü","Bagaj Fitili"],"Stoplar":["Sağ Stop","Sol Stop","Sağ İç Stop","Sol İç Stop","Arka Reflektör","Fren Lambası"],"Panel / İç Kısım":["Arka Panel","Panel İç Sacı","Bagaj Havuzu","Arka Travers"]},"ARAÇ İÇİ":{"Airbag / Emniyet":["Sürücü Airbag","Yolcu Airbag","Sağ Perde Airbag","Sol Perde Airbag","Sürücü Emniyet Kemeri","Yolcu Emniyet Kemeri","Sağ Arka Emniyet Kemeri","Sol Arka Emniyet Kemeri","Airbag Beyni"],"Ön Konsol":["Torpido / Göğüs","Orta Konsol","Gösterge Paneli","Multimedya Ekranı"],"Koltuklar":["Sürücü Koltuğu","Yolcu Koltuğu","Arka Koltuk","Sağ Koltuk Kılıfı","Sol Koltuk Kılıfı","Koltuk Rayı"],"İç Döşeme":["Tavan Döşemesi"]},"ŞASE GRUBU":{"Ön Şase":["Sağ Ön Şase Ucu","Sol Ön Şase Ucu","Sağ Ön Şase Kolu","Sol Ön Şase Kolu","Ön Travers","Motor Beşiği / Alt Şase"],"Orta Şase":["Sağ Taban Sacı","Sol Taban Sacı","Orta Tünel","Sağ Marşpiyel İç Sacı","Sol Marşpiyel İç Sacı"],"Arka Şase":["Sağ Arka Şase Kolu","Sol Arka Şase Kolu","Arka Travers","Bagaj Taban Sacı"]},"CAMLAR":{"Ön Cam":["Ön Cam","Ön Cam Fitili","Yağmur Sensörü","Ön Kamera Muhafazası"],"Arka Cam":["Arka Cam","Arka Cam Fitili","Arka Cam Rezistansı"],"Sağ Yan Camlar":["Sağ Ön Kapı Camı","Sağ Arka Kapı Camı","Sağ Kelebek Camı"],"Sol Yan Camlar":["Sol Ön Kapı Camı","Sol Arka Kapı Camı","Sol Kelebek Camı"],"Tavan Camı":["Sunroof Camı","Panoramik Tavan Camı","Sunroof Mekanizması"]},"ÖN MEKANİK":{"Sağ Yürür Aksam":["Sağ Ön Amortisör","Sağ Amortisör Takozu","Sağ Ön Aks","Sağ Ön Porya","Sağ Ön Rulman","Sağ Ön Taşıyıcı","Sağ Ön Salıncak","Sağ Rot Başı","Sağ Rot Kolu","Sağ Z-Rot"],"Sol Yürür Aksam":["Sol Ön Amortisör","Sol Amortisör Takozu","Sol Ön Aks","Sol Ön Porya","Sol Ön Rulman","Sol Ön Taşıyıcı","Sol Ön Salıncak","Sol Rot Başı","Sol Rot Kolu","Sol Z-Rot"],"Radyatör Grubu":["Su Radyatörü","Klima Kondenseri","Fan Grubu","Fan Davlumbazı","Intercooler","Radyatör Üst Hortumu","Radyatör Alt Hortumu","Radyatör Takozu"],"Motor Grubu":["Motor Komple","Motor Üst Kapağı","Karter","Sağ Motor Takozu","Sol Motor Takozu","Alt Motor Takozu","Emme Manifoldu","Egzoz Manifoldu","Turbo","Alternatör","Marş Motoru"]},"ARKA MEKANİK":{"Sağ Arka Yürür Aksam":["Sağ Arka Amortisör","Sağ Arka Yay","Sağ Arka Porya","Sağ Arka Rulman","Sağ Arka Taşıyıcı","Sağ Arka Salıncak"],"Sol Arka Yürür Aksam":["Sol Arka Amortisör","Sol Arka Yay","Sol Arka Porya","Sol Arka Rulman","Sol Arka Taşıyıcı","Sol Arka Salıncak"],"Arka Aks / Diferansiyel":["Arka Aks","Arka Dingil","Diferansiyel","Sağ Aks Mili","Sol Aks Mili","Kardan Mili"],"Yakıt / Egzoz":["Yakıt Deposu","Yakıt Deposu Muhafazası","Egzoz Susturucusu","Egzoz Borusu","Katalitik Konvertör"]},"DİĞER":{"Diğer Parçalar":[]}};
+const regionalDamageData = {"ÖN BÖLÜM":{"Motor Kaputu":["Motor Kaputu","Kaput Kilidi","Kilit Karşılığı","Sağ Kaput Menteşesi","Sol Kaput Menteşesi","Sağ Kaput Amortisörü","Sol Kaput Amortisörü","Kaput İzolasyonu"],"Ön Tampon":["Ön Tampon","Ön Panjur","Ön Tampon Alt Parçası / Spoiler","Ön Tampon Izgarası","Tampon Demiri","Darbe Emici","Sağ Tampon Braketi","Sol Tampon Braketi","Sağ Sis Izgarası","Sol Sis Izgarası","Ön Park Sensörü","Ön Kamera / Radar"],"Farlar":["Sağ Far","Sol Far","Sağ Gündüz Farı / DRL","Sol Gündüz Farı / DRL","Sağ Far Bağlantı Sacı","Sol Far Bağlantı Sacı","Far Beyni / Modülü","LED Modülü"],"Ön Çamurluklar":["Sağ Ön Çamurluk","Sol Ön Çamurluk","Sağ İç Çamurluk","Sol İç Çamurluk","Sağ Davlumbaz","Sol Davlumbaz","Sağ Çamurluk Braketi","Sol Çamurluk Braketi"],"Ön Panel":["Ön Panel","Üst Travers","Alt Travers","Kaput Kilit Sacı"]},"SAĞ YAN":{"Sağ Ön Kapı":["Sağ Ön Kapı","Sağ Ön Kapı Kolu","Sağ Ön Kapı Kilidi","Sağ Ön Cam Mekanizması","Sağ Ön Kapı Fitili","Sağ Ön Kapı Döşemesi"],"Sağ Arka Kapı":["Sağ Arka Kapı","Sağ Arka Kapı Kolu","Sağ Arka Kapı Kilidi","Sağ Arka Cam Mekanizması","Sağ Arka Kapı Fitili","Sağ Arka Kapı Döşemesi"],"Sağ Ayna":["Sağ Dikiz Aynası","Sağ Ayna Camı","Sağ Ayna Sinyali","Sağ Ayna Kapağı"],"Sağ Marşpiyel":["Sağ Marşpiyel","Sağ Marşpiyel Kaplaması","Sağ Marşpiyel İç Sacı"],"Sağ Direkler":["Sağ A Direği","Sağ B Direği","Sağ C Direği"],"Sağ Arka Çamurluk":["Sağ Arka Çamurluk","Sağ Arka İç Çamurluk Sacı","Sağ Arka Davlumbaz"]},"SOL YAN":{"Sol Ön Kapı":["Sol Ön Kapı","Sol Ön Kapı Kolu","Sol Ön Kapı Kilidi","Sol Ön Cam Mekanizması","Sol Ön Kapı Fitili","Sol Ön Kapı Döşemesi"],"Sol Arka Kapı":["Sol Arka Kapı","Sol Arka Kapı Kolu","Sol Arka Kapı Kilidi","Sol Arka Cam Mekanizması","Sol Arka Kapı Fitili","Sol Arka Kapı Döşemesi"],"Sol Ayna":["Sol Dikiz Aynası","Sol Ayna Camı","Sol Ayna Sinyali","Sol Ayna Kapağı"],"Sol Marşpiyel":["Sol Marşpiyel","Sol Marşpiyel Kaplaması","Sol Marşpiyel İç Sacı"],"Sol Direkler":["Sol A Direği","Sol B Direği","Sol C Direği"],"Sol Arka Çamurluk":["Sol Arka Çamurluk","Sol Arka İç Çamurluk Sacı","Sol Arka Davlumbaz"]},"ARKA BÖLÜM":{"Arka Tampon":["Arka Tampon","Arka Tampon Demiri","Arka Darbe Emici","Sağ Arka Tampon Braketi","Sol Arka Tampon Braketi","Arka Park Sensörü"],"Bagaj Kapağı":["Bagaj Kapağı","Bagaj Kilidi","Kilit Karşılığı","Bagaj Amortisörü","Bagaj Fitili"],"Stoplar":["Sağ Stop","Sol Stop","Sağ İç Stop","Sol İç Stop","Arka Reflektör","Fren Lambası"],"Panel / İç Kısım":["Arka Panel","Panel İç Sacı","Bagaj Havuzu","Arka Travers"]},"ARAÇ İÇİ":{"Airbag / Emniyet":["Sürücü Airbag","Yolcu Airbag","Sağ Perde Airbag","Sol Perde Airbag","Sürücü Emniyet Kemeri","Yolcu Emniyet Kemeri","Sağ Arka Emniyet Kemeri","Sol Arka Emniyet Kemeri","Airbag Beyni"],"Ön Konsol":["Torpido / Göğüs","Orta Konsol","Gösterge Paneli","Multimedya Ekranı"],"Koltuklar":["Sürücü Koltuğu","Yolcu Koltuğu","Arka Koltuk","Sağ Koltuk Kılıfı","Sol Koltuk Kılıfı","Koltuk Rayı"],"İç Döşeme":["Tavan Döşemesi"]},"ŞASE GRUBU":{"Ön Şase":["Sağ Ön Şase Ucu","Sol Ön Şase Ucu","Sağ Ön Şase Kolu","Sol Ön Şase Kolu","Ön Travers","Motor Beşiği / Alt Şase"],"Orta Şase":["Sağ Taban Sacı","Sol Taban Sacı","Orta Tünel","Sağ Marşpiyel İç Sacı","Sol Marşpiyel İç Sacı"],"Arka Şase":["Sağ Arka Şase Kolu","Sol Arka Şase Kolu","Arka Travers","Bagaj Taban Sacı"]},"CAMLAR":{"Ön Cam":["Ön Cam","Ön Cam Fitili","Yağmur Sensörü","Ön Kamera Muhafazası"],"Arka Cam":["Arka Cam","Arka Cam Fitili","Arka Cam Rezistansı"],"Sağ Yan Camlar":["Sağ Ön Kapı Camı","Sağ Arka Kapı Camı","Sağ Kelebek Camı"],"Sol Yan Camlar":["Sol Ön Kapı Camı","Sol Arka Kapı Camı","Sol Kelebek Camı"],"Tavan Camı":["Sunroof Camı","Panoramik Tavan Camı","Sunroof Mekanizması"]},"ÖN MEKANİK":{"Sağ Yürür Aksam":["Sağ Ön Amortisör","Sağ Amortisör Takozu","Sağ Ön Aks","Sağ Ön Porya","Sağ Ön Rulman","Sağ Ön Taşıyıcı","Sağ Ön Salıncak","Sağ Rot Başı","Sağ Rot Kolu","Sağ Z-Rot"],"Sol Yürür Aksam":["Sol Ön Amortisör","Sol Amortisör Takozu","Sol Ön Aks","Sol Ön Porya","Sol Ön Rulman","Sol Ön Taşıyıcı","Sol Ön Salıncak","Sol Rot Başı","Sol Rot Kolu","Sol Z-Rot"],"Radyatör Grubu":["Su Radyatörü","Klima Kondenseri","Fan Grubu","Fan Davlumbazı","Intercooler","Radyatör Üst Hortumu","Radyatör Alt Hortumu","Radyatör Takozu"],"Motor Grubu":["Motor Komple","Motor Üst Kapağı","Karter","Sağ Motor Takozu","Sol Motor Takozu","Alt Motor Takozu","Emme Manifoldu","Egzoz Manifoldu","Turbo","Alternatör","Marş Motoru"]},"ARKA MEKANİK":{"Sağ Arka Yürür Aksam":["Sağ Arka Amortisör","Sağ Arka Yay","Sağ Arka Porya","Sağ Arka Rulman","Sağ Arka Taşıyıcı","Sağ Arka Salıncak"],"Sol Arka Yürür Aksam":["Sol Arka Amortisör","Sol Arka Yay","Sol Arka Porya","Sol Arka Rulman","Sol Arka Taşıyıcı","Sol Arka Salıncak"],"Arka Aks / Diferansiyel":["Arka Aks","Arka Dingil","Diferansiyel","Sağ Aks Mili","Sol Aks Mili","Kardan Mili"],"Yakıt / Egzoz":["Yakıt Deposu","Yakıt Deposu Muhafazası","Egzoz Susturucusu","Egzoz Borusu","Katalitik Konvertör"]},"DİĞER":{"Diğer Parçalar":[]}};
 const regionalFlatGroups=[];
 Object.entries(regionalDamageData).forEach(([main,subs])=>Object.entries(subs).forEach(([sub,items])=>regionalFlatGroups.push({main,group:sub,items})));
 
@@ -2593,6 +2607,28 @@ makeReport=function(){__regionalMakeReportBase();const sec=regionalControlReport
   if(typeof basePlanningAction==='function')window.gePlanningAction=function(){const r=basePlanningAction.apply(this,arguments);return r;};
 
   window.addEventListener('load',()=>{setTimeout(()=>{ge859EnsureUI();ge859RefreshStorageCard();const i=ge859StorageInfo();if(i.ratio>=GE_WARN_RATIO&&!ge859WarnShown){ge859WarnShown=true;/* yalnız uyarı kartı; modal otomatik açılmaz */}},700);});
+})();
+</script>
+<script id="geSaha04RadioUncheck">
+(function(){
+  let remembered=null;
+  document.addEventListener('pointerdown',function(e){
+    const label=e.target.closest && e.target.closest('#kanaat label');
+    const radio=e.target.matches && e.target.matches('#kanaat input[type="radio"]')?e.target:(label?label.querySelector('input[type="radio"]'):null);
+    remembered=radio?{radio,wasChecked:radio.checked}:null;
+  },true);
+  document.addEventListener('click',function(e){
+    const radio=e.target.matches && e.target.matches('#kanaat input[type="radio"]')?e.target:null;
+    if(!radio || !remembered || remembered.radio!==radio || !remembered.wasChecked)return;
+    radio.checked=false;
+    remembered=null;
+    if(typeof ge82RefreshPanel==='function')ge82RefreshPanel();
+  },false);
+  document.addEventListener('keydown',function(e){
+    const radio=e.target;
+    if(!radio.matches || !radio.matches('#kanaat input[type="radio"]'))return;
+    if((e.key===' '||e.key==='Enter') && radio.checked){e.preventDefault(); radio.checked=false; if(typeof ge82RefreshPanel==='function')ge82RefreshPanel();}
+  },true);
 })();
 </script>
 </body>
@@ -2910,7 +2946,7 @@ window.ge82KanaatLayout=function(saved){
  <div id="ge82Panel">
  <div class="sectionTitle" style="background:#1d4ed8">1. Belge İncelemesi <span class="ge84Help">${HELP.belge}</span></div><div id="ge82Docs">${ge82DocRows(x.doc)}</div>
  <div class="sectionTitle" style="background:#047857">2. Fiziki İnceleme <span class="ge84Help">${HELP.fiziki}</span></div><div id="ge82Fiziki">${GE82_FIZIKI.map((q,i)=>`<div class="controlrow" data-ge84="f${i}"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82f'+i)}${i===3?`<div id="ge82BoyaUyumBox" class="card" style="display:none"><b>Boya transferi karşı araç rengi ile uyumlu mu?</b>${ge82YesNo('ge82boyaUyum')}</div>`:''}</div>`).join('')}</div>
- <div class="sectionTitle" style="background:#c2410c">3. Teknik Analiz <span class="ge84Help">${HELP.teknik}</span></div><div id="ge82Teknik">${GE82_TEKNIK.map((q,i)=>`<div class="controlrow" data-ge84="t${i}"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82t'+i)}${q==='İlave hasar ihtimali mevcut'?'<textarea id="ge82ilaveHasarNot" rows="2" placeholder="İlave hasar ihtimali varsa bölge / neden açıklaması"></textarea>':''}</div>`).join('')}</div>
+ <div class="sectionTitle" style="background:#c2410c">3. Teknik Analiz <span class="ge84Help">${HELP.teknik}</span></div><div id="ge82Teknik">${GE82_TEKNIK.map((q,i)=>`<div class="controlrow" data-ge84="t${i}"><b>${i>=6?i+2:i+1}. ${esc(q)}</b>${ge82YesNo('ge82t'+i)}${q==='İlave hasar ihtimali mevcut'?'<textarea id="ge82ilaveHasarNot" rows="2" placeholder="İlave hasar ihtimali varsa bölge / neden açıklaması"></textarea>':''}</div>${i===5?`<div class="controlrow" data-ge84="izEmare"><b>7. Araç üzerinde iz ve emare var mı?</b>${ge82YesNo('ge82IzEmare')}<textarea id="ge82IzEmareNot" rows="2" placeholder="Araç üzerinde tespit edilen iz ve emareler / açıklama"></textarea></div>`:''}`).join('')}</div>
  <div class="sectionTitle" style="background:#7c3aed">4. Genel Teknik Değerlendirme <span class="ge84Help">${HELP.genel}</span></div><div id="ge82Son">${GE82_SON.map((q,i)=>`<div class="controlrow" data-ge84="s${i}"><b>${i+1}. ${esc(q)}</b>${ge82YesNo('ge82s'+i)}${q==='Ek inceleme gereklidir'?`<div id="ge82EkIncelemeBox" class="card" style="display:none"><b>Ek inceleme türü</b><div class="checks">${GE82_EK_INCELEME.map((e,j)=>`<label><input type="checkbox" id="ge82ek${j}" onchange="ge82RefreshPanel()">${esc(e)}</label>`).join('')}</div><textarea id="ge82ekDigerNot" rows="2" placeholder="Diğer / ek inceleme açıklaması" oninput="ge82RefreshPanel()"></textarea></div>`:''}</div>`).join('')}</div>
  <div class="controlrow"><b>Dosya araştırmaya gönderildi mi?</b>${ge82YesNo('ge82arastirma')}<textarea id="ge82arastirmaNot" rows="2" placeholder="Eksper ilave görüşü / araştırma notu" oninput="ge82RefreshPanel()"></textarea></div>
  <div id="ge84SystemResult" class="ge84Result yellow">🟡 DEĞERLENDİRME SONUCU: KANAAT OLUŞMADI<small>Sorular cevaplandıkça teknik yönlendirme otomatik güncellenir.</small></div>
@@ -3920,6 +3956,7 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
 #hasar .pt-laborSummary{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:9px}#hasar .pt-sum{background:#f8fafc;border:1px solid #dbe3ec;border-radius:8px;padding:7px;text-align:center;font-size:11px}#hasar .pt-sum b{display:block;color:#102f57;font-size:14px;margin-top:3px}
 #hasar .pt-total{font-size:18px;font-weight:900;text-align:right;color:#102f57;margin-top:8px}
 @media(max-width:850px){#hasar .pt-picker{grid-template-columns:repeat(2,minmax(0,1fr))}#hasar .pt-laborSummary{grid-template-columns:repeat(2,1fr)}#hasar .pt-mainTabs,#hasar .pt-subTabs{display:grid;grid-template-columns:repeat(2,1fr)}}
+#hasar .pt-repairLocked select{background:#e5e7eb!important;color:#9ca3af!important;cursor:not-allowed!important;opacity:.75!important}
 </style>
 <script id="ptV12FullMountScript">
 (function(){
@@ -3940,6 +3977,7 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
   const pformat=v=>{const d=String(v||'').replace(/\D/g,'');return d?new Intl.NumberFormat('tr-TR',{maximumFractionDigits:0}).format(parseInt(d,10)||0)+'.-':''};
   const pfmt=n=>new Intl.NumberFormat('tr-TR',{maximumFractionDigits:0}).format(Math.round(Number(n)||0))+'.-';
   function currentParts(){return [...(data[ptActiveMain]?.[ptActiveSub]||[]),...(ptCustomBySub[ptActiveMain+'|||'+ptActiveSub]||[])]}
+  let ptValidationRequested=false;
   function hasOp(d){return !!(d.sokTak||d.degisim||d.repair||d.paint||d.kontrol||d.mo)}
   function opText(d){const a=[];if(d.sokTak)a.push('Sökme-Takma');if(d.degisim)a.push('Değişim');if(d.repair)a.push(d.repair+' Onarım');if(d.paint)a.push(d.paint==='Tam'?'Tam Boya':d.paint==='Kısmi'?'Kısmi Boya':d.paint);if(d.kontrol)a.push('Kontrol');if(d.mo)a.push('MO');return a.join(' / ')||'Seçim'}
   function mount(){
@@ -3978,6 +4016,7 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
       <div class="pt-addBelow"><button type="button" onclick="ptShowTableAdd()">+ Ekle</button></div>
       <div id="ptTableAdd" class="pt-inlineAdd"><input id="ptTableCustomName" placeholder="Eklenecek parça adını yazınız"><button type="button" onclick="ptSaveTablePart()">Parçayı Ekle</button><button type="button" class="soft" onclick="ptHideTableAdd()">Vazgeç</button></div>
     </section>
+    <div id="ptMissingOpWarning" class="ptMissingOpWarning" role="alert" style="display:none"></div>
     <div class="sectionNextBar"><button type="button" class="green" onclick="saveAndNextSection('iscilik')">Kaydet ve Sonraki Bölüme Geç</button></div>`;
     renderAll();
   }
@@ -4029,8 +4068,12 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
   window.ptOtherAdd=()=>{const sk='DİĞER|||Diğer Parçalar';ptCustomBySub[sk]=ptCustomBySub[sk]||['','','','','',''];ptCustomBySub[sk].push('');renderPicker();};
   window.ptTogglePart=(enc,on)=>{const k=decodeURIComponent(enc),[m,s,n]=k.split('|||');if(on){ptSelected[k]=true;ensure(k,m,s,n)}else delete ptSelected[k];renderAll()};
   window.ptAddCustomPart=()=>{const i=$('ptCustomPartName'),n=(i.value||'').trim();if(!n)return;const k0=ptActiveMain+'|||'+ptActiveSub;ptCustomBySub[k0]=ptCustomBySub[k0]||[];if(!ptCustomBySub[k0].some(x=>x.toLocaleLowerCase('tr-TR')===n.toLocaleLowerCase('tr-TR')))ptCustomBySub[k0].push(n);const k=key(ptActiveMain,ptActiveSub,n);ptSelected[k]=true;ensure(k,ptActiveMain,ptActiveSub,n);i.value='';renderAll()};
-  window.ptSetRow=(enc,f,v)=>{const k=decodeURIComponent(enc);if(ptRows[k])ptRows[k][f]=v;renderPartTable();renderLabor()};window.ptRemovePart=enc=>{delete ptSelected[decodeURIComponent(enc)];renderAll()};
-  function renderPartTable(){const ks=Object.keys(ptSelected).filter(k=>ptSelected[k]);let h='';ks.forEach(k=>{const d=ptRows[k],e=ptSafeEnc(k),done=hasOp(d);h+=`<tr class="${done?'pt-done':'pt-pending'}"><td class="pt-pieceName">${esc(d.name)}<div class="small">${esc(d.main)}</div></td><td><select onchange="ptSetRow('${e}','partType',this.value)"><option value="">Seçiniz</option>${partTypes.map(v=>`<option ${d.partType===v?'selected':''}>${v}</option>`).join('')}</select></td><td class="pt-checkcell ${d.sokTak?'pt-activeOp':''}"><label><input type="checkbox" ${d.sokTak?'checked':''} onchange="ptSetRow('${e}','sokTak',this.checked)"> S/T</label></td><td class="pt-checkcell ${d.degisim?'pt-activeOp':''}"><label><input type="checkbox" ${d.degisim?'checked':''} onchange="ptSetRow('${e}','degisim',this.checked)"> Değişim</label></td><td class="${d.repair?'pt-activeOp':''}"><select onchange="ptSetRow('${e}','repair',this.value)"><option value="">-</option>${repairChoices.map(v=>`<option ${d.repair===v?'selected':''}>${v}</option>`).join('')}</select></td><td class="${d.paint?'pt-activeOp':''}"><select onchange="ptSetRow('${e}','paint',this.value)"><option value="">-</option>${paintChoices.map(v=>`<option ${d.paint===v?'selected':''}>${v}</option>`).join('')}</select></td><td class="pt-checkcell ${d.kontrol?'pt-activeOp':''}"><label><input type="checkbox" ${d.kontrol?'checked':''} onchange="ptSetRow('${e}','kontrol',this.checked)"> Kontrol</label></td><td class="pt-checkcell ${d.mo?'pt-activeOp':''}"><label><input type="checkbox" ${d.mo?'checked':''} onchange="ptSetRow('${e}','mo',this.checked)"> MO</label></td><td><input type="text" value="${esc(d.note)}" oninput="ptSetRow('${e}','note',this.value)" placeholder="Not"></td><td><button type="button" class="danger" onclick="ptRemovePart('${e}')">×</button></td></tr>`});$('ptPartBody').innerHTML=h||'<tr><td colspan="10">Henüz parça seçilmedi.</td></tr>'}
+  window.ptSetRow=(enc,f,v)=>{const k=decodeURIComponent(enc),r=ptRows[k];if(!r)return;
+    // Saha düzeltme 02: Değişim ve onarım karşılıklı dışlayıcıdır.
+    if(f==='degisim'&&v===true)r.repair='';
+    if(f==='repair'&&v&&r.degisim)return;
+    r[f]=v;renderPartTable();ptRefreshMissingWarning();renderLabor()};window.ptRemovePart=enc=>{delete ptSelected[decodeURIComponent(enc)];renderAll();ptRefreshMissingWarning()};
+  function renderPartTable(){Object.values(ptRows).forEach(r=>{if(r&&r.degisim)r.repair=''});const ks=Object.keys(ptSelected).filter(k=>ptSelected[k]);let h='';ks.forEach(k=>{const d=ptRows[k],e=ptSafeEnc(k),done=hasOp(d);h+=`<tr class="${done?'pt-done':'pt-pending'} ${ptValidationRequested&&!done?'pt-missingOp':''}"><td class="pt-pieceName">${esc(d.name)}<div class="small">${esc(d.main)}</div></td><td><select onchange="ptSetRow('${e}','partType',this.value)"><option value="">Seçiniz</option>${partTypes.map(v=>`<option ${d.partType===v?'selected':''}>${v}</option>`).join('')}</select></td><td class="pt-checkcell ${d.sokTak?'pt-activeOp':''}"><label><input type="checkbox" ${d.sokTak?'checked':''} onchange="ptSetRow('${e}','sokTak',this.checked)"> S/T</label></td><td class="pt-checkcell ${d.degisim?'pt-activeOp':''}"><label><input type="checkbox" ${d.degisim?'checked':''} onchange="ptSetRow('${e}','degisim',this.checked)"> Değişim</label></td><td class="${d.repair?'pt-activeOp':''} ${d.degisim?'pt-repairLocked':''}"><select ${d.degisim?'disabled title="Değişim seçildiği için onarım kapalı"':''} onchange="ptSetRow('${e}','repair',this.value)"><option value="">-</option>${repairChoices.map(v=>`<option ${d.repair===v?'selected':''}>${v}</option>`).join('')}</select></td><td class="${d.paint?'pt-activeOp':''}"><select onchange="ptSetRow('${e}','paint',this.value)"><option value="">-</option>${paintChoices.map(v=>`<option ${d.paint===v?'selected':''}>${v}</option>`).join('')}</select></td><td class="pt-checkcell ${d.kontrol?'pt-activeOp':''}"><label><input type="checkbox" ${d.kontrol?'checked':''} onchange="ptSetRow('${e}','kontrol',this.checked)"> Kontrol</label></td><td class="pt-checkcell ${d.mo?'pt-activeOp':''}"><label><input type="checkbox" ${d.mo?'checked':''} onchange="ptSetRow('${e}','mo',this.checked)"> MO</label></td><td><input type="text" value="${esc(d.note)}" oninput="ptSetRow('${e}','note',this.value)" placeholder="Not"></td><td><button type="button" class="danger" onclick="ptRemovePart('${e}')">×</button></td></tr>`});$('ptPartBody').innerHTML=h||'<tr><td colspan="10">Henüz parça seçilmedi.</td></tr>'}
   window.ptShowTableAdd=()=>{$('ptTableAdd').classList.add('show');setTimeout(()=>$('ptTableCustomName').focus(),0)};window.ptHideTableAdd=()=>{$('ptTableAdd').classList.remove('show');$('ptTableCustomName').value=''};window.ptSaveTablePart=()=>{const n=($('ptTableCustomName').value||'').trim();if(!n)return;const m='DİĞER',s='Diğer Parçalar';if(!data[m])data[m]={[s]:[]};const k0=m+'|||'+s;ptCustomBySub[k0]=ptCustomBySub[k0]||[];if(!ptCustomBySub[k0].includes(n))ptCustomBySub[k0].push(n);const k=key(m,s,n);ptSelected[k]=true;ensure(k,m,s,n);ptHideTableAdd();renderAll()};
   function ensurePiece(k){return ptPiece[k]||(ptPiece[k]={st:'',on:'',bo:'',el:'',do:'',ca:'',me:''})}function hasLabor(p){return pieceFields.some(([f])=>pmoney(p[f])>0)}
   window.ptSetLaborMode=m=>{ptLaborMode=m==='piece'?'piece':'bulk';window.ge13LaborMode=ptLaborMode;renderLabor()};
@@ -4068,10 +4111,33 @@ setTimeout(()=>{try{let saved={};try{saved=ge82Collect()}catch(e){} ge82KanaatLa
     const ids=['docs','damageGroups','labor','extraLabor','kanaatSpecialControls','vehicleChecks','equipment','photos'];
     ids.forEach(id=>{if(!document.getElementById(id)){const x=document.createElement('div');x.id=id;x.style.display='none';x.setAttribute('data-ge853-legacy','1');document.body.appendChild(x);}});
   }
-  const baseLoad=window.load;window.load=function(d,k=''){ge853EnsureLegacyTargets();try{baseLoad(d,k)}catch(e){console.warn('Eski kayıt uyumluluk uyarısı:',e)}ptSelected={};ptRows={};ptCustomBySub={};ptPiece={};ptExtraPiece=[];ptExtraBulk=[];ptBulk=Object.fromEntries(bulkFields.map(x=>[x[0],'']));if(d.portableRows){ptRows=JSON.parse(JSON.stringify(d.portableRows));ptCustomBySub=JSON.parse(JSON.stringify(d.portableCustomBySub||{}));(d.portableSelectedKeys||[]).forEach(k=>ptSelected[k]=true);ptLaborMode=d.portableLaborMode||d.laborEntryMode||'bulk';ptBulk=Object.assign(ptBulk,d.portableBulk||{});ptExtraBulk=JSON.parse(JSON.stringify(d.portableExtraBulk||[]));ptPiece=JSON.parse(JSON.stringify(d.portablePiece||{}));ptExtraPiece=JSON.parse(JSON.stringify(d.portableExtraPiece||[]))}else{(d.groups||[]).forEach(gr=>{(gr.rows||[]).concat(gr.extras||[]).forEach(r=>{if(!r.name)return;const m=gr.main||gr.group,s=gr.group||m,k=key(m,s,r.name);const rr=ensure(k,m,s,r.name);Object.assign(rr,{partType:r.partType||r.type||'',sokTak:!!r.s,degisim:!!r.d,repair:r.onarimSeviyesi||r.osev||(r.o?'Orta':''),paint:r.boyaTuru||(r.b?'Tam':''),kontrol:!!r.kontrol,mo:!!r.mo,note:r.n||''});if(r.s||r.o||r.d||r.b||r.mo||r.kontrol||r.n)ptSelected[k]=true})});ptLaborMode=d.laborEntryMode||'bulk'}mount();if($('damageServisListesi'))$('damageServisListesi').checked=!!d.damageServisListesi;mountLabor();show('dosya')};
-  const baseNew=window.newFile;window.newFile=function(){ge853EnsureLegacyTargets();ptSelected={};ptRows={};ptCustomBySub={};ptPiece={};ptExtraPiece=[];ptExtraBulk=[];ptBulk=Object.fromEntries(bulkFields.map(x=>[x[0],'']));ptLaborMode='bulk';baseNew();setTimeout(()=>{mount();mountLabor();},0)};
+  const baseLoad=window.load;window.load=function(d,k=''){ptValidationRequested=false;ge853EnsureLegacyTargets();try{baseLoad(d,k)}catch(e){console.warn('Eski kayıt uyumluluk uyarısı:',e)}ptSelected={};ptRows={};ptCustomBySub={};ptPiece={};ptExtraPiece=[];ptExtraBulk=[];ptBulk=Object.fromEntries(bulkFields.map(x=>[x[0],'']));if(d.portableRows){ptRows=JSON.parse(JSON.stringify(d.portableRows));ptCustomBySub=JSON.parse(JSON.stringify(d.portableCustomBySub||{}));(d.portableSelectedKeys||[]).forEach(k=>ptSelected[k]=true);ptLaborMode=d.portableLaborMode||d.laborEntryMode||'bulk';ptBulk=Object.assign(ptBulk,d.portableBulk||{});ptExtraBulk=JSON.parse(JSON.stringify(d.portableExtraBulk||[]));ptPiece=JSON.parse(JSON.stringify(d.portablePiece||{}));ptExtraPiece=JSON.parse(JSON.stringify(d.portableExtraPiece||[]))}else{(d.groups||[]).forEach(gr=>{(gr.rows||[]).concat(gr.extras||[]).forEach(r=>{if(!r.name)return;const m=gr.main||gr.group,s=gr.group||m,k=key(m,s,r.name);const rr=ensure(k,m,s,r.name);Object.assign(rr,{partType:r.partType||r.type||'',sokTak:!!r.s,degisim:!!r.d,repair:r.onarimSeviyesi||r.osev||(r.o?'Orta':''),paint:r.boyaTuru||(r.b?'Tam':''),kontrol:!!r.kontrol,mo:!!r.mo,note:r.n||''});if(r.s||r.o||r.d||r.b||r.mo||r.kontrol||r.n)ptSelected[k]=true})});ptLaborMode=d.laborEntryMode||'bulk'}mount();if($('damageServisListesi'))$('damageServisListesi').checked=!!d.damageServisListesi;mountLabor();show('dosya')};
+  const baseNew=window.newFile;window.newFile=function(){ptValidationRequested=false;ge853EnsureLegacyTargets();ptSelected={};ptRows={};ptCustomBySub={};ptPiece={};ptExtraPiece=[];ptExtraBulk=[];ptBulk=Object.fromEntries(bulkFields.map(x=>[x[0],'']));ptLaborMode='bulk';baseNew();setTimeout(()=>{mount();mountLabor();},0)};
   const baseShow=window.show;window.show=function(id){baseShow(id);if(id==='hasar'&&!$('ptMainTabs'))mount();if(id==='iscilik'&&!$('ptBulkPanel'))mountLabor();else if(id==='iscilik')renderLabor()};
   window.addEventListener('load',()=>setTimeout(mount,180));
+  function ptRefreshMissingWarning(){
+    const el=document.getElementById('ptMissingOpWarning');
+    if(!el)return;
+    const missing=Object.keys(ptSelected).filter(k=>ptSelected[k]&&!hasOp(ptRows[k]||{}));
+    if(!ptValidationRequested||!missing.length){el.style.display='none';el.textContent='';return;}
+    el.style.display='block';
+    el.textContent='İşlem girilmemiş '+missing.length+' parça bulunmaktadır. Lütfen kırmızı işaretli parçalara işlem giriniz: '+missing.map(k=>(ptRows[k]&&ptRows[k].name)||k.split('|||').pop()).join(', ');
+  }
+  const ptPreviousSaveAndNext=window.saveAndNextSection;
+  window.saveAndNextSection=function(nextId){
+    if(document.getElementById('hasar')?.classList.contains('active') && nextId==='iscilik'){
+      const missing=Object.keys(ptSelected).filter(k=>ptSelected[k]&&!hasOp(ptRows[k]||{}));
+      ptValidationRequested=missing.length>0;
+      renderPartTable();ptRefreshMissingWarning();
+      if(missing.length){
+        const el=document.getElementById('ptMissingOpWarning');
+        if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+        return;
+      }
+    }
+    return ptPreviousSaveAndNext(nextId);
+  };
+
 })();
 </script>
 
@@ -4364,3 +4430,30 @@ window.addEventListener('load',()=>setTimeout(ge86SetupFastEntry,0));
 
 <style id="ge2409FieldStyle">#dosya input:not([type="date"]):not([type="time"]){font-weight:800;text-transform:uppercase}</style>
 <script id="ge2409FieldPatch">(function(){function upperDosyaField(el){if(!el||el.tagName!=='INPUT')return;const type=(el.type||'text').toLowerCase();if(type==='date'||type==='time'||type==='checkbox'||type==='radio'||type==='file')return;const start=el.selectionStart,end=el.selectionEnd;const up=String(el.value||'').toLocaleUpperCase('tr-TR');if(el.value!==up){el.value=up;try{el.setSelectionRange(start,end)}catch(e){}}}document.addEventListener('input',function(e){if(e.target&&e.target.closest&&e.target.closest('#dosya'))upperDosyaField(e.target)},true);window.addEventListener('load',function(){document.querySelectorAll('#dosya input').forEach(upperDosyaField)});})();</script>
+<script id="geSaha05IzEmareDigerNotlar">
+/* SAHA 05: Kanaat iz/emare cevabını Notlar > Diğer Notlar rapor hücresine ekle. */
+(function(){
+  const previousNotesTable=window.notesTable;
+  if(typeof previousNotesTable!=='function')return;
+  function buildIzEmareNote(x){
+    if(!x || (x.izEmare!=='Evet' && x.izEmare!=='Hayır'))return '';
+    const detail=String(x.izEmareNot||'').trim();
+    if(x.izEmare==='Hayır'){
+      return 'Araç üzerinde yapılan incelemelerde iz ve emareye rastlanmamıştır.'+(detail?' Açıklama: '+detail:'');
+    }
+    if(!detail)return 'Araç üzerinde yapılan incelemelerde iz ve emare tespit edilmiştir.';
+    if(/^araç üzerinde/i.test(detail))return /[.!?]$/.test(detail)?detail:detail+'.';
+    const statement=/(rastlan|tespit edil|görül|bulun|mevcut|izlen|saptan)/i.test(detail);
+    const tail=statement?detail:detail+' tespit edilmiştir';
+    return 'Araç üzerinde yapılan incelemelerde '+tail+(/[.!?]$/.test(tail)?'':'.');
+  }
+  window.notesTable=function(v){
+    let x={};
+    try{x=typeof ge82Collect==='function'?ge82Collect():{};}catch(e){x={};}
+    const extra=buildIzEmareNote(x);
+    if(!extra)return previousNotesTable.apply(this,arguments);
+    const manual=String(v&&v.notDiger||'').trim();
+    return previousNotesTable.call(this,{...v,notDiger:[manual,extra].filter(Boolean).join('\n\n')});
+  };
+})();
+</script>
